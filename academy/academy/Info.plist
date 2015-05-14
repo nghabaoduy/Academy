@@ -30,6 +30,14 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GothamRounded-Light.tff</string>
+		<string>GothamRounded-Bold.tff</string>
+		<string>GothamRounded-Book.tff</string>
+		<string>GothamRounded-LightItalic.tff</string>
+		<string>GothamRounded-BoldItalic.tff</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

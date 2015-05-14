@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UserShelfNavVC.h"
 
 @interface ViewController ()
 
@@ -22,6 +23,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)login:(id)sender {
+    UserShelfNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfNavView"];
+    [self presentViewController:view animated:NO completion:nil];
 }
 
 @end

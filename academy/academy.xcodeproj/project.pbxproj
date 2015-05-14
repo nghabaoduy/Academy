@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
+		AFCFE5F11B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5EC1B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf */; };
+		AFCFE5F21B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5ED1B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf */; };
+		AFCFE5F31B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5EE1B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf */; };
+		AFCFE5F41B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5EF1B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf */; };
+		AFCFE5F51B04DD8B006D9744 /* GothamRounded-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5F01B04DD8B006D9744 /* GothamRounded-Light.ttf */; };
+		AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */; };
+		AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */; };
+		AFCFE5FE1B04E668006D9744 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5FD1B04E668006D9744 /* cross.png */; };
 		AFD6362D1B038E1000ABDB3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD6362C1B038E1000ABDB3C /* main.m */; };
 		AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD6362F1B038E1000ABDB3C /* AppDelegate.m */; };
 		AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */; };
@@ -16,6 +24,27 @@
 		AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD6363A1B038E1000ABDB3C /* Images.xcassets */; };
 		AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */; };
 		AFD6364A1B038E1000ABDB3C /* academyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD636491B038E1000ABDB3C /* academyTests.m */; };
+		AFE6DECD1B03C3B1003E30CA /* HKSlideMenu3DController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DECC1B03C3B1003E30CA /* HKSlideMenu3DController.m */; };
+		AFE6DED91B03C6EC003E30CA /* Login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DECF1B03C6EC003E30CA /* Login.jpg */; };
+		AFE6DEDA1B03C6EC003E30CA /* Menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED01B03C6EC003E30CA /* Menu.jpg */; };
+		AFE6DEDB1B03C6EC003E30CA /* Profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED11B03C6EC003E30CA /* Profile.jpg */; };
+		AFE6DEDC1B03C6EC003E30CA /* Set selection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED21B03C6EC003E30CA /* Set selection.jpg */; };
+		AFE6DEDD1B03C6EC003E30CA /* Set Start.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED31B03C6EC003E30CA /* Set Start.jpg */; };
+		AFE6DEDE1B03C6EC003E30CA /* Shelf.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED41B03C6EC003E30CA /* Shelf.jpg */; };
+		AFE6DEDF1B03C6EC003E30CA /* ShowWord.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED51B03C6EC003E30CA /* ShowWord.jpg */; };
+		AFE6DEE01B03C6EC003E30CA /* test example 1.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED61B03C6EC003E30CA /* test example 1.png */; };
+		AFE6DEE11B03C6EC003E30CA /* test example 2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED71B03C6EC003E30CA /* test example 2.png */; };
+		AFE6DEE21B03C6EC003E30CA /* WordKnownSelection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED81B03C6EC003E30CA /* WordKnownSelection.jpg */; };
+		AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */; };
+		AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEE71B03CAF2003E30CA /* ShopVC.m */; };
+		AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */; };
+		AFE6DEEE1B03D365003E30CA /* UserShelfNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEED1B03D365003E30CA /* UserShelfNavVC.m */; };
+		AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */; };
+		AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEF31B048FF1003E30CA /* WordInfoVC.m */; };
+		AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DEF91B049D97003E30CA /* CardInfo.xib */; };
+		AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */; };
+		AFE6DF011B04A83E003E30CA /* Card.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DF001B04A83E003E30CA /* Card.png */; };
+		AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DF041B04B0A4003E30CA /* CardParentVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +59,14 @@
 
 /* Begin PBXFileReference section */
 		19415BF26ACA690DC120472F /* libPods-academy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-academy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFCFE5EC1B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Bold_21016.ttf"; path = "Fonts/Gotham-Rounded-Bold_21016.ttf"; sourceTree = "<group>"; };
+		AFCFE5ED1B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Bold-Italic_21015.ttf"; path = "Fonts/Gotham-Rounded-Bold-Italic_21015.ttf"; sourceTree = "<group>"; };
+		AFCFE5EE1B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Light_21020.ttf"; path = "Fonts/Gotham-Rounded-Light_21020.ttf"; sourceTree = "<group>"; };
+		AFCFE5EF1B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Light-Italic_21019.ttf"; path = "Fonts/Gotham-Rounded-Light-Italic_21019.ttf"; sourceTree = "<group>"; };
+		AFCFE5F01B04DD8B006D9744 /* GothamRounded-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GothamRounded-Light.ttf"; path = "Fonts/GothamRounded-Light.ttf"; sourceTree = "<group>"; };
+		AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-blue-btn.png"; path = "Graphics/medium-blue-btn.png"; sourceTree = "<group>"; };
+		AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-red-btn.png"; path = "Graphics/medium-red-btn.png"; sourceTree = "<group>"; };
+		AFCFE5FD1B04E668006D9744 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cross.png; path = Graphics/cross.png; sourceTree = "<group>"; };
 		AFD636271B038E1000ABDB3C /* academy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = academy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD6362B1B038E1000ABDB3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFD6362C1B038E1000ABDB3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,6 +81,36 @@
 		AFD636431B038E1000ABDB3C /* academyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = academyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD636481B038E1000ABDB3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFD636491B038E1000ABDB3C /* academyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = academyTests.m; sourceTree = "<group>"; };
+		AFE6DECB1B03C3B1003E30CA /* HKSlideMenu3DController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKSlideMenu3DController.h; sourceTree = "<group>"; };
+		AFE6DECC1B03C3B1003E30CA /* HKSlideMenu3DController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKSlideMenu3DController.m; sourceTree = "<group>"; };
+		AFE6DECF1B03C6EC003E30CA /* Login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Login.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Login.jpg"; sourceTree = "<group>"; };
+		AFE6DED01B03C6EC003E30CA /* Menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Menu.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Menu.jpg"; sourceTree = "<group>"; };
+		AFE6DED11B03C6EC003E30CA /* Profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Profile.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Profile.jpg"; sourceTree = "<group>"; };
+		AFE6DED21B03C6EC003E30CA /* Set selection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Set selection.jpg"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Set selection.jpg"; sourceTree = "<group>"; };
+		AFE6DED31B03C6EC003E30CA /* Set Start.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Set Start.jpg"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Set Start.jpg"; sourceTree = "<group>"; };
+		AFE6DED41B03C6EC003E30CA /* Shelf.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Shelf.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Shelf.jpg"; sourceTree = "<group>"; };
+		AFE6DED51B03C6EC003E30CA /* ShowWord.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ShowWord.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/ShowWord.jpg"; sourceTree = "<group>"; };
+		AFE6DED61B03C6EC003E30CA /* test example 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "test example 1.png"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/test example 1.png"; sourceTree = "<group>"; };
+		AFE6DED71B03C6EC003E30CA /* test example 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "test example 2.png"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/test example 2.png"; sourceTree = "<group>"; };
+		AFE6DED81B03C6EC003E30CA /* WordKnownSelection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WordKnownSelection.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/WordKnownSelection.jpg"; sourceTree = "<group>"; };
+		AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserShelfVC.h; sourceTree = "<group>"; };
+		AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserShelfVC.m; sourceTree = "<group>"; };
+		AFE6DEE61B03CAF2003E30CA /* ShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopVC.h; sourceTree = "<group>"; };
+		AFE6DEE71B03CAF2003E30CA /* ShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopVC.m; sourceTree = "<group>"; };
+		AFE6DEE91B03CEDC003E30CA /* SetSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetSelectVC.h; sourceTree = "<group>"; };
+		AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSelectVC.m; sourceTree = "<group>"; };
+		AFE6DEEC1B03D365003E30CA /* UserShelfNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserShelfNavVC.h; sourceTree = "<group>"; };
+		AFE6DEED1B03D365003E30CA /* UserShelfNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserShelfNavVC.m; sourceTree = "<group>"; };
+		AFE6DEEF1B03D7AC003E30CA /* SetDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDetailVC.h; sourceTree = "<group>"; };
+		AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDetailVC.m; sourceTree = "<group>"; };
+		AFE6DEF21B048FF1003E30CA /* WordInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordInfoVC.h; sourceTree = "<group>"; };
+		AFE6DEF31B048FF1003E30CA /* WordInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordInfoVC.m; sourceTree = "<group>"; };
+		AFE6DEF91B049D97003E30CA /* CardInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardInfo.xib; path = academy/CardView/CardInfo.xib; sourceTree = SOURCE_ROOT; };
+		AFE6DEFB1B049DC3003E30CA /* CardInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardInfoView.h; sourceTree = "<group>"; };
+		AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardInfoView.m; sourceTree = "<group>"; };
+		AFE6DF001B04A83E003E30CA /* Card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Card.png; path = Graphics/Card.png; sourceTree = "<group>"; };
+		AFE6DF031B04B0A4003E30CA /* CardParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardParentVC.h; sourceTree = "<group>"; };
+		AFE6DF041B04B0A4003E30CA /* CardParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardParentVC.m; sourceTree = "<group>"; };
 		D19210394AACFD6C04951512 /* Pods-academy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-academy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-academy/Pods-academy.debug.xcconfig"; sourceTree = "<group>"; };
 		E83EB9BA4E2972E7D72DA310 /* Pods-academy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-academy.release.xcconfig"; path = "Pods/Target Support Files/Pods-academy/Pods-academy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +134,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AFCFE5E61B04D754006D9744 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AFCFE5EC1B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf */,
+				AFCFE5ED1B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf */,
+				AFCFE5EE1B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf */,
+				AFCFE5EF1B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf */,
+				AFCFE5F01B04DD8B006D9744 /* GothamRounded-Light.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		AFD6361E1B038E1000ABDB3C = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +169,12 @@
 		AFD636291B038E1000ABDB3C /* academy */ = {
 			isa = PBXGroup;
 			children = (
+				AFCFE5E61B04D754006D9744 /* Fonts */,
+				AFE6DF021B04B016003E30CA /* WordCardViewCollection */,
+				AFE6DEFF1B04A830003E30CA /* Graphics */,
+				AFE6DEF51B049D04003E30CA /* CardView */,
+				AFE6DECE1B03C6CF003E30CA /* Mockups img */,
+				AFE6DECA1B03C3B1003E30CA /* SlideMenu3D */,
 				AFD6362E1B038E1000ABDB3C /* AppDelegate.h */,
 				AFD6362F1B038E1000ABDB3C /* AppDelegate.m */,
 				AFD636341B038E1000ABDB3C /* ViewController.h */,
@@ -99,6 +184,16 @@
 				AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */,
 				AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */,
 				AFD6362A1B038E1000ABDB3C /* Supporting Files */,
+				AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */,
+				AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */,
+				AFE6DEE61B03CAF2003E30CA /* ShopVC.h */,
+				AFE6DEE71B03CAF2003E30CA /* ShopVC.m */,
+				AFE6DEE91B03CEDC003E30CA /* SetSelectVC.h */,
+				AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */,
+				AFE6DEEC1B03D365003E30CA /* UserShelfNavVC.h */,
+				AFE6DEED1B03D365003E30CA /* UserShelfNavVC.m */,
+				AFE6DEEF1B03D7AC003E30CA /* SetDetailVC.h */,
+				AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */,
 			);
 			path = academy;
 			sourceTree = "<group>";
@@ -127,6 +222,65 @@
 				AFD636481B038E1000ABDB3C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AFE6DECA1B03C3B1003E30CA /* SlideMenu3D */ = {
+			isa = PBXGroup;
+			children = (
+				AFE6DECB1B03C3B1003E30CA /* HKSlideMenu3DController.h */,
+				AFE6DECC1B03C3B1003E30CA /* HKSlideMenu3DController.m */,
+			);
+			path = SlideMenu3D;
+			sourceTree = "<group>";
+		};
+		AFE6DECE1B03C6CF003E30CA /* Mockups img */ = {
+			isa = PBXGroup;
+			children = (
+				AFE6DECF1B03C6EC003E30CA /* Login.jpg */,
+				AFE6DED01B03C6EC003E30CA /* Menu.jpg */,
+				AFE6DED11B03C6EC003E30CA /* Profile.jpg */,
+				AFE6DED21B03C6EC003E30CA /* Set selection.jpg */,
+				AFE6DED31B03C6EC003E30CA /* Set Start.jpg */,
+				AFE6DED41B03C6EC003E30CA /* Shelf.jpg */,
+				AFE6DED51B03C6EC003E30CA /* ShowWord.jpg */,
+				AFE6DED61B03C6EC003E30CA /* test example 1.png */,
+				AFE6DED71B03C6EC003E30CA /* test example 2.png */,
+				AFE6DED81B03C6EC003E30CA /* WordKnownSelection.jpg */,
+			);
+			name = "Mockups img";
+			sourceTree = "<group>";
+		};
+		AFE6DEF51B049D04003E30CA /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				AFE6DEF91B049D97003E30CA /* CardInfo.xib */,
+				AFE6DEFB1B049DC3003E30CA /* CardInfoView.h */,
+				AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */,
+			);
+			name = CardView;
+			path = SlideMenu3D;
+			sourceTree = "<group>";
+		};
+		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				AFCFE5FD1B04E668006D9744 /* cross.png */,
+				AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */,
+				AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */,
+				AFE6DF001B04A83E003E30CA /* Card.png */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
+		AFE6DF021B04B016003E30CA /* WordCardViewCollection */ = {
+			isa = PBXGroup;
+			children = (
+				AFE6DEF21B048FF1003E30CA /* WordInfoVC.h */,
+				AFE6DEF31B048FF1003E30CA /* WordInfoVC.m */,
+				AFE6DF031B04B0A4003E30CA /* CardParentVC.h */,
+				AFE6DF041B04B0A4003E30CA /* CardParentVC.m */,
+			);
+			name = WordCardViewCollection;
 			sourceTree = "<group>";
 		};
 		D1F161B5ED3662F51D828E49 /* Frameworks */ = {
@@ -197,6 +351,7 @@
 				TargetAttributes = {
 					AFD636261B038E1000ABDB3C = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 5TP4Q7LFBK;
 					};
 					AFD636421B038E1000ABDB3C = {
 						CreatedOnToolsVersion = 6.0;
@@ -229,8 +384,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */,
+				AFCFE5F51B04DD8B006D9744 /* GothamRounded-Light.ttf in Resources */,
+				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
+				AFE6DEDB1B03C6EC003E30CA /* Profile.jpg in Resources */,
+				AFE6DED91B03C6EC003E30CA /* Login.jpg in Resources */,
+				AFE6DEDA1B03C6EC003E30CA /* Menu.jpg in Resources */,
+				AFE6DEDC1B03C6EC003E30CA /* Set selection.jpg in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
+				AFE6DEE21B03C6EC003E30CA /* WordKnownSelection.jpg in Resources */,
+				AFE6DEDF1B03C6EC003E30CA /* ShowWord.jpg in Resources */,
+				AFCFE5FE1B04E668006D9744 /* cross.png in Resources */,
+				AFCFE5F31B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf in Resources */,
+				AFE6DEE11B03C6EC003E30CA /* test example 2.png in Resources */,
+				AFE6DEDD1B03C6EC003E30CA /* Set Start.jpg in Resources */,
+				AFE6DEE01B03C6EC003E30CA /* test example 1.png in Resources */,
+				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
+				AFCFE5F41B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf in Resources */,
+				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
+				AFCFE5F21B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf in Resources */,
 				AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */,
+				AFCFE5F11B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf in Resources */,
+				AFE6DEDE1B03C6EC003E30CA /* Shelf.jpg in Resources */,
+				AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,8 +456,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
+				AFE6DEEE1B03D365003E30CA /* UserShelfNavVC.m in Sources */,
+				AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
+				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
+				AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */,
 				AFD6362D1B038E1000ABDB3C /* main.m in Sources */,
+				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
+				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
+				AFE6DECD1B03C3B1003E30CA /* HKSlideMenu3DController.m in Sources */,
+				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,
 				AFD636361B038E1000ABDB3C /* ViewController.m in Sources */,
 				AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */,
 			);
@@ -407,9 +591,12 @@
 			baseConfigurationReference = D19210394AACFD6C04951512 /* Pods-academy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = academy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -418,9 +605,12 @@
 			baseConfigurationReference = E83EB9BA4E2972E7D72DA310 /* Pods-academy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = academy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
