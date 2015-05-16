@@ -49,6 +49,10 @@
 		AFE6DF011B04A83E003E30CA /* Card.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DF001B04A83E003E30CA /* Card.png */; };
 		AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DF041B04B0A4003E30CA /* CardParentVC.m */; };
 		AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */; };
+		C36AEB261B0711A800A40692 /* AModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB251B0711A800A40692 /* AModel.m */; };
+		C36AEB281B071C6E00A40692 /* AModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB271B071C6E00A40692 /* AModelTest.m */; };
+		C37437271B0721A00002E46F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C37437261B0721A00002E46F /* User.m */; };
+		C37437291B0722ED0002E46F /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C37437281B0722ED0002E46F /* UserTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +125,12 @@
 		AFE6DF041B04B0A4003E30CA /* CardParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardParentVC.m; sourceTree = "<group>"; };
 		AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuVC.h; sourceTree = "<group>"; };
 		AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuVC.m; sourceTree = "<group>"; };
+		C36AEB241B0711A800A40692 /* AModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AModel.h; sourceTree = "<group>"; };
+		C36AEB251B0711A800A40692 /* AModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModel.m; sourceTree = "<group>"; };
+		C36AEB271B071C6E00A40692 /* AModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModelTest.m; sourceTree = "<group>"; };
+		C37437251B0721A00002E46F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		C37437261B0721A00002E46F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		C37437281B0722ED0002E46F /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
 		D19210394AACFD6C04951512 /* Pods-academy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-academy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-academy/Pods-academy.debug.xcconfig"; sourceTree = "<group>"; };
 		E83EB9BA4E2972E7D72DA310 /* Pods-academy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-academy.release.xcconfig"; path = "Pods/Target Support Files/Pods-academy/Pods-academy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +189,8 @@
 		AFD636291B038E1000ABDB3C /* academy */ = {
 			isa = PBXGroup;
 			children = (
+				C36AEB231B0710AF00A40692 /* Models */,
+				C36AEB221B07109D00A40692 /* Controllers */,
 				AFE0107F1B05313C005B4B4D /* Misc Object */,
 				AFCFE5E61B04D754006D9744 /* Fonts */,
 				AFE6DF021B04B016003E30CA /* WordCardViewCollection */,
@@ -193,21 +205,7 @@
 				AFD6363A1B038E1000ABDB3C /* Images.xcassets */,
 				AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */,
 				AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */,
-				AFE6DEEC1B03D365003E30CA /* UserShelfNavVC.h */,
-				AFE6DEED1B03D365003E30CA /* UserShelfNavVC.m */,
-				AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */,
-				AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */,
-				AFE010851B05A941005B4B4D /* ShopNavVC.h */,
-				AFE010861B05A941005B4B4D /* ShopNavVC.m */,
-				AFE6DEE61B03CAF2003E30CA /* ShopVC.h */,
-				AFE6DEE71B03CAF2003E30CA /* ShopVC.m */,
-				AFE6DEE91B03CEDC003E30CA /* SetSelectVC.h */,
-				AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */,
-				AFE6DEEF1B03D7AC003E30CA /* SetDetailVC.h */,
-				AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */,
 				AFD6362A1B038E1000ABDB3C /* Supporting Files */,
-				AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */,
-				AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */,
 			);
 			path = academy;
 			sourceTree = "<group>";
@@ -226,6 +224,8 @@
 			children = (
 				AFD636491B038E1000ABDB3C /* academyTests.m */,
 				AFD636471B038E1000ABDB3C /* Supporting Files */,
+				C36AEB271B071C6E00A40692 /* AModelTest.m */,
+				C37437281B0722ED0002E46F /* UserTest.m */,
 			);
 			path = academyTests;
 			sourceTree = "<group>";
@@ -297,6 +297,38 @@
 				AFE6DF041B04B0A4003E30CA /* CardParentVC.m */,
 			);
 			name = WordCardViewCollection;
+			sourceTree = "<group>";
+		};
+		C36AEB221B07109D00A40692 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */,
+				AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */,
+				AFE6DEEC1B03D365003E30CA /* UserShelfNavVC.h */,
+				AFE6DEED1B03D365003E30CA /* UserShelfNavVC.m */,
+				AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */,
+				AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */,
+				AFE010851B05A941005B4B4D /* ShopNavVC.h */,
+				AFE010861B05A941005B4B4D /* ShopNavVC.m */,
+				AFE6DEE61B03CAF2003E30CA /* ShopVC.h */,
+				AFE6DEE71B03CAF2003E30CA /* ShopVC.m */,
+				AFE6DEE91B03CEDC003E30CA /* SetSelectVC.h */,
+				AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */,
+				AFE6DEEF1B03D7AC003E30CA /* SetDetailVC.h */,
+				AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C36AEB231B0710AF00A40692 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C36AEB241B0711A800A40692 /* AModel.h */,
+				C36AEB251B0711A800A40692 /* AModel.m */,
+				C37437251B0721A00002E46F /* User.h */,
+				C37437261B0721A00002E46F /* User.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		D1F161B5ED3662F51D828E49 /* Frameworks */ = {
@@ -478,7 +510,9 @@
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFE6DEEE1B03D365003E30CA /* UserShelfNavVC.m in Sources */,
 				AFE010821B053186005B4B4D /* PackageCell.m in Sources */,
+				C37437271B0721A00002E46F /* User.m in Sources */,
 				AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */,
+				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
 				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
 				AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */,
@@ -497,6 +531,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD6364A1B038E1000ABDB3C /* academyTests.m in Sources */,
+				C36AEB281B071C6E00A40692 /* AModelTest.m in Sources */,
+				C37437291B0722ED0002E46F /* UserTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

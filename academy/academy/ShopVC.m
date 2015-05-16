@@ -142,8 +142,7 @@
     return NO;
 }
 - (IBAction)gotoShelf:(id)sender {
-    UserShelfNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfNavView"];
-    [self presentViewController:view animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

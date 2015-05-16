@@ -9,8 +9,9 @@
 #import "ViewController.h"
 #import "UserShelfNavVC.h"
 #import "ShopNavVC.h"
+#import "AModel.h"
 
-@interface ViewController ()
+@interface ViewController () <ModelDelegate>
 
 @end
 
@@ -19,6 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"here");
+    AModel * newModel = [AModel new];
+    newModel.delegate = self;
+    newModel.modelId = @"100";
+    [newModel updateModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,7 +36,18 @@
     //ShopNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"shopNavView"];
     UserShelfNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfNavView"];
     [self presentViewController:view animated:NO completion:nil];
+    
 }
+
++ (void)findIdSuccessful:(AModel *)model {
+    NSLog(@"model Id %@", model.modelId);
+}
+
+- (void)updateModelSuccessful:(AModel *)model {
+    NSLog(@"model Id %@", model.modelId);
+
+}
+
 
 
 
