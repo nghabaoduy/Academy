@@ -13,5 +13,6 @@
 @interface WordInfoVC : CardParentVC <CardInfoViewDelegate>
 @property (strong, nonatomic) IBOutlet CardInfoView *wordCard;
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
+@property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
 
 @end

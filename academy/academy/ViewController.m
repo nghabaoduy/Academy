@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UserShelfNavVC.h"
+#import "ShopNavVC.h"
 
 @interface ViewController ()
 
@@ -26,8 +27,11 @@
 }
 
 - (IBAction)login:(id)sender {
+    //ShopNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"shopNavView"];
     UserShelfNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfNavView"];
     [self presentViewController:view animated:NO completion:nil];
 }
+
+
 
 @end

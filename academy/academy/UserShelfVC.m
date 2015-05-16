@@ -8,6 +8,8 @@
 
 #import "UserShelfVC.h"
 #import "SetSelectVC.h"
+#import "PackageCell.h"
+#import "ShopNavVC.h"
 
 @interface UserShelfVC ()
 
@@ -15,14 +17,24 @@
 
 @implementation UserShelfVC {
     NSArray *tempArray;
+    
+    int cellInitHeight;
+    NSIndexPath *curCellPath;
+    int cellTopMargin;
 }
 
-float kTargetHeight = 200;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     tempArray = [NSArray arrayWithObjects:@"Basic", @"Intermediate", @"Advanced",nil];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    cellTopMargin = 10;
+    cellInitHeight = screenWidth *3/10 +cellTopMargin;
+    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,90 +50,36 @@ float kTargetHeight = 200;
     return tempArray.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"packCell" forIndexPath:indexPath];
+    PackageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"packCell" forIndexPath:indexPath];
     
-    [cell.textLabel setText:[tempArray objectAtIndex:indexPath.row]];
+    [cell.textLabel setHidden:YES];
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    [UIView animateWithDuration:1 animations:^{
-        // move down cells which are below selected one
-        for (UITableViewCell *cell in tableView.visibleCells) {
-            NSIndexPath *cellIndexPath = [tableView indexPathForCell:cell];
-            
-            if (cellIndexPath.row > indexPath.row) {
-                CGRect frame = cell.frame;
-                frame.origin.y += kTargetHeight - tableView.rowHeight;
-                cell.frame = frame;
-            }
-        }
-        // expand selected cell
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        
-        CGRect frame = cell.frame;
-        frame.size.height = kTargetHeight;
-        cell.frame = frame;
-    } completion:^(BOOL finished) {
-        [tableView reloadData];  // commit final state
-    }];*/
-}
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showSet"])
-    {
-        SetSelectVC * destination = segue.destinationViewController;
-        [destination setTitle:[tempArray objectAtIndex:self.tableView.indexPathForSelectedRow.row]];
-    }
+    return cellInitHeight;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
-
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 */
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return YES;
+}
+- (IBAction)gotoShop:(id)sender {
+    ShopNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"shopNavView"];
+    [self presentViewController:view animated:YES completion:nil];
+}
 
 @end
