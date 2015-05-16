@@ -14,13 +14,14 @@
 
 
 @implementation WordInfoVC{
-    NSArray *wordArray;
+    NSArray *wordList;
     int curWordNo;
     BOOL isFront;
 }
 
 @synthesize wordCard = _wordCard;
 @synthesize wordNoLb = _wordNoLb;
+@synthesize curSet;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -35,7 +36,8 @@
     _wordCard.delegate = self;
     _wordCard.view.bounds = _wordCard.bounds;
     
-   wordArray = @[@[@"abash",@"v",@"ə'bæ∫t",@"to make embarrassed or ashamed",@"Làm bối rối, làm lúng túng, làm luống cuống"],
+    wordList = curSet.wordList;
+   /*wordList = @[@[@"abash",@"v",@"ə'bæ∫t",@"to make embarrassed or ashamed",@"Làm bối rối, làm lúng túng, làm luống cuống"],
                 @[@"aboriginal",@"a",@",æbə'ridʒənl",@"original",@"(thuộc) thổ dân; (thuộc) thổ sản, (thuộc) đặc sản"],
                 @[@"eradicate",@"v",@"i'rædikeit",@"get rid of pull up by the roots",@"Nhổ rễ"],
                  @[@"surcharge",@"v",@"´sə:¸tʃa:dʒ",@"additional load/charge",@"Phần chất thêm, số lượng chất thêm (quá tải)\nSố tiền tính thêm, tiền trả thêm\nThuế phạt (phạt kẻ khai man số tài sản phải chịu thuế)"],
@@ -44,7 +46,7 @@
                 @[@"inculcate",@"v",@"inkʌl¸keit",@"fix firmly by repetition",@"ghi nhớ, khắc sâu, in sâu (vào tâm trí)"],
                  @[@"embellish",@"v",@"m´beliʃ",@"make beautiful",@"Làm đẹp, trang điểm, tô son điểm phấn"],
                  @[@"fulsome",@"a",@"´fulsəm",@"disgusting offensive due to excessiveness",@"Quá đáng, thái quá, Đê tiện"],
-                @[@"corporeal",@"a",@"kɔ:´pɔ:riəl",@"physical of or for the body",@"Vật chất, cụ thể, hữu hình; (pháp lý) cụ thể"]];
+                @[@"corporeal",@"a",@"kɔ:´pɔ:riəl",@"physical of or for the body",@"Vật chất, cụ thể, hữu hình; (pháp lý) cụ thể"]];*/
     curWordNo = 0;
     isFront = YES;
     [self displayCurWord];
@@ -65,19 +67,19 @@
 
 -(void) displayCurWord
 {
-    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",curWordNo+1,wordArray.count]];
-    NSArray *wordContent = wordArray[curWordNo];
+    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",curWordNo+1,wordList.count]];
+    Word *word = wordList[curWordNo];
     if (isFront) {
-        [_wordCard displayWord:wordContent[0] wordType:wordContent[1] phonetic:wordContent[2] detailContent:wordContent[3]];
+        [_wordCard displayWord:word.name wordType:[word getWordType:@"English"] phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];
     }
     else
     {
-        [_wordCard displayWord:wordContent[0] wordType:wordContent[1] phonetic:wordContent[2] detailContent:wordContent[4]];
+        [_wordCard displayWord:word.name wordType:[word getWordType:@"Vietnamese"] phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:NO]];
     }
 }
 - (IBAction)next:(id)sender {
     isFront = YES;
-    if (curWordNo< wordArray.count -1) {
+    if (curWordNo< wordList.count -1) {
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
         }

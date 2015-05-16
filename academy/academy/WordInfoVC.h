@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "CardParentVC.h"
 #import "CardInfoView.h"
-
+#import "Word.h"
 @interface WordInfoVC : CardParentVC <CardInfoViewDelegate>
+
+@property (strong, nonatomic) LSet *curSet;
+
 @property (strong, nonatomic) IBOutlet CardInfoView *wordCard;
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
 @property (strong, nonatomic) IBOutlet UILabel *setTitleLb;

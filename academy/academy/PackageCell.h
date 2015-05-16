@@ -15,5 +15,8 @@
 @property (strong, nonatomic) IBOutlet UITextView *contentTV;
 @property (strong, nonatomic) IBOutlet UIButton *tryBtn;
 @property (strong, nonatomic) IBOutlet UIButton *buyBtn;
+@property (strong, nonatomic) IBOutlet UILabel *packTitle;
+@property (strong, nonatomic) IBOutlet UILabel *packSubTitle;
+
 
 @end

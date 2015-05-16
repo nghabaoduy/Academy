@@ -50,6 +50,7 @@
     }*/
     if (indexPath.row == 0) {
         WordInfoVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordInfoView"];
+        view.curSet = self.curSet;
         [self presentViewController:view animated:NO completion:nil];
     }
 }

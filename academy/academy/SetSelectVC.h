@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Package.h"
 
 @interface SetSelectVC : UITableViewController
+
+@property (nonatomic, retain) Package * curPack;
 
 @end

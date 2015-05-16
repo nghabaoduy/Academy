@@ -49,6 +49,9 @@
 		AFE6DF011B04A83E003E30CA /* Card.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DF001B04A83E003E30CA /* Card.png */; };
 		AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DF041B04B0A4003E30CA /* CardParentVC.m */; };
 		AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */; };
+		AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAC1B07BE7C00A0FD73 /* Package.m */; };
+		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
+		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
 		C36AEB261B0711A800A40692 /* AModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB251B0711A800A40692 /* AModel.m */; };
 		C36AEB281B071C6E00A40692 /* AModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB271B071C6E00A40692 /* AModelTest.m */; };
 		C37437271B0721A00002E46F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C37437261B0721A00002E46F /* User.m */; };
@@ -125,6 +128,12 @@
 		AFE6DF041B04B0A4003E30CA /* CardParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardParentVC.m; sourceTree = "<group>"; };
 		AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuVC.h; sourceTree = "<group>"; };
 		AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuVC.m; sourceTree = "<group>"; };
+		AFEE4BAB1B07BE7C00A0FD73 /* Package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Package.h; sourceTree = "<group>"; };
+		AFEE4BAC1B07BE7C00A0FD73 /* Package.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Package.m; sourceTree = "<group>"; };
+		AFEE4BAE1B07BEAF00A0FD73 /* LSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSet.h; sourceTree = "<group>"; };
+		AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSet.m; sourceTree = "<group>"; };
+		AFEE4BB11B07BEC100A0FD73 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
+		AFEE4BB21B07BEC100A0FD73 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		C36AEB241B0711A800A40692 /* AModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AModel.h; sourceTree = "<group>"; };
 		C36AEB251B0711A800A40692 /* AModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModel.m; sourceTree = "<group>"; };
 		C36AEB271B071C6E00A40692 /* AModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModelTest.m; sourceTree = "<group>"; };
@@ -327,6 +336,12 @@
 				C36AEB251B0711A800A40692 /* AModel.m */,
 				C37437251B0721A00002E46F /* User.h */,
 				C37437261B0721A00002E46F /* User.m */,
+				AFEE4BAB1B07BE7C00A0FD73 /* Package.h */,
+				AFEE4BAC1B07BE7C00A0FD73 /* Package.m */,
+				AFEE4BAE1B07BEAF00A0FD73 /* LSet.h */,
+				AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */,
+				AFEE4BB11B07BEC100A0FD73 /* Word.h */,
+				AFEE4BB21B07BEC100A0FD73 /* Word.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -511,6 +526,7 @@
 				AFE6DEEE1B03D365003E30CA /* UserShelfNavVC.m in Sources */,
 				AFE010821B053186005B4B4D /* PackageCell.m in Sources */,
 				C37437271B0721A00002E46F /* User.m in Sources */,
+				AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */,
 				AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */,
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
@@ -518,8 +534,10 @@
 				AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */,
 				AFD6362D1B038E1000ABDB3C /* main.m in Sources */,
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
+				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
+				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,
 				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,
 				AFD636361B038E1000ABDB3C /* ViewController.m in Sources */,
 				AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */,

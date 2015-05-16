@@ -8,6 +8,7 @@
 
 #import "SetSelectVC.h"
 #import "SetDetailVC.h"
+#import "LSet.h"
 
 @interface SetSelectVC ()
 
@@ -17,10 +18,10 @@
     NSArray *tempArray;
 }
 
+@synthesize curPack;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    tempArray = [NSArray arrayWithObjects:@"Basic1", @"Phrases", @"Basic2", @"Food", @"Animals", @"Plurals",nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,14 +34,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return tempArray.count;
+    if (!curPack) {
+        return 0;
+    }
+    return curPack.setList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setListCell" forIndexPath:indexPath];
-    
-    [cell.textLabel setText:[tempArray objectAtIndex:indexPath.row]];
+    LSet *set = [curPack.setList objectAtIndex:indexPath.row];
+    [cell.textLabel setText:set.name];
     
     return cell;
 }
@@ -48,8 +52,10 @@
 {
     if ([[segue identifier] isEqualToString:@"goSetDetail"])
     {
+         LSet *set = [curPack.setList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
         SetDetailVC * destination = segue.destinationViewController;
-        [destination setTitle:[tempArray objectAtIndex:self.tableView.indexPathForSelectedRow.row]];
+        [destination setTitle:set.name];
+        destination.curSet = set;
     }
 }
 

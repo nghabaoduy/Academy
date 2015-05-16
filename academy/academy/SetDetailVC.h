@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LSet.h"
 @interface SetDetailVC : UITableViewController
+
+@property (nonatomic, retain) LSet* curSet;
 
 @end
