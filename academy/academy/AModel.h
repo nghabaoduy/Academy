@@ -30,6 +30,7 @@
 @property (nonatomic, strong) NSString * modelId;
 @property (nonatomic, weak) id <ModelDelegate> delegate;
 - (id)initWithDict:(NSDictionary*)dict;
+
 - (void)getAllWithFilter:(NSDictionary*)filterDictionary;
 - (void)findId:(NSString*)valId;
 - (void)createModel;
