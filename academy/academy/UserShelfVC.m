@@ -12,8 +12,10 @@
 #import "ShopNavVC.h"
 #import "AFNetworking.h"
 #import "Package.h"
+#import "UserPackage.h"
+#import "User.h"
 
-@interface UserShelfVC ()
+@interface UserShelfVC () <ModelDelegate>
 
 @end
 
@@ -29,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    packageList = [NSMutableArray new];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     cellTopMargin = 10;
@@ -37,41 +39,14 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    packageList = [NSMutableArray new];
+    
     [self retrievePackages];
 }
 -(void) retrievePackages
 {
-    
-    NSString *requestURL = @"http://academy.openlabproduction.com/api/package";
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
-    [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSArray *packages = responseObject;
-        for (NSDictionary * packageDict in packages) {
-            Package* pack = [[Package alloc] initWithDict:packageDict];
-            [packageList addObject:pack];
-            [self.tableView reloadData];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSUInteger statusCode = [operation.response statusCode];
-        NSString *errorMessage = @"SceduleList Error";
-        NSLog(@"statusCode = %u",statusCode);
-        NSLog(@"error = %@",[error description]);
-        switch (statusCode) {
-            case 404:
-                errorMessage = @"User was not found.";
-                break;
-            case 500:
-                errorMessage = @"Internal Error";
-                break;
-            default:
-                break;
-        }
-        NSLog(@"error = %@",errorMessage);
-    }];
+    UserPackage * userPackage = [UserPackage new];
+    [userPackage setDelegate:self];
+    [userPackage getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,7 +65,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PackageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"packCell" forIndexPath:indexPath];
     
-    Package *pack = [packageList objectAtIndex:indexPath.row];
+    UserPackage * curUserPackage = [packageList objectAtIndex:indexPath.row];;
+    Package *pack = curUserPackage.package;
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
     [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
@@ -103,6 +79,16 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return cellInitHeight;
+}
+#pragma mark - Model Delegate
+
+- (void)getAllSucessfull:(NSMutableArray *)allList {
+    packageList = allList;
+    [self.tableView reloadData];
+}
+
+- (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    
 }
 
 #pragma mark - Navigation
@@ -118,10 +104,10 @@
 {
     if ([[segue identifier] isEqualToString:@"goSetList"])
     {
-        Package *pack = [packageList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        UserPackage * userPack = [packageList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
         SetSelectVC * destination = segue.destinationViewController;
-        [destination setTitle:pack.name];
-        destination.curPack = pack;
+        [destination setTitle:userPack.package.name];
+        destination.curPack = userPack.package;
     }
 }
 

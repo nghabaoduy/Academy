@@ -7,18 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Package.h"
-@interface LSet : NSObject
+#import "AModel.h"
 
-@property (nonatomic, retain) Package * package;
-@property (nonatomic, retain) NSString * awsId;
+@interface LSet : AModel
+
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * desc;
 @property int orderNo;
+@property (nonatomic, strong) NSString * package_id;
 
 @property (nonatomic, retain) NSMutableArray * wordList;
 
--(id) initWithDict:(NSDictionary *) dict package:(Package *) pack;
--(void) loadDictInfo:(NSDictionary *) dict  package:(Package *) pack;
 
 @end

@@ -19,7 +19,7 @@
 
 - (void)getAllWithFilter:(NSDictionary *)filterDictionary {
     
-    [self.delegate getAllSucessfull:@[]];
+    //[self.delegate getAllSucessfull:@[]];
 }
 
 - (void)createModel {
@@ -40,6 +40,21 @@
 
 - (NSDictionary *)getDictionaryFromObject {
     return @{};
+}
+
+- (id)initWithDict:(NSDictionary *)dict {
+    self = [super init];
+    if (self) {
+        [self setObjectWithDictionary:dict];
+    }
+    return self;
+}
+
+- (NSString *)getStringFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
+    if ([dict[key] isEqual:[NSNull null]]) {
+        return nil;
+    }
+    return dict[key];
 }
 
 @end

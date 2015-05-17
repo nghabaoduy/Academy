@@ -50,7 +50,6 @@
     curWordNo = 0;
     isFront = YES;
     [self displayCurWord];
-    
 }
 
 

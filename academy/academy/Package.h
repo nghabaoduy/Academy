@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AModel.h"
 
-@interface Package : NSObject
+@interface Package : AModel
 
 @property (nonatomic, retain) NSString * awsId;
 @property (nonatomic, retain) NSString * name;
@@ -19,6 +20,4 @@
 
 @property (nonatomic, retain) NSMutableArray * setList;
 
--(id) initWithDict:(NSDictionary *) dict;
--(void) loadDictInfo:(NSDictionary *) dict;
 @end

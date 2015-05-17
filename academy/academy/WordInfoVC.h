@@ -10,6 +10,7 @@
 #import "CardParentVC.h"
 #import "CardInfoView.h"
 #import "Word.h"
+#import "LSet.h"
 @interface WordInfoVC : CardParentVC <CardInfoViewDelegate>
 
 @property (strong, nonatomic) LSet *curSet;

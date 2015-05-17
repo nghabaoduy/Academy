@@ -7,18 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LSet.h"
+#import "AModel.h"
 
-@interface Word : NSObject
+@interface Word : AModel
 
-@property (nonatomic, retain) LSet *set;
-@property (nonatomic, retain) NSString * awsId;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * wordType;
 @property (nonatomic, retain) NSString * phonentic;
 
-
--(id) initWithDict:(NSDictionary *) dict set:(LSet *) inSet;
--(void) loadDictInfo:(NSDictionary *) dict set:(LSet *) inSet;
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample;
 -(NSString *) getWordType: (NSString *) lang;
 

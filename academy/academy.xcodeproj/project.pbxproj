@@ -54,6 +54,9 @@
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
 		C36AEB261B0711A800A40692 /* AModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB251B0711A800A40692 /* AModel.m */; };
 		C36AEB281B071C6E00A40692 /* AModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB271B071C6E00A40692 /* AModelTest.m */; };
+		C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C36DF4EA1B084C3900C225DA /* DataEngine.m */; };
+		C36DF4EF1B0853B300C225DA /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C36DF4EE1B0853B300C225DA /* LoginVC.m */; };
+		C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = C36DF4F11B088B3D00C225DA /* UserPackage.m */; };
 		C37437271B0721A00002E46F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C37437261B0721A00002E46F /* User.m */; };
 		C37437291B0722ED0002E46F /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C37437281B0722ED0002E46F /* UserTest.m */; };
 /* End PBXBuildFile section */
@@ -137,6 +140,12 @@
 		C36AEB241B0711A800A40692 /* AModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AModel.h; sourceTree = "<group>"; };
 		C36AEB251B0711A800A40692 /* AModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModel.m; sourceTree = "<group>"; };
 		C36AEB271B071C6E00A40692 /* AModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModelTest.m; sourceTree = "<group>"; };
+		C36DF4E91B084C3900C225DA /* DataEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEngine.h; sourceTree = "<group>"; };
+		C36DF4EA1B084C3900C225DA /* DataEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEngine.m; sourceTree = "<group>"; };
+		C36DF4ED1B0853B300C225DA /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		C36DF4EE1B0853B300C225DA /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		C36DF4F01B088B3D00C225DA /* UserPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPackage.h; sourceTree = "<group>"; };
+		C36DF4F11B088B3D00C225DA /* UserPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPackage.m; sourceTree = "<group>"; };
 		C37437251B0721A00002E46F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		C37437261B0721A00002E46F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		C37437281B0722ED0002E46F /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
@@ -198,6 +207,7 @@
 		AFD636291B038E1000ABDB3C /* academy */ = {
 			isa = PBXGroup;
 			children = (
+				C36DF4EC1B084C4300C225DA /* Singleton */,
 				C36AEB231B0710AF00A40692 /* Models */,
 				C36AEB221B07109D00A40692 /* Controllers */,
 				AFE0107F1B05313C005B4B4D /* Misc Object */,
@@ -325,6 +335,8 @@
 				AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */,
 				AFE6DEEF1B03D7AC003E30CA /* SetDetailVC.h */,
 				AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */,
+				C36DF4ED1B0853B300C225DA /* LoginVC.h */,
+				C36DF4EE1B0853B300C225DA /* LoginVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -342,8 +354,19 @@
 				AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */,
 				AFEE4BB11B07BEC100A0FD73 /* Word.h */,
 				AFEE4BB21B07BEC100A0FD73 /* Word.m */,
+				C36DF4F01B088B3D00C225DA /* UserPackage.h */,
+				C36DF4F11B088B3D00C225DA /* UserPackage.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		C36DF4EC1B084C4300C225DA /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				C36DF4E91B084C3900C225DA /* DataEngine.h */,
+				C36DF4EA1B084C3900C225DA /* DataEngine.m */,
+			);
+			name = Singleton;
 			sourceTree = "<group>";
 		};
 		D1F161B5ED3662F51D828E49 /* Frameworks */ = {
@@ -527,14 +550,17 @@
 				AFE010821B053186005B4B4D /* PackageCell.m in Sources */,
 				C37437271B0721A00002E46F /* User.m in Sources */,
 				AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */,
+				C36DF4EF1B0853B300C225DA /* LoginVC.m in Sources */,
 				AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */,
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
+				C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */,
 				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
 				AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */,
 				AFD6362D1B038E1000ABDB3C /* main.m in Sources */,
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
+				C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */,
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
 				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,

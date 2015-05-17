@@ -10,21 +10,15 @@
 
 @implementation Word
 
-@synthesize set, awsId, name, phonentic;
+@synthesize name, phonentic, wordType;
 
--(id) initWithDict:(NSDictionary *) dict set:(LSet *) inSet
-{
-    [self loadDictInfo:dict set:inSet];
-    return self;
+- (void)setObjectWithDictionary:(NSDictionary *)dict {
+    self.modelId = [dict valueForKey:@"id"];
+    name = [self getStringFromDict:dict WithKey:@"name"];
+    phonentic = [self getStringFromDict:dict WithKey:@"phonentic"];
+    wordType = [self getStringFromDict:dict WithKey:@"word_type"];
 }
 
--(void) loadDictInfo:(NSDictionary *) dict set:(LSet *) inSet
-{
-    set = inSet;
-    awsId = [dict valueForKey:@"id"];
-    name = [dict valueForKey:@"name"];
-    phonentic = [dict valueForKey:@"phonentic"];
-}
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample
 {
     return @"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit";

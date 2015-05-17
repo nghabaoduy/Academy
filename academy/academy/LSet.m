@@ -11,28 +11,26 @@
 
 @implementation LSet
 
-@synthesize package, awsId, name, desc, orderNo, wordList;
+@synthesize name, desc, orderNo, wordList, package_id;
 
--(id) initWithDict:(NSDictionary *) dict package:(Package *) pack
-{
-    [self loadDictInfo:dict package:pack];
-    return self;
-}
+- (void)setObjectWithDictionary:(NSDictionary *)dict {
+    self.modelId = [dict valueForKey:@"id"];
 
--(void) loadDictInfo:(NSDictionary *) dict package:(Package *) pack
-{
-    package = pack;
-    awsId = [dict valueForKey:@"id"];
-    name = [dict valueForKey:@"name"];
-    desc = [dict valueForKey:@"description"];
-    orderNo = [[dict valueForKey:@"order_number"] intValue];
+    name = dict[@"name"] ?: nil;
+    desc = dict[@"description"] ?:nil;
+    package_id = dict[@"package_id"] ?: nil;
+    orderNo = dict[@"order_number"] ? [dict[@"order_number"] intValue] : -1;
+    
     
     wordList = [NSMutableArray new];
-    for (NSDictionary *wordDict in [dict objectForKey:@"words"]) {
-        Word *word = [[Word alloc] initWithDict:wordDict set:self];
-        [wordList addObject:word];
+    
+    NSArray * words = dict[@"words"]?: @[];
+    
+    for (NSDictionary * wordDict in words) {
+        Word * newWord = [[Word alloc] initWithDict:wordDict];
+        [wordList addObject:newWord];
     }
+    
 }
-
 
 @end

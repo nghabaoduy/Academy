@@ -10,8 +10,9 @@
 #import "UserShelfNavVC.h"
 #import "ShopNavVC.h"
 #import "AModel.h"
+#import "User.h"
 
-@interface ViewController () <ModelDelegate>
+@interface ViewController () <AuthDelegate>
 
 @end
 
@@ -21,11 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"here");
-    AModel * newModel = [AModel new];
-    newModel.delegate = self;
-    newModel.modelId = @"100";
-    [newModel updateModel];
-}
+    
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -39,14 +37,23 @@
     
 }
 
-+ (void)findIdSuccessful:(AModel *)model {
-    NSLog(@"model Id %@", model.modelId);
+
+- (IBAction)actionLogin:(id)sender {
+    User * newUser = [User new];
+    [newUser setAuthDelegate:self];
+    [newUser userLoginWith:@"nghabaoduy" Password:@"00000"];
 }
 
-- (void)updateModelSuccessful:(AModel *)model {
-    NSLog(@"model Id %@", model.modelId);
 
+- (void)userLogout:(User *)user WithError:(NSDictionary *)Error {
+    
 }
+
+- (void)userLoginSuccessfull:(User *)user {
+    NSLog(@"%@", [user getDictionaryFromObject]);
+}
+
+
 
 
 

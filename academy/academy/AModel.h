@@ -7,19 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataEngine.h"
+
 
 @class AModel;
 @protocol ModelDelegate <NSObject>
 
 @optional
-- (void)getAllSucessfull:(NSArray *)allList;
+- (void)getAllSucessfull:(NSMutableArray *)allList;
 - (void)findIdSuccessful:(AModel*)model;
 - (void)createModelSuccessful:(AModel *)model;
 - (void)updateModelSuccessful:(AModel *)model;
 - (void)deleteModelSuccessful:(AModel *)model;
 
-- (void)model:(AModel *)model ErrorMessage:(NSDictionary *)error;
-+ (void)findWithErrorMessage:(NSDictionary *)error;
+- (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode;
+- (void)findWithErrorMessage:(NSDictionary *)error;
 
 @end
 
@@ -27,7 +29,7 @@
 
 @property (nonatomic, strong) NSString * modelId;
 @property (nonatomic, weak) id <ModelDelegate> delegate;
-
+- (id)initWithDict:(NSDictionary*)dict;
 - (void)getAllWithFilter:(NSDictionary*)filterDictionary;
 - (void)findId:(NSString*)valId;
 - (void)createModel;
@@ -36,5 +38,7 @@
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict;
 - (NSDictionary*)getDictionaryFromObject;
+
+- (NSString*)getStringFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 
 @end

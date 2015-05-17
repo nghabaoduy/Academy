@@ -10,26 +10,24 @@
 #import "PackageCell.h"
 #import "UserShelfNavVC.h"
 #import "AFNetworking.h"
-
 #import "Package.h"
 
-@interface ShopVC ()
+@interface ShopVC () <ModelDelegate>
 
 @end
 
-@implementation ShopVC{
+@implementation ShopVC {
     NSArray *tempArray;
     NSMutableArray *packageList;
-    
     int cellInitHeight;
     NSIndexPath *curCellPath;
     int expansionHeight;
     int cellTopMargin;
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    packageList = [NSMutableArray new];
     tempArray = [NSArray arrayWithObjects:@"Basic", @"Intermediate", @"Advanced",nil];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -38,42 +36,16 @@
     expansionHeight = screenWidth *3/10 *160/200 + cellTopMargin;
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    packageList = [NSMutableArray new];
     [self retrievePackages];
 }
--(void) retrievePackages
-{
-    
-    NSString *requestURL = @"http://academy.openlabproduction.com/api/package";
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
-    [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSArray *packages = responseObject;
-        for (NSDictionary * packageDict in packages) {
-            Package* pack = [[Package alloc] initWithDict:packageDict];
-            [packageList addObject:pack];
-            [self.tableView reloadData];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSUInteger statusCode = [operation.response statusCode];
-        NSString *errorMessage = @"SceduleList Error";
-        NSLog(@"statusCode = %u",statusCode);
-        NSLog(@"error = %@",[error description]);
-        switch (statusCode) {
-            case 404:
-                errorMessage = @"User was not found.";
-                break;
-            case 500:
-                errorMessage = @"Internal Error";
-                break;
-            default:
-                break;
-        }
-        NSLog(@"error = %@",errorMessage);
-    }];
+
+-(void) retrievePackages {
+    //Init new package just to find (i cant do static one)
+    Package * toRetrivePackages = [Package new];
+    //Assign Deleteage
+    toRetrivePackages.delegate = self;
+    //Call the function
+    [toRetrivePackages getAllWithFilter:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,7 +77,6 @@
         if (curCellPath.section == indexPath.section && curCellPath.row == indexPath.row) {
             return;
         }
-        
         [self tableView:tableView minimizeCurCellAndExpandCellAtIndex:indexPath];
     }
     else
@@ -159,7 +130,7 @@
         frame.size.height += expansionHeight;
         cell.frame = frame;
     } completion:^(BOOL finished) {
-        [tableView reloadData];
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
@@ -170,6 +141,15 @@
             return cellInitHeight+expansionHeight;
         }
     return cellInitHeight;
+}
+#pragma mark - Package
+- (void)getAllSucessfull:(NSMutableArray *)allList {
+    packageList = allList;
+    [self.tableView reloadData];
+}
+
+- (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    
 }
 
 #pragma mark - Navigation
