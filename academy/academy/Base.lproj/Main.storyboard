@@ -81,6 +81,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="181" y="470" width="38" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="actionLogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="weG-yh-IiG"/>
                                 </connections>
@@ -546,6 +549,9 @@
                                             <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="24"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="25" y="28" width="59" height="28"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ml4-QM-RfH">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -562,7 +568,8 @@
                                                     <exclude reference="KsL-kE-AQr"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="325" y="15" width="65" height="14"/>
                                                 <mask key="constraints">
                                                     <include reference="KsL-kE-AQr"/>
                                                 </mask>
@@ -573,6 +580,9 @@
                                             <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="25" y="59" width="47" height="23"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>

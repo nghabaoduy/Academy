@@ -15,15 +15,15 @@
 @synthesize awsId, name, desc, category, price, wordsTotal, setList;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
-    self.modelId = [dict valueForKey:@"id"];
-    name = [dict valueForKey:@"name"];
-    desc = [dict valueForKey:@"description"];
-    category = [dict valueForKey:@"category"];
-    price = [dict valueForKey:@"price"];
-    wordsTotal = [[dict valueForKey:@"no_of_words"] intValue];
+    self.modelId = [self getStringFromDict:dict WithKey:@"id"];
+    name = [self getStringFromDict:dict WithKey:@"name"];
+    desc = [self getStringFromDict:dict WithKey:@"description"];
+    category = [self getStringFromDict:dict WithKey:@"category"];
+    price = [self getStringFromDict:dict WithKey:@"price"];
+    wordsTotal = [[self getStringFromDict:dict WithKey:@"no_of_words"] intValue];
     
     setList = [NSMutableArray new];
-    for (NSDictionary *setDict in [dict objectForKey:@"sets"]) {
+    for (NSDictionary *setDict in [self getArrayFromDict:dict WithKey:@"sets"]) {
         LSet *set = [[LSet alloc] initWithDict:setDict];
         [setList addObject:set];
     }

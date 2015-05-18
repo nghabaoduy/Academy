@@ -52,6 +52,7 @@
 		AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAC1B07BE7C00A0FD73 /* Package.m */; };
 		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
+		C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */ = {isa = PBXBuildFile; fileRef = C34203D91B0A18650058FFE2 /* Meaning.m */; };
 		C36AEB261B0711A800A40692 /* AModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB251B0711A800A40692 /* AModel.m */; };
 		C36AEB281B071C6E00A40692 /* AModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB271B071C6E00A40692 /* AModelTest.m */; };
 		C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C36DF4EA1B084C3900C225DA /* DataEngine.m */; };
@@ -137,6 +138,8 @@
 		AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSet.m; sourceTree = "<group>"; };
 		AFEE4BB11B07BEC100A0FD73 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		AFEE4BB21B07BEC100A0FD73 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		C34203D81B0A18650058FFE2 /* Meaning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meaning.h; sourceTree = "<group>"; };
+		C34203D91B0A18650058FFE2 /* Meaning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meaning.m; sourceTree = "<group>"; };
 		C36AEB241B0711A800A40692 /* AModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AModel.h; sourceTree = "<group>"; };
 		C36AEB251B0711A800A40692 /* AModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModel.m; sourceTree = "<group>"; };
 		C36AEB271B071C6E00A40692 /* AModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AModelTest.m; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 				AFEE4BB21B07BEC100A0FD73 /* Word.m */,
 				C36DF4F01B088B3D00C225DA /* UserPackage.h */,
 				C36DF4F11B088B3D00C225DA /* UserPackage.m */,
+				C34203D81B0A18650058FFE2 /* Meaning.h */,
+				C34203D91B0A18650058FFE2 /* Meaning.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */,
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
+				C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */,
 				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,
 				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,
 				AFD636361B038E1000ABDB3C /* ViewController.m in Sources */,

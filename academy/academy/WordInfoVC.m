@@ -8,7 +8,7 @@
 
 #import "WordInfoVC.h"
 
-@interface WordInfoVC ()
+@interface WordInfoVC () <ModelDelegate>
 
 @end
 
@@ -36,20 +36,11 @@
     _wordCard.delegate = self;
     _wordCard.view.bounds = _wordCard.bounds;
     
-    wordList = curSet.wordList;
-   /*wordList = @[@[@"abash",@"v",@"ə'bæ∫t",@"to make embarrassed or ashamed",@"Làm bối rối, làm lúng túng, làm luống cuống"],
-                @[@"aboriginal",@"a",@",æbə'ridʒənl",@"original",@"(thuộc) thổ dân; (thuộc) thổ sản, (thuộc) đặc sản"],
-                @[@"eradicate",@"v",@"i'rædikeit",@"get rid of pull up by the roots",@"Nhổ rễ"],
-                 @[@"surcharge",@"v",@"´sə:¸tʃa:dʒ",@"additional load/charge",@"Phần chất thêm, số lượng chất thêm (quá tải)\nSố tiền tính thêm, tiền trả thêm\nThuế phạt (phạt kẻ khai man số tài sản phải chịu thuế)"],
-                @[@"trickle",@"n",@"trikəl",@"flow in drops",@"Dòng chảy nhỏ giọt (nước)"],
-                @[@"intrepid",@"a",@"in´trepid",@"fearless brave undaunted",@"Gan dạ, dũng cảm"],
-                @[@"inculcate",@"v",@"inkʌl¸keit",@"fix firmly by repetition",@"ghi nhớ, khắc sâu, in sâu (vào tâm trí)"],
-                 @[@"embellish",@"v",@"m´beliʃ",@"make beautiful",@"Làm đẹp, trang điểm, tô son điểm phấn"],
-                 @[@"fulsome",@"a",@"´fulsəm",@"disgusting offensive due to excessiveness",@"Quá đáng, thái quá, Đê tiện"],
-                @[@"corporeal",@"a",@"kɔ:´pɔ:riəl",@"physical of or for the body",@"Vật chất, cụ thể, hữu hình; (pháp lý) cụ thể"]];*/
     curWordNo = 0;
     isFront = YES;
-    [self displayCurWord];
+    
+    [self retrieveWords];
+    //[self displayCurWord];
 }
 
 
@@ -60,6 +51,12 @@
     [super didReceiveMemoryWarning];
     
 }
+
+- (void)retrieveWords {
+    [curSet setDelegate:self];
+    [curSet findId:curSet.modelId];
+}
+
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -69,11 +66,11 @@
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",curWordNo+1,wordList.count]];
     Word *word = wordList[curWordNo];
     if (isFront) {
-        [_wordCard displayWord:word.name wordType:[word getWordType:@"English"] phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];
+        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];
     }
     else
     {
-        [_wordCard displayWord:word.name wordType:[word getWordType:@"Vietnamese"] phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:NO]];
+        [_wordCard displayWord:word.name wordType:[word getWordType:@"Vietnamese"] phonetic:word.wordType detailContent:[word getMeaning:@"Vietnamese" bExample:NO]];
     }
 }
 - (IBAction)next:(id)sender {
@@ -127,6 +124,16 @@
 {
     NSLog(@"cardIsTapped");
     [self startFlip:_wordCard];
+}
+
+#pragma mark - Model Delegate
+- (void)findIdSuccessful:(LSet *)model {
+    wordList = model.wordList;
+    [self displayCurWord];
+}
+
+- (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    
 }
 
 @end

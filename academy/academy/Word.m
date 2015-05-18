@@ -7,6 +7,7 @@
 //
 
 #import "Word.h"
+#import "Meaning.h"
 
 @implementation Word
 
@@ -17,14 +18,35 @@
     name = [self getStringFromDict:dict WithKey:@"name"];
     phonentic = [self getStringFromDict:dict WithKey:@"phonentic"];
     wordType = [self getStringFromDict:dict WithKey:@"word_type"];
+
+    _meaningList = [NSMutableArray new];
+    NSArray * meanings = [self getArrayFromDict:dict WithKey:@"meaning_list"];
+    for (NSDictionary * meaningDict in meanings) {
+        Meaning * newMeaning = [[Meaning alloc] initWithDict:meaningDict];
+        [_meaningList addObject:newMeaning];
+    }
 }
 
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample
 {
-    return @"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit";
+    if (bExample) {
+        for (Meaning * meaning in _meaningList) {
+            if ([meaning.language isEqualToString:lang] ) {
+                return [NSString stringWithFormat:@"%@\n\nExample:\n%@", meaning.content, meaning.example];
+            }
+        }
+    }
+    
+    
+    return [self getWordType:lang];
 }
 -(NSString *) getWordType: (NSString *) lang
 {
-    return @"n";
+    for (Meaning * meaning in _meaningList) {
+        if ([meaning.language isEqualToString:lang] ) {
+            return meaning.content;
+        }
+    }
+    return @"Meaning not found";
 }
 @end

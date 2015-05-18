@@ -51,8 +51,29 @@
 }
 
 - (NSString *)getStringFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
-    if ([dict[key] isEqual:[NSNull null]]) {
-        return nil;
+    if ([dict[key] isEqual:[NSNull null]] || !dict[key]) {
+        return @"Empty";
+    }
+    return dict[key];
+}
+
+- (NSNumber *)getNumberFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
+    if ([dict[key] isEqual:[NSNull null]] || !dict[key]) {
+        return @(-1);
+    }
+    return dict[key];
+}
+
+- (NSArray *)getArrayFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
+    if ([dict[key] isEqual:[NSNull null]] || !dict[key]) {
+        return @[];
+    }
+    return dict[key];
+}
+
+- (NSDictionary *)getDictFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
+    if ([dict[key] isEqual:[NSNull null]] || !dict[key]) {
+        return @{};
     }
     return dict[key];
 }

@@ -14,6 +14,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * wordType;
 @property (nonatomic, retain) NSString * phonentic;
+@property (nonatomic, retain) NSMutableArray * meaningList;
 
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample;
 -(NSString *) getWordType: (NSString *) lang;

@@ -41,5 +41,8 @@
 - (NSDictionary*)getDictionaryFromObject;
 
 - (NSString*)getStringFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
+- (NSArray*)getArrayFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
+- (NSNumber*)getNumberFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
+- (NSDictionary*)getDictFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 
 @end
