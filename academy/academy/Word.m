@@ -32,21 +32,25 @@
     if (bExample) {
         for (Meaning * meaning in _meaningList) {
             if ([meaning.language isEqualToString:lang] ) {
+                if ([meaning.example isEqualToString:@""]) {
+                    return meaning.content;
+                }
                 return [NSString stringWithFormat:@"%@\n\nExample:\n%@", meaning.content, meaning.example];
             }
         }
     }
-    
-    
-    return [self getWordType:lang];
-}
--(NSString *) getWordType: (NSString *) lang
-{
-    for (Meaning * meaning in _meaningList) {
-        if ([meaning.language isEqualToString:lang] ) {
-            return meaning.content;
+    else
+    {
+        for (Meaning * meaning in _meaningList) {
+            if ([meaning.language isEqualToString:lang] ) {
+                return meaning.content;
+            }
         }
     }
-    return @"Meaning not found";
+    return @"";
+}
+-(NSString *) getWordType
+{
+    return self.wordType;
 }
 @end

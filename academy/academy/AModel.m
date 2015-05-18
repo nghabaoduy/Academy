@@ -52,7 +52,8 @@
 
 - (NSString *)getStringFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
     if ([dict[key] isEqual:[NSNull null]] || !dict[key]) {
-        return @"Empty";
+        return @"";
+        //return @"Empty";
     }
     return dict[key];
 }

@@ -8,11 +8,13 @@
 
 #import "LoginVC.h"
 #import "User.h"
+#import "LoadingUIView.h"
 
 @interface LoginVC ()<AuthDelegate> {
     
     __weak IBOutlet UITextField *textfUsername;
     __weak IBOutlet UITextField *textfPassword;
+    LoadingUIView *loadingView;
 }
 
 @end
@@ -21,8 +23,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (loadingView != nil) {
+        return;
+    }
+    loadingView = [[LoadingUIView alloc] init];
+    [self.view addSubview:loadingView];
+    
 }
-
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [self.view bringSubviewToFront:loadingView];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -42,12 +53,14 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
+    [loadingView startLoading];
     User * newUser = [User new];
     [newUser setAuthDelegate:self];
     [newUser userLoginWith:textfUsername.text Password:textfPassword.text];
 }
 
 - (void)loginSuccess {
+    [loadingView endLoading];
     [self performSegueWithIdentifier:@"toBookShelf" sender:nil];
 }
 
@@ -60,6 +73,7 @@
 
 #pragma mark - Auth Delegate
 - (void)userLogin:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode {
+    [loadingView endLoading];
     NSString * errorMessage = @"";
     
     switch (statusCode.intValue) {

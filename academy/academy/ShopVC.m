@@ -11,6 +11,7 @@
 #import "UserShelfNavVC.h"
 #import "AFNetworking.h"
 #import "Package.h"
+#import "PackageInfoVC.h"
 
 @interface ShopVC () <ModelDelegate>
 
@@ -73,73 +74,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (curCellPath!=nil) {
-        if (curCellPath.section == indexPath.section && curCellPath.row == indexPath.row) {
-            return;
-        }
-        [self tableView:tableView minimizeCurCellAndExpandCellAtIndex:indexPath];
-    }
-    else
-    {
-        [self tableView:tableView expandCellAtIndex:indexPath];
-    }
     
     
 }
-
-- (void)tableView:(UITableView *)tableView minimizeCurCellAndExpandCellAtIndex:(NSIndexPath *)indexPath
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        // move down cells which are below selected one
-        for (UITableViewCell *cell in tableView.visibleCells) {
-            NSIndexPath *cellIndexPath = [tableView indexPathForCell:cell];
-            
-            if (cellIndexPath.row > curCellPath.row) {
-                CGRect frame = cell.frame;
-                frame.origin.y -= expansionHeight;
-                cell.frame = frame;
-            }
-        }
-        // expand selected cell
-        PackageCell *cell = (PackageCell *)[tableView cellForRowAtIndexPath:curCellPath];
-        
-        CGRect frame = cell.frame;
-        frame.size.height -= expansionHeight;
-        cell.frame = frame;
-    } completion:^(BOOL finished) {
-        [self tableView:tableView expandCellAtIndex:indexPath];
-    }];
-}
-- (void)tableView:(UITableView *)tableView expandCellAtIndex:(NSIndexPath *)indexPath
-{
-    curCellPath = indexPath;
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        for (UITableViewCell *cell in tableView.visibleCells) {
-            NSIndexPath *cellIndexPath = [tableView indexPathForCell:cell];
-            
-            if (cellIndexPath.row > indexPath.row) {
-                CGRect frame = cell.frame;
-                frame.origin.y += expansionHeight;
-                cell.frame = frame;
-            }
-        }
-        // expand selected cell
-        PackageCell *cell = (PackageCell *)[tableView cellForRowAtIndexPath:indexPath];
-        
-        CGRect frame = cell.frame;
-        frame.size.height += expansionHeight;
-        cell.frame = frame;
-    } completion:^(BOOL finished) {
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    }];
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (curCellPath != nil)
-        if (curCellPath.section == indexPath.section && curCellPath.row == indexPath.row) {
-            return cellInitHeight+expansionHeight;
-        }
     return cellInitHeight;
 }
 #pragma mark - Package
@@ -153,18 +92,18 @@
 }
 
 #pragma mark - Navigation
-/*
+
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+     if ([[segue identifier] isEqualToString:@"goPackInfo"])
+     {
+         Package * pack = [packageList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+         PackageInfoVC * destination = segue.destinationViewController;
+         [destination setTitle:pack.name];
+         destination.curPack = pack;
+     }
  }
- */
 
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    return NO;
-}
 - (IBAction)gotoShelf:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

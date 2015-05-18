@@ -19,7 +19,6 @@
 		AFD6362D1B038E1000ABDB3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD6362C1B038E1000ABDB3C /* main.m */; };
 		AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD6362F1B038E1000ABDB3C /* AppDelegate.m */; };
 		AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */; };
-		AFD636361B038E1000ABDB3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD636351B038E1000ABDB3C /* ViewController.m */; };
 		AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFD636371B038E1000ABDB3C /* Main.storyboard */; };
 		AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD6363A1B038E1000ABDB3C /* Images.xcassets */; };
 		AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */; };
@@ -28,16 +27,6 @@
 		AFE010821B053186005B4B4D /* PackageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE010811B053186005B4B4D /* PackageCell.m */; };
 		AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE010831B053547005B4B4D /* PackCellInfoBG.png */; };
 		AFE010871B05A941005B4B4D /* ShopNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE010861B05A941005B4B4D /* ShopNavVC.m */; };
-		AFE6DED91B03C6EC003E30CA /* Login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DECF1B03C6EC003E30CA /* Login.jpg */; };
-		AFE6DEDA1B03C6EC003E30CA /* Menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED01B03C6EC003E30CA /* Menu.jpg */; };
-		AFE6DEDB1B03C6EC003E30CA /* Profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED11B03C6EC003E30CA /* Profile.jpg */; };
-		AFE6DEDC1B03C6EC003E30CA /* Set selection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED21B03C6EC003E30CA /* Set selection.jpg */; };
-		AFE6DEDD1B03C6EC003E30CA /* Set Start.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED31B03C6EC003E30CA /* Set Start.jpg */; };
-		AFE6DEDE1B03C6EC003E30CA /* Shelf.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED41B03C6EC003E30CA /* Shelf.jpg */; };
-		AFE6DEDF1B03C6EC003E30CA /* ShowWord.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED51B03C6EC003E30CA /* ShowWord.jpg */; };
-		AFE6DEE01B03C6EC003E30CA /* test example 1.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED61B03C6EC003E30CA /* test example 1.png */; };
-		AFE6DEE11B03C6EC003E30CA /* test example 2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED71B03C6EC003E30CA /* test example 2.png */; };
-		AFE6DEE21B03C6EC003E30CA /* WordKnownSelection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DED81B03C6EC003E30CA /* WordKnownSelection.jpg */; };
 		AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */; };
 		AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEE71B03CAF2003E30CA /* ShopVC.m */; };
 		AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */; };
@@ -52,6 +41,10 @@
 		AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAC1B07BE7C00A0FD73 /* Package.m */; };
 		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
+		AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */; };
+		AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB76AF1B0A350A001489F1 /* LoadingView.xib */; };
+		AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */; };
+		AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */; };
 		C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */ = {isa = PBXBuildFile; fileRef = C34203D91B0A18650058FFE2 /* Meaning.m */; };
 		C36AEB261B0711A800A40692 /* AModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB251B0711A800A40692 /* AModel.m */; };
 		C36AEB281B071C6E00A40692 /* AModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C36AEB271B071C6E00A40692 /* AModelTest.m */; };
@@ -88,8 +81,6 @@
 		AFD6362E1B038E1000ABDB3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AFD6362F1B038E1000ABDB3C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AFD636321B038E1000ABDB3C /* academy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = academy.xcdatamodel; sourceTree = "<group>"; };
-		AFD636341B038E1000ABDB3C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AFD636351B038E1000ABDB3C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AFD636381B038E1000ABDB3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFD6363A1B038E1000ABDB3C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFD6363D1B038E1000ABDB3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -102,16 +93,6 @@
 		AFE010831B053547005B4B4D /* PackCellInfoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PackCellInfoBG.png; path = Graphics/PackCellInfoBG.png; sourceTree = "<group>"; };
 		AFE010851B05A941005B4B4D /* ShopNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopNavVC.h; sourceTree = "<group>"; };
 		AFE010861B05A941005B4B4D /* ShopNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopNavVC.m; sourceTree = "<group>"; };
-		AFE6DECF1B03C6EC003E30CA /* Login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Login.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Login.jpg"; sourceTree = "<group>"; };
-		AFE6DED01B03C6EC003E30CA /* Menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Menu.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Menu.jpg"; sourceTree = "<group>"; };
-		AFE6DED11B03C6EC003E30CA /* Profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Profile.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Profile.jpg"; sourceTree = "<group>"; };
-		AFE6DED21B03C6EC003E30CA /* Set selection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Set selection.jpg"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Set selection.jpg"; sourceTree = "<group>"; };
-		AFE6DED31B03C6EC003E30CA /* Set Start.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Set Start.jpg"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Set Start.jpg"; sourceTree = "<group>"; };
-		AFE6DED41B03C6EC003E30CA /* Shelf.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Shelf.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/Shelf.jpg"; sourceTree = "<group>"; };
-		AFE6DED51B03C6EC003E30CA /* ShowWord.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ShowWord.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/ShowWord.jpg"; sourceTree = "<group>"; };
-		AFE6DED61B03C6EC003E30CA /* test example 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "test example 1.png"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/test example 1.png"; sourceTree = "<group>"; };
-		AFE6DED71B03C6EC003E30CA /* test example 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "test example 2.png"; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/test example 2.png"; sourceTree = "<group>"; };
-		AFE6DED81B03C6EC003E30CA /* WordKnownSelection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WordKnownSelection.jpg; path = "../../../../../Dropbox/openlabProduction/English Academy/mockups/WordKnownSelection.jpg"; sourceTree = "<group>"; };
 		AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserShelfVC.h; sourceTree = "<group>"; };
 		AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserShelfVC.m; sourceTree = "<group>"; };
 		AFE6DEE61B03CAF2003E30CA /* ShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopVC.h; sourceTree = "<group>"; };
@@ -138,6 +119,12 @@
 		AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSet.m; sourceTree = "<group>"; };
 		AFEE4BB11B07BEC100A0FD73 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		AFEE4BB21B07BEC100A0FD73 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		AFFB76AC1B0A34EE001489F1 /* LoadingUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingUIView.h; sourceTree = "<group>"; };
+		AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingUIView.m; sourceTree = "<group>"; };
+		AFFB76AF1B0A350A001489F1 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		AFFB76B11B0A4D0B001489F1 /* PackageInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoVC.h; sourceTree = "<group>"; };
+		AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoVC.m; sourceTree = "<group>"; };
+		AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "long-blue-btn.png"; path = "Graphics/long-blue-btn.png"; sourceTree = "<group>"; };
 		C34203D81B0A18650058FFE2 /* Meaning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meaning.h; sourceTree = "<group>"; };
 		C34203D91B0A18650058FFE2 /* Meaning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meaning.m; sourceTree = "<group>"; };
 		C36AEB241B0711A800A40692 /* AModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AModel.h; sourceTree = "<group>"; };
@@ -218,11 +205,8 @@
 				AFE6DF021B04B016003E30CA /* WordCardViewCollection */,
 				AFE6DEFF1B04A830003E30CA /* Graphics */,
 				AFE6DEF51B049D04003E30CA /* CardView */,
-				AFE6DECE1B03C6CF003E30CA /* Mockups img */,
 				AFD6362E1B038E1000ABDB3C /* AppDelegate.h */,
 				AFD6362F1B038E1000ABDB3C /* AppDelegate.m */,
-				AFD636341B038E1000ABDB3C /* ViewController.h */,
-				AFD636351B038E1000ABDB3C /* ViewController.m */,
 				AFD636371B038E1000ABDB3C /* Main.storyboard */,
 				AFD6363A1B038E1000ABDB3C /* Images.xcassets */,
 				AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */,
@@ -265,25 +249,11 @@
 			children = (
 				AFE010801B053186005B4B4D /* PackageCell.h */,
 				AFE010811B053186005B4B4D /* PackageCell.m */,
+				AFFB76AC1B0A34EE001489F1 /* LoadingUIView.h */,
+				AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */,
+				AFFB76AF1B0A350A001489F1 /* LoadingView.xib */,
 			);
 			name = "Misc Object";
-			sourceTree = "<group>";
-		};
-		AFE6DECE1B03C6CF003E30CA /* Mockups img */ = {
-			isa = PBXGroup;
-			children = (
-				AFE6DECF1B03C6EC003E30CA /* Login.jpg */,
-				AFE6DED01B03C6EC003E30CA /* Menu.jpg */,
-				AFE6DED11B03C6EC003E30CA /* Profile.jpg */,
-				AFE6DED21B03C6EC003E30CA /* Set selection.jpg */,
-				AFE6DED31B03C6EC003E30CA /* Set Start.jpg */,
-				AFE6DED41B03C6EC003E30CA /* Shelf.jpg */,
-				AFE6DED51B03C6EC003E30CA /* ShowWord.jpg */,
-				AFE6DED61B03C6EC003E30CA /* test example 1.png */,
-				AFE6DED71B03C6EC003E30CA /* test example 2.png */,
-				AFE6DED81B03C6EC003E30CA /* WordKnownSelection.jpg */,
-			);
-			name = "Mockups img";
 			sourceTree = "<group>";
 		};
 		AFE6DEF51B049D04003E30CA /* CardView */ = {
@@ -300,6 +270,7 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */,
 				AFE010831B053547005B4B4D /* PackCellInfoBG.png */,
 				AFE0107D1B051CE5005B4B4D /* PackageCellBG.png */,
 				AFCFE5FD1B04E668006D9744 /* cross.png */,
@@ -340,6 +311,8 @@
 				AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */,
 				C36DF4ED1B0853B300C225DA /* LoginVC.h */,
 				C36DF4EE1B0853B300C225DA /* LoginVC.m */,
+				AFFB76B11B0A4D0B001489F1 /* PackageInfoVC.h */,
+				AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -479,25 +452,17 @@
 				AFCFE5F51B04DD8B006D9744 /* GothamRounded-Light.ttf in Resources */,
 				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
 				AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */,
-				AFE6DEDB1B03C6EC003E30CA /* Profile.jpg in Resources */,
-				AFE6DED91B03C6EC003E30CA /* Login.jpg in Resources */,
-				AFE6DEDA1B03C6EC003E30CA /* Menu.jpg in Resources */,
-				AFE6DEDC1B03C6EC003E30CA /* Set selection.jpg in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
-				AFE6DEE21B03C6EC003E30CA /* WordKnownSelection.jpg in Resources */,
-				AFE6DEDF1B03C6EC003E30CA /* ShowWord.jpg in Resources */,
 				AFCFE5FE1B04E668006D9744 /* cross.png in Resources */,
 				AFCFE5F31B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf in Resources */,
-				AFE6DEE11B03C6EC003E30CA /* test example 2.png in Resources */,
-				AFE6DEDD1B03C6EC003E30CA /* Set Start.jpg in Resources */,
-				AFE6DEE01B03C6EC003E30CA /* test example 1.png in Resources */,
 				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
 				AFCFE5F41B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf in Resources */,
 				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
 				AFCFE5F21B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf in Resources */,
 				AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */,
 				AFCFE5F11B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf in Resources */,
-				AFE6DEDE1B03C6EC003E30CA /* Shelf.jpg in Resources */,
+				AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */,
+				AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */,
 				AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +525,7 @@
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
 				C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */,
+				AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */,
 				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
 				AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */,
 				AFD6362D1B038E1000ABDB3C /* main.m in Sources */,
@@ -571,7 +537,7 @@
 				C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */,
 				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,
 				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,
-				AFD636361B038E1000ABDB3C /* ViewController.m in Sources */,
+				AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */,
 				AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

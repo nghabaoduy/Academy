@@ -26,5 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent;
+-(void) clearDisplay;
 
 @end

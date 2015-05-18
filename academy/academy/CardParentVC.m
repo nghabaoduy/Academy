@@ -19,9 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
+    if (self.loadingView != nil) {
+        return;
+    }
+    self.loadingView = [[LoadingUIView alloc] init];
+    [self.view addSubview:self.loadingView];
 
+}
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [self.view bringSubviewToFront:self.loadingView];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

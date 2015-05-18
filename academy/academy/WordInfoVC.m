@@ -40,7 +40,9 @@
     isFront = YES;
     
     [self retrieveWords];
-    //[self displayCurWord];
+    [_wordCard clearDisplay];
+    
+    [self.loadingView startLoading];
 }
 
 
@@ -70,7 +72,7 @@
     }
     else
     {
-        [_wordCard displayWord:word.name wordType:[word getWordType:@"Vietnamese"] phonetic:word.wordType detailContent:[word getMeaning:@"Vietnamese" bExample:NO]];
+        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES]];
     }
 }
 - (IBAction)next:(id)sender {
@@ -130,10 +132,11 @@
 - (void)findIdSuccessful:(LSet *)model {
     wordList = model.wordList;
     [self displayCurWord];
+    [self.loadingView endLoading];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    
+    [self.loadingView endLoading];
 }
 
 @end

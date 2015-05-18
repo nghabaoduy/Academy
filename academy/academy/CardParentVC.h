@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CardInfoView.h"
+#import "LoadingUIView.h"
 
 @interface CardParentVC : UIViewController
 
 @property BOOL isInAnimation;
+@property (strong, nonatomic) LoadingUIView *loadingView;
 
 -(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft;
 -(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft :(int)startX;

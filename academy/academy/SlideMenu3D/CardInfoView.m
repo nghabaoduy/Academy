@@ -40,6 +40,39 @@
     [self.wordLb setText:word];
     [self.wordTypeLb setText:[NSString stringWithFormat:@"(%@)",wordType]];
     [self.phoneticLb setText:[NSString stringWithFormat:@"/%@/",phonetic]];
+    [self.contentTV setText:@""];
     [self.contentTV setText:detailContent];
+    [self changeTextViewSubStringAtt:self.contentTV targetText:word color:[UIColor redColor]];
+    
+}
+-(void) changeTextViewSubStringAtt:(UITextView *) tv targetText:(NSString *)targetText color:(UIColor *) color
+{
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setParagraphSpacing:4];
+    
+    NSDictionary *attrsDictionary = @{NSFontAttributeName: tv.font, NSParagraphStyleAttributeName: paragraphStyle};
+    tv.attributedText = [[NSAttributedString alloc] initWithString:tv.text attributes:attrsDictionary];
+    
+    
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithAttributedString:tv.attributedText];
+    
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:targetText options:0 error:nil];
+    NSRange range = NSMakeRange(0,[tv.text length]);
+    [expression enumerateMatchesInString:tv.text options:0 range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        NSRange subRange = [result rangeAtIndex:0];
+        [string addAttribute:NSForegroundColorAttributeName value:color range:subRange];
+        [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"GothamRounded-Bold" size:14] range:subRange];
+    }];
+    
+    
+    
+    [tv setAttributedText:string];
+}
+-(void) clearDisplay
+{
+    [self.wordLb setText:@""];
+    [self.wordTypeLb setText:@""];
+    [self.phoneticLb setText:@""];
+    [self.contentTV setText:@""];
 }
 @end
