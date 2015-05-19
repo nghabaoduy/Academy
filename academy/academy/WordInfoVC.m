@@ -38,6 +38,7 @@
     
     curWordNo = 0;
     isFront = YES;
+    [self.setTitleLb setText:self.curSet.name];
     
     [self retrieveWords];
     [_wordCard clearDisplay];

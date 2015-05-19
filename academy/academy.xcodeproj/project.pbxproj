@@ -41,6 +41,7 @@
 		AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAC1B07BE7C00A0FD73 /* Package.m */; };
 		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
+		AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */; };
 		AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */; };
 		AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB76AF1B0A350A001489F1 /* LoadingView.xib */; };
 		AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */; };
@@ -119,6 +120,7 @@
 		AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSet.m; sourceTree = "<group>"; };
 		AFEE4BB11B07BEC100A0FD73 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		AFEE4BB21B07BEC100A0FD73 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ViewBG.jpg; path = Graphics/ViewBG.jpg; sourceTree = "<group>"; };
 		AFFB76AC1B0A34EE001489F1 /* LoadingUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingUIView.h; sourceTree = "<group>"; };
 		AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingUIView.m; sourceTree = "<group>"; };
 		AFFB76AF1B0A350A001489F1 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		AFD636291B038E1000ABDB3C /* academy */ = {
 			isa = PBXGroup;
 			children = (
+				AFF2A6671B0BC90400DBFC2A /* SideMenu */,
 				C36DF4EC1B084C4300C225DA /* Singleton */,
 				C36AEB231B0710AF00A40692 /* Models */,
 				C36AEB221B07109D00A40692 /* Controllers */,
@@ -270,6 +273,7 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */,
 				AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */,
 				AFE010831B053547005B4B4D /* PackCellInfoBG.png */,
 				AFE0107D1B051CE5005B4B4D /* PackageCellBG.png */,
@@ -292,11 +296,18 @@
 			name = WordCardViewCollection;
 			sourceTree = "<group>";
 		};
-		C36AEB221B07109D00A40692 /* Controllers */ = {
+		AFF2A6671B0BC90400DBFC2A /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
 				AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */,
 				AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */,
+			);
+			name = SideMenu;
+			sourceTree = "<group>";
+		};
+		C36AEB221B07109D00A40692 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				AFE6DEEC1B03D365003E30CA /* UserShelfNavVC.h */,
 				AFE6DEED1B03D365003E30CA /* UserShelfNavVC.m */,
 				AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */,
@@ -449,6 +460,7 @@
 			files = (
 				AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */,
 				AFE0107E1B051CE5005B4B4D /* PackageCellBG.png in Resources */,
+				AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */,
 				AFCFE5F51B04DD8B006D9744 /* GothamRounded-Light.ttf in Resources */,
 				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
 				AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */,
@@ -608,6 +620,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"STORYBOARD=1",
+					"COCOAPODS=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -645,6 +659,10 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"STORYBOARD=1",
+					"COCOAPODS=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -690,6 +708,7 @@
 		};
 		AFD636511B038E1000ABDB3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D19210394AACFD6C04951512 /* Pods-academy.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -709,6 +728,7 @@
 		};
 		AFD636521B038E1000ABDB3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E83EB9BA4E2972E7D72DA310 /* Pods-academy.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
