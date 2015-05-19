@@ -41,7 +41,6 @@
     
     [self retrieveWords];
     [_wordCard clearDisplay];
-    
     [self.loadingView startLoading];
 }
 
