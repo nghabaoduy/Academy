@@ -7,8 +7,9 @@
 //
 
 #import "PackageInfoVC.h"
+#import "User.h"
 
-@interface PackageInfoVC ()
+@interface PackageInfoVC () <AuthDelegate>
 
 @end
 
@@ -26,15 +27,52 @@
     [topTitleLb setText:curPack.name];
     [topSubTitleLb setText:[NSString stringWithFormat:@"%i Words",curPack.wordsTotal]];
     [contentTv setText:curPack.desc];
+    
+    if ([curPack.price intValue] == 0) {
+        [buyBtn setHidden:YES];
+        [tryBtn setHidden:YES];
+        [freeBtn setHidden:NO];
+    } else {
+        [buyBtn setHidden:NO];
+        [tryBtn setHidden:NO];
+        [freeBtn setHidden:YES];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 - (IBAction)buy:(id)sender {
+    User * user = [User currentUser];
+    [user setAuthDelegate:self];
+    [user purchasePackage: curPack];
 }
 - (IBAction)try:(id)sender {
+    User * user = [User currentUser];
+    [user setAuthDelegate:self];
+    [user tryPackage: curPack];
 }
 - (IBAction)getFree:(id)sender {
+    User * user = [User currentUser];
+    [user setAuthDelegate:self];
+    [user purchasePackage: curPack];
+    
+}
+
+#pragma mark - Auth delegate
+- (void)userPurchasePackageSucessful:(User *)user {
+    NSLog(@"purchase successful");
+}
+
+- (void)userPurchasePackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    NSLog(@"purchase failed %@", error);
+}
+
+- (void)userTryPackageSucessful:(User *)user {
+    NSLog(@"try successful");
+}
+
+- (void)userTryPackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    NSLog(@"try failed %@", error);
 }
 
 /*

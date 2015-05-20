@@ -14,4 +14,6 @@
 
 - (NSString*)requestURL;
 
+@property (nonatomic, assign) BOOL isForceReload;
+
 @end

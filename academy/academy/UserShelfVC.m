@@ -14,6 +14,7 @@
 #import "Package.h"
 #import "UserPackage.h"
 #import "User.h"
+#import "DataEngine.h"
 
 @interface UserShelfVC () <ModelDelegate>
 
@@ -25,6 +26,7 @@
     int cellInitHeight;
     NSIndexPath *curCellPath;
     int cellTopMargin;
+    UIRefreshControl * refeshControl;
 }
 
 
@@ -39,11 +41,28 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(retrievePackages)
+                  forControlEvents:UIControlEventValueChanged];
     
-    [self retrievePackages];
+    [self.tableView addSubview:refeshControl];
+    [[DataEngine getInstance] setIsForceReload:YES];
+    
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    if ([[DataEngine getInstance] isForceReload]) {
+        [self retrievePackages];
+        [[DataEngine getInstance] setIsForceReload:NO];
+    }
+}
+
 -(void) retrievePackages
 {
+    [refeshControl beginRefreshing];
     UserPackage * userPackage = [UserPackage new];
     [userPackage setDelegate:self];
     [userPackage getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
@@ -80,15 +99,38 @@
 {
     return cellInitHeight;
 }
+
+- (void)reloadData
+{
+    // Reload table data
+    [self.tableView reloadData];
+    
+    // End the refreshing
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        [self.refreshControl endRefreshing];
+    }
+}
 #pragma mark - Model Delegate
 
 - (void)getAllSucessfull:(NSMutableArray *)allList {
     packageList = allList;
-    [self.tableView reloadData];
+    [self reloadData];
+
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    
+    NSLog(@"error %@", error);
+    [self.refreshControl endRefreshing];
+
 }
 
 #pragma mark - Navigation

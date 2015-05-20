@@ -34,7 +34,7 @@
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
     [manager GET:requestURL parameters:filterDictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"data %@", responseObject);
+        NSLog(@"get all user package successful");
         NSArray *packages = responseObject;
         NSMutableArray * packageList = [NSMutableArray new];
         for (NSDictionary * userPackageDict in packages) {
