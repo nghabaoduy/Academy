@@ -1242,7 +1242,7 @@
                     <view key="view" contentMode="scaleToFill" id="chE-fv-9Yu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.11179535604733934" green="0.11351065768577595" blue="0.12229123612793769" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Riz-17-KJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1250,28 +1250,69 @@
             <point key="canvasLocation" x="124.5" y="-273"/>
         </scene>
         <!--Side MenuVC-->
-        <scene sceneID="2z9-xu-tvm">
+        <scene sceneID="YJr-Hl-hNR">
             <objects>
-                <tableViewController storyboardIdentifier="menuView" id="HEJ-yw-rjk" customClass="SideMenuVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YwO-rU-2ad">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <viewController storyboardIdentifier="menuView" id="Rue-d5-fH3" customClass="SideMenuVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dwl-gL-4LE"/>
+                        <viewControllerLayoutGuide type="bottom" id="i1t-7c-P42"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4CD-Yb-LNZ">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="HCZ-cL-bZb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuCell" id="SEG-pg-zax" customClass="SideMenuCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SEG-pg-zax" id="ToA-UQ-KMy">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Rue-d5-fH3" id="zGi-ce-rzh"/>
+                                    <outlet property="delegate" destination="Rue-d5-fH3" id="WiJ-IE-gtO"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="VFT-hy-E3P">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VFT-hy-E3P" id="YFQ-jc-QX7">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="HEJ-yw-rjk" id="5EZ-ST-XCX"/>
-                            <outlet property="delegate" destination="HEJ-yw-rjk" id="Rya-v8-9Rs"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5TH-qk-sDC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="HCZ-cL-bZb" firstAttribute="top" secondItem="dwl-gL-4LE" secondAttribute="bottom" constant="50" id="2ov-JC-dLa"/>
+                            <constraint firstItem="HCZ-cL-bZb" firstAttribute="leading" secondItem="4CD-Yb-LNZ" secondAttribute="leading" id="Y9d-LK-7Yx"/>
+                            <constraint firstAttribute="trailing" secondItem="HCZ-cL-bZb" secondAttribute="trailing" id="cUQ-88-EVx"/>
+                            <constraint firstItem="i1t-7c-P42" firstAttribute="top" secondItem="HCZ-cL-bZb" secondAttribute="bottom" id="n32-pT-z6l"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="HCZ-cL-bZb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2ov-JC-dLa"/>
+                                <exclude reference="Y9d-LK-7Yx"/>
+                                <exclude reference="cUQ-88-EVx"/>
+                                <exclude reference="n32-pT-z6l"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="HCZ-cL-bZb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2ov-JC-dLa"/>
+                                <include reference="Y9d-LK-7Yx"/>
+                                <include reference="cUQ-88-EVx"/>
+                                <include reference="n32-pT-z6l"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="HCZ-cL-bZb" id="YTr-Lq-2gh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R2b-mf-eGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="861" y="-273"/>
         </scene>

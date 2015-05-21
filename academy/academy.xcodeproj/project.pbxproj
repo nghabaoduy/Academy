@@ -32,6 +32,12 @@
 		AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */; };
 		AFE6DF011B04A83E003E30CA /* Card.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DF001B04A83E003E30CA /* Card.png */; };
 		AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DF041B04B0A4003E30CA /* CardParentVC.m */; };
+		AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE7297D1B0DEAB7005F0850 /* SideMenuCell.m */; };
+		AFE729801B0DEFEA005F0850 /* SideMenuCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE7297F1B0DEFEA005F0850 /* SideMenuCellView.xib */; };
+		AFE729821B0DFF69005F0850 /* SideMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE729811B0DFF69005F0850 /* SideMenuHeaderView.xib */; };
+		AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE729841B0DFFBA005F0850 /* SideMenuHeader.m */; };
+		AFE729871B0E03E7005F0850 /* MenuHeaderBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE729861B0E03E7005F0850 /* MenuHeaderBG.png */; };
+		AFE729891B0E0820005F0850 /* MenuCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE729881B0E0820005F0850 /* MenuCellBG.png */; };
 		AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */; };
 		AFEDE7D91B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEDE7D71B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf */; };
 		AFEDE7DA1B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEDE7D81B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf */; };
@@ -104,6 +110,14 @@
 		AFE6DF001B04A83E003E30CA /* Card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Card.png; path = Graphics/Card.png; sourceTree = "<group>"; };
 		AFE6DF031B04B0A4003E30CA /* CardParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardParentVC.h; sourceTree = "<group>"; };
 		AFE6DF041B04B0A4003E30CA /* CardParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardParentVC.m; sourceTree = "<group>"; };
+		AFE7297C1B0DEAB7005F0850 /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCell.h; sourceTree = "<group>"; };
+		AFE7297D1B0DEAB7005F0850 /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
+		AFE7297F1B0DEFEA005F0850 /* SideMenuCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuCellView.xib; sourceTree = "<group>"; };
+		AFE729811B0DFF69005F0850 /* SideMenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuHeaderView.xib; sourceTree = "<group>"; };
+		AFE729831B0DFFBA005F0850 /* SideMenuHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuHeader.h; sourceTree = "<group>"; };
+		AFE729841B0DFFBA005F0850 /* SideMenuHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuHeader.m; sourceTree = "<group>"; };
+		AFE729861B0E03E7005F0850 /* MenuHeaderBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuHeaderBG.png; path = Graphics/MenuHeaderBG.png; sourceTree = "<group>"; };
+		AFE729881B0E0820005F0850 /* MenuCellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuCellBG.png; path = Graphics/MenuCellBG.png; sourceTree = "<group>"; };
 		AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuVC.h; sourceTree = "<group>"; };
 		AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuVC.m; sourceTree = "<group>"; };
 		AFEDE7D71B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "VNF-Gotham-Rounded-Bold.ttf"; path = "Fonts/VNF-Gotham-Rounded-Bold.ttf"; sourceTree = "<group>"; };
@@ -264,6 +278,8 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				AFE729881B0E0820005F0850 /* MenuCellBG.png */,
+				AFE729861B0E03E7005F0850 /* MenuHeaderBG.png */,
 				AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */,
 				AFE010831B053547005B4B4D /* PackCellInfoBG.png */,
 				AFE0107D1B051CE5005B4B4D /* PackageCellBG.png */,
@@ -292,6 +308,12 @@
 			children = (
 				AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */,
 				AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */,
+				AFE7297C1B0DEAB7005F0850 /* SideMenuCell.h */,
+				AFE7297D1B0DEAB7005F0850 /* SideMenuCell.m */,
+				AFE7297F1B0DEFEA005F0850 /* SideMenuCellView.xib */,
+				AFE729811B0DFF69005F0850 /* SideMenuHeaderView.xib */,
+				AFE729831B0DFFBA005F0850 /* SideMenuHeader.h */,
+				AFE729841B0DFFBA005F0850 /* SideMenuHeader.m */,
 			);
 			name = SideMenu;
 			sourceTree = "<group>";
@@ -449,11 +471,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFE729891B0E0820005F0850 /* MenuCellBG.png in Resources */,
 				AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */,
+				AFE729871B0E03E7005F0850 /* MenuHeaderBG.png in Resources */,
 				AFE0107E1B051CE5005B4B4D /* PackageCellBG.png in Resources */,
 				AFEDE7D91B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf in Resources */,
 				AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */,
 				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
+				AFE729821B0DFF69005F0850 /* SideMenuHeaderView.xib in Resources */,
 				AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
 				AFEDE7DA1B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf in Resources */,
@@ -461,6 +486,7 @@
 				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
 				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
 				AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */,
+				AFE729801B0DEFEA005F0850 /* SideMenuCellView.xib in Resources */,
 				AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */,
 				AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */,
 				AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */,
@@ -523,6 +549,7 @@
 				C36DF4EF1B0853B300C225DA /* LoginVC.m in Sources */,
 				AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */,
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
+				AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
 				C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */,
 				AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */,
@@ -531,6 +558,7 @@
 				AFD6362D1B038E1000ABDB3C /* main.m in Sources */,
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
+				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,
 				C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */,
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,

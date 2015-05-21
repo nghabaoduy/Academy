@@ -1,18 +1,19 @@
 //
 //  SideMenuVC.m
-//  academy
+//  FoodOrder
 //
-//  Created by Brian on 5/16/15.
+//  Created by Brian on 5/20/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
+
 #import "SideMenuVC.h"
 #import "LoginVC.h"
-#import "UserShelfVC.h"
-#import "ShopNavVC.h"
+#import "SideMenuCell.h"
+#import "SideMenuHeader.h"
 
-NSString * const MSMenuCellReuseIdentifier = @"Drawer Cell";
-NSString * const MSDrawerHeaderReuseIdentifier = @"Drawer Header";
+NSString * const MenuCellReuseIdentifier = @"menuCell";
+NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
 
 typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
     MSMenuViewControllerTableViewSectionTypeOptions,
@@ -36,6 +37,9 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 @property (nonatomic, strong) UIBarButtonItem *paneRevealLeftBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *paneRevealRightBarButtonItem;
 
+@property (nonatomic, strong) NSArray *menuIconList;
+@property (nonatomic, strong) NSArray *menuTitleList;
+@property (nonatomic, strong) NSArray *menuHeaderTitle;
 @end
 
 @implementation SideMenuVC
@@ -62,11 +66,17 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.view.opaque = NO;
+    self.view.backgroundColor = [UIColor clearColor];
+    self.tableView.opaque = NO;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.scrollEnabled = NO;
+    [self.tableView registerClass:[SideMenuCell class] forCellReuseIdentifier:MenuCellReuseIdentifier];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,30 +90,43 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 {
     self.paneViewControllerType = NSUIntegerMax;
     self.paneViewControllerTitles = @{
-                                      @(ControllerLogin) : @"Login",
-                                      @(ControllerUserShelf) : @"UserShelf",
-                                      @(ControllerShop) : @"Shop"
+                                      @(ControllerLogin) : @"Login"
+                                     // @(ControllerMenuList) : @"Menu"
                                       };
 #if !defined(STORYBOARD)
     self.paneViewControllerClasses = @{
-                                       @(ControllerLogin) : [LoginVC class],
-                                       @(ControllerUserShelf) : [UserShelfVC class],
-                                       @(ControllerShop) : [ShopNavVC class]
+                                       @(ControllerLogin) : [LoginVC class]
+                                       //@(ControllerMenuList) : [MenuListVC class]
                                        };
 #else
     self.paneViewControllerIdentifiers = @{
-                                           @(ControllerLogin) : @"loginView",
-                                           @(ControllerUserShelf) : @"userShelfView",
-                                           @(ControllerShop) : @"ShopNavVC"
+                                           @(ControllerLogin) : @"loginView"
+                                          // @(ControllerMenuList) : @"menuListView"
                                            };
 #endif
     self.sectionTitles = @{
-
+                           
                            };
     
     self.tableViewSectionBreaks = @[
-
+                                    
                                     ];
+    
+    self.menuIconList = @[
+                          @"Folder-Heart.png",
+                          @"Buy-Button.png",
+                          @"Rubber-Duck.png",
+                          @"Polaroid-Socialmatic.png",
+                          @"Support.png"
+                          ];
+    self.menuTitleList = @[
+                           @"Shelf",
+                           @"Store",
+                           @"Top Up",
+                           @"Privacy",
+                           @"Setting"
+                           ];
+    self.menuHeaderTitle = @[@"Menu"];
 }
 
 - (MSPaneViewControllerType)paneViewControllerTypeForIndexPath:(NSIndexPath *)indexPath
@@ -120,7 +143,6 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 
 - (void)transitionToViewController:(MSPaneViewControllerType)paneViewControllerType
 {
-    NSLog(@"transitionToViewController calls %i vs %i",paneViewControllerType,self.paneViewControllerType);
     // Close pane if already displaying the pane view controller
     if (paneViewControllerType == self.paneViewControllerType) {
         [self.dynamicsDrawerViewController setPaneState:MSDynamicsDrawerPaneStateClosed animated:YES allowUserInterruption:YES completion:nil];
@@ -137,7 +159,6 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 #endif
     paneViewController.navigationItem.title = self.paneViewControllerTitles[@(paneViewControllerType)];
     
-    NSLog(@"paneViewController = %@",paneViewController);
     self.paneRevealLeftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
     paneViewController.navigationItem.leftBarButtonItem = self.paneRevealLeftBarButtonItem;
     
@@ -160,68 +181,82 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    return 1;
+    
+    return self.menuHeaderTitle.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return 3;
+    
+    return self.menuTitleList.count;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [UITableViewCell new];
     
-    [cell.textLabel setText:[NSString stringWithFormat:@"Row %i",indexPath.row]];
     
+    SideMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuCellReuseIdentifier];
+    
+    cell.titleLb.text = [self.menuTitleList objectAtIndex:indexPath.row];
     return cell;
 }
-
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    SideMenuHeader *headerView = [[SideMenuHeader alloc] init];
+    headerView.titleLb.text = [self.menuHeaderTitle objectAtIndex:section];
+    return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 60.0;
+}
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 @end
