@@ -33,6 +33,7 @@
         self.bounds = self.view.bounds;
         [self addSubview:self.view];
         [self.view setBackgroundColor:[UIColor clearColor]];
+        self.view.userInteractionEnabled = NO;
         
     }
     return self;

@@ -11,14 +11,19 @@
 #import "MSDynamicsDrawerViewController.h"
 typedef NS_ENUM(NSUInteger, MSPaneViewControllerType) {
     ControllerLogin,
-    ControllerMenuList,
+    ControllerUserShelf,
+    ControllerShop,
     ControllerTypeCount
 };
 
 @interface SideMenuVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
++ (id)getInstance;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) MSPaneViewControllerType paneViewControllerType;
 @property (nonatomic, weak) MSDynamicsDrawerViewController *dynamicsDrawerViewController;
 
 - (void)transitionToViewController:(MSPaneViewControllerType)paneViewControllerType;
+- (void)dynamicsDrawerRevealLeftBarButtonItemTapped:(id)sender;
 @end

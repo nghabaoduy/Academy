@@ -11,6 +11,8 @@
 #import "LoginVC.h"
 #import "SideMenuCell.h"
 #import "SideMenuHeader.h"
+#import "UserShelfVC.h"
+#import "ShopVC.h"
 
 NSString * const MenuCellReuseIdentifier = @"menuCell";
 NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
@@ -39,29 +41,44 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 
 @property (nonatomic, strong) NSArray *menuIconList;
 @property (nonatomic, strong) NSArray *menuTitleList;
+@property (nonatomic, strong) NSArray *menuNavList;
 @property (nonatomic, strong) NSArray *menuHeaderTitle;
+
 @end
+
 
 @implementation SideMenuVC
 
+static SideMenuVC * instance = nil;
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
+    if (instance) {
+        return instance;
+    }
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self initialize];
     }
-    return self;
+    instance = self ;
+    return instance;
 }
-
++ (id)getInstance{
+    return instance;
+}
 #pragma mark - UIViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    if (instance) {
+        return instance;
+    }
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self initialize];
     }
-    return self;
+    instance = self;
+    return instance;
 }
 
 - (void)viewDidLoad {
@@ -90,18 +107,21 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 {
     self.paneViewControllerType = NSUIntegerMax;
     self.paneViewControllerTitles = @{
-                                      @(ControllerLogin) : @"Login"
-                                     // @(ControllerMenuList) : @"Menu"
+                                      @(ControllerLogin) : @"Login",
+                                      @(ControllerUserShelf) : @"Shelf",
+                                      @(ControllerShop) : @"Shop"
                                       };
 #if !defined(STORYBOARD)
     self.paneViewControllerClasses = @{
-                                       @(ControllerLogin) : [LoginVC class]
-                                       //@(ControllerMenuList) : [MenuListVC class]
+                                       @(ControllerLogin) : [LoginVC class],
+                                       @(ControllerUserShelf) : [UserShelfVC class],
+                                        @(ControllerShop) : [ShopVC Class]
                                        };
 #else
     self.paneViewControllerIdentifiers = @{
-                                           @(ControllerLogin) : @"loginView"
-                                          // @(ControllerMenuList) : @"menuListView"
+                                           @(ControllerLogin) : @"loginView",
+                                           @(ControllerUserShelf) : @"userShelfView",
+                                            @(ControllerShop) : @"shopView"
                                            };
 #endif
     self.sectionTitles = @{
@@ -126,19 +146,31 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
                            @"Privacy",
                            @"Setting"
                            ];
+    
     self.menuHeaderTitle = @[@"Menu"];
 }
 
 - (MSPaneViewControllerType)paneViewControllerTypeForIndexPath:(NSIndexPath *)indexPath
 {
-    MSPaneViewControllerType paneViewControllerType;
+    /*MSPaneViewControllerType paneViewControllerType;
     if (indexPath.section == 0) {
         paneViewControllerType = indexPath.row;
     } else {
         paneViewControllerType = ([self.tableViewSectionBreaks[(indexPath.section - 1)] integerValue] + indexPath.row);
+    }*/
+    switch (indexPath.row) {
+        case 0:
+            return ControllerUserShelf;
+            break;
+        case 1:
+            return ControllerShop;
+            
+        default:
+            break;
     }
+    return ControllerUserShelf;
     //NSAssert(paneViewControllerType < MSPaneViewControllerTypeCount, @"Invalid Index Path");
-    return paneViewControllerType;
+    //return paneViewControllerType;
 }
 
 - (void)transitionToViewController:(MSPaneViewControllerType)paneViewControllerType
@@ -159,8 +191,11 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 #endif
     paneViewController.navigationItem.title = self.paneViewControllerTitles[@(paneViewControllerType)];
     
-    self.paneRevealLeftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
-    paneViewController.navigationItem.leftBarButtonItem = self.paneRevealLeftBarButtonItem;
+    if (paneViewControllerType != ControllerLogin) {
+        self.paneRevealLeftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
+        paneViewController.navigationItem.leftBarButtonItem = self.paneRevealLeftBarButtonItem;
+    }
+    
     
     UINavigationController *paneNavigationViewController = [[UINavigationController alloc] initWithRootViewController:paneViewController];
     [self.dynamicsDrawerViewController setPaneViewController:paneNavigationViewController animated:animateTransition completion:nil];
@@ -170,6 +205,7 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 
 - (void)dynamicsDrawerRevealLeftBarButtonItemTapped:(id)sender
 {
+    NSLog(@"dynamicsDrawerRevealLeftBarButtonItemTapped called");
     [self.dynamicsDrawerViewController setPaneState:MSDynamicsDrawerPaneStateOpen inDirection:MSDynamicsDrawerDirectionLeft animated:YES allowUserInterruption:YES completion:nil];
 }
 
@@ -193,8 +229,6 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 {
     return 50;
 }
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -213,7 +247,17 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 {
     return 60.0;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MSPaneViewControllerType paneViewControllerType = [self paneViewControllerTypeForIndexPath:indexPath];
+    [self transitionToViewController:paneViewControllerType];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView reloadData];
+    });
+}
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class MSDynamicsDrawerViewController;
+@class SideMenuVC;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,6 +21,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) MSDynamicsDrawerViewController *dynamicsDrawerViewController;
+@property (strong, nonatomic) SideMenuVC *menuViewController;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

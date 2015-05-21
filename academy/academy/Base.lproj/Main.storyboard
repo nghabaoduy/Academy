@@ -166,12 +166,11 @@
                     <connections>
                         <outlet property="textfPassword" destination="FlU-Bp-q7b" id="4ae-Xr-tyX"/>
                         <outlet property="textfUsername" destination="Rev-Dh-DLK" id="ruV-YY-LIK"/>
-                        <segue destination="qFL-ay-fjj" kind="presentation" identifier="toBookShelf" id="vhB-zB-G1e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124.5" y="388.5"/>
+            <point key="canvasLocation" x="861" y="379.5"/>
         </scene>
         <!--Your Shelf-->
         <scene sceneID="3u1-yX-529">
@@ -485,26 +484,6 @@
             </objects>
             <point key="canvasLocation" x="1770" y="1089.75"/>
         </scene>
-        <!--Shop NavVC-->
-        <scene sceneID="umC-wk-u9u">
-            <objects>
-                <navigationController storyboardIdentifier="shopNavView" id="S2G-5B-aLb" customClass="ShopNavVC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2bU-g1-JZJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.054901960780000002" green="0.63921568630000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="FZq-fu-QMK" kind="relationship" relationship="rootViewController" id="RDk-pi-EQ6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="esy-qP-qoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="861" y="1089.75"/>
-        </scene>
         <!--Set SelectVC-->
         <scene sceneID="i0T-nq-XBb">
             <objects>
@@ -532,7 +511,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z9C-q6-gWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2641.5" y="384.75"/>
+            <point key="canvasLocation" x="2649" y="379.5"/>
         </scene>
         <!--Set DetailVC-->
         <scene sceneID="Im1-UG-BHl">
@@ -1315,27 +1294,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2b-mf-eGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="861" y="-273"/>
-        </scene>
-        <!--User Shelf NavVC-->
-        <scene sceneID="r6L-g8-Gk8">
-            <objects>
-                <navigationController storyboardIdentifier="userShelfNavView" id="qFL-ay-fjj" customClass="UserShelfNavVC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KCk-WS-p48">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.054901960784313725" green="0.63921568627450975" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Qn0-v8-GXc" kind="relationship" relationship="rootViewController" id="fAR-ql-1OP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hiK-zn-iku" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="861" y="384.75"/>
         </scene>
     </scenes>
     <resources>

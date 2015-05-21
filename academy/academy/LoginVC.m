@@ -9,6 +9,9 @@
 #import "LoginVC.h"
 #import "User.h"
 #import "LoadingUIView.h"
+#import "UserShelfVC.h"
+#import "AppDelegate.h"
+#import "SideMenuVC.h"
 
 @interface LoginVC ()<AuthDelegate> {
     
@@ -61,7 +64,10 @@
 
 - (void)loginSuccess {
     [loadingView endLoading];
-    [self performSegueWithIdentifier:@"toBookShelf" sender:nil];
+    UserShelfVC *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfView"];
+    UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
+    [self presentViewController:desNavController animated:YES completion:nil];
+    //[self performSegueWithIdentifier:@"toBookShelf" sender:nil];
 }
 
 - (BOOL)validation {
@@ -104,8 +110,25 @@
 }
 
 - (void)userLoginSuccessfull:(User *)user {
-    [self performSegueWithIdentifier:@"toBookShelf" sender:nil];
+    NSLog(@"navigateView");
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+   
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf];
 }
 
+    
+    //[self performSegueWithIdentifier:@"toBookShelf" sender:nil];
+   /* UserShelfVC *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfView"];
+    UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
+    UIBarButtonItem *menuBtn = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
+    destination.navigationItem.leftBarButtonItem = menuBtn;
+    [self presentViewController:desNavController animated:YES completion:nil];
+}
+- (void)dynamicsDrawerRevealLeftBarButtonItemTapped:(id)sender
+{
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appdelegate.menuViewController dynamicsDrawerRevealLeftBarButtonItemTapped:sender];
+    
+}*/
 
 @end

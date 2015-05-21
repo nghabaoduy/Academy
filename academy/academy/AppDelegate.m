@@ -21,12 +21,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-#if !defined(STORYBOARD)
-    NSLog(@"storyboard is not defined");
-#else
-    NSLog(@"storyboard is defined");
-#endif
-    NSLog(@"done if");
+    NSLog(@"self delegate = %@",self);
 
 #if !defined(STORYBOARD)
     self.dynamicsDrawerViewController = [MSDynamicsDrawerViewController new];
@@ -48,6 +43,7 @@
     [self.dynamicsDrawerViewController setDrawerViewController:menuViewController forDirection:MSDynamicsDrawerDirectionLeft];
     
     // Transition to the first view controller
+    NSLog(@"delegate.menuViewController = %@",menuViewController);
     [menuViewController transitionToViewController:ControllerLogin];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
