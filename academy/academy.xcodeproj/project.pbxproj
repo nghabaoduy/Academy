@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
-		AFCFE5F11B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5EC1B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf */; };
-		AFCFE5F21B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5ED1B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf */; };
-		AFCFE5F31B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5EE1B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf */; };
-		AFCFE5F41B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5EF1B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf */; };
-		AFCFE5F51B04DD8B006D9744 /* GothamRounded-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5F01B04DD8B006D9744 /* GothamRounded-Light.ttf */; };
 		AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */; };
 		AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */; };
 		AFCFE5FE1B04E668006D9744 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5FD1B04E668006D9744 /* cross.png */; };
@@ -38,6 +33,8 @@
 		AFE6DF011B04A83E003E30CA /* Card.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DF001B04A83E003E30CA /* Card.png */; };
 		AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DF041B04B0A4003E30CA /* CardParentVC.m */; };
 		AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */; };
+		AFEDE7D91B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEDE7D71B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf */; };
+		AFEDE7DA1B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEDE7D81B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf */; };
 		AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAC1B07BE7C00A0FD73 /* Package.m */; };
 		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
@@ -68,11 +65,6 @@
 
 /* Begin PBXFileReference section */
 		19415BF26ACA690DC120472F /* libPods-academy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-academy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFCFE5EC1B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Bold_21016.ttf"; path = "Fonts/Gotham-Rounded-Bold_21016.ttf"; sourceTree = "<group>"; };
-		AFCFE5ED1B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Bold-Italic_21015.ttf"; path = "Fonts/Gotham-Rounded-Bold-Italic_21015.ttf"; sourceTree = "<group>"; };
-		AFCFE5EE1B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Light_21020.ttf"; path = "Fonts/Gotham-Rounded-Light_21020.ttf"; sourceTree = "<group>"; };
-		AFCFE5EF1B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Rounded-Light-Italic_21019.ttf"; path = "Fonts/Gotham-Rounded-Light-Italic_21019.ttf"; sourceTree = "<group>"; };
-		AFCFE5F01B04DD8B006D9744 /* GothamRounded-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GothamRounded-Light.ttf"; path = "Fonts/GothamRounded-Light.ttf"; sourceTree = "<group>"; };
 		AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-blue-btn.png"; path = "Graphics/medium-blue-btn.png"; sourceTree = "<group>"; };
 		AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-red-btn.png"; path = "Graphics/medium-red-btn.png"; sourceTree = "<group>"; };
 		AFCFE5FD1B04E668006D9744 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cross.png; path = Graphics/cross.png; sourceTree = "<group>"; };
@@ -114,6 +106,8 @@
 		AFE6DF041B04B0A4003E30CA /* CardParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardParentVC.m; sourceTree = "<group>"; };
 		AFED6ADB1B06756100B8AF10 /* SideMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuVC.h; sourceTree = "<group>"; };
 		AFED6ADC1B06756100B8AF10 /* SideMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuVC.m; sourceTree = "<group>"; };
+		AFEDE7D71B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "VNF-Gotham-Rounded-Bold.ttf"; path = "Fonts/VNF-Gotham-Rounded-Bold.ttf"; sourceTree = "<group>"; };
+		AFEDE7D81B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "VNF-Gotham-Rounded-Book.ttf"; path = "Fonts/VNF-Gotham-Rounded-Book.ttf"; sourceTree = "<group>"; };
 		AFEE4BAB1B07BE7C00A0FD73 /* Package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Package.h; sourceTree = "<group>"; };
 		AFEE4BAC1B07BE7C00A0FD73 /* Package.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Package.m; sourceTree = "<group>"; };
 		AFEE4BAE1B07BEAF00A0FD73 /* LSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSet.h; sourceTree = "<group>"; };
@@ -167,11 +161,8 @@
 		AFCFE5E61B04D754006D9744 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				AFCFE5EC1B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf */,
-				AFCFE5ED1B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf */,
-				AFCFE5EE1B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf */,
-				AFCFE5EF1B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf */,
-				AFCFE5F01B04DD8B006D9744 /* GothamRounded-Light.ttf */,
+				AFEDE7D71B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf */,
+				AFEDE7D81B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -274,10 +265,10 @@
 			isa = PBXGroup;
 			children = (
 				AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */,
-				AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */,
 				AFE010831B053547005B4B4D /* PackCellInfoBG.png */,
 				AFE0107D1B051CE5005B4B4D /* PackageCellBG.png */,
 				AFCFE5FD1B04E668006D9744 /* cross.png */,
+				AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */,
 				AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */,
 				AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */,
 				AFE6DF001B04A83E003E30CA /* Card.png */,
@@ -460,19 +451,16 @@
 			files = (
 				AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */,
 				AFE0107E1B051CE5005B4B4D /* PackageCellBG.png in Resources */,
+				AFEDE7D91B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf in Resources */,
 				AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */,
-				AFCFE5F51B04DD8B006D9744 /* GothamRounded-Light.ttf in Resources */,
 				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
 				AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
+				AFEDE7DA1B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf in Resources */,
 				AFCFE5FE1B04E668006D9744 /* cross.png in Resources */,
-				AFCFE5F31B04DD8B006D9744 /* Gotham-Rounded-Light_21020.ttf in Resources */,
 				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
-				AFCFE5F41B04DD8B006D9744 /* Gotham-Rounded-Light-Italic_21019.ttf in Resources */,
 				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
-				AFCFE5F21B04DD8B006D9744 /* Gotham-Rounded-Bold-Italic_21015.ttf in Resources */,
 				AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */,
-				AFCFE5F11B04DD8B006D9744 /* Gotham-Rounded-Bold_21016.ttf in Resources */,
 				AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */,
 				AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */,
 				AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */,

@@ -24,11 +24,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>GothamRounded-Light.tff</string>
+		<string>VNF-Gotham.ttf</string>
 		<string>GothamRounded-Bold.tff</string>
-		<string>GothamRounded-Book.tff</string>
-		<string>GothamRounded-LightItalic.tff</string>
-		<string>GothamRounded-BoldItalic.tff</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

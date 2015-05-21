@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Gotham-Rounded-Bold_21016.ttf">
+        <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
             <string>GothamRounded-Bold</string>
         </mutableArray>
-        <mutableArray key="GothamRounded-Light.ttf">
+        <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
         </mutableArray>
