@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
+		AF0241CD1B0F0B6F0019B3E2 /* CardTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241CC1B0F0B6F0019B3E2 /* CardTestView.m */; };
+		AF0241CF1B0F0BA00019B3E2 /* CardTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTest.xib */; };
+		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
+		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
 		AFC27BC11B0EEC5700225016 /* arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC27B7D1B0EEC5700225016 /* arrows.png */; };
 		AFC27BC21B0EEC5700225016 /* bag.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC27B7E1B0EEC5700225016 /* bag.png */; };
 		AFC27BC31B0EEC5700225016 /* basket.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC27B7F1B0EEC5700225016 /* basket.png */; };
@@ -100,7 +104,6 @@
 		AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DEF91B049D97003E30CA /* CardInfo.xib */; };
 		AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */; };
 		AFE6DF011B04A83E003E30CA /* Card.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE6DF001B04A83E003E30CA /* Card.png */; };
-		AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6DF041B04B0A4003E30CA /* CardParentVC.m */; };
 		AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE7297D1B0DEAB7005F0850 /* SideMenuCell.m */; };
 		AFE729801B0DEFEA005F0850 /* SideMenuCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE7297F1B0DEFEA005F0850 /* SideMenuCellView.xib */; };
 		AFE729821B0DFF69005F0850 /* SideMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE729811B0DFF69005F0850 /* SideMenuHeaderView.xib */; };
@@ -140,6 +143,13 @@
 
 /* Begin PBXFileReference section */
 		19415BF26ACA690DC120472F /* libPods-academy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-academy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF0241CB1B0F0B6F0019B3E2 /* CardTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTestView.h; sourceTree = "<group>"; };
+		AF0241CC1B0F0B6F0019B3E2 /* CardTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTestView.m; sourceTree = "<group>"; };
+		AF0241CE1B0F0BA00019B3E2 /* CardTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTest.xib; path = academy/CardView/CardTest.xib; sourceTree = SOURCE_ROOT; };
+		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
+		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
+		AF0241D31B0F18930019B3E2 /* WordDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDisplayView.h; sourceTree = "<group>"; };
+		AF0241D41B0F18930019B3E2 /* WordDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDisplayView.m; sourceTree = "<group>"; };
 		AFC27B7D1B0EEC5700225016 /* arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrows.png; path = Graphics/Icons/arrows.png; sourceTree = "<group>"; };
 		AFC27B7E1B0EEC5700225016 /* bag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bag.png; path = Graphics/Icons/bag.png; sourceTree = "<group>"; };
 		AFC27B7F1B0EEC5700225016 /* basket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = basket.png; path = Graphics/Icons/basket.png; sourceTree = "<group>"; };
@@ -247,8 +257,6 @@
 		AFE6DEFB1B049DC3003E30CA /* CardInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardInfoView.h; sourceTree = "<group>"; };
 		AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardInfoView.m; sourceTree = "<group>"; };
 		AFE6DF001B04A83E003E30CA /* Card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Card.png; path = Graphics/Card.png; sourceTree = "<group>"; };
-		AFE6DF031B04B0A4003E30CA /* CardParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardParentVC.h; sourceTree = "<group>"; };
-		AFE6DF041B04B0A4003E30CA /* CardParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardParentVC.m; sourceTree = "<group>"; };
 		AFE7297C1B0DEAB7005F0850 /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCell.h; sourceTree = "<group>"; };
 		AFE7297D1B0DEAB7005F0850 /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
 		AFE7297F1B0DEFEA005F0850 /* SideMenuCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuCellView.xib; sourceTree = "<group>"; };
@@ -484,6 +492,9 @@
 				AFE6DEF91B049D97003E30CA /* CardInfo.xib */,
 				AFE6DEFB1B049DC3003E30CA /* CardInfoView.h */,
 				AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */,
+				AF0241CE1B0F0BA00019B3E2 /* CardTest.xib */,
+				AF0241CB1B0F0B6F0019B3E2 /* CardTestView.h */,
+				AF0241CC1B0F0B6F0019B3E2 /* CardTestView.m */,
 			);
 			name = CardView;
 			path = SlideMenu3D;
@@ -512,8 +523,10 @@
 			children = (
 				AFE6DEF21B048FF1003E30CA /* WordInfoVC.h */,
 				AFE6DEF31B048FF1003E30CA /* WordInfoVC.m */,
-				AFE6DF031B04B0A4003E30CA /* CardParentVC.h */,
-				AFE6DF041B04B0A4003E30CA /* CardParentVC.m */,
+				AF0241D01B0F16560019B3E2 /* WordTestVC.h */,
+				AF0241D11B0F16560019B3E2 /* WordTestVC.m */,
+				AF0241D31B0F18930019B3E2 /* WordDisplayView.h */,
+				AF0241D41B0F18930019B3E2 /* WordDisplayView.m */,
 			);
 			name = WordCardViewCollection;
 			sourceTree = "<group>";
@@ -735,6 +748,7 @@
 				AFC27BED1B0EEC5700225016 /* portfolio.png in Resources */,
 				AFC27BF11B0EEC5700225016 /* ribbon.png in Resources */,
 				AFC27BD61B0EEC5700225016 /* download.png in Resources */,
+				AF0241CF1B0F0BA00019B3E2 /* CardTest.xib in Resources */,
 				AFC27BC71B0EEC5700225016 /* building.png in Resources */,
 				AFC27C001B0EEC5700225016 /* view.png in Resources */,
 				AFC27BCA1B0EEC5700225016 /* call.png in Resources */,
@@ -832,14 +846,15 @@
 				C37437271B0721A00002E46F /* User.m in Sources */,
 				AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */,
 				C36DF4EF1B0853B300C225DA /* LoginVC.m in Sources */,
-				AFE6DF051B04B0A4003E30CA /* CardParentVC.m in Sources */,
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
 				C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */,
+				AF0241CD1B0F0B6F0019B3E2 /* CardTestView.m in Sources */,
 				AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */,
 				AFC27C071B0EF01A00225016 /* MyUIEngine.m in Sources */,
 				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
+				AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */,
 				AFE6DEE81B03CAF2003E30CA /* ShopVC.m in Sources */,
 				AFD6362D1B038E1000ABDB3C /* main.m in Sources */,
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
@@ -850,6 +865,7 @@
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
 				C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */,
 				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,
+				AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */,
 				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,
 				AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */,
 				AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */,

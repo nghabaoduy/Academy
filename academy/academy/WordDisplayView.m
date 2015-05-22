@@ -1,30 +1,35 @@
 //
-//  CardParentVC.m
+//  WordDisplayView.m
 //  academy
 //
-//  Created by Brian on 5/14/15.
+//  Created by Brian on 5/22/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
-#import "CardParentVC.h"
+#import "WordDisplayView.h"
 
-
-@interface CardParentVC ()
+@interface WordDisplayView ()
 
 @end
 
-@implementation CardParentVC
+@implementation WordDisplayView
 
 @synthesize isInAnimation = _isInAnimation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prefersStatusBarHidden];
+    [self setNeedsStatusBarAppearanceUpdate];
     if (self.loadingView != nil) {
         return;
     }
     self.loadingView = [[LoadingUIView alloc] init];
     [self.view addSubview:self.loadingView];
+    
+}
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -35,7 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft
+-(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft
 {
     if (_isInAnimation) {
         return NO;
@@ -53,7 +58,7 @@
                      }];
     return YES;
 }
--(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft :(int)startX
+-(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
 {
     wordCard.frame = CGRectMake(self.view.frame.size.width* (moveLeft?1:-1), wordCard.frame.origin.y, wordCard.frame.size.width, wordCard.frame.size.height);
     [UIView animateWithDuration:0.2 delay:0.0 options:    UIViewAnimationOptionCurveEaseOut
@@ -62,7 +67,7 @@
                      }
                      completion:^(BOOL b) {
                          if (b) {
-                              _isInAnimation = NO;
+                             _isInAnimation = NO;
                              [self endMove];
                          }
                      }];
@@ -71,12 +76,12 @@
 {
     
 }
--(BOOL) startFlip:(CardInfoView *)wordCard
+-(BOOL) startFlip:(UIView *)wordCard
 {
     if (_isInAnimation) {
         return NO;
     }
-     _isInAnimation = YES;
+    _isInAnimation = YES;
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
                      animations:^(void) {
                          wordCard.transform = CGAffineTransformMakeScale(0.01, 1);
@@ -88,7 +93,7 @@
                      }];
     return YES;
 }
--(void) startEndFlip:(CardInfoView *)wordCard
+-(void) startEndFlip:(UIView *)wordCard
 {
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
                      animations:^(void) {
@@ -105,4 +110,5 @@
 {
     
 }
+
 @end

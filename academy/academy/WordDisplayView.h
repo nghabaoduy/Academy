@@ -1,8 +1,8 @@
 //
-//  CardParentVC.h
+//  WordDisplayView.h
 //  academy
 //
-//  Created by Brian on 5/14/15.
+//  Created by Brian on 5/22/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
@@ -10,22 +10,21 @@
 #import "CardInfoView.h"
 #import "LoadingUIView.h"
 
-@interface CardParentVC : UIViewController
+@interface WordDisplayView : UIViewController
 
 @property BOOL isInAnimation;
 @property (strong, nonatomic) LoadingUIView *loadingView;
 
--(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft;
--(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft :(int)startX;
+-(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft;
+-(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX;
 -(void) endMove;
--(BOOL) startFlip:(CardInfoView *)wordCard;
--(void) startEndFlip:(CardInfoView *)wordCard;
+-(BOOL) startFlip:(UIView *)wordCard;
+-(void) startEndFlip:(UIView *)wordCard;
 -(void) endFlip;
-
 @end
-
-/* basic function
-
+/*
+  basic function
+ 
  -(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft
  {
  return [super startMove:wordCard :moveLeft];
@@ -54,4 +53,4 @@
  {
  
  }
-*/
+ */

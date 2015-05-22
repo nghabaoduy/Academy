@@ -46,9 +46,7 @@
 }
 
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -65,7 +63,7 @@
 
 -(void) displayCurWord
 {
-    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",curWordNo+1,wordList.count]];
+    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",curWordNo+1,(unsigned long)wordList.count]];
     Word *word = wordList[curWordNo];
     if (isFront) {
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];

@@ -8,6 +8,7 @@
 
 #import "SetDetailVC.h"
 #import "WordInfoVC.h"
+#import "WordTestVC.h"
 
 @interface SetDetailVC ()
 
@@ -50,6 +51,11 @@
     }*/
     if (indexPath.row == 0) {
         WordInfoVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordInfoView"];
+        view.curSet = self.curSet;
+        [self presentViewController:view animated:YES completion:nil];
+    }
+    if (indexPath.row == 2) {
+        WordTestVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordTestView"];
         view.curSet = self.curSet;
         [self presentViewController:view animated:YES completion:nil];
     }
