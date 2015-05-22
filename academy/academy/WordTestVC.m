@@ -47,16 +47,15 @@
     
 }
 
-- (void)shuffleWordList
+- (NSMutableArray *)shuffleArray:(NSMutableArray *) tarArray
 {
-    NSMutableArray *tempArray = [wordList mutableCopy];
-    NSUInteger count = [tempArray count];
+    NSUInteger count = [tarArray count];
     for (NSUInteger i = 0; i < count; ++i) {
         NSInteger remainingCount = count - i;
         NSInteger exchangeIndex = i + arc4random_uniform((u_int32_t )remainingCount);
-        [tempArray exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
+        [tarArray exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
     }
-    wordList = [tempArray copy];
+    return tarArray;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,9 +82,7 @@
     [answerPool addObject:[self getRandomWordNameDifferentFrom:answerPool]];
     [answerPool addObject:[self getRandomWordNameDifferentFrom:answerPool]];
     [answerPool addObject:[self getRandomWordNameDifferentFrom:answerPool]];
-    answerPool = [[(NSArray *)[answerPool copy] sortedArrayUsingComparator:^NSComparisonResult(NSString * a, NSString * b) {
-        return [a compare:b];
-    }] mutableCopy];
+    answerPool = [self shuffleArray:answerPool];
     [_wordCard displayMultipleChoiceQuestion:question choice1:answerPool[0] choice2:answerPool[1] choice3:answerPool[2] choice4:answerPool[3]];
     
 }
@@ -155,7 +152,7 @@
     }
     else
     {
-        [_wordCard displayMessage:[NSString stringWithFormat:@"You have answer correctly %i out of %i", correctWordList.count, wordList.count]];
+        [_wordCard displayMessage:[NSString stringWithFormat:@"You have answer correctly %lu out of %lu", (unsigned long)correctWordList.count, (unsigned long)wordList.count]];
         [nextBtn setTitle:@"Finish" forState:UIControlStateNormal];
     }
 }
@@ -164,7 +161,7 @@
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     wordList = model.wordList;
-    [self shuffleWordList];
+    wordList = [[self shuffleArray:[wordList mutableCopy]] copy];
     [self displayCurWord];
     [self.loadingView endLoading];
     
