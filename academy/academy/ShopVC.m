@@ -104,9 +104,5 @@
      }
  }
 
-- (IBAction)gotoShelf:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 @end

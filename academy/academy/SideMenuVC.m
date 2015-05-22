@@ -133,18 +133,19 @@ static SideMenuVC * instance = nil;
                                     ];
     
     self.menuIconList = @[
-                          @"Folder-Heart.png",
-                          @"Buy-Button.png",
-                          @"Rubber-Duck.png",
-                          @"Polaroid-Socialmatic.png",
-                          @"Support.png"
+                          @"book.png",
+                          @"shop.png",
+                          @"wallet.png",
+                          @"user.png",
+                          @"config.png"
                           ];
     self.menuTitleList = @[
                            @"Shelf",
                            @"Store",
                            @"Top Up",
                            @"Privacy",
-                           @"Setting"
+                           @"Setting",
+                           @"Log out"
                            ];
     
     self.menuHeaderTitle = @[@"Menu"];
@@ -235,6 +236,9 @@ static SideMenuVC * instance = nil;
     SideMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuCellReuseIdentifier];
     
     cell.titleLb.text = [self.menuTitleList objectAtIndex:indexPath.row];
+    if (indexPath.row <= self.menuIconList.count -1) {
+        [cell.icon setImage:[UIImage imageNamed:[self.menuIconList objectAtIndex:indexPath.row]]];
+    }
     return cell;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

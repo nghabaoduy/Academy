@@ -11,5 +11,6 @@
 @interface SideMenuCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UITableViewCell *view;
 @property (strong, nonatomic) IBOutlet UILabel *titleLb;
+@property (strong, nonatomic) IBOutlet UIImageView *icon;
 
 @end

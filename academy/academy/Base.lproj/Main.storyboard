@@ -172,7 +172,7 @@
             </objects>
             <point key="canvasLocation" x="861" y="379.5"/>
         </scene>
-        <!--Your Shelf-->
+        <!--User ShelfVC-->
         <scene sceneID="3u1-yX-529">
             <objects>
                 <tableViewController storyboardIdentifier="userShelfView" id="Qn0-v8-GXc" customClass="UserShelfVC" sceneMemberID="viewController">
@@ -315,20 +315,12 @@
                             <outlet property="delegate" destination="Qn0-v8-GXc" id="dxR-H2-7H6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Your Shelf" id="tsd-Me-mkv">
-                        <barButtonItem key="rightBarButtonItem" title="Shop" id="KHL-Xg-Ysn">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="gotoShop:" destination="Qn0-v8-GXc" id="mHb-c7-DQj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Qi-Dd-pY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1770" y="379.5"/>
         </scene>
-        <!--Shop-->
+        <!--ShopVC-->
         <scene sceneID="gnn-P7-bIK">
             <objects>
                 <tableViewController storyboardIdentifier="shopView" id="FZq-fu-QMK" customClass="ShopVC" sceneMemberID="viewController">
@@ -471,14 +463,6 @@
                             <outlet property="delegate" destination="FZq-fu-QMK" id="X7B-ug-8tq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Shop" id="Oh3-tl-65K">
-                        <barButtonItem key="rightBarButtonItem" title="Shelf" id="QpH-Qz-zz6">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="gotoShelf:" destination="FZq-fu-QMK" id="Pd7-ey-5KM"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nh1-AJ-GgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -652,7 +636,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="25" y="130" width="47" height="23"/>
+                                    <rect key="frame" x="25" y="86" width="47" height="23"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-yM-uIV">
@@ -661,7 +645,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="25" y="99" width="59" height="28"/>
+                                    <rect key="frame" x="25" y="55" width="59" height="28"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3N-fe-2o7">
@@ -680,7 +664,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="325" y="86" width="65" height="14"/>
+                                    <rect key="frame" x="325" y="42" width="65" height="14"/>
                                     <mask key="constraints">
                                         <include reference="VPL-Eh-BL5"/>
                                     </mask>
@@ -1237,6 +1221,7 @@
                         <viewControllerLayoutGuide type="bottom" id="i1t-7c-P42"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4CD-Yb-LNZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="HCZ-cL-bZb">
@@ -1269,10 +1254,10 @@
                                 <exclude reference="HCZ-cL-bZb"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="n32-pT-z6l"/>
                                 <exclude reference="2ov-JC-dLa"/>
                                 <exclude reference="Y9d-LK-7Yx"/>
                                 <exclude reference="cUQ-88-EVx"/>
-                                <exclude reference="n32-pT-z6l"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1280,10 +1265,10 @@
                                 <include reference="HCZ-cL-bZb"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="n32-pT-z6l"/>
                                 <include reference="2ov-JC-dLa"/>
                                 <include reference="Y9d-LK-7Yx"/>
                                 <include reference="cUQ-88-EVx"/>
-                                <include reference="n32-pT-z6l"/>
                             </mask>
                         </variation>
                     </view>

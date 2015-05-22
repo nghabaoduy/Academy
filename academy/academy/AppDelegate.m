@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MyUIEngine.h"
 #import "SideMenuVC.h"
 #import "MSDynamicsDrawerViewController.h"
 #import "MSDynamicsDrawerStyler.h"
@@ -21,7 +22,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@"self delegate = %@",self);
+   
+    [[MyUIEngine sharedUIEngine] appDelegateUICustomzation];
 
 #if !defined(STORYBOARD)
     self.dynamicsDrawerViewController = [MSDynamicsDrawerViewController new];
@@ -43,7 +45,7 @@
     [self.dynamicsDrawerViewController setDrawerViewController:menuViewController forDirection:MSDynamicsDrawerDirectionLeft];
     
     // Transition to the first view controller
-    NSLog(@"delegate.menuViewController = %@",menuViewController);
+    
     [menuViewController transitionToViewController:ControllerLogin];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

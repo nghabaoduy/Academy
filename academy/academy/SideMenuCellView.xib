@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SideMenuCell">
             <connections>
+                <outlet property="icon" destination="zLD-Nf-OhV" id="Blh-2k-vKh"/>
                 <outlet property="titleLb" destination="6or-vV-DXQ" id="Dbw-SE-LbJ"/>
                 <outlet property="view" destination="3xt-EX-fu4" id="8wN-TY-HVs"/>
             </connections>
@@ -31,9 +32,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MenuCellBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ssm-b7-4m6">
                         <rect key="frame" x="0.0" y="1" width="250" height="49"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zLD-Nf-OhV">
+                        <rect key="frame" x="18" y="0.0" width="48" height="48"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="438" y="313"/>
+            <point key="canvasLocation" x="438" y="310"/>
         </tableViewCell>
     </objects>
     <resources>

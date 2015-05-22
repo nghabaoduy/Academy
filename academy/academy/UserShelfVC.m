@@ -157,9 +157,5 @@
 {
     return YES;
 }
-- (IBAction)gotoShop:(id)sender {
-    ShopNavVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"shopNavView"];
-    [self presentViewController:view animated:YES completion:nil];
-}
 
 @end
