@@ -46,7 +46,7 @@
     
     // Transition to the first view controller
     
-    [menuViewController transitionToViewController:ControllerLogin];
+    [menuViewController transitionToViewController:ControllerLogin animated:NO];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.dynamicsDrawerViewController;

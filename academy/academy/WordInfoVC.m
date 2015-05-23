@@ -7,6 +7,8 @@
 //
 
 #import "WordInfoVC.h"
+#import "WordTestVC.h"
+#import "CustomIOSAlertView.h"
 
 @interface WordInfoVC () <ModelDelegate>
 
@@ -14,14 +16,21 @@
 
 
 @implementation WordInfoVC{
+    NSArray *originalWordList;
     NSArray *wordList;
+    NSMutableArray *knownWords;
     int curWordNo;
     BOOL isFront;
+    
+    IBOutlet UIButton *prevBtn;
+    IBOutlet UIButton *nextBtn;
+    IBOutlet UIButton *knowBtn;
+    IBOutlet UIButton *dunnoBtn;
 }
 
 @synthesize wordCard = _wordCard;
 @synthesize wordNoLb = _wordNoLb;
-@synthesize curSet;
+@synthesize curSet,isWordCheckSession;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -36,13 +45,35 @@
     _wordCard.delegate = self;
     _wordCard.view.bounds = _wordCard.bounds;
     
+    
+    [self retrieveWords];
+    [self.loadingView startLoading];
+    
+    knownWords = [NSMutableArray new];
+    [self resetView];
+}
+
+-(void) resetView
+{
+    [_wordCard clearDisplay];
+    
     curWordNo = 0;
     isFront = YES;
     [self.setTitleLb setText:self.curSet.name];
     
-    [self retrieveWords];
-    [_wordCard clearDisplay];
-    [self.loadingView startLoading];
+    [prevBtn setHidden:YES];
+    [nextBtn setHidden:YES];
+    [knowBtn setHidden:YES];
+    [dunnoBtn setHidden:YES];
+    
+    if (!isWordCheckSession) {
+        [prevBtn setHidden:NO];
+        [nextBtn setHidden:NO];
+    }
+    else{
+        [knowBtn setHidden:NO];
+        [dunnoBtn setHidden:NO];
+    }
 }
 
 
@@ -64,7 +95,16 @@
 -(void) displayCurWord
 {
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",curWordNo+1,(unsigned long)wordList.count]];
+    
     Word *word = wordList[curWordNo];
+    
+    //Check Session
+    if (isWordCheckSession) {
+        [_wordCard displayCenterWord:word.name message:@"Bạn có biết từ này không?"];
+        return;
+    }
+    
+
     if (isFront) {
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];
     }
@@ -72,15 +112,19 @@
     {
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES]];
     }
+    
+    prevBtn.hidden = curWordNo == 0;
+    nextBtn.hidden = curWordNo >= wordList.count -1;
+    
 }
+// PREV - NEXT
 - (IBAction)next:(id)sender {
     isFront = YES;
     if (curWordNo< wordList.count -1) {
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
         }
-        
-    };
+    }
 }
 - (IBAction)prev:(id)sender
 {
@@ -91,8 +135,115 @@
             curWordNo--;
         }
     }
-
 }
+
+
+// KNOW - DUNNO
+- (IBAction)know:(id)sender {
+    if (![knownWords containsObject:wordList[curWordNo]]) {
+        [knownWords addObject:wordList[curWordNo]];
+    }
+
+    if (curWordNo< wordList.count -1) {
+        if ([self startMove:_wordCard:YES]) {
+            curWordNo++;
+        }
+    }else{
+        [self startWordInfoSession];
+    }
+}
+- (IBAction)dunno:(id)sender
+{
+    if (curWordNo< wordList.count -1) {
+        if ([self startMove:_wordCard:YES]) {
+            curWordNo++;
+        }
+    }else{
+        [self startWordInfoSession];
+    }
+}
+
+-(void) startWordInfoSession
+{
+    if (knownWords.count >= wordList.count) {
+        [self alertGoToTest];
+        return;
+    }
+    
+    if (knownWords.count > 0) {
+        NSMutableArray * sortedWordArray = [wordList mutableCopy];
+        for (Word *word in knownWords) {
+            [sortedWordArray removeObject:word];
+        }
+        wordList = [sortedWordArray copy];
+    }
+    
+    isWordCheckSession = NO;
+    [self resetView];
+    [self alertChangeToWordInfoSession];
+ 
+}
+
+-(void) alertChangeToWordInfoSession
+{
+    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
+    
+    // Add some custom content to the alert view
+    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 200)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 270, 180)];
+    [imageView setImage:[UIImage imageNamed:@"demo"]];
+    [demoView addSubview:imageView];
+    [alertView setContainerView:demoView];
+
+    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Okie", nil]];
+    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
+        [self displayCurWord];
+        [alertView close];
+    }];
+    [alertView setUseMotionEffects:true];
+    [alertView show];
+}
+// GO TO TEST
+-(void) alertGoToTest
+{
+    NSLog(@"alertGoToTest called");
+    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
+    
+    // Add some custom content to the alert view
+    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 200)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 270, 180)];
+    [imageView setImage:[UIImage imageNamed:@"demo"]];
+    [demoView addSubview:imageView];
+    [alertView setContainerView:demoView];
+    
+    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Okie",@"Chút nữa", nil]];
+    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
+        if (buttonIndex == 0) {
+            [self goToTestView];
+        }
+        else
+        {
+            if (knownWords.count >= wordList.count) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+        [alertView close];
+    }];
+    [alertView setUseMotionEffects:true];
+    [alertView show];
+}
+
+-(void) goToTestView
+{
+    WordTestVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordTestView"];
+    view.curSet = self.curSet;
+    view.wordList = originalWordList;
+    view.wordInfoView = self;
+    [self presentViewController:view animated:YES completion:nil];
+}
+
+// CARD MOVE - FLIP
+
 -(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft
 {
     return [super startMove:wordCard :moveLeft];
@@ -122,13 +273,16 @@
 }
 -(void) cardIsTapped:(CardInfoView *)card
 {
-    NSLog(@"cardIsTapped");
-    [self startFlip:_wordCard];
+    if (!isWordCheckSession) {
+        NSLog(@"cardIsTapped");
+        [self startFlip:_wordCard];
+    }
 }
 
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     wordList = model.wordList;
+    originalWordList = [wordList copy];
     [self displayCurWord];
     [self.loadingView endLoading];
 }

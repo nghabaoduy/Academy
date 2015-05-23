@@ -8,13 +8,15 @@
 
 #import "WordTestVC.h"
 
+#import "SoundEngine.h"
+
 @interface WordTestVC () <ModelDelegate>
 
 @end
 
 
 @implementation WordTestVC{
-    NSArray *wordList;
+    
     int curWordNo;
     NSMutableArray * correctWordList;
     IBOutlet UIButton *nextBtn;
@@ -22,7 +24,7 @@
 
 @synthesize wordCard = _wordCard;
 @synthesize wordNoLb = _wordNoLb;
-@synthesize curSet;
+@synthesize curSet, wordList;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,10 +43,15 @@
     curWordNo = 0;
     [self.setTitleLb setText:self.curSet.name];
     
-    [self retrieveWords];
-    [_wordCard clearDisplay];
-    [self.loadingView startLoading];
-    
+    if (!wordList) {
+        [self retrieveWords];
+        [self.loadingView startLoading];
+        [_wordCard clearDisplay];
+    }
+    else
+    {
+        [self displayCurWord];
+    }
 }
 
 - (NSMutableArray *)shuffleArray:(NSMutableArray *) tarArray
@@ -69,7 +76,13 @@
 }
 
 - (IBAction)close:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.wordInfoView) {
+            [self.wordInfoView dismissViewControllerAnimated:YES completion:nil];
+            self.wordInfoView = nil;
+        }
+    }];
 }
 
 -(void) displayCurWord
@@ -140,6 +153,7 @@
     if ([answer isEqual:choice]) {
         [correctWordList addObject:word];
         NSLog(@"Correct answer");
+        [[SoundEngine getInstance] playSound:@"Correct.mp3"];
     }
     else
     {

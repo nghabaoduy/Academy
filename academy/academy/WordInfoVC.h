@@ -19,4 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
 @property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
 
+@property BOOL isWordCheckSession;
+
 @end

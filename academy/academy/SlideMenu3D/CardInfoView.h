@@ -23,9 +23,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneticLb;
 @property (strong, nonatomic) IBOutlet UILabel *wordTypeLb;
 @property (strong, nonatomic) IBOutlet UITextView *contentTV;
+@property (strong, nonatomic) IBOutlet UILabel *messageLb;
+@property (strong, nonatomic) IBOutlet UILabel *centerWordLb;
 @property (strong, nonatomic) IBOutlet UIView *view;
 
+
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent;
+-(void) displayCenterWord:(NSString *)word message:(NSString *) message;
 -(void) clearDisplay;
 
 @end

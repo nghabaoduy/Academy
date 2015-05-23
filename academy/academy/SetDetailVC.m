@@ -52,6 +52,13 @@
     if (indexPath.row == 0) {
         WordInfoVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordInfoView"];
         view.curSet = self.curSet;
+        view.isWordCheckSession = NO;
+        [self presentViewController:view animated:YES completion:nil];
+    }
+    if (indexPath.row == 1) {
+        WordInfoVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordInfoView"];
+        view.curSet = self.curSet;
+        view.isWordCheckSession = YES;
         [self presentViewController:view animated:YES completion:nil];
     }
     if (indexPath.row == 2) {

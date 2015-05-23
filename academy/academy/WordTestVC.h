@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WordDisplayView.h"
 #import "CardTestView.h"
+#import "WordInfoVC.h"
 #import "Word.h"
 #import "LSet.h"
 
@@ -19,4 +20,7 @@
 @property (strong, nonatomic) IBOutlet CardTestView *wordCard;
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
 @property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
+
+@property (strong, nonatomic) NSArray *wordList;
+@property (strong, nonatomic) WordInfoVC *wordInfoView;
 @end

@@ -6,8 +6,10 @@
     <customFonts key="customFonts">
         <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
             <string>GothamRounded-Bold</string>
+            <string>GothamRounded-Bold</string>
         </mutableArray>
         <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
+            <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
         </mutableArray>
@@ -15,7 +17,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardInfoView">
             <connections>
+                <outlet property="centerWordLb" destination="fxJ-NU-RAd" id="4aj-qM-m5F"/>
                 <outlet property="contentTV" destination="UE7-3w-IZu" id="Dv1-3Z-CUx"/>
+                <outlet property="messageLb" destination="Xm6-DT-24r" id="oBo-uW-yGb"/>
                 <outlet property="phoneticLb" destination="Aaf-hn-8N7" id="rAF-np-5ZB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Gps-F4-S6y"/>
                 <outlet property="wordLb" destination="Y1r-Bz-KpO" id="LxR-s1-gKA"/>
@@ -56,8 +60,40 @@
                     <color key="textColor" white="0.49090442519999999" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bạn có biết từ này không?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm6-DT-24r">
+                    <rect key="frame" x="16" y="26" width="260" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="KMs-hD-4if"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="21"/>
+                    <color key="textColor" white="0.15923032409999999" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Center Word" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-NU-RAd">
+                    <rect key="frame" x="8" y="140" width="284" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="284" id="GT0-Ri-Ygp"/>
+                        <constraint firstAttribute="height" constant="75" id="bBw-KO-J8K"/>
+                        <constraint firstAttribute="height" constant="30" id="wKD-l1-T0a"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="28"/>
+                    <color key="textColor" white="0.15923032409999999" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="wKD-l1-T0a"/>
+                        </mask>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Xm6-DT-24r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="D1G-2N-Zbn"/>
+                <constraint firstItem="Xm6-DT-24r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="DA6-7V-ODM"/>
+                <constraint firstAttribute="trailing" secondItem="Xm6-DT-24r" secondAttribute="trailing" constant="16" id="lVK-BK-l0Z"/>
+                <constraint firstAttribute="centerX" secondItem="fxJ-NU-RAd" secondAttribute="centerX" id="r2V-di-Zpn"/>
+                <constraint firstAttribute="centerY" secondItem="fxJ-NU-RAd" secondAttribute="centerY" id="ui2-t9-ebg"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

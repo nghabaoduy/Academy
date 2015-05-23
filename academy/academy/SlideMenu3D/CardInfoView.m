@@ -45,6 +45,12 @@
     [self changeTextViewSubStringAtt:self.contentTV targetText:word color:[UIColor redColor]];
     
 }
+-(void) displayCenterWord:(NSString *)word message:(NSString *) message
+{
+    [self clearDisplay];
+    [self.messageLb setText:message];
+    [self.centerWordLb setText:word];
+}
 -(void) changeTextViewSubStringAtt:(UITextView *) tv targetText:(NSString *)targetText color:(UIColor *) color
 {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -74,5 +80,7 @@
     [self.wordTypeLb setText:@""];
     [self.phoneticLb setText:@""];
     [self.contentTV setText:@""];
+    [self.centerWordLb setText:@""];
+    [self.messageLb setText:@""];
 }
 @end

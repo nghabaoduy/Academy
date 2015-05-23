@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 3
 
+// CustomIOSAlertView
+#define COCOAPODS_POD_AVAILABLE_CustomIOSAlertView
+#define COCOAPODS_VERSION_MAJOR_CustomIOSAlertView 0
+#define COCOAPODS_VERSION_MINOR_CustomIOSAlertView 9
+#define COCOAPODS_VERSION_PATCH_CustomIOSAlertView 3
+
 // MSDynamicsDrawerViewController
 #define COCOAPODS_POD_AVAILABLE_MSDynamicsDrawerViewController
 #define COCOAPODS_VERSION_MAJOR_MSDynamicsDrawerViewController 1

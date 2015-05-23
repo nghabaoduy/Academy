@@ -153,12 +153,6 @@ static SideMenuVC * instance = nil;
 
 - (MSPaneViewControllerType)paneViewControllerTypeForIndexPath:(NSIndexPath *)indexPath
 {
-    /*MSPaneViewControllerType paneViewControllerType;
-    if (indexPath.section == 0) {
-        paneViewControllerType = indexPath.row;
-    } else {
-        paneViewControllerType = ([self.tableViewSectionBreaks[(indexPath.section - 1)] integerValue] + indexPath.row);
-    }*/
     switch (indexPath.row) {
         case 0:
             return ControllerUserShelf;
@@ -170,11 +164,9 @@ static SideMenuVC * instance = nil;
             break;
     }
     return ControllerUserShelf;
-    //NSAssert(paneViewControllerType < MSPaneViewControllerTypeCount, @"Invalid Index Path");
-    //return paneViewControllerType;
 }
 
-- (void)transitionToViewController:(MSPaneViewControllerType)paneViewControllerType
+- (void)transitionToViewController:(MSPaneViewControllerType)paneViewControllerType animated:(BOOL) animated
 {
     // Close pane if already displaying the pane view controller
     if (paneViewControllerType == self.paneViewControllerType) {
@@ -182,7 +174,7 @@ static SideMenuVC * instance = nil;
         return;
     }
     
-    BOOL animateTransition = self.dynamicsDrawerViewController.paneViewController != nil;
+    BOOL animateTransition = self.dynamicsDrawerViewController.paneViewController != nil && animated;
     
 #if defined(STORYBOARD)
     UIViewController *paneViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.paneViewControllerIdentifiers[@(paneViewControllerType)]];
@@ -193,7 +185,7 @@ static SideMenuVC * instance = nil;
     paneViewController.navigationItem.title = self.paneViewControllerTitles[@(paneViewControllerType)];
     
     if (paneViewControllerType != ControllerLogin) {
-        self.paneRevealLeftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
+        self.paneRevealLeftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MenuBtn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
         paneViewController.navigationItem.leftBarButtonItem = self.paneRevealLeftBarButtonItem;
     }
     
@@ -254,57 +246,8 @@ static SideMenuVC * instance = nil;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MSPaneViewControllerType paneViewControllerType = [self paneViewControllerTypeForIndexPath:indexPath];
-    [self transitionToViewController:paneViewControllerType];
+    [self transitionToViewController:paneViewControllerType animated:YES];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    double delayInSeconds = 0.3;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.tableView reloadData];
-    });
 }
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 
 @end

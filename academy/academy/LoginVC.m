@@ -111,9 +111,7 @@
 
 - (void)userLoginSuccessfull:(User *)user {
     NSLog(@"navigateView");
-    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-   
-    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf];
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
 }
 
     
