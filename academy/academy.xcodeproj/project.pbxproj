@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
-		AF0241CD1B0F0B6F0019B3E2 /* CardTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241CC1B0F0B6F0019B3E2 /* CardTestView.m */; };
-		AF0241CF1B0F0BA00019B3E2 /* CardTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTest.xib */; };
+		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
 		AF7869A41B10BDB9009BE37B /* MenuBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7869A31B10BDB9009BE37B /* MenuBtn.png */; };
@@ -88,6 +87,13 @@
 		AFC27C031B0EEC5700225016 /* weather.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC27BBF1B0EEC5700225016 /* weather.png */; };
 		AFC27C041B0EEC5700225016 /* worldglobe.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC27BC01B0EEC5700225016 /* worldglobe.png */; };
 		AFC27C071B0EF01A00225016 /* MyUIEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC27C061B0EF01A00225016 /* MyUIEngine.m */; };
+		AFCB0D1F1B11D56000F5688F /* AlertBG_Giraffe.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCB0D1E1B11D56000F5688F /* AlertBG_Giraffe.png */; };
+		AFCB0D221B11D59700F5688F /* AlertCartoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCB0D211B11D59700F5688F /* AlertCartoonView.m */; };
+		AFCB0D241B11D5B000F5688F /* CartoonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFCB0D231B11D5B000F5688F /* CartoonView.xib */; };
+		AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCB0D261B11E71000F5688F /* TestMaker.m */; };
+		AFCB0D301B11ED3F00F5688F /* CardMultipleChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCB0D2F1B11ED3F00F5688F /* CardMultipleChoiceView.m */; };
+		AFCB0D321B11F89A00F5688F /* CardTypeAnswer.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFCB0D311B11F89A00F5688F /* CardTypeAnswer.xib */; };
+		AFCB0D351B11F8F800F5688F /* CardTypeAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCB0D341B11F8F800F5688F /* CardTypeAnswerView.m */; };
 		AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */; };
 		AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */; };
 		AFCFE5FE1B04E668006D9744 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = AFCFE5FD1B04E668006D9744 /* cross.png */; };
@@ -150,9 +156,7 @@
 
 /* Begin PBXFileReference section */
 		19415BF26ACA690DC120472F /* libPods-academy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-academy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF0241CB1B0F0B6F0019B3E2 /* CardTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTestView.h; sourceTree = "<group>"; };
-		AF0241CC1B0F0B6F0019B3E2 /* CardTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTestView.m; sourceTree = "<group>"; };
-		AF0241CE1B0F0BA00019B3E2 /* CardTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTest.xib; path = academy/CardView/CardTest.xib; sourceTree = SOURCE_ROOT; };
+		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
 		AF0241D31B0F18930019B3E2 /* WordDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDisplayView.h; sourceTree = "<group>"; };
@@ -235,6 +239,17 @@
 		AFC27BC01B0EEC5700225016 /* worldglobe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = worldglobe.png; path = Graphics/Icons/worldglobe.png; sourceTree = "<group>"; };
 		AFC27C051B0EF01A00225016 /* MyUIEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUIEngine.h; sourceTree = "<group>"; };
 		AFC27C061B0EF01A00225016 /* MyUIEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUIEngine.m; sourceTree = "<group>"; };
+		AFCB0D1E1B11D56000F5688F /* AlertBG_Giraffe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AlertBG_Giraffe.png; path = Graphics/AlertBG/AlertBG_Giraffe.png; sourceTree = "<group>"; };
+		AFCB0D201B11D59700F5688F /* AlertCartoonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCartoonView.h; sourceTree = "<group>"; };
+		AFCB0D211B11D59700F5688F /* AlertCartoonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCartoonView.m; sourceTree = "<group>"; };
+		AFCB0D231B11D5B000F5688F /* CartoonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartoonView.xib; sourceTree = "<group>"; };
+		AFCB0D251B11E71000F5688F /* TestMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMaker.h; sourceTree = "<group>"; };
+		AFCB0D261B11E71000F5688F /* TestMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMaker.m; sourceTree = "<group>"; };
+		AFCB0D2E1B11ED3F00F5688F /* CardMultipleChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMultipleChoiceView.h; sourceTree = "<group>"; };
+		AFCB0D2F1B11ED3F00F5688F /* CardMultipleChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMultipleChoiceView.m; sourceTree = "<group>"; };
+		AFCB0D311B11F89A00F5688F /* CardTypeAnswer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTypeAnswer.xib; sourceTree = "<group>"; };
+		AFCB0D331B11F8F800F5688F /* CardTypeAnswerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTypeAnswerView.h; sourceTree = "<group>"; };
+		AFCB0D341B11F8F800F5688F /* CardTypeAnswerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTypeAnswerView.m; sourceTree = "<group>"; };
 		AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-blue-btn.png"; path = "Graphics/medium-blue-btn.png"; sourceTree = "<group>"; };
 		AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-red-btn.png"; path = "Graphics/medium-red-btn.png"; sourceTree = "<group>"; };
 		AFCFE5FD1B04E668006D9744 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cross.png; path = Graphics/cross.png; sourceTree = "<group>"; };
@@ -419,6 +434,14 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		AFCB0D1D1B11D51F00F5688F /* AlertBG */ = {
+			isa = PBXGroup;
+			children = (
+				AFCB0D1E1B11D56000F5688F /* AlertBG_Giraffe.png */,
+			);
+			name = AlertBG;
+			sourceTree = "<group>";
+		};
 		AFCFE5E61B04D754006D9744 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +531,9 @@
 				AFFB76AC1B0A34EE001489F1 /* LoadingUIView.h */,
 				AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */,
 				AFFB76AF1B0A350A001489F1 /* LoadingView.xib */,
+				AFCB0D201B11D59700F5688F /* AlertCartoonView.h */,
+				AFCB0D211B11D59700F5688F /* AlertCartoonView.m */,
+				AFCB0D231B11D5B000F5688F /* CartoonView.xib */,
 			);
 			name = "Misc Object";
 			sourceTree = "<group>";
@@ -518,9 +544,12 @@
 				AFE6DEF91B049D97003E30CA /* CardInfo.xib */,
 				AFE6DEFB1B049DC3003E30CA /* CardInfoView.h */,
 				AFE6DEFC1B049DC3003E30CA /* CardInfoView.m */,
-				AF0241CE1B0F0BA00019B3E2 /* CardTest.xib */,
-				AF0241CB1B0F0B6F0019B3E2 /* CardTestView.h */,
-				AF0241CC1B0F0B6F0019B3E2 /* CardTestView.m */,
+				AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */,
+				AFCB0D2E1B11ED3F00F5688F /* CardMultipleChoiceView.h */,
+				AFCB0D2F1B11ED3F00F5688F /* CardMultipleChoiceView.m */,
+				AFCB0D311B11F89A00F5688F /* CardTypeAnswer.xib */,
+				AFCB0D331B11F8F800F5688F /* CardTypeAnswerView.h */,
+				AFCB0D341B11F8F800F5688F /* CardTypeAnswerView.m */,
 			);
 			name = CardView;
 			path = SlideMenu3D;
@@ -529,6 +558,7 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				AFCB0D1D1B11D51F00F5688F /* AlertBG */,
 				AFC27B7C1B0EEC4A00225016 /* Icons */,
 				AF7869AF1B10D48A009BE37B /* tick.png */,
 				AF7869A31B10BDB9009BE37B /* MenuBtn.png */,
@@ -615,6 +645,8 @@
 				C36DF4F11B088B3D00C225DA /* UserPackage.m */,
 				C34203D81B0A18650058FFE2 /* Meaning.h */,
 				C34203D91B0A18650058FFE2 /* Meaning.m */,
+				AFCB0D251B11E71000F5688F /* TestMaker.h */,
+				AFCB0D261B11E71000F5688F /* TestMaker.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -771,8 +803,10 @@
 				AFC27BC81B0EEC5700225016 /* calculator.png in Resources */,
 				AFC27BE41B0EEC5700225016 /* money.png in Resources */,
 				AFC27BF51B0EEC5700225016 /* shop.png in Resources */,
+				AFCB0D1F1B11D56000F5688F /* AlertBG_Giraffe.png in Resources */,
 				AFC27BE51B0EEC5700225016 /* monitor.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
+				AFCB0D321B11F89A00F5688F /* CardTypeAnswer.xib in Resources */,
 				AFC27BF71B0EEC5700225016 /* statistic.png in Resources */,
 				AFC27BDD1B0EEC5700225016 /* home.png in Resources */,
 				AFC27BFB1B0EEC5700225016 /* truck.png in Resources */,
@@ -781,9 +815,10 @@
 				AFC27BED1B0EEC5700225016 /* portfolio.png in Resources */,
 				AFC27BF11B0EEC5700225016 /* ribbon.png in Resources */,
 				AFC27BD61B0EEC5700225016 /* download.png in Resources */,
-				AF0241CF1B0F0BA00019B3E2 /* CardTest.xib in Resources */,
+				AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */,
 				AFC27BC71B0EEC5700225016 /* building.png in Resources */,
 				AFC27C001B0EEC5700225016 /* view.png in Resources */,
+				AFCB0D241B11D5B000F5688F /* CartoonView.xib in Resources */,
 				AFC27BCA1B0EEC5700225016 /* call.png in Resources */,
 				AFC27BC11B0EEC5700225016 /* arrows.png in Resources */,
 				AFC27BE01B0EEC5700225016 /* lifesaver.png in Resources */,
@@ -879,7 +914,10 @@
 				AFE010871B05A941005B4B4D /* ShopNavVC.m in Sources */,
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFE6DEEE1B03D365003E30CA /* UserShelfNavVC.m in Sources */,
+				AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */,
+				AFCB0D351B11F8F800F5688F /* CardTypeAnswerView.m in Sources */,
 				AFE010821B053186005B4B4D /* PackageCell.m in Sources */,
+				AFCB0D301B11ED3F00F5688F /* CardMultipleChoiceView.m in Sources */,
 				C37437271B0721A00002E46F /* User.m in Sources */,
 				AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */,
 				AF7869A71B10CB9B009BE37B /* SoundEngine.m in Sources */,
@@ -888,7 +926,6 @@
 				AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
 				C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */,
-				AF0241CD1B0F0B6F0019B3E2 /* CardTestView.m in Sources */,
 				AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */,
 				AFC27C071B0EF01A00225016 /* MyUIEngine.m in Sources */,
 				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
@@ -898,6 +935,7 @@
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
 				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,
+				AFCB0D221B11D59700F5688F /* AlertCartoonView.m in Sources */,
 				C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */,
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,

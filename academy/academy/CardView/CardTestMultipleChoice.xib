@@ -16,7 +16,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardTestView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardMultipleChoiceView">
             <connections>
                 <outlet property="choice1Btn" destination="2Tx-e3-4TH" id="94I-3C-0vW"/>
                 <outlet property="choice2Btn" destination="3Gw-MM-GBc" id="ZPc-oL-c30"/>
@@ -28,7 +28,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="400" id="pt3-uG-t6z" customClass="UIControl">
+        <view contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="400" id="pt3-uG-t6z">
             <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>

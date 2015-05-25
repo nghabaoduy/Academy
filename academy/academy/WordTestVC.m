@@ -17,12 +17,17 @@
 
 @implementation WordTestVC{
     
-    int curWordNo;
+    
     NSMutableArray * correctWordList;
     IBOutlet UIButton *nextBtn;
+    TestMaker *testMaker;
+    
+    UIView *curCard;
+    UIView *nextCard;
 }
 
-@synthesize wordCard = _wordCard;
+@synthesize cardMultipleChoice = _cardMultipleChoice;
+@synthesize cardTypeAnswer = _cardTypeAnswer;
 @synthesize wordNoLb = _wordNoLb;
 @synthesize curSet, wordList;
 
@@ -37,21 +42,54 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     }
     
-    _wordCard.delegate = self;
-    _wordCard.view.bounds = _wordCard.bounds;
     
-    curWordNo = 0;
+    _cardMultipleChoice.delegate = self;
+    _cardMultipleChoice.view.bounds = _cardMultipleChoice.bounds;
+    [_cardMultipleChoice clearDisplay];
+    
+    _cardTypeAnswer.delegate = self;
+    _cardTypeAnswer.view.bounds = _cardTypeAnswer.bounds;
+    [_cardTypeAnswer clearDisplay];
+    
+
     [self.setTitleLb setText:self.curSet.name];
     
     if (!wordList) {
         [self retrieveWords];
         [self.loadingView startLoading];
-        [_wordCard clearDisplay];
     }
     else
     {
-        [self displayCurWord];
+        [self startTest];
     }
+}
+
+-(void) startTest
+{
+    testMaker =[[TestMaker alloc] initWithSetAndWordList:curSet wordList:wordList];
+    [self registerTestMakerCardView];
+    curCard = [testMaker createNextQuestion];
+    [testMaker displayNextQuestion];
+    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",[testMaker getCurQuesNo]+1,(unsigned long)wordList.count]];
+    correctWordList = [NSMutableArray new];
+    [self refreshCardHiddenState];
+}
+-(void) registerTestMakerCardView
+{
+    [testMaker registerCardView:_cardMultipleChoice];
+    [testMaker registerCardView:_cardTypeAnswer];
+}
+
+-(void) refreshCardHiddenState
+{
+    if (curCard && nextCard && curCard != nextCard) {
+        curCard = nextCard;
+        nextCard = nil;
+    }
+    
+    _cardMultipleChoice.hidden = YES;
+    _cardTypeAnswer.hidden = YES;
+    curCard.hidden = NO;
 }
 
 - (NSMutableArray *)shuffleArray:(NSMutableArray *) tarArray
@@ -85,73 +123,37 @@
     }];
 }
 
--(void) displayCurWord
-{
-    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",curWordNo+1,(unsigned long)wordList.count]];
-    Word *word = wordList[curWordNo];
-    NSString *question = [word getMeaning:@"English" bExample:NO];
-    NSMutableArray *answerPool = [NSMutableArray new];
-    [answerPool addObject:word.name];
-    [answerPool addObject:[self getRandomWordNameDifferentFrom:answerPool]];
-    [answerPool addObject:[self getRandomWordNameDifferentFrom:answerPool]];
-    [answerPool addObject:[self getRandomWordNameDifferentFrom:answerPool]];
-    answerPool = [self shuffleArray:answerPool];
-    [_wordCard displayMultipleChoiceQuestion:question choice1:answerPool[0] choice2:answerPool[1] choice3:answerPool[2] choice4:answerPool[3]];
-    
-}
-
--(NSString *) getRandomWordNameDifferentFrom:(NSMutableArray *)curList
-{
-    NSMutableArray *tempWordList = [wordList mutableCopy];
-    while (tempWordList.count > 0) {
-        NSUInteger randomIndex = arc4random() % [tempWordList count];
-        Word *pickWord = tempWordList[randomIndex];
-        BOOL isNotDuplicated = YES;
-        for (NSString * curName in curList) {
-            if ([curName isEqual:pickWord.name]) {
-                isNotDuplicated = NO;
-            }
-        }
-        if (isNotDuplicated) {
-            return pickWord.name;
-        }else{
-            [tempWordList removeObject:pickWord];
-        }
-    }
-    return @"";
-}
-
 - (IBAction)next:(id)sender {
-
-    if (curWordNo< wordList.count -1) {
-        if ([self startMove:_wordCard:YES]) {
-            curWordNo++;
+    if (![testMaker isTestFinished]) {
+        NSLog(@"curcard = %@",curCard);
+        if ([self startMove:curCard:YES]) {
+            nextCard = [testMaker createNextQuestion];
         }
-    }else{
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (nextCard != curCard) {
+            [self startMove:nextCard:YES];
+        }
     }
 }
--(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft
+-(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft
 {
     return [super startMove:wordCard :moveLeft];
 }
--(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft :(int)startX
+-(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
 {
-    [self displayCurWord];
+    [testMaker displayNextQuestion];
+    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",[testMaker getCurQuesNo]+1,(unsigned long)wordList.count]];
     [super startEndMove:wordCard :moveLeft :startX];
+    
+    [self refreshCardHiddenState];
+    
 }
 -(void) endMove
 {
-    
-}
 
-#pragma mark - CardTestView Delegate
--(void) choiceSelect:(NSString *) choice
+}
+-(void) checkAnswer:(NSString *) answer
 {
-    Word *word = wordList[curWordNo];
-    NSString *answer = word.name;
-    if ([answer isEqual:choice]) {
-        [correctWordList addObject:word];
+    if ([testMaker checkAnswer:answer]) {
         NSLog(@"Correct answer");
         [[SoundEngine getInstance] playSound:@"Correct.mp3"];
     }
@@ -159,27 +161,34 @@
     {
         NSLog(@"Wrong answer");
     }
-    if (curWordNo< wordList.count -1) {
-        if ([self startMove:_wordCard:YES]) {
-            curWordNo++;
+    if (![testMaker isTestFinished]) {
+        if ([self startMove:curCard:YES]) {
+            nextCard = [testMaker createNextQuestion];
         }
     }
     else
     {
-        [_wordCard displayMessage:[NSString stringWithFormat:@"You have answer correctly %lu out of %lu", (unsigned long)correctWordList.count, (unsigned long)wordList.count]];
         [nextBtn setTitle:@"Finish" forState:UIControlStateNormal];
     }
 }
 
+#pragma mark - CardMultipleChoiceView Delegate
+-(void) CardMultipleChoiceView:(CardMultipleChoiceView *)cardView choiceSelect:(NSString *) choice
+{
+    [self checkAnswer:choice];
+}
+#pragma mark - CardMultipleChoiceView Delegate
+-(void)CardTypeAnswerView:(CardTypeAnswerView *)cardView checkAnswer:(NSString *)answer
+{
+    [self checkAnswer:answer];
+}
 
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     wordList = model.wordList;
     wordList = [[self shuffleArray:[wordList mutableCopy]] copy];
-    [self displayCurWord];
+    [self startTest];
     [self.loadingView endLoading];
-    
-    correctWordList = [NSMutableArray new];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {

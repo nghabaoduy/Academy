@@ -1,14 +1,14 @@
 //
-//  CardTestView.m
+//  CardMultipleChoiceView.m
 //  academy
 //
-//  Created by Brian on 5/22/15.
+//  Created by Brian on 5/24/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
-#import "CardTestView.h"
+#import "CardMultipleChoiceView.h"
 
-@implementation CardTestView{
+@implementation CardMultipleChoiceView{
     
     IBOutlet UITextView *questionTV;
     IBOutlet UIButton *choice1Btn;
@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"CardTest" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"CardTestMultipleChoice" owner:self options:nil];
         self.bounds = self.view.bounds;
         [self addSubview:self.view];
     }
@@ -34,7 +34,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"CardTest" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"CardTestMultipleChoice" owner:self options:nil];
         self.bounds = self.view.bounds;
         [self addSubview:self.view];
     }
@@ -87,6 +87,6 @@
 }
 
 - (IBAction)choiceClicked:(UIButton *)choiceBtn {
-    [delegate choiceSelect:choiceBtn.titleLabel.text];
+    [delegate CardMultipleChoiceView:self choiceSelect:choiceBtn.titleLabel.text];
 }
 @end

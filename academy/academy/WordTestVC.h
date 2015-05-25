@@ -8,16 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "WordDisplayView.h"
-#import "CardTestView.h"
+#import "cardMultipleChoiceView.h"
+#import "CardTypeAnswerView.h"
 #import "WordInfoVC.h"
 #import "Word.h"
 #import "LSet.h"
+#import "TestMaker.h"
 
-@interface WordTestVC : WordDisplayView <CardTestViewDelegate>
+@interface WordTestVC : WordDisplayView <CardMultipleChoiceViewDelegate, CardTypeAnswerViewDelegate>
 
 @property (strong, nonatomic) LSet *curSet;
 
-@property (strong, nonatomic) IBOutlet CardTestView *wordCard;
+@property (strong, nonatomic) IBOutlet CardMultipleChoiceView *cardMultipleChoice;
+@property (strong, nonatomic) IBOutlet CardTypeAnswerView *cardTypeAnswer;
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
 @property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
 

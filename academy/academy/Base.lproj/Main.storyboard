@@ -1443,7 +1443,7 @@
                                     <action selector="next:" destination="1BE-dC-8hf" eventType="touchUpInside" id="fjI-2A-uMr"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="6le-rn-MtA" customClass="CardTestView">
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="6le-rn-MtA" customClass="CardMultipleChoiceView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1462,6 +1462,28 @@
                                     <mask key="constraints">
                                         <include reference="ipb-QG-xkR"/>
                                         <include reference="pEY-2U-QIp"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="VPT-z8-RA8" customClass="CardTypeAnswerView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="316" id="PRB-ee-EW4">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="400" id="v4S-IJ-WqX"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PRB-ee-EW4"/>
+                                        <exclude reference="v4S-IJ-WqX"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="PRB-ee-EW4"/>
+                                        <include reference="v4S-IJ-WqX"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1519,12 +1541,14 @@
                             <constraint firstAttribute="centerX" secondItem="m2g-Ce-dAV" secondAttribute="centerX" id="Ial-06-OcF"/>
                             <constraint firstAttribute="centerY" secondItem="6le-rn-MtA" secondAttribute="centerY" id="Lmv-dI-9mM"/>
                             <constraint firstItem="uTa-9v-OTr" firstAttribute="top" secondItem="2b4-EH-rBx" secondAttribute="bottom" constant="16" id="Oxq-s6-yiV"/>
+                            <constraint firstAttribute="centerY" secondItem="VPT-z8-RA8" secondAttribute="centerY" id="Usy-k0-oHX"/>
                             <constraint firstItem="2b4-EH-rBx" firstAttribute="leading" secondItem="ghM-rj-gjN" secondAttribute="leadingMargin" id="Vv4-nO-0zQ"/>
                             <constraint firstAttribute="centerX" secondItem="M0L-xt-n2W" secondAttribute="centerX" id="XpD-iF-bcU"/>
                             <constraint firstItem="2b4-EH-rBx" firstAttribute="leading" secondItem="ghM-rj-gjN" secondAttribute="leading" constant="16" id="Yfr-hc-5Y1"/>
                             <constraint firstItem="M0L-xt-n2W" firstAttribute="top" secondItem="dpX-bs-z7q" secondAttribute="bottom" constant="10" id="agc-gE-1LX">
                                 <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                             </constraint>
+                            <constraint firstAttribute="centerX" secondItem="VPT-z8-RA8" secondAttribute="centerX" id="agg-S8-jaY"/>
                             <constraint firstItem="m2g-Ce-dAV" firstAttribute="top" secondItem="dpX-bs-z7q" secondAttribute="bottom" constant="44" id="eDc-r5-fIL">
                                 <variation key="heightClass=regular-widthClass=compact" constant="55"/>
                             </constraint>
@@ -1539,24 +1563,27 @@
                                 <exclude reference="YlZ-dd-yKa"/>
                                 <exclude reference="2b4-EH-rBx"/>
                                 <exclude reference="6le-rn-MtA"/>
+                                <exclude reference="VPT-z8-RA8"/>
                                 <exclude reference="m2g-Ce-dAV"/>
                                 <exclude reference="M0L-xt-n2W"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="FWo-C2-Z2b"/>
+                                <exclude reference="kWu-O8-tbg"/>
                                 <exclude reference="XpD-iF-bcU"/>
                                 <exclude reference="agc-gE-1LX"/>
                                 <exclude reference="Ial-06-OcF"/>
                                 <exclude reference="eDc-r5-fIL"/>
-                                <exclude reference="831-YB-UQz"/>
-                                <exclude reference="Oxq-s6-yiV"/>
+                                <exclude reference="Lmv-dI-9mM"/>
+                                <exclude reference="yd6-HA-i93"/>
+                                <exclude reference="Usy-k0-oHX"/>
+                                <exclude reference="agg-S8-jaY"/>
                                 <exclude reference="GPC-mw-acT"/>
                                 <exclude reference="Vv4-nO-0zQ"/>
                                 <exclude reference="Yfr-hc-5Y1"/>
                                 <exclude reference="rRp-oM-jNO"/>
-                                <exclude reference="FWo-C2-Z2b"/>
-                                <exclude reference="kWu-O8-tbg"/>
-                                <exclude reference="Lmv-dI-9mM"/>
-                                <exclude reference="yd6-HA-i93"/>
+                                <exclude reference="831-YB-UQz"/>
+                                <exclude reference="Oxq-s6-yiV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1564,24 +1591,27 @@
                                 <include reference="YlZ-dd-yKa"/>
                                 <include reference="2b4-EH-rBx"/>
                                 <include reference="6le-rn-MtA"/>
+                                <include reference="VPT-z8-RA8"/>
                                 <include reference="m2g-Ce-dAV"/>
                                 <include reference="M0L-xt-n2W"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="FWo-C2-Z2b"/>
+                                <include reference="kWu-O8-tbg"/>
                                 <include reference="XpD-iF-bcU"/>
                                 <include reference="agc-gE-1LX"/>
                                 <include reference="Ial-06-OcF"/>
                                 <include reference="eDc-r5-fIL"/>
-                                <exclude reference="831-YB-UQz"/>
-                                <include reference="Oxq-s6-yiV"/>
+                                <include reference="Lmv-dI-9mM"/>
+                                <include reference="yd6-HA-i93"/>
+                                <include reference="Usy-k0-oHX"/>
+                                <include reference="agg-S8-jaY"/>
                                 <include reference="GPC-mw-acT"/>
                                 <exclude reference="Vv4-nO-0zQ"/>
                                 <include reference="Yfr-hc-5Y1"/>
                                 <include reference="rRp-oM-jNO"/>
-                                <include reference="FWo-C2-Z2b"/>
-                                <include reference="kWu-O8-tbg"/>
-                                <include reference="Lmv-dI-9mM"/>
-                                <include reference="yd6-HA-i93"/>
+                                <exclude reference="831-YB-UQz"/>
+                                <include reference="Oxq-s6-yiV"/>
                             </mask>
                         </variation>
                     </view>
@@ -1589,9 +1619,10 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cardMultipleChoice" destination="6le-rn-MtA" id="LYr-Mi-X7I"/>
+                        <outlet property="cardTypeAnswer" destination="VPT-z8-RA8" id="4tT-0Y-mK1"/>
                         <outlet property="nextBtn" destination="2b4-EH-rBx" id="F9y-sE-afA"/>
                         <outlet property="setTitleLb" destination="M0L-xt-n2W" id="1Yd-h6-UdV"/>
-                        <outlet property="wordCard" destination="6le-rn-MtA" id="ADZ-s4-uBL"/>
                         <outlet property="wordNoLb" destination="m2g-Ce-dAV" id="3D9-UI-F6z"/>
                     </connections>
                 </viewController>

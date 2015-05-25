@@ -1,22 +1,23 @@
 //
-//  CardTestView.h
+//  CardMultipleChoiceView.h
 //  academy
 //
-//  Created by Brian on 5/22/15.
+//  Created by Brian on 5/24/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+@class CardMultipleChoiceView;
 
-@protocol CardTestViewDelegate
+@protocol CardMultipleChoiceViewDelegate
 
--(void) choiceSelect:(NSString *) choice;
+-(void) CardMultipleChoiceView:(CardMultipleChoiceView*)cardView choiceSelect:(NSString *) choice;
 
 @end
 
-@interface CardTestView : UIView
+@interface CardMultipleChoiceView : UIView
 {
-    id <CardTestViewDelegate> delegate;
+    id <CardMultipleChoiceViewDelegate> delegate;
 }
 @property (retain) id delegate;
 @property (strong, nonatomic) IBOutlet UIView *view;

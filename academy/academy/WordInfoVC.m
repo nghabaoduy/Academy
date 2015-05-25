@@ -9,6 +9,7 @@
 #import "WordInfoVC.h"
 #import "WordTestVC.h"
 #import "CustomIOSAlertView.h"
+#import "AlertCartoonView.h"
 
 @interface WordInfoVC () <ModelDelegate>
 
@@ -189,11 +190,9 @@
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
     
     // Add some custom content to the alert view
-    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 200)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 270, 180)];
-    [imageView setImage:[UIImage imageNamed:@"demo"]];
-    [demoView addSubview:imageView];
-    [alertView setContainerView:demoView];
+    AlertCartoonView *cartoonView = [[AlertCartoonView alloc] init];
+    [cartoonView.messageLb setText:@"Bắt đầu học từ mới nào!"];
+    [alertView setContainerView:cartoonView];
 
     [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Okie", nil]];
     [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
@@ -210,11 +209,9 @@
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
     
     // Add some custom content to the alert view
-    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 200)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 270, 180)];
-    [imageView setImage:[UIImage imageNamed:@"demo"]];
-    [demoView addSubview:imageView];
-    [alertView setContainerView:demoView];
+    AlertCartoonView *cartoonView = [[AlertCartoonView alloc] init];
+    [cartoonView.messageLb setText:@"Làm bài test ngay nhé?"];
+    [alertView setContainerView:cartoonView];
     
     [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Okie",@"Chút nữa", nil]];
     [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
