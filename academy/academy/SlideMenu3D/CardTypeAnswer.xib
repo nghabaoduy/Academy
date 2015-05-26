@@ -11,6 +11,7 @@
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -18,7 +19,11 @@
             <connections>
                 <outlet property="answerTF" destination="x6h-jH-FFo" id="qQb-hp-Wax"/>
                 <outlet property="checkBtn" destination="7Hk-Gd-7oD" id="0sb-v8-D53"/>
+                <outlet property="checkCrossHolder" destination="aO7-u2-DeX" id="Stf-rl-0w4"/>
+                <outlet property="correctAnswerLb" destination="Eno-Pp-Pvd" id="yKw-CN-xpk"/>
+                <outlet property="questionImg" destination="4aq-ej-PqQ" id="I9i-rp-a0I"/>
                 <outlet property="questionTV" destination="58g-wn-G50" id="uWF-kP-HvU"/>
+                <outlet property="speakerBtn" destination="67o-NP-m5m" id="QkG-09-gya"/>
                 <outlet property="view" destination="EuP-Or-4yo" id="dyr-nS-JxU"/>
             </connections>
         </placeholder>
@@ -27,6 +32,9 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4aq-ej-PqQ">
+                    <rect key="frame" x="10" y="66" width="280" height="141"/>
+                </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58g-wn-G50">
                     <rect key="frame" x="10" y="60" width="280" height="155"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -35,7 +43,7 @@
                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Question:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUt-kt-PMQ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Question:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUt-kt-PMQ">
                     <rect key="frame" x="10" y="42" width="86" height="21"/>
                     <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,31 +84,78 @@
                         <action selector="checkAnswer:" destination="-1" eventType="touchUpInside" id="DBw-h7-nLG"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="aO7-u2-DeX">
+                    <rect key="frame" x="252" y="210" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="KSb-uZ-wbt"/>
+                        <constraint firstAttribute="width" constant="40" id="Mzt-hM-99H"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Responsibility" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eno-Pp-Pvd">
+                    <rect key="frame" x="8" y="261" width="282" height="21"/>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                    <color key="textColor" red="0.054901960780000002" green="0.63921568630000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67o-NP-m5m">
+                    <rect key="frame" x="90" y="78" width="120" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="GsD-GN-vJA"/>
+                        <constraint firstAttribute="height" constant="120" id="fan-gx-qIH"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="speaker-btn">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="speakerClicked:" destination="-1" eventType="touchUpInside" id="J4T-3d-x0c"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="x6h-jH-FFo" firstAttribute="top" secondItem="EuP-Or-4yo" secondAttribute="top" constant="240" id="1mm-XB-HTc"/>
+                <constraint firstAttribute="trailing" secondItem="aO7-u2-DeX" secondAttribute="trailing" constant="10" id="4VV-53-nRr"/>
+                <constraint firstItem="Eno-Pp-Pvd" firstAttribute="leading" secondItem="EuP-Or-4yo" secondAttribute="leading" constant="8" id="8xz-LS-hRh"/>
+                <constraint firstItem="aO7-u2-DeX" firstAttribute="top" secondItem="18A-O9-YUW" secondAttribute="bottom" constant="8" id="9sa-Es-DV5"/>
+                <constraint firstAttribute="trailing" secondItem="Eno-Pp-Pvd" secondAttribute="trailing" constant="8" id="9ua-YH-ffb"/>
                 <constraint firstItem="x6h-jH-FFo" firstAttribute="top" secondItem="58g-wn-G50" secondAttribute="bottom" constant="5" id="H3l-IC-nkZ"/>
+                <constraint firstItem="18A-O9-YUW" firstAttribute="top" secondItem="aO7-u2-DeX" secondAttribute="bottom" constant="2" id="L3Y-Fh-PAR"/>
                 <constraint firstAttribute="centerX" secondItem="18A-O9-YUW" secondAttribute="centerX" id="Mlf-27-rZ0"/>
                 <constraint firstItem="x6h-jH-FFo" firstAttribute="top" secondItem="EuP-Or-4yo" secondAttribute="top" constant="220" id="P4Z-va-1Sl"/>
                 <constraint firstItem="18A-O9-YUW" firstAttribute="top" secondItem="x6h-jH-FFo" secondAttribute="bottom" constant="2" id="P9K-sW-QrV"/>
                 <constraint firstAttribute="centerX" secondItem="x6h-jH-FFo" secondAttribute="centerX" id="P9N-qx-Smt"/>
+                <constraint firstItem="aO7-u2-DeX" firstAttribute="top" secondItem="4aq-ej-PqQ" secondAttribute="bottom" constant="3" id="R1Q-1c-cNH"/>
                 <constraint firstAttribute="bottom" secondItem="7Hk-Gd-7oD" secondAttribute="bottom" constant="40" id="SFy-Tq-LgL"/>
+                <constraint firstAttribute="trailing" secondItem="4aq-ej-PqQ" secondAttribute="trailing" constant="10" id="SQf-Pu-hNe"/>
                 <constraint firstItem="7Hk-Gd-7oD" firstAttribute="top" secondItem="18A-O9-YUW" secondAttribute="bottom" constant="36" id="T5F-4P-rpF"/>
+                <constraint firstItem="4aq-ej-PqQ" firstAttribute="leading" secondItem="EuP-Or-4yo" secondAttribute="leading" constant="10" id="WlH-Yl-oWY"/>
+                <constraint firstItem="4aq-ej-PqQ" firstAttribute="top" secondItem="GUt-kt-PMQ" secondAttribute="bottom" constant="3" id="bLb-EA-hOO"/>
+                <constraint firstAttribute="trailing" secondItem="aO7-u2-DeX" secondAttribute="trailing" constant="8" id="bzK-Pz-ltL"/>
+                <constraint firstItem="Eno-Pp-Pvd" firstAttribute="top" secondItem="18A-O9-YUW" secondAttribute="bottom" constant="8" id="fTT-in-ItO"/>
+                <constraint firstItem="GUt-kt-PMQ" firstAttribute="top" secondItem="EuP-Or-4yo" secondAttribute="top" constant="42" id="hCD-gH-7W3"/>
+                <constraint firstItem="67o-NP-m5m" firstAttribute="top" secondItem="EuP-Or-4yo" secondAttribute="top" constant="78" id="mFO-UG-Sqh"/>
+                <constraint firstAttribute="trailing" secondItem="67o-NP-m5m" secondAttribute="trailing" constant="90" id="q44-FE-ZWj"/>
                 <constraint firstAttribute="centerX" secondItem="7Hk-Gd-7oD" secondAttribute="centerX" id="vN9-iL-gPr"/>
+                <constraint firstItem="67o-NP-m5m" firstAttribute="leading" secondItem="EuP-Or-4yo" secondAttribute="leading" constant="90" id="x1b-nh-MIZ"/>
+                <constraint firstItem="GUt-kt-PMQ" firstAttribute="leading" secondItem="EuP-Or-4yo" secondAttribute="leading" constant="10" id="xFp-eQ-BMW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="bLb-EA-hOO"/>
                     <exclude reference="1mm-XB-HTc"/>
                     <exclude reference="H3l-IC-nkZ"/>
                     <exclude reference="T5F-4P-rpF"/>
+                    <exclude reference="4VV-53-nRr"/>
+                    <exclude reference="9sa-Es-DV5"/>
                 </mask>
             </variation>
         </view>
     </objects>
     <resources>
         <image name="medium-blue-btn.png" width="260" height="94"/>
+        <image name="speaker-btn" width="256" height="256"/>
+        <image name="tick.png" width="128" height="128"/>
     </resources>
 </document>

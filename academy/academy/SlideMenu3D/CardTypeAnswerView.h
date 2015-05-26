@@ -23,7 +23,10 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 
 -(void)displayQuestion:(NSString *) question;
+-(void)displayImgQuestion:(NSString *) imgLink;
+-(void) displayWordSpeaker:(NSString *) word;
 -(void)clearDisplay;
 -(void)dismissKeyboard;
+-(void) displayCorrectChoice:(NSString *) correctAnswer isCorrect:(BOOL) isCorrect;
 
 @end

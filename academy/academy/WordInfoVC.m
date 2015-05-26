@@ -10,6 +10,7 @@
 #import "WordTestVC.h"
 #import "CustomIOSAlertView.h"
 #import "AlertCartoonView.h"
+#import "SoundEngine.h"
 
 @interface WordInfoVC () <ModelDelegate>
 
@@ -48,7 +49,7 @@
     
     
     [self retrieveWords];
-    [self.loadingView startLoading];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     knownWords = [NSMutableArray new];
     [self resetView];
@@ -105,7 +106,6 @@
         return;
     }
     
-
     if (isFront) {
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];
     }
@@ -198,6 +198,10 @@
     [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
         [self displayCurWord];
         [alertView close];
+
+        Word *word = wordList[curWordNo];
+        [[SoundEngine getInstance] readWord:word.name];
+
     }];
     [alertView setUseMotionEffects:true];
     [alertView show];
@@ -252,7 +256,10 @@
 }
 -(void) endMove
 {
-    
+    if (!isWordCheckSession) {
+        Word *word = wordList[curWordNo];
+        [[SoundEngine getInstance] readWord:word.name];
+    }
 }
 -(BOOL) startFlip:(CardInfoView *)wordCard
 {
@@ -266,7 +273,10 @@
 }
 -(void) endFlip
 {
-    
+    if (!isWordCheckSession) {
+        Word *word = wordList[curWordNo];
+        [[SoundEngine getInstance] readWord:word.name];
+    }
 }
 -(void) cardIsTapped:(CardInfoView *)card
 {
@@ -278,14 +288,20 @@
 
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
     wordList = model.wordList;
     originalWordList = [wordList copy];
     [self displayCurWord];
-    [self.loadingView endLoading];
+    if (!isWordCheckSession) {
+        Word *word = wordList[curWordNo];
+        [[SoundEngine getInstance] readWord:word.name];
+    }
+    
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    [self.loadingView endLoading];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 @end

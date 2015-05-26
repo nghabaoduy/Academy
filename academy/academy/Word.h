@@ -17,6 +17,6 @@
 @property (nonatomic, retain) NSMutableArray * meaningList;
 
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample;
--(NSString *) getWordType: (NSString *) lang;
+-(NSString *) getWordType;
 
 @end

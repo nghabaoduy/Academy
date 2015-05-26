@@ -16,13 +16,23 @@ typedef NS_ENUM(NSUInteger, TestType) {
     TestMultipleChoiceUserLanguage,
     TestWordFillingSameLanguage,
     TestWordFillingUserLanguage,
+    TestWordFillingWordListen,
     TestTypeCount
 };
 
+@class TestMaker;
+
+@protocol TestMakerDelegate
+-(void) testMaker:(TestMaker *) _testMaker answerCorrectly:(Word*) _word;
+-(void) testMaker:(TestMaker *) _testMaker answerWrongly:(Word*) _word;
+@end
+
+
 @interface TestMaker : NSObject
-
-
-
+{
+    id <TestMakerDelegate> delegate;
+}
+@property (retain) id delegate;
 - (id) initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList;
 -(void) registerCardView:(UIView *) view;
 -(UIView *) createNextQuestion;

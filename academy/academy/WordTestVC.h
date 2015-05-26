@@ -15,7 +15,7 @@
 #import "LSet.h"
 #import "TestMaker.h"
 
-@interface WordTestVC : WordDisplayView <CardMultipleChoiceViewDelegate, CardTypeAnswerViewDelegate>
+@interface WordTestVC : WordDisplayView <CardMultipleChoiceViewDelegate, CardTypeAnswerViewDelegate, TestMakerDelegate>
 
 @property (strong, nonatomic) LSet *curSet;
 

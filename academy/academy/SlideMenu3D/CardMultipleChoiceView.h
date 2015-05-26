@@ -29,5 +29,11 @@
                              choice2:(NSString *) choice2
                              choice3:(NSString *) choice3
                              choice4:(NSString *) choice4;
+-(void)displayMultipleChoiceImgQuestion:(NSString *) imgLink
+                                choice1:(NSString *) choice1
+                                choice2:(NSString *) choice2
+                                choice3:(NSString *) choice3
+                                choice4:(NSString *) choice4;
 -(void)clearDisplay;
+-(void) displayCorrectChoice:(NSString *) correctAnswer wrongChoice:(NSString *) wrongAnswer;
 @end

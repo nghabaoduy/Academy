@@ -13,16 +13,29 @@
 @implementation SoundEngine
 {
     AVAudioPlayer *audioPlayerObj;
+    AVSpeechSynthesizer *synthesizer;
 }
 
 static SoundEngine * instance = nil;
 
 + (id)getInstance {
     if (instance == nil) {
-        instance = [SoundEngine new];
+        instance = [[SoundEngine alloc] init];
     }
     return instance;
 }
+
+- (id)init {
+    if (self = [super init]) {
+        synthesizer = [[AVSpeechSynthesizer alloc] init];
+        synthesizer.delegate = self;
+        for (AVSpeechSynthesisVoice *voice in [AVSpeechSynthesisVoice speechVoices]) {
+            NSLog(@"%@", voice.language);
+        }
+    }
+    return self;
+}
+
 
 - (void)playSound:(NSString*)fileNameWithExtension {
     
@@ -37,5 +50,20 @@ static SoundEngine * instance = nil;
     [audioPlayerObj play];
     
 }
-
+- (void) readWord:(NSString*)word
+{
+    if ([synthesizer isPaused]) {
+        [synthesizer continueSpeaking];
+    }else{
+        [self speakText:word];
+    }
+}
+- (void)speakText:(NSString*)text{
+    
+    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
+    utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-au"];
+    
+    [synthesizer speakUtterance:utterance];
+}
 @end

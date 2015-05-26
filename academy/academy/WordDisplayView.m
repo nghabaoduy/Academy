@@ -12,7 +12,10 @@
 
 @end
 
-@implementation WordDisplayView
+@implementation WordDisplayView{
+    UIView *curCard;
+    BOOL direction;
+}
 
 @synthesize isInAnimation = _isInAnimation;
 
@@ -20,11 +23,7 @@
     [super viewDidLoad];
     [self prefersStatusBarHidden];
     [self setNeedsStatusBarAppearanceUpdate];
-    if (self.loadingView != nil) {
-        return;
-    }
-    self.loadingView = [[LoadingUIView alloc] init];
-    [self.view addSubview:self.loadingView];
+
     
 }
 
@@ -33,30 +32,40 @@
 }
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    [self.view bringSubviewToFront:self.loadingView];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft
+{
+    return [self startMove:wordCard :moveLeft delay:0];
+}
+-(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft delay:(CGFloat) delayInSecond
 {
     if (_isInAnimation) {
         return NO;
     }
     _isInAnimation = YES;
-    int startX = wordCard.frame.origin.x;
+    curCard = wordCard;
+    direction = moveLeft;
+    [self performSelector:@selector(performMove) withObject:self afterDelay:delayInSecond];
+    return YES;
+}
+-(void) performMove
+{
+    int startX = curCard.frame.origin.x;
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
                      animations:^(void) {
-                         wordCard.frame = CGRectMake(self.view.frame.size.width* (moveLeft?-1:1), wordCard.frame.origin.y, wordCard.frame.size.width, wordCard.frame.size.height);
+                         curCard.frame = CGRectMake(self.view.frame.size.width* (direction?-1:1), curCard.frame.origin.y, curCard.frame.size.width, curCard.frame.size.height);
                      }
                      completion:^(BOOL b) {
                          if (b) {
-                             [self startEndMove:wordCard:moveLeft:startX];
+                             [self startEndMove:curCard:direction:startX];
                          }
                      }];
-    return YES;
+   
 }
 -(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
 {

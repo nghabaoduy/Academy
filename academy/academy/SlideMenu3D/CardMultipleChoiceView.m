@@ -16,6 +16,9 @@
     IBOutlet UIButton *choice3Btn;
     IBOutlet UIButton *choice4Btn;
     IBOutlet UILabel *questionLb;
+    IBOutlet UIImageView *questionImg;
+    
+    NSArray *btnList;
 }
 
 @synthesize delegate;
@@ -55,6 +58,7 @@
     for (UIView * view in objectList) {
         view.hidden = YES;
     }
+    [questionImg setHidden:YES];
 }
 //========== Display Info ============//
 
@@ -84,9 +88,49 @@
     [choice2Btn setTitle:choice2 forState:UIControlStateNormal];
     [choice3Btn setTitle:choice3 forState:UIControlStateNormal];
     [choice4Btn setTitle:choice4 forState:UIControlStateNormal];
+    
+    btnList = @[choice1Btn,choice2Btn,choice3Btn,choice4Btn];
+    for (UIButton * choice in btnList) {
+        [choice setBackgroundImage:[UIImage imageNamed:@"medium-blue-btn.png"] forState:UIControlStateNormal];
+    }
 }
-
+-(void)displayMultipleChoiceImgQuestion:(NSString *) imgLink
+                             choice1:(NSString *) choice1
+                             choice2:(NSString *) choice2
+                             choice3:(NSString *) choice3
+                             choice4:(NSString *) choice4
+{
+    [self clearDisplay];
+    NSArray *objectList = @[questionLb, questionTV, choice1Btn, choice2Btn, choice3Btn, choice4Btn];
+    for (UIView * view in objectList) {
+        view.hidden = NO;
+    }
+    [questionImg setHidden:NO];
+    [questionImg setImage:[UIImage imageNamed:imgLink]];
+    [choice1Btn setTitle:choice1 forState:UIControlStateNormal];
+    [choice2Btn setTitle:choice2 forState:UIControlStateNormal];
+    [choice3Btn setTitle:choice3 forState:UIControlStateNormal];
+    [choice4Btn setTitle:choice4 forState:UIControlStateNormal];
+    
+    btnList = @[choice1Btn,choice2Btn,choice3Btn,choice4Btn];
+    for (UIButton * choice in btnList) {
+        [choice setBackgroundImage:[UIImage imageNamed:@"medium-blue-btn.png"] forState:UIControlStateNormal];
+    }
+}
 - (IBAction)choiceClicked:(UIButton *)choiceBtn {
     [delegate CardMultipleChoiceView:self choiceSelect:choiceBtn.titleLabel.text];
 }
+
+-(void) displayCorrectChoice:(NSString *) correctAnswer wrongChoice:(NSString *) wrongAnswer
+{
+    for (UIButton * choice in btnList) {
+        if ([choice.titleLabel.text isEqual:correctAnswer]) {
+            [choice setBackgroundImage:[UIImage imageNamed:@"medium-green-btn.png"] forState:UIControlStateNormal];
+        }
+        if ([choice.titleLabel.text isEqual:wrongAnswer]) {
+            [choice setBackgroundImage:[UIImage imageNamed:@"medium-red-btn.png"] forState:UIControlStateNormal];
+        }
+    }
+}
+
 @end

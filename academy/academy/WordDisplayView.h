@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CardInfoView.h"
-#import "LoadingUIView.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface WordDisplayView : UIViewController
 
 @property BOOL isInAnimation;
-@property (strong, nonatomic) LoadingUIView *loadingView;
 
 -(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft;
+-(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft delay:(CGFloat) delayInSecond;
 -(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX;
 -(void) endMove;
 -(BOOL) startFlip:(UIView *)wordCard;

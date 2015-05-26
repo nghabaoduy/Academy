@@ -18,7 +18,7 @@
     int curWordNo;
     NSString *answer;
 }
-
+@synthesize delegate;
 - (id)initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList {
     self = [super init];
     if (self) {
@@ -41,6 +41,7 @@
     if ([view class] == [CardTypeAnswerView class]) {
         viewTypeList[TestWordFillingSameLanguage] = view;
         viewTypeList[TestWordFillingUserLanguage] = view;
+        viewTypeList[TestWordFillingWordListen] = view;
     }
     
 }
@@ -113,20 +114,24 @@
 {
     CardTypeAnswerView *card = [viewTypeList objectAtIndex:TestWordFillingSameLanguage];
     Word *word = wordList[curWordNo];
+    NSString * wordType = [word getWordType];
     NSString *question;
     
     switch (curTestType) {
         case TestWordFillingSameLanguage:
-            question  = [word getMeaning:@"English" bExample:NO];
+            question  = [NSString stringWithFormat:@"(%@) %@",wordType,[word getMeaning:@"English" bExample:NO]];
+            [card displayQuestion:question ];
             break;
         case TestWordFillingUserLanguage:
-            question  = [word getMeaning:@"Vietnamese" bExample:NO];
+            question  = [NSString stringWithFormat:@"(%@) %@",wordType,[word getMeaning:@"Vietnamese" bExample:NO]];
+            [card displayQuestion:question ];
+            break;
+        case TestWordFillingWordListen:
+            [card displayWordSpeaker:word.name];
             break;
         default:
             break;
     }
-
-    [card displayQuestion:question ];
     answer = word.name;
 }
 
@@ -157,7 +162,9 @@
         case TestWordFillingUserLanguage:
             [self displayFillingWordCard];
             break;
-            
+        case TestWordFillingWordListen:
+            [self displayFillingWordCard];
+            break;
         default:
             break;
     }
@@ -165,7 +172,50 @@
 }
 -(BOOL) checkAnswer:(NSString *) _answer
 {
-    return [[answer lowercaseString] isEqualToString:[_answer lowercaseString]];
+    BOOL isCorrect = [[answer lowercaseString] isEqualToString:[_answer lowercaseString]];
+    switch (curTestType) {
+        case TestMultipleChoiceSameLanguage:
+        {
+            CardMultipleChoiceView *card = [viewTypeList objectAtIndex:TestMultipleChoiceSameLanguage];
+            [card displayCorrectChoice:answer wrongChoice:[_answer isEqualToString:answer]?@"":_answer];
+            break;
+        }
+        case TestMultipleChoiceUserLanguage:
+        {
+            CardMultipleChoiceView *card = [viewTypeList objectAtIndex:TestMultipleChoiceUserLanguage];
+            [card displayCorrectChoice:answer wrongChoice:[_answer isEqualToString:answer]?@"":_answer];
+            break;
+        }
+        case TestWordFillingSameLanguage:
+        {
+            CardTypeAnswerView *card = [viewTypeList objectAtIndex:TestWordFillingSameLanguage];
+            [card displayCorrectChoice:answer isCorrect:isCorrect];
+            break;
+        }
+        case TestWordFillingUserLanguage:
+        {
+            CardTypeAnswerView *card = [viewTypeList objectAtIndex:TestWordFillingUserLanguage];
+            [card displayCorrectChoice:answer isCorrect:isCorrect];
+            break;
+        }
+        case TestWordFillingWordListen:
+        {
+            CardTypeAnswerView *card = [viewTypeList objectAtIndex:TestWordFillingUserLanguage];
+            [card displayCorrectChoice:answer isCorrect:isCorrect];
+            break;
+        }
+
+        default:
+            break;
+    }
+    Word *word = wordList[curWordNo];
+    if (isCorrect) {
+        [delegate testMaker:self answerCorrectly:word];
+    }
+    else{
+        [delegate testMaker:self answerWrongly:word];
+    }
+    return isCorrect;
 }
 -(BOOL) isTestFinished
 {

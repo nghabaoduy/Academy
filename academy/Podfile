@@ -5,6 +5,7 @@ target 'academy' do
 pod "AFNetworking", "~> 2.0"
 pod 'MSDynamicsDrawerViewController', '~> 1.5.1'
 pod 'CustomIOSAlertView', '~> 0.9.3'
+pod 'MBProgressHUD', '~> 0.5'
 
 end
 

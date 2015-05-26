@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVSpeechSynthesis.h>
 
-@interface SoundEngine : NSObject
+@interface SoundEngine : NSObject<AVSpeechSynthesizerDelegate>
 
 + (id)getInstance;
 - (void)playSound:(NSString*)fileNameWithExtension ;
+- (void) readWord:(NSString*)word;
 @end

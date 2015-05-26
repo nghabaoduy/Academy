@@ -24,6 +24,8 @@
     
     UIView *curCard;
     UIView *nextCard;
+    
+    BOOL hasAnswered;
 }
 
 @synthesize cardMultipleChoice = _cardMultipleChoice;
@@ -56,7 +58,7 @@
     
     if (!wordList) {
         [self retrieveWords];
-        [self.loadingView startLoading];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     else
     {
@@ -66,6 +68,7 @@
 
 -(void) startTest
 {
+    hasAnswered = NO;
     testMaker =[[TestMaker alloc] initWithSetAndWordList:curSet wordList:wordList];
     [self registerTestMakerCardView];
     curCard = [testMaker createNextQuestion];
@@ -129,30 +132,45 @@
         if ([self startMove:curCard:YES]) {
             nextCard = [testMaker createNextQuestion];
         }
-        if (nextCard != curCard) {
-            [self startMove:nextCard:YES];
-        }
     }
-}
--(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft
-{
-    return [super startMove:wordCard :moveLeft];
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (self.wordInfoView) {
+                [self.wordInfoView dismissViewControllerAnimated:YES completion:nil];
+                self.wordInfoView = nil;
+            }
+        }];
+    }
 }
 -(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
 {
     [testMaker displayNextQuestion];
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",[testMaker getCurQuesNo]+1,(unsigned long)wordList.count]];
-    [super startEndMove:wordCard :moveLeft :startX];
+    if (nextCard != curCard) {
+        [super startEndMove:nextCard :moveLeft :startX];
+    }
+    else
+    {
+        [super startEndMove:curCard :moveLeft :startX];
+    }
+    
     
     [self refreshCardHiddenState];
     
 }
 -(void) endMove
 {
-
+    hasAnswered = NO;
+    [nextBtn setEnabled:YES];
 }
 -(void) checkAnswer:(NSString *) answer
 {
+    [nextBtn setEnabled:NO];
+    if (hasAnswered) {
+        return;
+    }
+    hasAnswered = YES;
     if ([testMaker checkAnswer:answer]) {
         NSLog(@"Correct answer");
         [[SoundEngine getInstance] playSound:@"Correct.mp3"];
@@ -162,7 +180,7 @@
         NSLog(@"Wrong answer");
     }
     if (![testMaker isTestFinished]) {
-        if ([self startMove:curCard:YES]) {
+        if ([self startMove:curCard:YES delay:1.5]) {
             nextCard = [testMaker createNextQuestion];
         }
     }
@@ -183,16 +201,26 @@
     [self checkAnswer:answer];
 }
 
+#pragma mark - TestMaker Delegate
+-(void)testMaker:(TestMaker *)_testMaker answerCorrectly:(Word *)_word
+{
+    [correctWordList addObject:_word];
+}
+-(void)testMaker:(TestMaker *)_testMaker answerWrongly:(Word *)_word
+{
+    
+}
+
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     wordList = model.wordList;
     wordList = [[self shuffleArray:[wordList mutableCopy]] copy];
     [self startTest];
-    [self.loadingView endLoading];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    [self.loadingView endLoading];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 @end

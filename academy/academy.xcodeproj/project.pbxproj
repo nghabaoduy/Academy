@@ -11,6 +11,8 @@
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
+		AF0ED9C21B142C5400340BA5 /* medium-green-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF0ED9C11B142C5400340BA5 /* medium-green-btn.png */; };
+		AF0ED9C61B1473D300340BA5 /* speaker-btn in Resources */ = {isa = PBXBuildFile; fileRef = AF0ED9C51B1473D300340BA5 /* speaker-btn */; };
 		AF7869A41B10BDB9009BE37B /* MenuBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7869A31B10BDB9009BE37B /* MenuBtn.png */; };
 		AF7869A71B10CB9B009BE37B /* SoundEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7869A61B10CB9B009BE37B /* SoundEngine.m */; };
 		AF7869A91B10CBD3009BE37B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7869A81B10CBD3009BE37B /* AVFoundation.framework */; };
@@ -130,8 +132,6 @@
 		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
 		AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */; };
-		AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */; };
-		AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB76AF1B0A350A001489F1 /* LoadingView.xib */; };
 		AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */; };
 		AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */; };
 		C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */ = {isa = PBXBuildFile; fileRef = C34203D91B0A18650058FFE2 /* Meaning.m */; };
@@ -161,6 +161,8 @@
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
 		AF0241D31B0F18930019B3E2 /* WordDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDisplayView.h; sourceTree = "<group>"; };
 		AF0241D41B0F18930019B3E2 /* WordDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDisplayView.m; sourceTree = "<group>"; };
+		AF0ED9C11B142C5400340BA5 /* medium-green-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-green-btn.png"; path = "Graphics/medium-green-btn.png"; sourceTree = "<group>"; };
+		AF0ED9C51B1473D300340BA5 /* speaker-btn */ = {isa = PBXFileReference; lastKnownFileType = file; name = "speaker-btn"; path = "Graphics/speaker-btn"; sourceTree = "<group>"; };
 		AF7869A31B10BDB9009BE37B /* MenuBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuBtn.png; path = Graphics/MenuBtn.png; sourceTree = "<group>"; };
 		AF7869A51B10CB9B009BE37B /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEngine.h; sourceTree = "<group>"; };
 		AF7869A61B10CB9B009BE37B /* SoundEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEngine.m; sourceTree = "<group>"; };
@@ -306,9 +308,6 @@
 		AFEE4BB11B07BEC100A0FD73 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		AFEE4BB21B07BEC100A0FD73 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ViewBG.jpg; path = Graphics/ViewBG.jpg; sourceTree = "<group>"; };
-		AFFB76AC1B0A34EE001489F1 /* LoadingUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingUIView.h; sourceTree = "<group>"; };
-		AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingUIView.m; sourceTree = "<group>"; };
-		AFFB76AF1B0A350A001489F1 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		AFFB76B11B0A4D0B001489F1 /* PackageInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoVC.h; sourceTree = "<group>"; };
 		AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoVC.m; sourceTree = "<group>"; };
 		AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "long-blue-btn.png"; path = "Graphics/long-blue-btn.png"; sourceTree = "<group>"; };
@@ -528,9 +527,6 @@
 			children = (
 				AFE010801B053186005B4B4D /* PackageCell.h */,
 				AFE010811B053186005B4B4D /* PackageCell.m */,
-				AFFB76AC1B0A34EE001489F1 /* LoadingUIView.h */,
-				AFFB76AD1B0A34EE001489F1 /* LoadingUIView.m */,
-				AFFB76AF1B0A350A001489F1 /* LoadingView.xib */,
 				AFCB0D201B11D59700F5688F /* AlertCartoonView.h */,
 				AFCB0D211B11D59700F5688F /* AlertCartoonView.m */,
 				AFCB0D231B11D5B000F5688F /* CartoonView.xib */,
@@ -560,6 +556,7 @@
 			children = (
 				AFCB0D1D1B11D51F00F5688F /* AlertBG */,
 				AFC27B7C1B0EEC4A00225016 /* Icons */,
+				AF0ED9C51B1473D300340BA5 /* speaker-btn */,
 				AF7869AF1B10D48A009BE37B /* tick.png */,
 				AF7869A31B10BDB9009BE37B /* MenuBtn.png */,
 				AFE729881B0E0820005F0850 /* MenuCellBG.png */,
@@ -570,6 +567,7 @@
 				AFCFE5FD1B04E668006D9744 /* cross.png */,
 				AFFB76B61B0A5A47001489F1 /* long-blue-btn.png */,
 				AFCFE5F91B04E315006D9744 /* medium-blue-btn.png */,
+				AF0ED9C11B142C5400340BA5 /* medium-green-btn.png */,
 				AFCFE5FA1B04E315006D9744 /* medium-red-btn.png */,
 				AFE6DF001B04A83E003E30CA /* Card.png */,
 				AF7869B71B10F71B009BE37B /* demo.png */,
@@ -773,6 +771,7 @@
 				AFC27BE31B0EEC5700225016 /* mail.png in Resources */,
 				AFE729871B0E03E7005F0850 /* MenuHeaderBG.png in Resources */,
 				AFC27BD21B0EEC5700225016 /* count.png in Resources */,
+				AF0ED9C61B1473D300340BA5 /* speaker-btn in Resources */,
 				AFC27BC51B0EEC5700225016 /* box.png in Resources */,
 				AFC27C021B0EEC5700225016 /* wallet.png in Resources */,
 				AFC27BFC1B0EEC5700225016 /* tv.png in Resources */,
@@ -787,6 +786,7 @@
 				AFC27C011B0EEC5700225016 /* voicemail.png in Resources */,
 				AFC27BD31B0EEC5700225016 /* creditcard.png in Resources */,
 				AFC27C041B0EEC5700225016 /* worldglobe.png in Resources */,
+				AF0ED9C21B142C5400340BA5 /* medium-green-btn.png in Resources */,
 				AFC27BDA1B0EEC5700225016 /* flag.png in Resources */,
 				AFC27BFD1B0EEC5700225016 /* upload.png in Resources */,
 				AFC27BEC1B0EEC5700225016 /* photo.png in Resources */,
@@ -852,7 +852,6 @@
 				AFC27BF61B0EEC5700225016 /* speech.png in Resources */,
 				AFC27BDE1B0EEC5700225016 /* hotcup.png in Resources */,
 				AF7869B01B10D48A009BE37B /* tick.png in Resources */,
-				AFFB76B01B0A350A001489F1 /* LoadingView.xib in Resources */,
 				AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */,
 				AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */,
 				AFC27BCD1B0EEC5700225016 /* cloudupload.png in Resources */,
@@ -926,7 +925,6 @@
 				AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
 				C36DF4F21B088B3D00C225DA /* UserPackage.m in Sources */,
-				AFFB76AE1B0A34EE001489F1 /* LoadingUIView.m in Sources */,
 				AFC27C071B0EF01A00225016 /* MyUIEngine.m in Sources */,
 				AFE6DEF41B048FF1003E30CA /* WordInfoVC.m in Sources */,
 				AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */,
