@@ -49,6 +49,15 @@
     }
     return @"";
 }
+-(NSString *) getExample: (NSString *) lang
+{
+    for (Meaning * meaning in _meaningList) {
+        if ([meaning.language isEqualToString:lang] ) {
+            return meaning.example;
+        }
+    }
+    return @"";
+}
 -(NSString *) getWordType
 {
     return self.wordType;

@@ -29,16 +29,13 @@ static SoundEngine * instance = nil;
     if (self = [super init]) {
         synthesizer = [[AVSpeechSynthesizer alloc] init];
         synthesizer.delegate = self;
-        for (AVSpeechSynthesisVoice *voice in [AVSpeechSynthesisVoice speechVoices]) {
-            NSLog(@"%@", voice.language);
-        }
     }
     return self;
 }
 
 
-- (void)playSound:(NSString*)fileNameWithExtension {
-    
+- (void)playSound:(NSString*)fileNameWithExtension
+{
     if(!audioPlayerObj)
         audioPlayerObj = [AVAudioPlayer alloc];
     
@@ -48,7 +45,6 @@ static SoundEngine * instance = nil;
     // Create audio player object and initialize with URL to sound
     audioPlayerObj = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     [audioPlayerObj play];
-    
 }
 - (void) readWord:(NSString*)word
 {

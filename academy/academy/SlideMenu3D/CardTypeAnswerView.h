@@ -12,7 +12,8 @@
 @protocol CardTypeAnswerViewDelegate
 
 -(void) CardTypeAnswerView:(CardTypeAnswerView *) cardView checkAnswer:(NSString *) answer;
-
+-(void) CardTypeAnswerView:(CardTypeAnswerView *) cardView textfieldStartEditing:(UITextField *)textfield;
+-(void) CardTypeAnswerView:(CardTypeAnswerView *) cardView textfieldEndEditing:(UITextField *)textfield;
 @end
 
 @interface CardTypeAnswerView : UIView <UITextFieldDelegate>

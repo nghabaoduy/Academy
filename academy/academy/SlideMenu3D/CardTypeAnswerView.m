@@ -92,6 +92,14 @@
     [questionImg setHidden:YES];
     [speakerBtn setHidden:YES];
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [delegate CardTypeAnswerView:self textfieldStartEditing:textField];
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [delegate CardTypeAnswerView:self textfieldEndEditing:textField];
+}
 -(void)dismissKeyboard {
     [answerTF resignFirstResponder];
 }

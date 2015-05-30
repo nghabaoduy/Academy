@@ -14,17 +14,17 @@
 typedef NS_ENUM(NSUInteger, TestType) {
     TestMultipleChoiceSameLanguage,
     TestMultipleChoiceUserLanguage,
+    TestMultipleChoiceExampleBlank,
     TestWordFillingSameLanguage,
     TestWordFillingUserLanguage,
     TestWordFillingWordListen,
     TestTypeCount
 };
-
 @class TestMaker;
 
 @protocol TestMakerDelegate
--(void) testMaker:(TestMaker *) _testMaker answerCorrectly:(Word*) _word;
--(void) testMaker:(TestMaker *) _testMaker answerWrongly:(Word*) _word;
+-(void) testMaker:(TestMaker *) _testMaker answerCorrectly:(Word*) _word testFinished:(BOOL) finished;
+-(void) testMaker:(TestMaker *) _testMaker answerWrongly:(Word*) _word testFinished:(BOOL) finished;
 @end
 
 
@@ -34,10 +34,11 @@ typedef NS_ENUM(NSUInteger, TestType) {
 }
 @property (retain) id delegate;
 - (id) initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList;
+-(void) setAllowAnswerBack:(BOOL) allow;//notyet answer question;
 -(void) registerCardView:(UIView *) view;
 -(UIView *) createNextQuestion;
 -(void) displayNextQuestion;
 -(BOOL) checkAnswer:(NSString *) _answer;
--(BOOL) isTestFinished;
+-(BOOL) isLastQuestion;
 -(int) getCurQuesNo;
 @end

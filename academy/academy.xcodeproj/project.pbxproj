@@ -13,6 +13,8 @@
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
 		AF0ED9C21B142C5400340BA5 /* medium-green-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF0ED9C11B142C5400340BA5 /* medium-green-btn.png */; };
 		AF0ED9C61B1473D300340BA5 /* speaker-btn in Resources */ = {isa = PBXBuildFile; fileRef = AF0ED9C51B1473D300340BA5 /* speaker-btn */; };
+		AF0ED9C91B14C2D100340BA5 /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0ED9C81B14C2D100340BA5 /* TestVC.m */; };
+		AF243D321B183F0300FDF1D8 /* AlertTestModePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF243D311B183F0300FDF1D8 /* AlertTestModePickView.m */; };
 		AF7869A41B10BDB9009BE37B /* MenuBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7869A31B10BDB9009BE37B /* MenuBtn.png */; };
 		AF7869A71B10CB9B009BE37B /* SoundEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7869A61B10CB9B009BE37B /* SoundEngine.m */; };
 		AF7869A91B10CBD3009BE37B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7869A81B10CBD3009BE37B /* AVFoundation.framework */; };
@@ -106,6 +108,7 @@
 		AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD6363A1B038E1000ABDB3C /* Images.xcassets */; };
 		AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */; };
 		AFD6364A1B038E1000ABDB3C /* academyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD636491B038E1000ABDB3C /* academyTests.m */; };
+		AFDFE68E1B183D810065CBE6 /* TestModePickView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDFE68D1B183D810065CBE6 /* TestModePickView.xib */; };
 		AFE0107E1B051CE5005B4B4D /* PackageCellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE0107D1B051CE5005B4B4D /* PackageCellBG.png */; };
 		AFE010821B053186005B4B4D /* PackageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE010811B053186005B4B4D /* PackageCell.m */; };
 		AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE010831B053547005B4B4D /* PackCellInfoBG.png */; };
@@ -163,6 +166,10 @@
 		AF0241D41B0F18930019B3E2 /* WordDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDisplayView.m; sourceTree = "<group>"; };
 		AF0ED9C11B142C5400340BA5 /* medium-green-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "medium-green-btn.png"; path = "Graphics/medium-green-btn.png"; sourceTree = "<group>"; };
 		AF0ED9C51B1473D300340BA5 /* speaker-btn */ = {isa = PBXFileReference; lastKnownFileType = file; name = "speaker-btn"; path = "Graphics/speaker-btn"; sourceTree = "<group>"; };
+		AF0ED9C71B14C2D100340BA5 /* TestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
+		AF0ED9C81B14C2D100340BA5 /* TestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
+		AF243D301B183F0300FDF1D8 /* AlertTestModePickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTestModePickView.h; sourceTree = "<group>"; };
+		AF243D311B183F0300FDF1D8 /* AlertTestModePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTestModePickView.m; sourceTree = "<group>"; };
 		AF7869A31B10BDB9009BE37B /* MenuBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuBtn.png; path = Graphics/MenuBtn.png; sourceTree = "<group>"; };
 		AF7869A51B10CB9B009BE37B /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEngine.h; sourceTree = "<group>"; };
 		AF7869A61B10CB9B009BE37B /* SoundEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEngine.m; sourceTree = "<group>"; };
@@ -267,6 +274,7 @@
 		AFD636431B038E1000ABDB3C /* academyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = academyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD636481B038E1000ABDB3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFD636491B038E1000ABDB3C /* academyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = academyTests.m; sourceTree = "<group>"; };
+		AFDFE68D1B183D810065CBE6 /* TestModePickView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestModePickView.xib; sourceTree = "<group>"; };
 		AFE0107D1B051CE5005B4B4D /* PackageCellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PackageCellBG.png; path = Graphics/PackageCellBG.png; sourceTree = "<group>"; };
 		AFE010801B053186005B4B4D /* PackageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageCell.h; sourceTree = "<group>"; };
 		AFE010811B053186005B4B4D /* PackageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageCell.m; sourceTree = "<group>"; };
@@ -490,6 +498,8 @@
 				AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */,
 				AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */,
 				AFD6362A1B038E1000ABDB3C /* Supporting Files */,
+				AF0ED9C71B14C2D100340BA5 /* TestVC.h */,
+				AF0ED9C81B14C2D100340BA5 /* TestVC.m */,
 			);
 			path = academy;
 			sourceTree = "<group>";
@@ -530,6 +540,9 @@
 				AFCB0D201B11D59700F5688F /* AlertCartoonView.h */,
 				AFCB0D211B11D59700F5688F /* AlertCartoonView.m */,
 				AFCB0D231B11D5B000F5688F /* CartoonView.xib */,
+				AF243D301B183F0300FDF1D8 /* AlertTestModePickView.h */,
+				AF243D311B183F0300FDF1D8 /* AlertTestModePickView.m */,
+				AFDFE68D1B183D810065CBE6 /* TestModePickView.xib */,
 			);
 			name = "Misc Object";
 			sourceTree = "<group>";
@@ -782,6 +795,7 @@
 				AFC27BDB1B0EEC5700225016 /* football.png in Resources */,
 				AFC27BF41B0EEC5700225016 /* setting.png in Resources */,
 				AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */,
+				AFDFE68E1B183D810065CBE6 /* TestModePickView.xib in Resources */,
 				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
 				AFC27C011B0EEC5700225016 /* voicemail.png in Resources */,
 				AFC27BD31B0EEC5700225016 /* creditcard.png in Resources */,
@@ -914,6 +928,7 @@
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFE6DEEE1B03D365003E30CA /* UserShelfNavVC.m in Sources */,
 				AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */,
+				AF0ED9C91B14C2D100340BA5 /* TestVC.m in Sources */,
 				AFCB0D351B11F8F800F5688F /* CardTypeAnswerView.m in Sources */,
 				AFE010821B053186005B4B4D /* PackageCell.m in Sources */,
 				AFCB0D301B11ED3F00F5688F /* CardMultipleChoiceView.m in Sources */,
@@ -938,6 +953,7 @@
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
 				C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */,
+				AF243D321B183F0300FDF1D8 /* AlertTestModePickView.m in Sources */,
 				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,
 				AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */,
 				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,

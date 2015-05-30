@@ -69,9 +69,7 @@
         [string addAttribute:NSForegroundColorAttributeName value:color range:subRange];
         [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"GothamRounded-Bold" size:14] range:subRange];
     }];
-    
-    
-    
+
     [tv setAttributedText:string];
 }
 -(void) clearDisplay

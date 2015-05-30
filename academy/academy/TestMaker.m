@@ -17,6 +17,10 @@
     NSMutableArray *viewTypeList;
     int curWordNo;
     NSString *answer;
+    BOOL allowAnswerBack;
+    BOOL hasFinishedRound1;
+    
+    NSMutableArray *answeredQuestion;
 }
 @synthesize delegate;
 - (id)initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList {
@@ -27,16 +31,22 @@
         viewTypeList = [[NSMutableArray alloc] initWithCapacity:TestTypeCount];
         curWordNo = -1;
         curTestType = arc4random_uniform(TestTypeCount);
+        answeredQuestion = [NSMutableArray new];
+        hasFinishedRound1 = NO;
     }
     return self;
 }
-
+-(void) setAllowAnswerBack:(BOOL) allow
+{
+    allowAnswerBack = allow;
+}
 -(void) registerCardView:(UIView *) view
 {
 
     if ([view class] == [CardMultipleChoiceView class]) {
         viewTypeList[TestMultipleChoiceSameLanguage] = view;
         viewTypeList[TestMultipleChoiceUserLanguage] = view;
+        viewTypeList[TestMultipleChoiceExampleBlank] = view;
     }
     if ([view class] == [CardTypeAnswerView class]) {
         viewTypeList[TestWordFillingSameLanguage] = view;
@@ -74,6 +84,10 @@
             break;
         case TestMultipleChoiceUserLanguage:
             question  = [word getMeaning:@"Vietnamese" bExample:NO];
+            break;
+        case TestMultipleChoiceExampleBlank:
+            question = [word getExample:@"English"];
+            question = [question stringByReplacingOccurrencesOfString:word.name withString:@"__________"];
             break;
         default:
             break;
@@ -138,14 +152,74 @@
 
 -(UIView *) createNextQuestion
 {
-    curWordNo++;
+    curWordNo = [self getNextQuestionIndex];
+    NSLog(@"curWordNo = %i",curWordNo);
     int randType = curTestType;
-    while(randType == curTestType && TestTypeCount > 1)
+    while(randType == curTestType || ![self questionTypeIsValid:randType])
     {
         randType = arc4random_uniform(TestTypeCount);
     }
     curTestType = randType;
     return viewTypeList[curTestType];
+}
+-(BOOL) questionTypeIsValid: (TestType) testT
+{
+    if (testT == TestTypeCount) {
+        return NO;
+    }
+    int minCharacters = 10;
+    int minWordsInSentence = 6;
+    Word *word = wordList[curWordNo];
+    switch (testT) {
+        case TestMultipleChoiceExampleBlank:
+        {
+            NSString *example = [word getExample:@"English"];
+            if (example.length < minCharacters) {
+                return NO;
+            }
+            if ([example componentsSeparatedByString:@" "].count > minWordsInSentence) {
+                return NO;
+            }
+        }
+        break;
+            
+        default:
+            break;
+    }
+
+    return YES;
+}
+-(int) getNextQuestionIndex
+{
+    if ([self isLastQuestion]) {
+        return -1;
+    }
+    if (!allowAnswerBack) {
+        return curWordNo+1;
+    }
+    else
+    {
+        if (curWordNo >= (int)(wordList.count -1) || hasFinishedRound1) {
+            hasFinishedRound1 = YES;
+            for (int i = curWordNo; i< wordList.count; i++) {
+                Word *word = wordList[i];
+                if (![answeredQuestion containsObject:word] && word != wordList[curWordNo]) {
+                    return i;
+                }
+            }
+            for (int i = 0; i< curWordNo; i++) {
+                Word *word = wordList[i];
+                if (![answeredQuestion containsObject:word] && word != wordList[curWordNo]) {
+                    return i;
+                }
+            }
+        }
+        else
+        {
+            return curWordNo+1;
+        }
+    }
+    return curWordNo;
 }
 -(void) displayNextQuestion
 {
@@ -154,6 +228,9 @@
             [self displayMultipleChoiceCard];
             break;
         case TestMultipleChoiceUserLanguage:
+            [self displayMultipleChoiceCard];
+            break;
+        case TestMultipleChoiceExampleBlank:
             [self displayMultipleChoiceCard];
             break;
         case TestWordFillingSameLanguage:
@@ -172,6 +249,7 @@
 }
 -(BOOL) checkAnswer:(NSString *) _answer
 {
+    [answeredQuestion addObject:wordList[curWordNo]];
     BOOL isCorrect = [[answer lowercaseString] isEqualToString:[_answer lowercaseString]];
     switch (curTestType) {
         case TestMultipleChoiceSameLanguage:
@@ -183,6 +261,12 @@
         case TestMultipleChoiceUserLanguage:
         {
             CardMultipleChoiceView *card = [viewTypeList objectAtIndex:TestMultipleChoiceUserLanguage];
+            [card displayCorrectChoice:answer wrongChoice:[_answer isEqualToString:answer]?@"":_answer];
+            break;
+        }
+        case TestMultipleChoiceExampleBlank:
+        {
+            CardMultipleChoiceView *card = [viewTypeList objectAtIndex:TestMultipleChoiceExampleBlank];
             [card displayCorrectChoice:answer wrongChoice:[_answer isEqualToString:answer]?@"":_answer];
             break;
         }
@@ -210,16 +294,21 @@
     }
     Word *word = wordList[curWordNo];
     if (isCorrect) {
-        [delegate testMaker:self answerCorrectly:word];
+        [delegate testMaker:self answerCorrectly:word testFinished:[self isLastQuestion]];
     }
     else{
-        [delegate testMaker:self answerWrongly:word];
+        [delegate testMaker:self answerWrongly:word testFinished:[self isLastQuestion]];
     }
+    
     return isCorrect;
 }
--(BOOL) isTestFinished
+-(BOOL) isLastQuestion
 {
-    return curWordNo >= wordList.count -1;
+    if (!allowAnswerBack) {
+        return (curWordNo >= (int)(wordList.count -1));
+    }
+    return answeredQuestion.count >= wordList.count;
+    
 }
 -(int) getCurQuesNo
 {

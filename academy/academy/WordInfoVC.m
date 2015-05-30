@@ -115,7 +115,7 @@
     }
     
     prevBtn.hidden = curWordNo == 0;
-    nextBtn.hidden = curWordNo >= wordList.count -1;
+    
     
 }
 // PREV - NEXT
@@ -125,6 +125,10 @@
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
         }
+    }
+    else
+    {
+        [self alertGoToTest];
     }
 }
 - (IBAction)prev:(id)sender
@@ -225,7 +229,7 @@
         else
         {
             if (knownWords.count >= wordList.count) {
-                [self dismissViewControllerAnimated:YES completion:nil];
+                //[self dismissViewControllerAnimated:YES completion:nil];
             }
         }
         [alertView close];
@@ -247,6 +251,10 @@
 
 -(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft
 {
+    [nextBtn setEnabled:NO];
+    [prevBtn setEnabled:NO];
+    [knowBtn setEnabled:NO];
+    [dunnoBtn setEnabled:NO];
     return [super startMove:wordCard :moveLeft];
 }
 -(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft :(int)startX
@@ -256,13 +264,30 @@
 }
 -(void) endMove
 {
+    [nextBtn setEnabled:YES];
+    [prevBtn setEnabled:YES];
+    [knowBtn setEnabled:YES];
+    [dunnoBtn setEnabled:YES];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name];
+
+        if (curWordNo>= wordList.count -1) {
+            [nextBtn setBackgroundImage:[UIImage imageNamed:@"medium-green-btn"] forState:UIControlStateNormal];
+            [nextBtn setTitle:@"Test" forState:UIControlStateNormal];
+        }
+        if (curWordNo == wordList.count -2) {
+            [nextBtn setBackgroundImage:[UIImage imageNamed:@"medium-blue-btn"] forState:UIControlStateNormal];
+            [nextBtn setTitle:@"Next" forState:UIControlStateNormal];
+        }
     }
 }
 -(BOOL) startFlip:(CardInfoView *)wordCard
 {
+    [nextBtn setEnabled:NO];
+    [prevBtn setEnabled:NO];
+    [knowBtn setEnabled:NO];
+    [dunnoBtn setEnabled:NO];
     return [super startFlip:wordCard];
 }
 -(void) startEndFlip:(CardInfoView *)wordCard
@@ -273,6 +298,10 @@
 }
 -(void) endFlip
 {
+    [nextBtn setEnabled:YES];
+    [prevBtn setEnabled:YES];
+    [knowBtn setEnabled:YES];
+    [dunnoBtn setEnabled:YES];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name];

@@ -14,8 +14,9 @@
 #import "Word.h"
 #import "LSet.h"
 #import "TestMaker.h"
+#import "AlertTestModePickView.h"
 
-@interface WordTestVC : WordDisplayView <CardMultipleChoiceViewDelegate, CardTypeAnswerViewDelegate, TestMakerDelegate>
+@interface WordTestVC : WordDisplayView <CardMultipleChoiceViewDelegate, CardTypeAnswerViewDelegate, TestMakerDelegate, TestPickDelegate>
 
 @property (strong, nonatomic) LSet *curSet;
 

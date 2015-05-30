@@ -7,7 +7,9 @@
 //
 
 #import "WordTestVC.h"
-
+#import "DDHTimerControl.h"
+#import "CustomIOSAlertView.h"
+#import "AlertCartoonView.h"
 #import "SoundEngine.h"
 
 @interface WordTestVC () <ModelDelegate>
@@ -26,6 +28,11 @@
     UIView *nextCard;
     
     BOOL hasAnswered;
+    DDHTimerControl *_timerControl3;
+    NSDate *endDate;
+    
+    BOOL isTestFinished;
+    BOOL isTFUp;
 }
 
 @synthesize cardMultipleChoice = _cardMultipleChoice;
@@ -44,7 +51,6 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     }
     
-    
     _cardMultipleChoice.delegate = self;
     _cardMultipleChoice.view.bounds = _cardMultipleChoice.bounds;
     [_cardMultipleChoice clearDisplay];
@@ -52,7 +58,6 @@
     _cardTypeAnswer.delegate = self;
     _cardTypeAnswer.view.bounds = _cardTypeAnswer.bounds;
     [_cardTypeAnswer clearDisplay];
-    
 
     [self.setTitleLb setText:self.curSet.name];
     
@@ -62,20 +67,102 @@
     }
     else
     {
-        [self startTest];
+        [self displayAlertTestPick];
     }
 }
+- (void) addTimer
+{
+    if (_timerControl3 != nil) {
+        endDate = [NSDate dateWithTimeIntervalSinceNow:99];
+        return;
+    }
+    _timerControl3 = [DDHTimerControl timerControlWithType:DDHTimerTypeSolid];
+    _timerControl3.translatesAutoresizingMaskIntoConstraints = NO;
+    _timerControl3.color = [UIColor orangeColor];
+    _timerControl3.highlightColor = [UIColor redColor];
+    _timerControl3.maxValue = wordList.count * 6;
+    _timerControl3.titleLabel.text = @"sec";
+    _timerControl3.userInteractionEnabled = NO;
+    _timerControl3.frame = CGRectMake(self.view.frame.size.width - 70 - 20, 30, 70, 70);
+    [self.view addSubview:_timerControl3];
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeTimer:) userInfo:nil repeats:YES];
+    endDate = [NSDate dateWithTimeIntervalSinceNow:wordList.count * 6];
+}
+- (void)changeTimer:(NSTimer*)timer {
+    if (isTestFinished) {
+        return;
+    }
+    NSTimeInterval timeInterval = [endDate timeIntervalSinceNow];
+    _timerControl3.minutesOrSeconds = ((NSInteger)timeInterval);
+    if (timeInterval <=-1) {
+        [self finishTest];
+    }
+    
+}
+-(void) displayAlertTestPick
+{
+    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
+    
+    // Add some custom content to the alert view
+    AlertTestModePickView *modePickView = [[AlertTestModePickView alloc] init];
+    modePickView.alertView = alertView;
+    modePickView.delegate = self;
+    [alertView setContainerView:modePickView];
+    
+    [alertView setButtonTitles:[NSMutableArray arrayWithObjects: nil]];
+    [alertView setUseMotionEffects:true];
+    [alertView show];
 
+}
 -(void) startTest
 {
+    isTestFinished = NO;
     hasAnswered = NO;
     testMaker =[[TestMaker alloc] initWithSetAndWordList:curSet wordList:wordList];
+    testMaker.delegate = self;
+    
     [self registerTestMakerCardView];
     curCard = [testMaker createNextQuestion];
     [testMaker displayNextQuestion];
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",[testMaker getCurQuesNo]+1,(unsigned long)wordList.count]];
     correctWordList = [NSMutableArray new];
     [self refreshCardHiddenState];
+    [nextBtn setEnabled:YES];
+}
+-(void) finishTest
+{
+    isTestFinished = YES;
+    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
+    
+    // Add some custom content to the alert view
+    AlertCartoonView *cartoonView = [[AlertCartoonView alloc] init];
+    [cartoonView.messageLb setText:[NSString stringWithFormat:@"Chúc mừng! Bạn trả lời đúng %lu/%lu câu hỏi.",(unsigned long)correctWordList.count, (unsigned long)wordList.count]];
+    [alertView setContainerView:cartoonView];
+    
+    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Thoát", @"Làm lại", nil]];
+    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
+        switch (buttonIndex) {
+            case 0:
+            {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.wordInfoView) {
+                        [self.wordInfoView dismissViewControllerAnimated:YES completion:nil];
+                        self.wordInfoView = nil;
+                    }
+                }];
+            }
+            break;
+            case 1:
+                [self displayAlertTestPick];
+            default:
+                break;
+        }
+        [alertView close];
+        
+    }];
+    [alertView setUseMotionEffects:true];
+    [alertView show];
+    
 }
 -(void) registerTestMakerCardView
 {
@@ -127,7 +214,7 @@
 }
 
 - (IBAction)next:(id)sender {
-    if (![testMaker isTestFinished]) {
+    if (![testMaker isLastQuestion]) {
         NSLog(@"curcard = %@",curCard);
         if ([self startMove:curCard:YES]) {
             nextCard = [testMaker createNextQuestion];
@@ -135,12 +222,7 @@
     }
     else
     {
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (self.wordInfoView) {
-                [self.wordInfoView dismissViewControllerAnimated:YES completion:nil];
-                self.wordInfoView = nil;
-            }
-        }];
+        [self finishTest];
     }
 }
 -(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
@@ -179,14 +261,29 @@
     {
         NSLog(@"Wrong answer");
     }
-    if (![testMaker isTestFinished]) {
+    if (![testMaker isLastQuestion]) {
         if ([self startMove:curCard:YES delay:1.5]) {
             nextCard = [testMaker createNextQuestion];
         }
     }
-    else
-    {
-        [nextBtn setTitle:@"Finish" forState:UIControlStateNormal];
+}
+#pragma mark - AlertTestModePick Delegate
+-(void)AlertTestModePickView:(AlertTestModePickView *)modePickView modePicked:(TestPickType)testPickType
+{
+    [modePickView.alertView close];
+    switch (testPickType) {
+        case TestPickNormal:
+            [self startTest];
+            break;
+        case TestPickTimer:
+        {
+            [self startTest];
+            [testMaker setAllowAnswerBack:YES];
+            [self addTimer];
+        }
+            break;
+        default:
+            break;
     }
 }
 
@@ -195,27 +292,63 @@
 {
     [self checkAnswer:choice];
 }
-#pragma mark - CardMultipleChoiceView Delegate
+#pragma mark - CardTypeAnswerView Delegate
 -(void)CardTypeAnswerView:(CardTypeAnswerView *)cardView checkAnswer:(NSString *)answer
 {
     [self checkAnswer:answer];
 }
-
+-(void)CardTypeAnswerView:(CardTypeAnswerView *)cardView textfieldStartEditing:(UITextField *)textfield
+{
+    int tfBottomY = cardView.frame.origin.y + textfield.frame.origin.y + textfield.frame.size.height;
+    [self animateTextField:tfBottomY up:YES];
+}
+-(void)CardTypeAnswerView:(CardTypeAnswerView *)cardView textfieldEndEditing:(UITextField *)textfield
+{
+    int tfBottomY = cardView.frame.origin.y + textfield.frame.origin.y + textfield.frame.size.height;
+    [self animateTextField:tfBottomY up:NO];
+}
+- (void) animateTextField: (int)tfBottomY up: (BOOL) up
+{
+    if (isTFUp == up) {
+        return;
+    }
+    isTFUp = up;
+    float keyboardHeight = 260.0f;
+    
+    NSLog(@"tfBottomY = %i vs %f",tfBottomY,self.view.frame.size.height - keyboardHeight);
+    
+    if ( tfBottomY > self.view.frame.size.height - keyboardHeight) {
+        const int movementDistance = 100; // tweak as needed
+        const float movementDuration = 0.3f; // tweak as needed
+        
+        int movement = (up ? -movementDistance : movementDistance);
+        
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration: movementDuration];
+        if (up)
+            self.view.frame = CGRectMake(0, movement, self.view.frame.size.width, self.view.frame.size.height);
+        else
+            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
+        [UIView commitAnimations];
+    }
+}
 #pragma mark - TestMaker Delegate
--(void)testMaker:(TestMaker *)_testMaker answerCorrectly:(Word *)_word
+-(void)testMaker:(TestMaker *)_testMaker answerCorrectly:(Word *)_word testFinished:(BOOL) finished
 {
     [correctWordList addObject:_word];
+    finished?[self finishTest]:nil;
 }
--(void)testMaker:(TestMaker *)_testMaker answerWrongly:(Word *)_word
+-(void)testMaker:(TestMaker *)_testMaker answerWrongly:(Word *)_word testFinished:(BOOL) finished
 {
-    
+    finished?[self finishTest]:nil;
 }
-
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     wordList = model.wordList;
     wordList = [[self shuffleArray:[wordList mutableCopy]] copy];
-    [self startTest];
+    [self displayAlertTestPick];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 

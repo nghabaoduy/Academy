@@ -115,13 +115,13 @@ static SideMenuVC * instance = nil;
     self.paneViewControllerClasses = @{
                                        @(ControllerLogin) : [LoginVC class],
                                        @(ControllerUserShelf) : [UserShelfVC class],
-                                        @(ControllerShop) : [ShopVC Class]
+                                       @(ControllerShop) : [ShopVC Class]
                                        };
 #else
     self.paneViewControllerIdentifiers = @{
                                            @(ControllerLogin) : @"loginView",
                                            @(ControllerUserShelf) : @"userShelfView",
-                                            @(ControllerShop) : @"shopView"
+                                           @(ControllerShop) : @"shopView"
                                            };
 #endif
     self.sectionTitles = @{
