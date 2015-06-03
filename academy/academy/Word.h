@@ -19,4 +19,5 @@
 -(NSString *) getWordType;
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample;
 -(NSString *) getExample: (NSString *) lang;
+-(NSDictionary *) getWordSubDict: (NSString *) lang;
 @end

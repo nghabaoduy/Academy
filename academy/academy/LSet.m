@@ -31,6 +31,8 @@
         Word * newWord = [[Word alloc] initWithDict:wordDict];
         [wordList addObject:newWord];
     }
+    
+    self.grade = 0;
 }
 
 

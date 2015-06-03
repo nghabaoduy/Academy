@@ -140,12 +140,12 @@ static SideMenuVC * instance = nil;
                           @"config.png"
                           ];
     self.menuTitleList = @[
-                           @"Shelf",
-                           @"Store",
-                           @"Top Up",
-                           @"Privacy",
-                           @"Setting",
-                           @"Log out"
+                           @"Tủ Sách",
+                           @"Cửa Hàng",
+                           @"Nạp Thẻ",
+                           @"Cá Nhân",
+                           @"Điều Chỉnh",
+                           @"Thoát"
                            ];
     
     self.menuHeaderTitle = @[@"Menu"];
@@ -159,7 +159,8 @@ static SideMenuVC * instance = nil;
             break;
         case 1:
             return ControllerShop;
-            
+        case 5:
+            return ControllerLogin;
         default:
             break;
     }

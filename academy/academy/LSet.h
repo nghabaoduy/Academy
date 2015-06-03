@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AModel.h"
-
+#import "SetScore.h"
 @interface LSet : AModel
 
 @property (nonatomic, retain) NSString * name;
@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString * package_id;
 
 @property (nonatomic, retain) NSMutableArray * wordList;
-
+@property (nonatomic, retain) NSNumber * grade;
+@property (nonatomic, retain) SetScore *score;
 
 @end

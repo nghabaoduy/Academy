@@ -9,7 +9,7 @@
 #import "WordInfoVC.h"
 #import "WordTestVC.h"
 #import "CustomIOSAlertView.h"
-#import "AlertCartoonView.h"
+#import "AlertMascotView.h"
 #import "SoundEngine.h"
 
 @interface WordInfoVC () <ModelDelegate>
@@ -32,6 +32,7 @@
 
 @synthesize wordCard = _wordCard;
 @synthesize wordNoLb = _wordNoLb;
+@synthesize setTitleLb = _setTitleLb;
 @synthesize curSet,isWordCheckSession;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,6 +47,8 @@
     
     _wordCard.delegate = self;
     _wordCard.view.bounds = _wordCard.bounds;
+    _wordNoLb.text = @"";
+    _setTitleLb.text = @"";
     
     
     [self retrieveWords];
@@ -107,7 +110,7 @@
     }
     
     if (isFront) {
-        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES]];
+        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES] wordSubDict:[word getWordSubDict:@"English"]];
     }
     else
     {
@@ -194,7 +197,7 @@
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
     
     // Add some custom content to the alert view
-    AlertCartoonView *cartoonView = [[AlertCartoonView alloc] init];
+    AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
     [cartoonView.messageLb setText:@"Bắt đầu học từ mới nào!"];
     [alertView setContainerView:cartoonView];
 
@@ -217,7 +220,7 @@
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
     
     // Add some custom content to the alert view
-    AlertCartoonView *cartoonView = [[AlertCartoonView alloc] init];
+    AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
     [cartoonView.messageLb setText:@"Làm bài test ngay nhé?"];
     [alertView setContainerView:cartoonView];
     
@@ -310,7 +313,7 @@
 -(void) cardIsTapped:(CardInfoView *)card
 {
     if (!isWordCheckSession) {
-        NSLog(@"cardIsTapped");
+        //NSLog(@"cardIsTapped");
         [self startFlip:_wordCard];
     }
 }

@@ -20,8 +20,27 @@ PODS:
   - AFNetworking/UIKit (2.5.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Bolts (1.1.5):
+    - Bolts/AppLinks (= 1.1.5)
+    - Bolts/Tasks (= 1.1.5)
+  - Bolts/AppLinks (1.1.5):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.1.5)
   - CustomIOSAlertView (0.9.3)
   - DDHTimerControl (1.0.0)
+  - FBSDKCoreKit (4.2.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.2.0)
+    - FBSDKCoreKit/no-arc (= 4.2.0)
+  - FBSDKCoreKit/arc (4.2.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.2.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.2.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.2.0):
+    - FBSDKCoreKit
   - MBProgressHUD (0.9.1)
   - MSDynamicsDrawerViewController (1.5.1)
 
@@ -29,13 +48,20 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - CustomIOSAlertView (~> 0.9.3)
   - DDHTimerControl
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - MBProgressHUD (~> 0.5)
   - MSDynamicsDrawerViewController (~> 1.5.1)
 
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
   CustomIOSAlertView: 94d2401e34fcfb0ac0134679d6947f5e251b0446
   DDHTimerControl: 5dfe11a9d3cfe70ebe054437ad4ef7e89a99fe2a
+  FBSDKCoreKit: 84b3616a361801f190e43a9909caead7bb6087c7
+  FBSDKLoginKit: 57e37106af12c9e264e473dcb75d7decdbb07fe4
+  FBSDKShareKit: 931746fdf8fb95efd6e12310ec14b2b3295e2aec
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MSDynamicsDrawerViewController: 2874df90f5e9453dc7d4e32f8038b50615d4baa7
 

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Package.h"
-
-@interface SetSelectVC : UITableViewController
+#import "SetRow1Displayer.h"
+#import "SetRow2Displayer.h"
+@interface SetSelectVC : UITableViewController <SetDisplayerDelegate>
 
 @property (nonatomic, retain) Package * curPack;
 

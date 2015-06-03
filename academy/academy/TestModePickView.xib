@@ -4,7 +4,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
+            <string>GothamRounded-Bold</string>
+            <string>GothamRounded-Bold</string>
+        </mutableArray>
         <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
+            <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
         </mutableArray>
@@ -12,64 +18,134 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertTestModePickView">
             <connections>
-                <outlet property="mode1Btn" destination="e8J-Nm-9Fd" id="lFQ-rA-YCp"/>
-                <outlet property="mode2Btn" destination="1dx-wL-Wau" id="uZ4-Jr-noc"/>
+                <outlet property="testInfoLb" destination="3cR-3n-ahh" id="hmx-3W-h7S"/>
                 <outlet property="view" destination="iN0-l3-epB" id="cc3-ao-Lrg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="290" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="290" height="210"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8J-Nm-9Fd">
-                    <rect key="frame" x="8" y="8" width="274" height="95"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbQ-n4-fmA" customClass="UIControl">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="105"/>
+                    <subviews>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCV-1U-wS8">
+                            <rect key="frame" x="12" y="17" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="DXh-8M-Zbv"/>
+                                <constraint firstAttribute="height" constant="80" id="VQp-aC-VmO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
+                            <state key="normal" backgroundImage="sticker_pencil.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tập luyện" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKH-z3-fLh">
+                            <rect key="frame" x="107" y="25" width="121" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="5S4-b5-RXk"/>
+                                <constraint firstAttribute="width" constant="121" id="uxg-Dc-u2R"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="21"/>
+                            <color key="textColor" red="0.090196078430000007" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thử sức với các loại câu hỏi nào!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5u-vJ-ELl">
+                            <rect key="frame" x="107" y="46" width="171" height="51"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="51" id="LI9-eT-ECX"/>
+                                <constraint firstAttribute="width" constant="171" id="dxP-1U-dky"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                            <color key="textColor" red="0.090196078430000007" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="95" id="F3U-bl-BA1"/>
-                        <constraint firstAttribute="width" constant="274" id="Mvs-Xs-2wK"/>
+                        <constraint firstItem="hKH-z3-fLh" firstAttribute="top" secondItem="jbQ-n4-fmA" secondAttribute="top" constant="25" id="HBz-dP-pQm"/>
+                        <constraint firstItem="hKH-z3-fLh" firstAttribute="leading" secondItem="NCV-1U-wS8" secondAttribute="trailing" constant="15" id="JU4-VZ-fyE"/>
+                        <constraint firstAttribute="width" constant="290" id="LNt-Zx-EI5"/>
+                        <constraint firstAttribute="height" constant="105" id="Lku-bv-jpI"/>
+                        <constraint firstItem="P5u-vJ-ELl" firstAttribute="top" secondItem="hKH-z3-fLh" secondAttribute="bottom" id="ebp-ck-i8Q"/>
+                        <constraint firstItem="NCV-1U-wS8" firstAttribute="top" secondItem="jbQ-n4-fmA" secondAttribute="top" constant="17" id="i1B-6F-0Lm"/>
+                        <constraint firstItem="NCV-1U-wS8" firstAttribute="leading" secondItem="jbQ-n4-fmA" secondAttribute="leading" constant="12" id="jbU-o7-6EK"/>
+                        <constraint firstItem="P5u-vJ-ELl" firstAttribute="leading" secondItem="NCV-1U-wS8" secondAttribute="trailing" constant="15" id="yKo-dZ-vux"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
-                    <state key="normal" title="Mode1" backgroundImage="medium-blue-btn.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
                     <connections>
-                        <action selector="mode1Click:" destination="-1" eventType="touchUpInside" id="2VQ-oY-VSa"/>
+                        <action selector="mode1Click:" destination="-1" eventType="touchUpInside" id="mPb-g4-HNY"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dx-wL-Wau">
-                    <rect key="frame" x="8" y="111" width="274" height="95"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHJ-OU-qYs" customClass="UIControl">
+                    <rect key="frame" x="0.0" y="105" width="290" height="105"/>
+                    <subviews>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nog-M5-PCK">
+                            <rect key="frame" x="12" y="8" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="GfQ-bi-mOe"/>
+                                <constraint firstAttribute="width" constant="80" id="HwB-rD-0XP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
+                            <state key="normal" backgroundImage="sticker_timer.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kiểm tra" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYF-g2-9Wp">
+                            <rect key="frame" x="107" y="13" width="121" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="Q3n-FE-KqE"/>
+                                <constraint firstAttribute="width" constant="121" id="of8-eB-LaO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="21"/>
+                            <color key="textColor" red="0.090196078430000007" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bạn có 60s để hoàn thành bài kiểm tra" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cR-3n-ahh">
+                            <rect key="frame" x="107" y="37" width="171" height="51"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="171" id="Oaf-aM-vb4"/>
+                                <constraint firstAttribute="height" constant="51" id="oHC-Lq-uPq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                            <color key="textColor" red="0.090196078430000007" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="95" id="5oh-2f-wY8"/>
-                        <constraint firstAttribute="width" constant="274" id="R7b-NO-NE9"/>
+                        <constraint firstAttribute="width" constant="290" id="4Kl-zy-Ui5"/>
+                        <constraint firstItem="3cR-3n-ahh" firstAttribute="leading" secondItem="nog-M5-PCK" secondAttribute="trailing" constant="15" id="4WE-73-s93"/>
+                        <constraint firstItem="3cR-3n-ahh" firstAttribute="top" secondItem="aHJ-OU-qYs" secondAttribute="top" constant="37" id="7UD-8f-LGZ"/>
+                        <constraint firstItem="IYF-g2-9Wp" firstAttribute="top" secondItem="aHJ-OU-qYs" secondAttribute="top" constant="13" id="DYA-SU-KP4"/>
+                        <constraint firstItem="nog-M5-PCK" firstAttribute="leading" secondItem="aHJ-OU-qYs" secondAttribute="leading" constant="12" id="ZJE-st-OyE"/>
+                        <constraint firstItem="nog-M5-PCK" firstAttribute="top" secondItem="aHJ-OU-qYs" secondAttribute="top" constant="8" id="fKs-LL-2ED"/>
+                        <constraint firstItem="IYF-g2-9Wp" firstAttribute="leading" secondItem="nog-M5-PCK" secondAttribute="trailing" constant="15" id="mDp-R2-UCI"/>
+                        <constraint firstAttribute="height" constant="105" id="mcj-9l-b3O"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
-                    <state key="normal" title="Mode2" backgroundImage="medium-blue-btn.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
                     <connections>
-                        <action selector="mode2Click:" destination="-1" eventType="touchUpInside" id="bYf-YR-YKo"/>
+                        <action selector="mode2Click:" destination="-1" eventType="touchUpInside" id="Pan-aU-Qdz"/>
                     </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="1dx-wL-Wau" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Fpd-ke-jPR"/>
-                <constraint firstItem="1dx-wL-Wau" firstAttribute="top" secondItem="e8J-Nm-9Fd" secondAttribute="bottom" constant="8" id="G7T-qb-qm3"/>
-                <constraint firstItem="e8J-Nm-9Fd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="VLb-BM-sEG"/>
-                <constraint firstAttribute="trailing" secondItem="e8J-Nm-9Fd" secondAttribute="trailing" constant="8" id="ZBN-H3-1y6"/>
-                <constraint firstItem="e8J-Nm-9Fd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="bL6-yP-6bC"/>
-                <constraint firstAttribute="trailing" secondItem="1dx-wL-Wau" secondAttribute="trailing" constant="8" id="wCQ-TY-Cuf"/>
+                <constraint firstItem="jbQ-n4-fmA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7jg-hu-Pjc"/>
+                <constraint firstItem="jbQ-n4-fmA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ewj-BJ-zRU"/>
+                <constraint firstItem="aHJ-OU-qYs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iaQ-B9-DSG"/>
+                <constraint firstItem="aHJ-OU-qYs" firstAttribute="top" secondItem="jbQ-n4-fmA" secondAttribute="bottom" id="yat-nP-CbB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="177" y="181"/>
+            <point key="canvasLocation" x="177" y="136"/>
         </view>
     </objects>
     <resources>
-        <image name="medium-blue-btn.png" width="260" height="94"/>
+        <image name="sticker_pencil.png" width="128" height="128"/>
+        <image name="sticker_timer.png" width="128" height="128"/>
     </resources>
 </document>

@@ -29,6 +29,7 @@
 
 
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent;
+-(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent wordSubDict:(NSDictionary *) subDict;
 -(void) displayCenterWord:(NSString *)word message:(NSString *) message;
 -(void) clearDisplay;
 

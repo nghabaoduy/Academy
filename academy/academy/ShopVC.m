@@ -8,7 +8,6 @@
 
 #import "ShopVC.h"
 #import "PackageCell.h"
-#import "UserShelfNavVC.h"
 #import "AFNetworking.h"
 #import "Package.h"
 #import "PackageInfoVC.h"
@@ -68,7 +67,22 @@
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
     [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
-    [cell.priceLb setText:pack.price];
+    
+    if ([pack.price intValue] == 0) {
+        [cell.priceLb setText:@"FREE"];
+    }
+    else
+    {
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+        
+        NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[pack.price integerValue]]];
+        formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+        [cell.priceLb setText:[NSString stringWithFormat:@"%@ đ",formatted]];
+    }
+    
+    NSArray *imgList = @[@"banner_1.png",@"banner_2.png",@"banner_3.png",@"banner_4.png",@"banner_5.png"];
+    [cell.packageImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",imgList[arc4random_uniform(imgList.count)]]]];
     return cell;
 }
 

@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString * content;
 @property (nonatomic, strong) NSString * wordId;
 @property (nonatomic, strong) NSString * example;
+@property (nonatomic, strong) NSDictionary * wordSubDict;
 
 @end

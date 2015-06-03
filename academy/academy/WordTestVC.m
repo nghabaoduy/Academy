@@ -9,8 +9,9 @@
 #import "WordTestVC.h"
 #import "DDHTimerControl.h"
 #import "CustomIOSAlertView.h"
-#import "AlertCartoonView.h"
+#import "TestRankAnimView.h"
 #import "SoundEngine.h"
+#import "AlertMascotView.h"
 
 @interface WordTestVC () <ModelDelegate>
 
@@ -18,7 +19,7 @@
 
 
 @implementation WordTestVC{
-    
+    LSet *curSet;
     
     NSMutableArray * correctWordList;
     IBOutlet UIButton *nextBtn;
@@ -33,11 +34,14 @@
     
     BOOL isTestFinished;
     BOOL isTFUp;
+    
+    TestPickType curPickType;
 }
 
 @synthesize cardMultipleChoice = _cardMultipleChoice;
 @synthesize cardTypeAnswer = _cardTypeAnswer;
 @synthesize wordNoLb = _wordNoLb;
+@synthesize setTitleLb = _setTitleLb;
 @synthesize curSet, wordList;
 
 - (void)viewDidLoad {
@@ -67,9 +71,11 @@
     }
     else
     {
-        [self displayAlertTestPick];
+        [self performSelector:@selector(displayAlertTestPick) withObject:self afterDelay:0.5];
     }
+    _wordNoLb.text = @"";
 }
+
 - (void) addTimer
 {
     if (_timerControl3 != nil) {
@@ -107,8 +113,9 @@
     AlertTestModePickView *modePickView = [[AlertTestModePickView alloc] init];
     modePickView.alertView = alertView;
     modePickView.delegate = self;
+    [modePickView setTestTimeText:(wordList.count * 6)];
     [alertView setContainerView:modePickView];
-    
+
     [alertView setButtonTitles:[NSMutableArray arrayWithObjects: nil]];
     [alertView setUseMotionEffects:true];
     [alertView show];
@@ -132,12 +139,53 @@
 -(void) finishTest
 {
     isTestFinished = YES;
+    [_cardTypeAnswer dismissKeyboard];
+    //ranking
+    if (correctWordList.count >= wordList.count) {
+        curSet.grade = [NSNumber numberWithInt:3];
+    } else
+    if (correctWordList.count >= wordList.count*70/100) {
+        curSet.grade = [NSNumber numberWithInt:2];
+    } else
+    if (correctWordList.count >= wordList.count*50/100) {
+            curSet.grade = [NSNumber numberWithInt:1];
+    } else
+    {
+        curSet.grade = 0;
+    }
+    
+    
+    [self displayFinishTestAlert];
+}
+-(void) displayFinishTestAlert
+{
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
     
     // Add some custom content to the alert view
-    AlertCartoonView *cartoonView = [[AlertCartoonView alloc] init];
-    [cartoonView.messageLb setText:[NSString stringWithFormat:@"Chúc mừng! Bạn trả lời đúng %lu/%lu câu hỏi.",(unsigned long)correctWordList.count, (unsigned long)wordList.count]];
-    [alertView setContainerView:cartoonView];
+    if (curPickType == TestPickNormal) {
+        AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
+        [cartoonView.messageLb setText:[NSString stringWithFormat:@"Bạn trả lời đúng %lu/%lu câu hỏi.",(unsigned long)correctWordList.count, (unsigned long)wordList.count]];
+        [alertView setContainerView:cartoonView];
+    }
+    else
+    {
+        if (curSet.grade == 0) {
+            AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
+            [cartoonView.messageLb setText:[NSString stringWithFormat:@"Tiếc quá, bạn chỉ trả lời đúng %lu/%lu câu thôi, cố lên nhé.",(unsigned long)correctWordList.count, (unsigned long)wordList.count]];
+            [cartoonView.mascotImg setImage:[UIImage imageNamed:@"giraffe_sad.png"]];
+            [alertView setContainerView:cartoonView];
+            
+        }
+        else
+        {
+            TestRankAnimView *rankView = [[TestRankAnimView alloc] init];
+            NSString *message = [NSString stringWithFormat:@"Chúc mừng, bạn đã hoàn thành bài kiểm tra với %lu/%lu câu trả lời đúng.",(unsigned long)correctWordList.count, (unsigned long)wordList.count];
+            [rankView setMessage:message];
+            [rankView setLSet:curSet];
+            [alertView setContainerView:rankView];
+        }
+    }
+    
     
     [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Thoát", @"Làm lại", nil]];
     [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
@@ -151,7 +199,7 @@
                     }
                 }];
             }
-            break;
+                break;
             case 1:
                 [self displayAlertTestPick];
             default:
@@ -162,7 +210,6 @@
     }];
     [alertView setUseMotionEffects:true];
     [alertView show];
-    
 }
 -(void) registerTestMakerCardView
 {
@@ -262,7 +309,7 @@
         NSLog(@"Wrong answer");
     }
     if (![testMaker isLastQuestion]) {
-        if ([self startMove:curCard:YES delay:1.5]) {
+        if ([self startMove:curCard:YES delay:curPickType == TestPickNormal?1.5:0.5]) {
             nextCard = [testMaker createNextQuestion];
         }
     }
@@ -270,6 +317,7 @@
 #pragma mark - AlertTestModePick Delegate
 -(void)AlertTestModePickView:(AlertTestModePickView *)modePickView modePicked:(TestPickType)testPickType
 {
+    curPickType = testPickType;
     [modePickView.alertView close];
     switch (testPickType) {
         case TestPickNormal:
@@ -346,6 +394,8 @@
 }
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
+    curSet = model;
+    
     wordList = model.wordList;
     wordList = [[self shuffleArray:[wordList mutableCopy]] copy];
     [self displayAlertTestPick];

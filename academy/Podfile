@@ -7,7 +7,9 @@ pod 'MSDynamicsDrawerViewController', '~> 1.5.1'
 pod 'CustomIOSAlertView', '~> 0.9.3'
 pod 'MBProgressHUD', '~> 0.5'
 pod 'DDHTimerControl'
-
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
 end
 
 target 'academyTests' do

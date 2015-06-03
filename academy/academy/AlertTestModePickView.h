@@ -26,5 +26,5 @@ typedef NS_ENUM(NSUInteger, TestPickType) {
 @property (retain) id delegate;
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (strong, nonatomic) CustomIOSAlertView *alertView;
-
+-(void) setTestTimeText:(int) sec;
 @end

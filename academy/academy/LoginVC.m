@@ -5,6 +5,8 @@
 //  Created by Nguyen Ha Bao Duy on 17/5/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #import "LoginVC.h"
 #import "User.h"
@@ -19,7 +21,7 @@
     __weak IBOutlet UITextField *textfUsername;
     __weak IBOutlet UITextField *textfPassword;
 }
-
+@property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 @end
 
 @implementation LoginVC
@@ -28,6 +30,27 @@
     [super viewDidLoad];
     [SoundEngine getInstance];
     
+    if ([FBSDKAccessToken currentAccessToken]) {
+        NSLog(@"FB token userID = %@",[FBSDKAccessToken currentAccessToken].userID);
+    }
+    self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    
+    
+}
+- (IBAction)loginWithFB:(id)sender {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+            // Process error
+        } else if (result.isCancelled) {
+            // Handle cancellations
+        } else {
+            NSLog(@"FB token userID = %@",[FBSDKAccessToken currentAccessToken].userID);
+            if ([result.grantedPermissions containsObject:@"email"]) {
+                
+            }
+        }
+    }];
     
 }
 -(void)viewDidLayoutSubviews{

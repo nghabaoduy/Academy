@@ -10,18 +10,41 @@
 #import "SetDetailVC.h"
 #import "LSet.h"
 
+
 @interface SetSelectVC ()
 
 @end
 
 @implementation SetSelectVC{
+    NSMutableArray *setOrderArray;
     NSArray *tempArray;
+    LSet *clickedSet;
+    BOOL isDisplayerClicked;
 }
 
 @synthesize curPack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.tableView.allowsSelection = NO;
+    setOrderArray = [NSMutableArray new];
+    for (LSet *set in curPack.setList) {
+        int row = set.orderNo/2;
+        while (setOrderArray.count <= row) {
+            [setOrderArray addObject:[NSMutableArray new]];
+        }
+        NSMutableArray * orderList = setOrderArray[row];
+        [orderList addObject:set];
+        [orderList sortUsingComparator:^NSComparisonResult(LSet * set1, LSet * set2) {
+            return (set1.orderNo%2)>(set2.orderNo%2);
+        }];
+    }
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,28 +60,62 @@
     if (!curPack) {
         return 0;
     }
-    return curPack.setList.count;
+    return setOrderArray.count;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 142;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setListCell" forIndexPath:indexPath];
-    LSet *set = [curPack.setList objectAtIndex:indexPath.row];
-    [cell.textLabel setText:set.name];
+    NSMutableArray * orderList = setOrderArray[indexPath.row];
     
-    return cell;
+    if (orderList.count == 1) {
+        SetRow1Displayer *cell = [tableView dequeueReusableCellWithIdentifier:@"setCell1Displayer" forIndexPath:indexPath];
+        cell.setDisplayer.delegate = self;
+        LSet *set = orderList[0];
+        [cell.setDisplayer setLSet:set];
+        
+        return cell;
+    }
+    else
+    {
+        SetRow2Displayer *cell = [tableView dequeueReusableCellWithIdentifier:@"setCell2Displayer" forIndexPath:indexPath];
+        cell.setDisplayer1.delegate = self;
+        LSet *set = orderList[0];
+        [cell.setDisplayer1 setLSet:set];
+        
+        cell.setDisplayer2.delegate = self;
+        LSet *set2 = orderList[1];
+        [cell.setDisplayer2 setLSet:set2];
+        
+        return cell;
+    }
+    
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"goSetDetail"])
     {
-         LSet *set = [curPack.setList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+         LSet *set = clickedSet;
         SetDetailVC * destination = segue.destinationViewController;
         [destination setTitle:set.name];
         destination.curSet = set;
     }
 }
 
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return isDisplayerClicked;
+}
+
+#pragma mark - SetDisplayer
+-(void)setDisplayerClicked:(SetDisplayer *)_setDisplayer
+{
+    isDisplayerClicked = YES;
+    clickedSet = [_setDisplayer getLSet];
+    [self performSegueWithIdentifier:@"goSetDetail" sender:self];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -49,6 +49,15 @@
     }
     return @"";
 }
+-(NSDictionary *) getWordSubDict: (NSString *) lang
+{
+    for (Meaning * meaning in _meaningList) {
+        if ([meaning.language isEqualToString:lang] ) {
+            return meaning.wordSubDict;
+        }
+    }
+    return @"";
+}
 -(NSString *) getExample: (NSString *) lang
 {
     for (Meaning * meaning in _meaningList) {

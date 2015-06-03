@@ -7,11 +7,11 @@
 //
 
 #import "AlertTestModePickView.h"
-
+#import <QuartzCore/QuartzCore.h>
 @implementation AlertTestModePickView
 {
-    IBOutlet UIButton *mode1Btn;
-    IBOutlet UIButton *mode2Btn;
+    IBOutlet UILabel *testInfoLb;
+
 }
 @synthesize delegate;
 -(id)initWithFrame:(CGRect)frame
@@ -19,10 +19,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"TestModePickView" owner:self options:nil];
-        self.bounds = self.view.bounds;
+        
         [self addSubview:self.view];
         self.view.backgroundColor = [UIColor clearColor];
-        self.view.layer.anchorPoint = CGPointMake(0, 0);
+        self.layer.anchorPoint = CGPointMake(0, 0);
+        self.layer.bounds = self.view.bounds;
+        
     }
     return self;
 }
@@ -31,18 +33,25 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"TestModePickView" owner:self options:nil];
-        self.bounds = self.view.bounds;
         [self addSubview:self.view];
         self.view.backgroundColor = [UIColor clearColor];
-        self.view.layer.anchorPoint = CGPointMake(0, 0);
+        self.layer.anchorPoint = CGPointMake(0, 0);
+       self.layer.bounds = self.view.bounds;
+
     }
     return self;
 }
 - (IBAction)mode1Click:(id)sender {
+    NSLog(@"mode1 clicked");
     [delegate AlertTestModePickView:self modePicked:TestPickNormal];
 }
 - (IBAction)mode2Click:(id)sender {
+    NSLog(@"mode2 clicked");
     [delegate AlertTestModePickView:self modePicked:TestPickTimer];
+}
+-(void) setTestTimeText:(int) sec
+{
+    [testInfoLb setText:[NSString stringWithFormat:@"Bạn có %is để hoàn thành bài kiểm tra",sec]];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -51,5 +60,4 @@
     // Drawing code
 }
 */
-
 @end
