@@ -151,11 +151,17 @@
             curSet.grade = [NSNumber numberWithInt:1];
     } else
     {
-        curSet.grade = 0;
+        curSet.grade = @(0);
     }
     
-    
+    SetScore * newsScore = [SetScore new];
+    newsScore.delegate = self;
+    newsScore.score = curSet.grade;
+    newsScore.set_id = curSet.modelId;
+    [newsScore createModel];
     [self displayFinishTestAlert];
+    
+    
 }
 -(void) displayFinishTestAlert
 {
@@ -403,6 +409,10 @@
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+- (void)createModelSuccessful:(AModel *)model {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
