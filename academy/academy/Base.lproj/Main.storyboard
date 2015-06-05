@@ -43,6 +43,7 @@
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -54,7 +55,7 @@
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -94,7 +95,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2b-J9-odH">
+                            <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2b-J9-odH">
                                 <rect key="frame" x="16" y="535" width="136" height="30"/>
                                 <state key="normal" title="Enable Pan Gesture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,7 +107,7 @@
                                     <action selector="panAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ps3-Nv-BOL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEU-Qo-Nem">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEU-Qo-Nem">
                                 <rect key="frame" x="444" y="535" width="140" height="30"/>
                                 <state key="normal" title="Disable Pan Gesture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -170,7 +171,7 @@
                                     <action selector="loginWithFB:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="r88-ej-PE4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qz1-Sa-uZx" customClass="FBSDKLoginButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qz1-Sa-uZx">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Img-YU-F1z"/>
@@ -191,6 +192,9 @@
                                         <include reference="iYd-rj-Io1"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="loginWithGooglePlus:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kIU-RA-3dx"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng nhập với" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYF-U6-1w1">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -236,15 +240,74 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxB-vP-EvD">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Test FB Post">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testPost:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NDF-lH-7vV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQU-u3-g8Z">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="fSO-h7-IbA"/>
+                                    <constraint firstAttribute="width" constant="50" id="jl1-an-pBZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="19"/>
+                                <color key="textColor" red="0.1794593978" green="0.29624771900000002" blue="0.2378535584" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="jl1-an-pBZ"/>
+                                        <exclude reference="fSO-h7-IbA"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="jl1-an-pBZ"/>
+                                        <include reference="fSO-h7-IbA"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWJ-BZ-UQp">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="107" id="v18-IG-HvO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="19"/>
+                                <state key="normal" title="Đăng Ký">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="v18-IG-HvO"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="147" y="530" width="107" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="v18-IG-HvO"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="registerNewUser:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="avC-mP-Ucf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qz1-Sa-uZx" firstAttribute="top" secondItem="gYF-U6-1w1" secondAttribute="bottom" constant="8" id="06f-4H-XWb"/>
+                            <constraint firstItem="YQU-u3-g8Z" firstAttribute="top" secondItem="RVN-48-rmq" secondAttribute="bottom" constant="8" id="1e7-28-5b1">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="RVN-48-rmq" secondAttribute="centerX" id="1xn-lv-rRQ"/>
                             <constraint firstAttribute="centerY" secondItem="Rev-Dh-DLK" secondAttribute="centerY" id="5N1-U7-89n">
-                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="gYF-U6-1w1" secondAttribute="centerX" id="7e3-Bj-huY"/>
+                            <constraint firstAttribute="centerX" secondItem="kxB-vP-EvD" secondAttribute="centerX" id="8Fr-su-i5L"/>
                             <constraint firstItem="FlU-Bp-q7b" firstAttribute="top" secondItem="Rev-Dh-DLK" secondAttribute="bottom" constant="8" id="ALv-ya-0wF"/>
                             <constraint firstItem="RVN-48-rmq" firstAttribute="top" secondItem="FlU-Bp-q7b" secondAttribute="bottom" constant="26" id="J4g-pz-NR6"/>
                             <constraint firstAttribute="centerX" secondItem="3q7-2I-bah" secondAttribute="centerX" id="KXh-vF-ZKh"/>
@@ -254,6 +317,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="-50"/>
                             </constraint>
                             <constraint firstItem="RVN-48-rmq" firstAttribute="top" secondItem="FlU-Bp-q7b" secondAttribute="bottom" constant="17" id="SJq-cY-VAB"/>
+                            <constraint firstAttribute="centerX" secondItem="DWJ-BZ-UQp" secondAttribute="centerX" id="bFK-g1-0Gc"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="YfA-Ni-KU9" secondAttribute="bottom" constant="8" id="dg8-lZ-Sza">
                                 <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                             </constraint>
@@ -262,6 +326,11 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="qz1-Sa-uZx" secondAttribute="bottom" constant="15" id="jrj-8W-Edn"/>
+                            <constraint firstAttribute="centerX" secondItem="YQU-u3-g8Z" secondAttribute="centerX" id="nMd-Yl-SrY"/>
+                            <constraint firstItem="DWJ-BZ-UQp" firstAttribute="top" secondItem="YQU-u3-g8Z" secondAttribute="bottom" constant="8" id="vKo-na-1lh">
+                                <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                            </constraint>
+                            <constraint firstItem="Rev-Dh-DLK" firstAttribute="top" secondItem="kxB-vP-EvD" secondAttribute="bottom" constant="13" id="vO6-2u-Ajs"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -274,23 +343,32 @@
                                 <exclude reference="qz1-Sa-uZx"/>
                                 <exclude reference="gYF-U6-1w1"/>
                                 <exclude reference="3q7-2I-bah"/>
+                                <exclude reference="kxB-vP-EvD"/>
+                                <exclude reference="YQU-u3-g8Z"/>
+                                <exclude reference="DWJ-BZ-UQp"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="LRX-5Z-ULQ"/>
-                                <exclude reference="dg8-lZ-Sza"/>
-                                <exclude reference="jrj-8W-Edn"/>
-                                <exclude reference="KXh-vF-ZKh"/>
-                                <exclude reference="ALv-ya-0wF"/>
-                                <exclude reference="LKS-kQ-EbS"/>
+                                <exclude reference="8Fr-su-i5L"/>
                                 <exclude reference="5N1-U7-89n"/>
                                 <exclude reference="eps-Fc-gAo"/>
-                                <exclude reference="7e3-Bj-huY"/>
+                                <exclude reference="vO6-2u-Ajs"/>
+                                <exclude reference="ALv-ya-0wF"/>
+                                <exclude reference="LKS-kQ-EbS"/>
                                 <exclude reference="1xn-lv-rRQ"/>
                                 <exclude reference="J4g-pz-NR6"/>
                                 <exclude reference="SJq-cY-VAB"/>
+                                <exclude reference="1e7-28-5b1"/>
+                                <exclude reference="nMd-Yl-SrY"/>
+                                <exclude reference="bFK-g1-0Gc"/>
+                                <exclude reference="vKo-na-1lh"/>
+                                <exclude reference="7e3-Bj-huY"/>
                                 <exclude reference="iKF-XX-kom"/>
                                 <exclude reference="06f-4H-XWb"/>
                                 <exclude reference="NLs-pd-ce2"/>
+                                <exclude reference="KXh-vF-ZKh"/>
+                                <exclude reference="LRX-5Z-ULQ"/>
+                                <exclude reference="dg8-lZ-Sza"/>
+                                <exclude reference="jrj-8W-Edn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -304,25 +382,37 @@
                                 <include reference="qz1-Sa-uZx"/>
                                 <include reference="gYF-U6-1w1"/>
                                 <include reference="3q7-2I-bah"/>
+                                <include reference="kxB-vP-EvD"/>
+                                <include reference="YQU-u3-g8Z"/>
+                                <include reference="DWJ-BZ-UQp"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="LRX-5Z-ULQ"/>
-                                <include reference="dg8-lZ-Sza"/>
-                                <include reference="jrj-8W-Edn"/>
-                                <include reference="KXh-vF-ZKh"/>
-                                <include reference="ALv-ya-0wF"/>
-                                <include reference="LKS-kQ-EbS"/>
+                                <include reference="8Fr-su-i5L"/>
                                 <include reference="5N1-U7-89n"/>
                                 <include reference="eps-Fc-gAo"/>
-                                <include reference="7e3-Bj-huY"/>
+                                <include reference="vO6-2u-Ajs"/>
+                                <include reference="ALv-ya-0wF"/>
+                                <include reference="LKS-kQ-EbS"/>
                                 <include reference="1xn-lv-rRQ"/>
                                 <include reference="J4g-pz-NR6"/>
                                 <exclude reference="SJq-cY-VAB"/>
+                                <include reference="1e7-28-5b1"/>
+                                <include reference="nMd-Yl-SrY"/>
+                                <include reference="bFK-g1-0Gc"/>
+                                <include reference="vKo-na-1lh"/>
+                                <include reference="7e3-Bj-huY"/>
                                 <include reference="iKF-XX-kom"/>
                                 <include reference="06f-4H-XWb"/>
                                 <include reference="NLs-pd-ce2"/>
+                                <include reference="KXh-vF-ZKh"/>
+                                <include reference="LRX-5Z-ULQ"/>
+                                <include reference="dg8-lZ-Sza"/>
+                                <include reference="jrj-8W-Edn"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="viewTouchUp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="YEc-o0-b4y"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="textfPassword" destination="FlU-Bp-q7b" id="4ae-Xr-tyX"/>

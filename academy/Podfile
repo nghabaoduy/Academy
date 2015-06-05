@@ -10,6 +10,7 @@ pod 'DDHTimerControl'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'google-plus-ios-sdk'
 end
 
 target 'academyTests' do

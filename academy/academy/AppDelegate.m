@@ -7,11 +7,13 @@
 //
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <GooglePlus/GooglePlus.h>
 #import "AppDelegate.h"
 #import "MyUIEngine.h"
 #import "SideMenuVC.h"
 #import "MSDynamicsDrawerViewController.h"
 #import "MSDynamicsDrawerStyler.h"
+
 
 @interface AppDelegate ()<MSDynamicsDrawerViewControllerDelegate>
 
@@ -116,10 +118,20 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                          openURL:url
-                                                sourceApplication:sourceApplication
-                                                       annotation:annotation];
+    
+    if ([GPPURLHandler handleURL:url
+               sourceApplication:sourceApplication
+                      annotation:annotation]) {
+        return YES;
+    }else if([[FBSDKApplicationDelegate sharedInstance] application:application
+                                                            openURL:url
+                                                  sourceApplication:sourceApplication
+                                                         annotation:annotation]){
+        return YES;
+    }
+    
+    return NO;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

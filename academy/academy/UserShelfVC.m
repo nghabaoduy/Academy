@@ -14,6 +14,7 @@
 #import "UserPackage.h"
 #import "User.h"
 #import "DataEngine.h"
+#import "MSDynamicsDrawerViewController.h"
 
 @interface UserShelfVC () <ModelDelegate>
 
@@ -32,6 +33,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //enable sideMenu Drag
+    MSDynamicsDrawerViewController *dynamicsDrawerViewController = (MSDynamicsDrawerViewController *)self.navigationController.parentViewController;
+    
+    MSDynamicsDrawerDirectionActionForMaskedValues(dynamicsDrawerViewController.possibleDrawerDirection, ^(MSDynamicsDrawerDirection drawerDirection) {
+        [dynamicsDrawerViewController setPaneDragRevealEnabled:YES forDirection:drawerDirection];
+    });
+    
+    
     packageList = [NSMutableArray new];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;

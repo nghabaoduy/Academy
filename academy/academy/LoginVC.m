@@ -7,7 +7,9 @@
 //
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <GoogleOpenSource/GoogleOpenSource.h>
 
+#import "MSDynamicsDrawerViewController.h"
 #import "LoginVC.h"
 #import "User.h"
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -26,33 +28,195 @@
 
 @implementation LoginVC
 
+static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o4bp.apps.googleusercontent.com";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [SoundEngine getInstance];
     
-    if ([FBSDKAccessToken currentAccessToken]) {
-        NSLog(@"FB token userID = %@",[FBSDKAccessToken currentAccessToken].userID);
+    //disable sideMenu Drag
+    MSDynamicsDrawerViewController *dynamicsDrawerViewController = (MSDynamicsDrawerViewController *)self.navigationController.parentViewController;
+    
+    MSDynamicsDrawerDirectionActionForMaskedValues(dynamicsDrawerViewController.possibleDrawerDirection, ^(MSDynamicsDrawerDirection drawerDirection) {
+        [dynamicsDrawerViewController setPaneDragRevealEnabled:NO forDirection:drawerDirection];
+    });
+    
+    //GGP singleton setup
+    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    signIn.shouldFetchGooglePlusUser = YES;
+    signIn.shouldFetchGoogleUserEmail = YES;  // Uncomment to get the user's email
+    signIn.clientID = kClientId;
+    signIn.scopes = @[ kGTLAuthScopePlusLogin];  // "https://www.googleapis.com/auth/plus.login" scope
+    signIn.scopes = @[ @"profile" ];            // "profile" scope
+    signIn.delegate = self;
+    [signIn trySilentAuthentication];
+    
+    
+    
+}
+-(IBAction) testPost:(id)sender
+{
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+            [[[FBSDKGraphRequest alloc]
+              initWithGraphPath:@"me/feed"
+              parameters: @{ @"message" : @"hello world"}
+              HTTPMethod:@"POST"]
+             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 if (!error) {
+                     NSLog(@"Post id:%@", result[@"id"]);
+                 }
+             }];
+        }
+    } else {
+        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        [loginManager logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+            if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+                [[[FBSDKGraphRequest alloc]
+                  initWithGraphPath:@"me/feed"
+                  parameters: @{ @"message" : @"hello world"}
+                  HTTPMethod:@"POST"]
+                 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                     if (!error) {
+                         NSLog(@"Post id:%@", result[@"id"]);
+                     }
+                 }];
+            }
+        }];
     }
-    self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
-    
-    
 }
 - (IBAction)loginWithFB:(id)sender {
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-        if (error) {
-            // Process error
-        } else if (result.isCancelled) {
-            // Handle cancellations
-        } else {
-            NSLog(@"FB token userID = %@",[FBSDKAccessToken currentAccessToken].userID);
-            if ([result.grantedPermissions containsObject:@"email"]) {
+    if ([FBSDKAccessToken currentAccessToken]) {
+        NSLog(@"FB token userID = %@",[FBSDKAccessToken currentAccessToken].userID);
+        if ([FBSDKAccessToken currentAccessToken]) {
+            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
+             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 if (!error) {
+                     NSLog(@"fetched user:%@", result);
+                 }
+             }];
+        }
+        
+        
+    }
+    else
+    {
+        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        [login logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+            if (error) {
+                // Process error
+            } else if (result.isCancelled) {
+                // Handle cancellations
+            } else {
+                NSLog(@"FB token userID = %@",[FBSDKAccessToken currentAccessToken].userID);
+                if ([FBSDKAccessToken currentAccessToken]) {
+                    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
+                     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                         if (!error) {
+                             NSLog(@"fetched user:%@", result);
+                         }
+                     }];
+                }
                 
             }
-        }
-    }];
+        }];
+    }
     
 }
+- (IBAction)loginWithGooglePlus:(id)sender {
+    if ([[GPPSignIn sharedInstance] authentication]) {
+        NSLog(@"email %@ ",[NSString stringWithFormat:@"Email: %@",[GPPSignIn sharedInstance].authentication.userEmail]);
+        
+        // 1. Create a |GTLServicePlus| instance to send a request to Google+.
+        GTLServicePlus* plusService = [[GTLServicePlus alloc] init] ;
+        plusService.retryEnabled = YES;
+        
+        // 2. Set a valid |GTMOAuth2Authentication| object as the authorizer.
+        [plusService setAuthorizer:[GPPSignIn sharedInstance].authentication];
+        
+        
+        GTLQueryPlus *query = [GTLQueryPlus queryForPeopleGetWithUserId:@"me"];
+        
+        // *4. Use the "v1" version of the Google+ API.*
+        plusService.apiVersion = @"v1";
+        
+        [plusService executeQuery:query
+                completionHandler:^(GTLServiceTicket *ticket,
+                                    GTLPlusPerson *person,
+                                    NSError *error) {
+                    if (error) {
+                        
+                        
+                        
+                        //Handle Error
+                        
+                    } else
+                    {
+                        
+                        
+                        NSLog(@"Email= %@",[GPPSignIn sharedInstance].authentication.userEmail);
+                        NSLog(@"GoogleID=%@",person.identifier);
+                        NSLog(@"User Name=%@",[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName]);
+                        NSLog(@"Gender=%@",person.gender);
+                        
+                    }
+                }];
+    
+    }
+    else
+    {
+        GPPSignIn *signIn = [GPPSignIn sharedInstance];
+        [signIn authenticate];
+    }
+
+}
+- (void)finishedWithAuth: (GTMOAuth2Authentication *)auth
+                   error: (NSError *) error {
+    NSLog(@"Received error %@ and auth object %@",error, auth);
+    if (error) {
+        // Do some error handling here.
+    } else {
+        
+        NSLog(@"email %@ ",[NSString stringWithFormat:@"Email: %@",[GPPSignIn sharedInstance].authentication.userEmail]);
+        NSLog(@"Received error %@ and auth object %@",error, auth);
+        
+        // 1. Create a |GTLServicePlus| instance to send a request to Google+.
+        GTLServicePlus* plusService = [[GTLServicePlus alloc] init] ;
+        plusService.retryEnabled = YES;
+        
+        // 2. Set a valid |GTMOAuth2Authentication| object as the authorizer.
+        [plusService setAuthorizer:[GPPSignIn sharedInstance].authentication];
+        
+        
+        GTLQueryPlus *query = [GTLQueryPlus queryForPeopleGetWithUserId:@"me"];
+        
+        // *4. Use the "v1" version of the Google+ API.*
+        plusService.apiVersion = @"v1";
+        
+        [plusService executeQuery:query
+                completionHandler:^(GTLServiceTicket *ticket,
+                                    GTLPlusPerson *person,
+                                    NSError *error) {
+                    if (error) {
+                        
+                        
+                        
+                        //Handle Error
+                        
+                    } else
+                    {
+                        
+                        
+                        NSLog(@"Email= %@",[GPPSignIn sharedInstance].authentication.userEmail);
+                        NSLog(@"GoogleID=%@",person.identifier);
+                        NSLog(@"User Name=%@",[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName]);
+                        NSLog(@"Gender=%@",person.gender);
+                        
+                    }
+                }];
+    }
+}
+
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
 
@@ -84,11 +248,17 @@
 }
 
 - (void)loginSuccess {
+    
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+
+    
+    
     UserShelfVC *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfView"];
     UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
     [self presentViewController:desNavController animated:YES completion:nil];
     //[self performSegueWithIdentifier:@"toBookShelf" sender:nil];
+    
 }
 
 - (BOOL)validation {
@@ -127,12 +297,21 @@
                                                      }];
     
     [alertController addAction:dismiss];
+    
     [self presentViewController:alertController animated:YES completion:nil];
+    
+    
 }
 
 - (void)userLoginSuccessfull:(User *)user {
     NSLog(@"navigateView");
     [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
+}
+- (IBAction)registerNewUser:(id)sender {
+}
+
+- (IBAction)viewTouchUp:(id)sender {
+    
 }
 
     

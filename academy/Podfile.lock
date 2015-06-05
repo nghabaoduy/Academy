@@ -41,6 +41,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.2.0):
     - FBSDKCoreKit
+  - google-plus-ios-sdk (1.7.1)
   - MBProgressHUD (0.9.1)
   - MSDynamicsDrawerViewController (1.5.1)
 
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - google-plus-ios-sdk
   - MBProgressHUD (~> 0.5)
   - MSDynamicsDrawerViewController (~> 1.5.1)
 
@@ -62,6 +64,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 84b3616a361801f190e43a9909caead7bb6087c7
   FBSDKLoginKit: 57e37106af12c9e264e473dcb75d7decdbb07fe4
   FBSDKShareKit: 931746fdf8fb95efd6e12310ec14b2b3295e2aec
+  google-plus-ios-sdk: 47adbe03ea904bdb7aa1c0eca282a23c4686e1bc
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MSDynamicsDrawerViewController: 2874df90f5e9453dc7d4e32f8038b50615d4baa7
 
