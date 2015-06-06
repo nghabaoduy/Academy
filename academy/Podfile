@@ -11,6 +11,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'google-plus-ios-sdk'
+pod 'PNChart', '~> 0.5'
 end
 
 target 'academyTests' do

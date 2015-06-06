@@ -8,6 +8,6 @@
 #import <GooglePlus/GooglePlus.h>
 #import <UIKit/UIKit.h>
 
-@interface LoginVC : UIViewController<GPPSignInDelegate>
+@interface LoginVC : UIViewController<GPPSignInDelegate, UITextFieldDelegate>
 
 @end

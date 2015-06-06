@@ -120,6 +120,18 @@
 #define COCOAPODS_VERSION_MINOR_MSDynamicsDrawerViewController 5
 #define COCOAPODS_VERSION_PATCH_MSDynamicsDrawerViewController 1
 
+// PNChart
+#define COCOAPODS_POD_AVAILABLE_PNChart
+#define COCOAPODS_VERSION_MAJOR_PNChart 0
+#define COCOAPODS_VERSION_MINOR_PNChart 8
+#define COCOAPODS_VERSION_PATCH_PNChart 3
+
+// UICountingLabel
+#define COCOAPODS_POD_AVAILABLE_UICountingLabel
+#define COCOAPODS_VERSION_MAJOR_UICountingLabel 1
+#define COCOAPODS_VERSION_MINOR_UICountingLabel 2
+#define COCOAPODS_VERSION_PATCH_UICountingLabel 0
+
 // google-plus-ios-sdk
 #define COCOAPODS_POD_AVAILABLE_google_plus_ios_sdk
 #define COCOAPODS_VERSION_MAJOR_google_plus_ios_sdk 1

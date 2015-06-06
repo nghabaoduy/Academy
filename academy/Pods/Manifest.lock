@@ -44,6 +44,9 @@ PODS:
   - google-plus-ios-sdk (1.7.1)
   - MBProgressHUD (0.9.1)
   - MSDynamicsDrawerViewController (1.5.1)
+  - PNChart (0.8.3):
+    - UICountingLabel (~> 1.2.0)
+  - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -55,6 +58,7 @@ DEPENDENCIES:
   - google-plus-ios-sdk
   - MBProgressHUD (~> 0.5)
   - MSDynamicsDrawerViewController (~> 1.5.1)
+  - PNChart (~> 0.5)
 
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
@@ -67,5 +71,7 @@ SPEC CHECKSUMS:
   google-plus-ios-sdk: 47adbe03ea904bdb7aa1c0eca282a23c4686e1bc
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MSDynamicsDrawerViewController: 2874df90f5e9453dc7d4e32f8038b50615d4baa7
+  PNChart: 8d81e061ec4845915184755d8da84f385ca1cb28
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 
 COCOAPODS: 0.37.1

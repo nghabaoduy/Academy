@@ -17,6 +17,9 @@
 #import "AppDelegate.h"
 #import "SideMenuVC.h"
 #import "SoundEngine.h"
+#import "RegisterVC.h"
+
+
 
 @interface LoginVC ()<AuthDelegate> {
     
@@ -27,12 +30,19 @@
 @end
 
 @implementation LoginVC
+{
+    UITextField *curTextField;
+}
 
 static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o4bp.apps.googleusercontent.com";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [SoundEngine getInstance];
+    
+    textfUsername.placeholder = @"Email: ";
+    textfPassword.placeholder = @"Mật khẩu: ";
+
     
     //disable sideMenu Drag
     MSDynamicsDrawerViewController *dynamicsDrawerViewController = (MSDynamicsDrawerViewController *)self.navigationController.parentViewController;
@@ -228,6 +238,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 
 - (IBAction)actionLogin:(id)sender {
     
+    
     if (![self validation]) {
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Error!!!" message:@"Username or password cannot empty." preferredStyle:UIAlertControllerStyleAlert];
         
@@ -246,21 +257,18 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     [newUser userLoginWith:textfUsername.text Password:textfPassword.text];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
-
+/*
 - (void)loginSuccess {
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
 
-    
-    
     UserShelfVC *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfView"];
     UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
     [self presentViewController:desNavController animated:YES completion:nil];
     //[self performSegueWithIdentifier:@"toBookShelf" sender:nil];
     
 }
-
+*/
 - (BOOL)validation {
     if ([textfUsername.text isEqualToString:@""] && [textfPassword.text isEqualToString:@""]) {
         return NO;
@@ -288,19 +296,24 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
             break;
     }
     
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Error!!!" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Báo Lỗi" message:@"Đăng nhập thất bại" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Dismiss"
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Thử lại"
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction *action) {
                                                          // do destructive stuff here
                                                      }];
-    
+    UIAlertAction * forgotPass = [UIAlertAction actionWithTitle:@"Quên mật khẩu"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction *action) {
+                                                         [self performSegueWithIdentifier:@"goForgotPassword" sender:self];
+                                                     }];
     [alertController addAction:dismiss];
+    [alertController addAction:forgotPass];
     
     [self presentViewController:alertController animated:YES completion:nil];
     
-    
+    //goForgotPassword
 }
 
 - (void)userLoginSuccessfull:(User *)user {
@@ -308,25 +321,30 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
 }
 - (IBAction)registerNewUser:(id)sender {
+    RegisterVC *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"registerView"];
+    UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
+
+    [self presentViewController:desNavController animated:YES completion:nil];
 }
 
 - (IBAction)viewTouchUp:(id)sender {
-    
+    [curTextField resignFirstResponder];
 }
 
-    
-    //[self performSegueWithIdentifier:@"toBookShelf" sender:nil];
-   /* UserShelfVC *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"userShelfView"];
-    UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
-    UIBarButtonItem *menuBtn = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
-    destination.navigationItem.leftBarButtonItem = menuBtn;
-    [self presentViewController:desNavController animated:YES completion:nil];
-}
-- (void)dynamicsDrawerRevealLeftBarButtonItemTapped:(id)sender
+#pragma mark - TextField Delegate
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appdelegate.menuViewController dynamicsDrawerRevealLeftBarButtonItemTapped:sender];
-    
-}*/
+    curTextField = textField;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end

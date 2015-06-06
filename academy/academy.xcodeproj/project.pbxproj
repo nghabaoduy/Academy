@@ -26,6 +26,9 @@
 		AF5E99601B1ECCB4009342BA /* popupArrowUp in Resources */ = {isa = PBXBuildFile; fileRef = AF5E995F1B1ECCB4009342BA /* popupArrowUp */; };
 		AF66BF081B1EBCB500E89B23 /* MeaningPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF66BF071B1EBCB500E89B23 /* MeaningPopup.xib */; };
 		AF66BF0B1B1EBDA700E89B23 /* MeaningPopupDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF66BF0A1B1EBDA700E89B23 /* MeaningPopupDisplayer.m */; };
+		AF719E3A1B21ED1700D52EA3 /* MyCustomTextfield.m in Sources */ = {isa = PBXBuildFile; fileRef = AF719E391B21ED1700D52EA3 /* MyCustomTextfield.m */; };
+		AF719E431B21F23700D52EA3 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF719E421B21F23700D52EA3 /* RegisterVC.m */; };
+		AF719E461B22137F00D52EA3 /* PasswordResetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF719E451B22137F00D52EA3 /* PasswordResetVC.m */; };
 		AF7869A41B10BDB9009BE37B /* MenuBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7869A31B10BDB9009BE37B /* MenuBtn.png */; };
 		AF7869A71B10CB9B009BE37B /* SoundEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7869A61B10CB9B009BE37B /* SoundEngine.m */; };
 		AF7869A91B10CBD3009BE37B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7869A81B10CBD3009BE37B /* AVFoundation.framework */; };
@@ -156,6 +159,10 @@
 		AFF15E1C1B1F029E002D0EC1 /* AlertMascotDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E1B1B1F029E002D0EC1 /* AlertMascotDisplayView.xib */; };
 		AFF15E1F1B1F0304002D0EC1 /* AlertMascotView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF15E1E1B1F0304002D0EC1 /* AlertMascotView.m */; };
 		AFF15E211B1F096B002D0EC1 /* speechBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E201B1F096B002D0EC1 /* speechBubble.png */; };
+		AFF2504A1B22CB5B00803482 /* dummyAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF250491B22CB5B00803482 /* dummyAvatar.png */; };
+		AFF2504C1B22CBD400803482 /* circleWhite in Resources */ = {isa = PBXBuildFile; fileRef = AFF2504B1B22CBD400803482 /* circleWhite */; };
+		AFF2504F1B22D10300803482 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF2504E1B22D10300803482 /* ProfileVC.m */; };
+		AFF250521B23015000803482 /* PasswordChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF250511B23015000803482 /* PasswordChangeVC.m */; };
 		AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */; };
 		AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396C91B1CB9F6002675AB /* rankStar_1.png */; };
 		AFF396D01B1CB9F6002675AB /* rankStar_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396CA1B1CB9F6002675AB /* rankStar_2.png */; };
@@ -215,6 +222,12 @@
 		AF66BF071B1EBCB500E89B23 /* MeaningPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeaningPopup.xib; sourceTree = "<group>"; };
 		AF66BF091B1EBDA700E89B23 /* MeaningPopupDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeaningPopupDisplayer.h; sourceTree = "<group>"; };
 		AF66BF0A1B1EBDA700E89B23 /* MeaningPopupDisplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeaningPopupDisplayer.m; sourceTree = "<group>"; };
+		AF719E381B21ED1700D52EA3 /* MyCustomTextfield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomTextfield.h; sourceTree = "<group>"; };
+		AF719E391B21ED1700D52EA3 /* MyCustomTextfield.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomTextfield.m; sourceTree = "<group>"; };
+		AF719E411B21F23700D52EA3 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		AF719E421B21F23700D52EA3 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
+		AF719E441B22137F00D52EA3 /* PasswordResetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordResetVC.h; sourceTree = "<group>"; };
+		AF719E451B22137F00D52EA3 /* PasswordResetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordResetVC.m; sourceTree = "<group>"; };
 		AF7869A31B10BDB9009BE37B /* MenuBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MenuBtn.png; path = Graphics/MenuBtn.png; sourceTree = "<group>"; };
 		AF7869A51B10CB9B009BE37B /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEngine.h; sourceTree = "<group>"; };
 		AF7869A61B10CB9B009BE37B /* SoundEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEngine.m; sourceTree = "<group>"; };
@@ -369,6 +382,12 @@
 		AFF15E1D1B1F0304002D0EC1 /* AlertMascotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertMascotView.h; sourceTree = "<group>"; };
 		AFF15E1E1B1F0304002D0EC1 /* AlertMascotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertMascotView.m; sourceTree = "<group>"; };
 		AFF15E201B1F096B002D0EC1 /* speechBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speechBubble.png; sourceTree = "<group>"; };
+		AFF250491B22CB5B00803482 /* dummyAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dummyAvatar.png; path = Graphics/dummyAvatar.png; sourceTree = "<group>"; };
+		AFF2504B1B22CBD400803482 /* circleWhite */ = {isa = PBXFileReference; lastKnownFileType = file; name = circleWhite; path = Graphics/circleWhite; sourceTree = "<group>"; };
+		AFF2504D1B22D10300803482 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
+		AFF2504E1B22D10300803482 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
+		AFF250501B23015000803482 /* PasswordChangeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeVC.h; sourceTree = "<group>"; };
+		AFF250511B23015000803482 /* PasswordChangeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeVC.m; sourceTree = "<group>"; };
 		AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ViewBG.jpg; path = Graphics/ViewBG.jpg; sourceTree = "<group>"; };
 		AFF396C91B1CB9F6002675AB /* rankStar_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_1.png; path = Graphics/Stickers/rankStar_1.png; sourceTree = "<group>"; };
 		AFF396CA1B1CB9F6002675AB /* rankStar_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_2.png; path = Graphics/Stickers/rankStar_2.png; sourceTree = "<group>"; };
@@ -608,6 +627,8 @@
 				AFF15E1D1B1F0304002D0EC1 /* AlertMascotView.h */,
 				AFF15E1E1B1F0304002D0EC1 /* AlertMascotView.m */,
 				AFF15E1B1B1F029E002D0EC1 /* AlertMascotDisplayView.xib */,
+				AF719E381B21ED1700D52EA3 /* MyCustomTextfield.h */,
+				AF719E391B21ED1700D52EA3 /* MyCustomTextfield.m */,
 			);
 			name = "Misc Object";
 			sourceTree = "<group>";
@@ -632,6 +653,8 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				AFF2504B1B22CBD400803482 /* circleWhite */,
+				AFF250491B22CB5B00803482 /* dummyAvatar.png */,
 				AFC243071B1F85D100972BA4 /* GooglePlusLogo.png */,
 				AFC243051B1F842F00972BA4 /* FacebookLogo.png */,
 				AFF15E0D1B1EFB2E002D0EC1 /* Mascots */,
@@ -742,6 +765,14 @@
 				C36DF4EE1B0853B300C225DA /* LoginVC.m */,
 				AFFB76B11B0A4D0B001489F1 /* PackageInfoVC.h */,
 				AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */,
+				AF719E411B21F23700D52EA3 /* RegisterVC.h */,
+				AF719E421B21F23700D52EA3 /* RegisterVC.m */,
+				AF719E441B22137F00D52EA3 /* PasswordResetVC.h */,
+				AF719E451B22137F00D52EA3 /* PasswordResetVC.m */,
+				AFF2504D1B22D10300803482 /* ProfileVC.h */,
+				AFF2504E1B22D10300803482 /* ProfileVC.m */,
+				AFF250501B23015000803482 /* PasswordChangeVC.h */,
+				AFF250511B23015000803482 /* PasswordChangeVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -886,6 +917,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF2504C1B22CBD400803482 /* circleWhite in Resources */,
 				AFE729891B0E0820005F0850 /* MenuCellBG.png in Resources */,
 				AFC27BF91B0EEC5700225016 /* tablet.png in Resources */,
 				AFC27BFE1B0EEC5700225016 /* user.png in Resources */,
@@ -923,6 +955,7 @@
 				AFC27BEC1B0EEC5700225016 /* photo.png in Resources */,
 				AFC27BD11B0EEC5700225016 /* console.png in Resources */,
 				AFC27BD51B0EEC5700225016 /* diskette.png in Resources */,
+				AFF2504A1B22CB5B00803482 /* dummyAvatar.png in Resources */,
 				AFC27BE71B0EEC5700225016 /* news.png in Resources */,
 				AFC27BDF1B0EEC5700225016 /* letter.png in Resources */,
 				AFE729821B0DFF69005F0850 /* SideMenuHeaderView.xib in Resources */,
@@ -1060,8 +1093,11 @@
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */,
 				AF3AC8801B1DE9AF00B23FCF /* TestRankAnimView.m in Sources */,
+				AF719E431B21F23700D52EA3 /* RegisterVC.m in Sources */,
 				AF0ED9C91B14C2D100340BA5 /* TestVC.m in Sources */,
+				AF719E461B22137F00D52EA3 /* PasswordResetVC.m in Sources */,
 				AFCB0D351B11F8F800F5688F /* CardTypeAnswerView.m in Sources */,
+				AFF250521B23015000803482 /* PasswordChangeVC.m in Sources */,
 				AFE010821B053186005B4B4D /* PackageCell.m in Sources */,
 				AFCB0D301B11ED3F00F5688F /* CardMultipleChoiceView.m in Sources */,
 				C37437271B0721A00002E46F /* User.m in Sources */,
@@ -1082,6 +1118,7 @@
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
 				AF2B6F051B1CD95800079B4B /* SetRow2Displayer.m in Sources */,
 				AF2B6EFF1B1CC43B00079B4B /* SetDisplayer.m in Sources */,
+				AFF2504F1B22D10300803482 /* ProfileVC.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
 				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,
 				AF2B6F021B1CCC9200079B4B /* SetRow1Displayer.m in Sources */,
@@ -1089,6 +1126,7 @@
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
 				C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */,
+				AF719E3A1B21ED1700D52EA3 /* MyCustomTextfield.m in Sources */,
 				AF243D321B183F0300FDF1D8 /* AlertTestModePickView.m in Sources */,
 				AFF15E1F1B1F0304002D0EC1 /* AlertMascotView.m in Sources */,
 				AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */,

@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, MSPaneViewControllerType) {
     ControllerLogin,
     ControllerUserShelf,
     ControllerShop,
+    ControllerProfile,
     ControllerTypeCount
 };
 

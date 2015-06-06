@@ -13,6 +13,7 @@
 #import "SideMenuHeader.h"
 #import "UserShelfVC.h"
 #import "ShopVC.h"
+#import "ProfileVC.h"
 
 NSString * const MenuCellReuseIdentifier = @"menuCell";
 NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
@@ -107,21 +108,24 @@ static SideMenuVC * instance = nil;
 {
     self.paneViewControllerType = NSUIntegerMax;
     self.paneViewControllerTitles = @{
-                                      @(ControllerLogin) : @"Login",
-                                      @(ControllerUserShelf) : @"Shelf",
-                                      @(ControllerShop) : @"Shop"
+                                      @(ControllerLogin) : @"Đăng Nhập",
+                                      @(ControllerUserShelf) : @"Tủ Sách",
+                                      @(ControllerShop) : @"Thư Viện",
+                                      @(ControllerProfile) : @"Cá Nhân"
                                       };
 #if !defined(STORYBOARD)
     self.paneViewControllerClasses = @{
                                        @(ControllerLogin) : [LoginVC class],
                                        @(ControllerUserShelf) : [UserShelfVC class],
-                                       @(ControllerShop) : [ShopVC Class]
+                                       @(ControllerShop) : [ShopVC Class],
+                                       @(ControllerProfile) : [ProfileVC Class]
                                        };
 #else
     self.paneViewControllerIdentifiers = @{
                                            @(ControllerLogin) : @"loginView",
                                            @(ControllerUserShelf) : @"userShelfView",
-                                           @(ControllerShop) : @"shopView"
+                                           @(ControllerShop) : @"shopView",
+                                           @(ControllerProfile) : @"profileView"
                                            };
 #endif
     self.sectionTitles = @{
@@ -141,7 +145,7 @@ static SideMenuVC * instance = nil;
                           ];
     self.menuTitleList = @[
                            @"Tủ Sách",
-                           @"Cửa Hàng",
+                           @"Thư Viện",
                            @"Nạp Thẻ",
                            @"Cá Nhân",
                            @"Điều Chỉnh",
@@ -159,6 +163,8 @@ static SideMenuVC * instance = nil;
             break;
         case 1:
             return ControllerShop;
+        case 3:
+            return ControllerProfile;
         case 5:
             return ControllerLogin;
         default:
