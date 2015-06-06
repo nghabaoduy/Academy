@@ -51,7 +51,18 @@ static SoundEngine * instance = nil;
     if ([synthesizer isPaused]) {
         [synthesizer continueSpeaking];
     }else{
+        [self stopSpeech];
         [self speakText:word];
+    }
+}
+- (void)stopSpeech
+{
+    AVSpeechSynthesizer *talked = synthesizer;
+    if([talked isSpeaking]) {
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
+        [talked speakUtterance:utterance];
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
 }
 - (void)speakText:(NSString*)text{

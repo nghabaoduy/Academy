@@ -12,7 +12,8 @@
 
 @implementation TestMaker{
     LSet *curSet;
-    NSArray *wordList;
+    
+    NSMutableArray *wordList;
     TestType curTestType;
     NSMutableArray *viewTypeList;
     int curWordNo;
@@ -26,15 +27,31 @@
 - (id)initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList {
     self = [super init];
     if (self) {
+        _fullWordList = _wordList;
         curSet = _set;
-        wordList = _wordList;
-        viewTypeList = [[NSMutableArray alloc] initWithCapacity:TestTypeCount];
-        curWordNo = -1;
-        curTestType = arc4random_uniform(TestTypeCount);
-        answeredQuestion = [NSMutableArray new];
-        hasFinishedRound1 = NO;
+        _userPickedTestType = TestTypeCount;
+        _testWordQuantity = _wordList.count;
+        [self resetTest];
     }
     return self;
+}
+-(void) resetTest
+{
+    wordList = [NSMutableArray new];
+    NSMutableArray * shuffledWordList = [self shuffleArray:[_fullWordList mutableCopy]];
+    for (int i = 0; i<MIN(shuffledWordList.count, _testWordQuantity); i++) {
+        [wordList addObject:shuffledWordList[i]];
+    }
+
+    viewTypeList = [[NSMutableArray alloc] initWithCapacity:TestTypeCount];
+    curWordNo = -1;
+    curTestType = _userPickedTestType != TestTypeCount? _userPickedTestType : arc4random_uniform(TestTypeCount);
+    answeredQuestion = [NSMutableArray new];
+    hasFinishedRound1 = NO;
+}
+-(int) getTestWordQuantity
+{
+    return wordList.count;
 }
 -(void) setAllowAnswerBack:(BOOL) allow
 {
@@ -154,6 +171,11 @@
 {
     curWordNo = [self getNextQuestionIndex];
     NSLog(@"curWordNo = %i",curWordNo);
+    
+    if (_userPickedTestType != TestTypeCount) {
+        return viewTypeList[_userPickedTestType];
+    }
+    
     int randType = curTestType;
     while(randType == curTestType || ![self questionTypeIsValid:randType])
     {
@@ -313,6 +335,28 @@
 -(int) getCurQuesNo
 {
     return curWordNo;
+}
+
++ (NSString *) getTestTypeName:(TestType) testT
+{
+    switch (testT) {
+        case TestMultipleChoiceExampleBlank:
+            return @"Trắc nghiệm điền chỗ trống";
+        case TestMultipleChoiceSameLanguage:
+            return @"Trắc nghiệm dịch câu";
+        case TestMultipleChoiceUserLanguage:
+            return @"Trắc nghiệm dịch nghĩa";
+        case TestWordFillingSameLanguage:
+            return @"Điền từ dịch câu";
+        case TestWordFillingUserLanguage:
+            return @"Điền từ dịch nghĩa";
+        case TestWordFillingWordListen:
+            return @"Nghe từ điền chữ";
+        case TestTypeCount:
+            return @"Tất cả";
+        default:
+            return @"";
+    }
 }
 
 @end

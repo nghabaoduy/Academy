@@ -17,7 +17,7 @@
 {
     
     IBOutlet UITextField *nameTF;
-    IBOutlet UIImageView *avatar;
+    IBOutlet UIButton *avatar;
     IBOutlet UIView *chartView;
     
     PNBarChart * barChart;
@@ -25,10 +25,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self refreshView];
     [nameTF setFont:[UIFont fontWithName:@"GothamRounded-Bold" size:20]];
     
-    
+    [avatar.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    CALayer *avatarLayer = avatar.layer;
+    [avatarLayer setCornerRadius:50.0f];
+    [avatarLayer setMasksToBounds:YES];
     
     //For BarC hart
     barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180.0)];
@@ -39,8 +42,12 @@
     [chartView setBackgroundColor:[UIColor clearColor]];
     
     [self performSelector:@selector(refreshChart) withObject:self afterDelay:1.0f];
+}
+-(void) refreshView
+{
+   
     
-
+    
 }
 -(void) refreshChart
 {
@@ -70,73 +77,82 @@
 - (IBAction)firstCellInsideTouchUp:(id)sender {
     [nameTF resignFirstResponder];
 }
-
-#pragma mark - Table view data source
-/*
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+// Avatar Image Control
+- (IBAction) AddImageOption:(id)sender
+{
     
-    // Configure the cell...
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Thay Ảnh Đại Diện" delegate:self cancelButtonTitle:@"Huỷ"
+                                              destructiveButtonTitle: nil
+                                                   otherButtonTitles:@"Chụp ngay", @"Lấy ảnh từ máy", nil];
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [popupQuery showInView:self.view];
     
-    return cell;
+    
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self SelectCamera];
+    } else if (buttonIndex == 1) {
+        [self SelectImage];
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    chosenImage = [self imageWithImage:chosenImage minSide:100];
+    [avatar setImage:chosenImage forState:UIControlStateNormal];
+    //save image
+
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (UIImage *)imageWithImage:(UIImage *)image minSide:(int)minLength {
+    
+    CGSize newSize;
+    if(image.size.width > image.size.height)
+    {
+        newSize = CGSizeMake(image.size.width*minLength/image.size.height, minLength);
+    }
+    else
+    {
+        newSize = CGSizeMake(minLength, image.size.height*minLength/image.size.width);
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void) SelectImage
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) SelectCamera
+{
+    if (UIImagePickerControllerSourceTypeCamera)
+    {
+        UIImagePickerController * imgPicker = [[UIImagePickerController alloc] init];
+        
+        imgPicker.delegate = self;
+        
+        imgPicker.allowsEditing = NO;
+        imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [self presentViewController:imgPicker animated:YES completion:NULL];
+    }
+    
 }
-*/
 
 @end

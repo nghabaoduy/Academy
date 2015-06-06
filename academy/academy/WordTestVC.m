@@ -12,6 +12,7 @@
 #import "TestRankAnimView.h"
 #import "SoundEngine.h"
 #import "AlertMascotView.h"
+#import "TestSettingView.h"
 
 @interface WordTestVC () <ModelDelegate>
 
@@ -35,6 +36,7 @@
     BOOL isTestFinished;
     BOOL isTFUp;
     
+    IBOutlet UIButton *testSettingBtn;
     TestPickType curPickType;
 }
 
@@ -79,20 +81,20 @@
 - (void) addTimer
 {
     if (_timerControl3 != nil) {
-        endDate = [NSDate dateWithTimeIntervalSinceNow:99];
+        endDate = [NSDate dateWithTimeIntervalSinceNow:[testMaker getTestWordQuantity] * 6];
         return;
     }
     _timerControl3 = [DDHTimerControl timerControlWithType:DDHTimerTypeSolid];
     _timerControl3.translatesAutoresizingMaskIntoConstraints = NO;
     _timerControl3.color = [UIColor orangeColor];
     _timerControl3.highlightColor = [UIColor redColor];
-    _timerControl3.maxValue = wordList.count * 6;
+    _timerControl3.maxValue = [testMaker getTestWordQuantity] * 6;
     _timerControl3.titleLabel.text = @"sec";
     _timerControl3.userInteractionEnabled = NO;
-    _timerControl3.frame = CGRectMake(self.view.frame.size.width - 70 - 20, 30, 70, 70);
+    _timerControl3.frame = CGRectMake(self.view.frame.size.width - 70 - 5, 30, 70, 70);
     [self.view addSubview:_timerControl3];
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeTimer:) userInfo:nil repeats:YES];
-    endDate = [NSDate dateWithTimeIntervalSinceNow:wordList.count * 6];
+    endDate = [NSDate dateWithTimeIntervalSinceNow:[testMaker getTestWordQuantity] * 6];
 }
 - (void)changeTimer:(NSTimer*)timer {
     if (isTestFinished) {
@@ -113,7 +115,7 @@
     AlertTestModePickView *modePickView = [[AlertTestModePickView alloc] init];
     modePickView.alertView = alertView;
     modePickView.delegate = self;
-    [modePickView setTestTimeText:(wordList.count * 6)];
+    [modePickView setTestTimeText:([testMaker getTestWordQuantity] * 6)];
     [alertView setContainerView:modePickView];
 
     [alertView setButtonTitles:[NSMutableArray arrayWithObjects: nil]];
@@ -121,17 +123,27 @@
     [alertView show];
 
 }
+-(void) restartTest
+{
+    [self startTest];
+}
 -(void) startTest
 {
     isTestFinished = NO;
     hasAnswered = NO;
-    testMaker =[[TestMaker alloc] initWithSetAndWordList:curSet wordList:wordList];
+    if (!testMaker) {
+        testMaker =[[TestMaker alloc] initWithSetAndWordList:curSet wordList:wordList];
+    }
+    else{
+        [testMaker resetTest];
+    }
+    
     testMaker.delegate = self;
     
     [self registerTestMakerCardView];
     curCard = [testMaker createNextQuestion];
     [testMaker displayNextQuestion];
-    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",[testMaker getCurQuesNo]+1,(unsigned long)wordList.count]];
+    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",[testMaker getCurQuesNo]+1,[testMaker getTestWordQuantity]]];
     correctWordList = [NSMutableArray new];
     [self refreshCardHiddenState];
     [nextBtn setEnabled:YES];
@@ -141,17 +153,17 @@
     isTestFinished = YES;
     [_cardTypeAnswer dismissKeyboard];
     //ranking
-    if (correctWordList.count >= wordList.count) {
+    if (correctWordList.count >= [testMaker getTestWordQuantity]) {
         curSet.grade = [NSNumber numberWithInt:3];
     } else
-    if (correctWordList.count >= wordList.count*70/100) {
+    if (correctWordList.count >= [testMaker getTestWordQuantity]*70/100) {
         curSet.grade = [NSNumber numberWithInt:2];
     } else
-    if (correctWordList.count >= wordList.count*50/100) {
+    if (correctWordList.count >= [testMaker getTestWordQuantity]*50/100) {
             curSet.grade = [NSNumber numberWithInt:1];
     } else
     {
-        curSet.grade = @(0);
+        curSet.grade = [NSNumber numberWithInt:0];
     }
     
     SetScore * newsScore = [SetScore new];
@@ -170,14 +182,14 @@
     // Add some custom content to the alert view
     if (curPickType == TestPickNormal) {
         AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
-        [cartoonView.messageLb setText:[NSString stringWithFormat:@"Bạn trả lời đúng %lu/%lu câu hỏi.",(unsigned long)correctWordList.count, (unsigned long)wordList.count]];
+        [cartoonView.messageLb setText:[NSString stringWithFormat:@"Bạn trả lời đúng %lu/%i câu hỏi.",(unsigned long)correctWordList.count, [testMaker getTestWordQuantity]]];
         [alertView setContainerView:cartoonView];
     }
     else
     {
-        if (curSet.grade == 0) {
+        if ([curSet.grade intValue] == 0) {
             AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
-            [cartoonView.messageLb setText:[NSString stringWithFormat:@"Tiếc quá, bạn chỉ trả lời đúng %lu/%lu câu thôi, cố lên nhé.",(unsigned long)correctWordList.count, (unsigned long)wordList.count]];
+            [cartoonView.messageLb setText:[NSString stringWithFormat:@"Tiếc quá, bạn chỉ trả lời đúng %lu/%i câu thôi, cố lên nhé.",(unsigned long)correctWordList.count, [testMaker getTestWordQuantity]]];
             [cartoonView.mascotImg setImage:[UIImage imageNamed:@"giraffe_sad.png"]];
             [alertView setContainerView:cartoonView];
             
@@ -185,7 +197,7 @@
         else
         {
             TestRankAnimView *rankView = [[TestRankAnimView alloc] init];
-            NSString *message = [NSString stringWithFormat:@"Chúc mừng, bạn đã hoàn thành bài kiểm tra với %lu/%lu câu trả lời đúng.",(unsigned long)correctWordList.count, (unsigned long)wordList.count];
+            NSString *message = [NSString stringWithFormat:@"Chúc mừng, bạn đã hoàn thành bài kiểm tra với %lu/%i câu trả lời đúng.",(unsigned long)correctWordList.count, [testMaker getTestWordQuantity]];
             [rankView setMessage:message];
             [rankView setLSet:curSet];
             [alertView setContainerView:rankView];
@@ -235,17 +247,6 @@
     curCard.hidden = NO;
 }
 
-- (NSMutableArray *)shuffleArray:(NSMutableArray *) tarArray
-{
-    NSUInteger count = [tarArray count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        NSInteger remainingCount = count - i;
-        NSInteger exchangeIndex = i + arc4random_uniform((u_int32_t )remainingCount);
-        [tarArray exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
-    }
-    return tarArray;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -281,7 +282,7 @@
 -(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
 {
     [testMaker displayNextQuestion];
-    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",[testMaker getCurQuesNo]+1,(unsigned long)wordList.count]];
+    [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",[testMaker getCurQuesNo]+1,[testMaker getTestWordQuantity]]];
     if (nextCard != curCard) {
         [super startEndMove:nextCard :moveLeft :startX];
     }
@@ -320,6 +321,17 @@
         }
     }
 }
+
+- (IBAction)goTestSetting:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    TestSettingView *destination = [self.storyboard instantiateViewControllerWithIdentifier:@"testSettingView"];
+    destination.parentView = self;
+    destination.testMaker = testMaker;
+    UINavigationController *desNavController = [[UINavigationController alloc] initWithRootViewController:destination];
+    [self presentViewController:desNavController animated:YES completion:nil];
+}
+
+
 #pragma mark - AlertTestModePick Delegate
 -(void)AlertTestModePickView:(AlertTestModePickView *)modePickView modePicked:(TestPickType)testPickType
 {
@@ -328,10 +340,12 @@
     switch (testPickType) {
         case TestPickNormal:
             [self startTest];
+            testSettingBtn.hidden = NO;
             break;
         case TestPickTimer:
         {
             [self startTest];
+            testSettingBtn.hidden = YES;
             [testMaker setAllowAnswerBack:YES];
             [self addTimer];
         }
@@ -403,7 +417,6 @@
     curSet = model;
     
     wordList = model.wordList;
-    wordList = [[self shuffleArray:[wordList mutableCopy]] copy];
     [self displayAlertTestPick];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }

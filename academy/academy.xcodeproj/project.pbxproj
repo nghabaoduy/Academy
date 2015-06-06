@@ -163,6 +163,7 @@
 		AFF2504C1B22CBD400803482 /* circleWhite in Resources */ = {isa = PBXBuildFile; fileRef = AFF2504B1B22CBD400803482 /* circleWhite */; };
 		AFF2504F1B22D10300803482 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF2504E1B22D10300803482 /* ProfileVC.m */; };
 		AFF250521B23015000803482 /* PasswordChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF250511B23015000803482 /* PasswordChangeVC.m */; };
+		AFF250571B23382900803482 /* TestSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF250561B23382900803482 /* TestSettingView.m */; };
 		AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */; };
 		AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396C91B1CB9F6002675AB /* rankStar_1.png */; };
 		AFF396D01B1CB9F6002675AB /* rankStar_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396CA1B1CB9F6002675AB /* rankStar_2.png */; };
@@ -388,6 +389,8 @@
 		AFF2504E1B22D10300803482 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
 		AFF250501B23015000803482 /* PasswordChangeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeVC.h; sourceTree = "<group>"; };
 		AFF250511B23015000803482 /* PasswordChangeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeVC.m; sourceTree = "<group>"; };
+		AFF250551B23382900803482 /* TestSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSettingView.h; sourceTree = "<group>"; };
+		AFF250561B23382900803482 /* TestSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSettingView.m; sourceTree = "<group>"; };
 		AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ViewBG.jpg; path = Graphics/ViewBG.jpg; sourceTree = "<group>"; };
 		AFF396C91B1CB9F6002675AB /* rankStar_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_1.png; path = Graphics/Stickers/rankStar_1.png; sourceTree = "<group>"; };
 		AFF396CA1B1CB9F6002675AB /* rankStar_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_2.png; path = Graphics/Stickers/rankStar_2.png; sourceTree = "<group>"; };
@@ -653,16 +656,16 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				AFF15E0D1B1EFB2E002D0EC1 /* Mascots */,
+				AFE7BEE21B1DD7AD0088B9DB /* Banners */,
+				AFF396C81B1CB996002675AB /* Stickers */,
+				AFC27B7C1B0EEC4A00225016 /* Icons */,
 				AFF2504B1B22CBD400803482 /* circleWhite */,
 				AFF250491B22CB5B00803482 /* dummyAvatar.png */,
 				AFC243071B1F85D100972BA4 /* GooglePlusLogo.png */,
 				AFC243051B1F842F00972BA4 /* FacebookLogo.png */,
-				AFF15E0D1B1EFB2E002D0EC1 /* Mascots */,
 				AF5E995F1B1ECCB4009342BA /* popupArrowUp */,
 				AF0C13BA1B1E084E006D5AF9 /* PriceTag.png */,
-				AFE7BEE21B1DD7AD0088B9DB /* Banners */,
-				AFF396C81B1CB996002675AB /* Stickers */,
-				AFC27B7C1B0EEC4A00225016 /* Icons */,
 				AF0ED9C51B1473D300340BA5 /* speaker-btn */,
 				AF7869AF1B10D48A009BE37B /* tick.png */,
 				AF7869A31B10BDB9009BE37B /* MenuBtn.png */,
@@ -691,6 +694,8 @@
 				AF0241D11B0F16560019B3E2 /* WordTestVC.m */,
 				AF0241D31B0F18930019B3E2 /* WordDisplayView.h */,
 				AF0241D41B0F18930019B3E2 /* WordDisplayView.m */,
+				AFF250551B23382900803482 /* TestSettingView.h */,
+				AFF250561B23382900803482 /* TestSettingView.m */,
 			);
 			name = WordCardViewCollection;
 			sourceTree = "<group>";
@@ -1118,6 +1123,7 @@
 				AFE6DEFD1B049DC3003E30CA /* CardInfoView.m in Sources */,
 				AF2B6F051B1CD95800079B4B /* SetRow2Displayer.m in Sources */,
 				AF2B6EFF1B1CC43B00079B4B /* SetDisplayer.m in Sources */,
+				AFF250571B23382900803482 /* TestSettingView.m in Sources */,
 				AFF2504F1B22D10300803482 /* ProfileVC.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
 				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,

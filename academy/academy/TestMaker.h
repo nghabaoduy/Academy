@@ -33,7 +33,14 @@ typedef NS_ENUM(NSUInteger, TestType) {
     id <TestMakerDelegate> delegate;
 }
 @property (retain) id delegate;
+@property (nonatomic, retain) NSArray * fullWordList;
+@property int testWordQuantity;
+@property TestType userPickedTestType;
+
++ (NSString *) getTestTypeName:(TestType) testT;
+
 - (id) initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList;
+-(void) resetTest;
 -(void) setAllowAnswerBack:(BOOL) allow;//notyet answer question;
 -(void) registerCardView:(UIView *) view;
 -(UIView *) createNextQuestion;
@@ -41,4 +48,5 @@ typedef NS_ENUM(NSUInteger, TestType) {
 -(BOOL) checkAnswer:(NSString *) _answer;
 -(BOOL) isLastQuestion;
 -(int) getCurQuesNo;
+-(int) getTestWordQuantity;
 @end

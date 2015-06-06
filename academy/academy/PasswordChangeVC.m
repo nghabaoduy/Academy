@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.scrollEnabled = NO;
     self.navigationItem.title = @"Thay Đổi Mật Khẩu";
     curPassTF.placeholder = @"Mật khẩu hiện tại: ";
     passwordTF.placeholder = @"Mật khẩu mới: ";

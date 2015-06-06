@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.scrollEnabled = NO;
     self.navigationItem.title = @"Đăng Ký";
     profileNameTF.placeholder = @"Họ tên: ";
     emailTF.placeholder = @"Email: ";

@@ -27,4 +27,6 @@
 
 @property (strong, nonatomic) NSArray *wordList;
 @property (strong, nonatomic) WordInfoVC *wordInfoView;
+
+-(void) restartTest;
 @end
