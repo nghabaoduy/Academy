@@ -12,16 +12,18 @@
 
 @implementation Package
 
-@synthesize awsId, name, desc, category, price, wordsTotal, setList;
+@synthesize awsId, name, desc, category, price, wordsTotal, setList, imgURL;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     NSLog(@"Package dict = %@",dict);
+    
     self.modelId = [self getStringFromDict:dict WithKey:@"id"];
     name = [self getStringFromDict:dict WithKey:@"name"];
     desc = [self getStringFromDict:dict WithKey:@"description"];
     category = [self getStringFromDict:dict WithKey:@"category"];
     price = [self getStringFromDict:dict WithKey:@"price"];
     wordsTotal = [[self getStringFromDict:dict WithKey:@"no_of_words"] intValue];
+    imgURL = dict[@"asset"] ? dict[@"asset"][@"index"] : nil;
     
     setList = [NSMutableArray new];
     for (NSDictionary *setDict in [self getArrayFromDict:dict WithKey:@"sets"]) {

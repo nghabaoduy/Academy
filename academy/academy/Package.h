@@ -20,4 +20,5 @@
 
 @property (nonatomic, retain) NSMutableArray * setList;
 @property (nonatomic, retain) NSNumber * grade;
+@property (nonatomic, retain) NSString * imgURL;
 @end

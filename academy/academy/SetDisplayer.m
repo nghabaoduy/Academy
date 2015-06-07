@@ -7,7 +7,7 @@
 //
 
 #import "SetDisplayer.h"
-
+#import "UIImageView+AFNetworking.h"
 
 @implementation SetDisplayer
 {
@@ -47,6 +47,12 @@
     curSet = set;
     isFinalTest = NO;
     [titleLb setText:set.name];
+    
+    if (set.imgURL)
+        [img setImageWithURL:[NSURL URLWithString:set.imgURL] placeholderImage:[UIImage imageNamed:@"sticker_egg.png"]];
+    else
+        [img setImage:[UIImage imageNamed:@"sticker_egg.png"]];
+    
     if ([set.grade intValue] == 0) {
         [rankImg setHidden:YES];
     }

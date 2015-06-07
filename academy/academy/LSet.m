@@ -12,7 +12,7 @@
 
 @implementation LSet
 
-@synthesize name, desc, orderNo, wordList, package_id;
+@synthesize name, desc, orderNo, wordList, package_id, imgURL;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     self.modelId = [dict valueForKey:@"id"];
@@ -22,7 +22,7 @@
     package_id = [self getStringFromDict:dict WithKey:@"package_id"];
     orderNo = [self getStringFromDict:dict WithKey:@"order_number"] ? [[self getStringFromDict:dict WithKey:@"order_number"] intValue]:-1;
     
-    
+    imgURL = dict[@"asset"] ? dict[@"asset"][@"index"] : nil;
     wordList = [NSMutableArray new];
     
     NSArray * words = [self getArrayFromDict:dict WithKey:@"words"];

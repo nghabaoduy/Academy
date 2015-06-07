@@ -158,6 +158,7 @@
 		AFEED0DD1B23FDB70008F4DE /* Finish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0D91B23FDB70008F4DE /* Finish.mp3 */; };
 		AFEED0DE1B23FDB70008F4DE /* Wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0DA1B23FDB70008F4DE /* Wrong.mp3 */; };
 		AFEED0E01B23FE390008F4DE /* Win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0DF1B23FE390008F4DE /* Win.mp3 */; };
+		AFEED0E21B24AD1C0008F4DE /* dummyBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0E11B24AD1C0008F4DE /* dummyBanner.png */; };
 		AFF15E101B1EFB2E002D0EC1 /* giraffe_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E0E1B1EFB2E002D0EC1 /* giraffe_happy.png */; };
 		AFF15E111B1EFB2E002D0EC1 /* giraffe_sad.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E0F1B1EFB2E002D0EC1 /* giraffe_sad.png */; };
 		AFF15E1C1B1F029E002D0EC1 /* AlertMascotDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E1B1B1F029E002D0EC1 /* AlertMascotDisplayView.xib */; };
@@ -385,6 +386,7 @@
 		AFEED0D91B23FDB70008F4DE /* Finish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Finish.mp3; path = Sounds/Finish.mp3; sourceTree = "<group>"; };
 		AFEED0DA1B23FDB70008F4DE /* Wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Wrong.mp3; path = Sounds/Wrong.mp3; sourceTree = "<group>"; };
 		AFEED0DF1B23FE390008F4DE /* Win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Win.mp3; path = Sounds/Win.mp3; sourceTree = "<group>"; };
+		AFEED0E11B24AD1C0008F4DE /* dummyBanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dummyBanner.png; path = Graphics/Banner/dummyBanner.png; sourceTree = "<group>"; };
 		AFF15E0E1B1EFB2E002D0EC1 /* giraffe_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giraffe_happy.png; sourceTree = "<group>"; };
 		AFF15E0F1B1EFB2E002D0EC1 /* giraffe_sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giraffe_sad.png; sourceTree = "<group>"; };
 		AFF15E1B1B1F029E002D0EC1 /* AlertMascotDisplayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertMascotDisplayView.xib; sourceTree = "<group>"; };
@@ -715,6 +717,7 @@
 		AFE7BEE21B1DD7AD0088B9DB /* Banners */ = {
 			isa = PBXGroup;
 			children = (
+				AFEED0E11B24AD1C0008F4DE /* dummyBanner.png */,
 				AFE7BEE31B1DD7BE0088B9DB /* banner_1.png */,
 				AFE7BEE41B1DD7BE0088B9DB /* banner_2.png */,
 				AFE7BEE51B1DD7BE0088B9DB /* banner_3.png */,
@@ -947,6 +950,7 @@
 				AFC27C021B0EEC5700225016 /* wallet.png in Resources */,
 				AFC27BFC1B0EEC5700225016 /* tv.png in Resources */,
 				AFC27BCB1B0EEC5700225016 /* camera.png in Resources */,
+				AFEED0E21B24AD1C0008F4DE /* dummyBanner.png in Resources */,
 				AFE7BEEC1B1DD7BE0088B9DB /* banner_5.png in Resources */,
 				AFE0107E1B051CE5005B4B4D /* PackageCellBG.png in Resources */,
 				AFF15E1C1B1F029E002D0EC1 /* AlertMascotDisplayView.xib in Resources */,

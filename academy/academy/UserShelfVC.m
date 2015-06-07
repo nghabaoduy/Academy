@@ -15,6 +15,7 @@
 #import "User.h"
 #import "DataEngine.h"
 #import "MSDynamicsDrawerViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface UserShelfVC () <ModelDelegate>
 
@@ -112,9 +113,11 @@
         [cell.priceLb setText:[NSString stringWithFormat:@"%@ đ",formatted]];
     }
     
-    
-    NSArray *imgList = @[@"banner_1.png",@"banner_2.png",@"banner_3.png",@"banner_4.png",@"banner_5.png"];
-    [cell.packageImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",imgList[arc4random_uniform(imgList.count)]]]];
+
+    if (pack.imgURL)
+        [cell.packageImg setImageWithURL:[NSURL URLWithString:pack.imgURL] placeholderImage:[UIImage imageNamed:@"dummyBanner.png"]];
+    else
+        [cell.packageImg setImage:[UIImage imageNamed:@"dummyBanner.png"]];
     
     return cell;
 }
