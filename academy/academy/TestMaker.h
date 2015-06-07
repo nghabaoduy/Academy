@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, TestType) {
 
 + (NSString *) getTestTypeName:(TestType) testT;
 
-- (id) initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList;
+- (id) initWithWordList:(NSArray *) _wordList;
 -(void) resetTest;
 -(void) setAllowAnswerBack:(BOOL) allow;//notyet answer question;
 -(void) registerCardView:(UIView *) view;

@@ -19,5 +19,5 @@
 @property int wordsTotal;
 
 @property (nonatomic, retain) NSMutableArray * setList;
-
+@property (nonatomic, retain) NSNumber * grade;
 @end

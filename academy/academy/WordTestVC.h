@@ -13,11 +13,13 @@
 #import "WordInfoVC.h"
 #import "Word.h"
 #import "LSet.h"
+#import "Package.h"
 #import "TestMaker.h"
 #import "AlertTestModePickView.h"
 
 @interface WordTestVC : WordDisplayView <CardMultipleChoiceViewDelegate, CardTypeAnswerViewDelegate, TestMakerDelegate, TestPickDelegate>
 
+@property (strong, nonatomic) Package *curPack;
 @property (strong, nonatomic) LSet *curSet;
 
 @property (strong, nonatomic) IBOutlet CardMultipleChoiceView *cardMultipleChoice;

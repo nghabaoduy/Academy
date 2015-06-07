@@ -10,7 +10,7 @@
 #import "Package.h"
 #import "SetRow1Displayer.h"
 #import "SetRow2Displayer.h"
-@interface SetSelectVC : UITableViewController <SetDisplayerDelegate>
+@interface SetSelectVC : UITableViewController <SetDisplayerDelegate, ModelDelegate>
 
 @property (nonatomic, retain) Package * curPack;
 

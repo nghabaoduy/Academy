@@ -72,7 +72,7 @@ const CGFloat kDDHLabelHeight = kDDHLabelWidth;
     _timerElementRect = CGRectInset(frame, kDDHInsetX, kDDHInsetY);
     _radius = CGRectGetWidth(_timerElementRect) / 2;
 
-    _staticLableRect = CGRectInset(self.bounds, kDDHInsetX + floorf(0.18*frame.size.width), kDDHInsetY + floorf(0.18*frame.size.height));
+    _staticLableRect = CGRectInset(self.bounds, kDDHInsetX + floorf(0.18*frame.size.width)-20, kDDHInsetY + floorf(0.18*frame.size.height));
     _staticLableRect.origin.y -= floorf(0.1*frame.size.height);
     _minutesOrSecondsLabel.frame = _staticLableRect;
 

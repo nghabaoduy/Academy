@@ -15,6 +15,7 @@
 @synthesize awsId, name, desc, category, price, wordsTotal, setList;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
+    NSLog(@"Package dict = %@",dict);
     self.modelId = [self getStringFromDict:dict WithKey:@"id"];
     name = [self getStringFromDict:dict WithKey:@"name"];
     desc = [self getStringFromDict:dict WithKey:@"description"];

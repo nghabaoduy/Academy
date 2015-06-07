@@ -11,7 +11,6 @@
 #import "CardTypeAnswerView.h"
 
 @implementation TestMaker{
-    LSet *curSet;
     
     NSMutableArray *wordList;
     TestType curTestType;
@@ -24,11 +23,10 @@
     NSMutableArray *answeredQuestion;
 }
 @synthesize delegate;
-- (id)initWithSetAndWordList:(LSet *)_set wordList:(NSArray *) _wordList {
+- (id)initWithWordList:(NSArray *) _wordList {
     self = [super init];
     if (self) {
         _fullWordList = _wordList;
-        curSet = _set;
         _userPickedTestType = TestTypeCount;
         _testWordQuantity = _wordList.count;
         [self resetTest];
@@ -171,7 +169,7 @@
 {
     curWordNo = [self getNextQuestionIndex];
     NSLog(@"curWordNo = %i",curWordNo);
-    
+    NSLog(@"userPickedTestType = %i",_userPickedTestType);
     if (_userPickedTestType != TestTypeCount) {
         return viewTypeList[_userPickedTestType];
     }

@@ -154,6 +154,10 @@
 		AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAC1B07BE7C00A0FD73 /* Package.m */; };
 		AFEE4BB01B07BEAF00A0FD73 /* LSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */; };
 		AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEE4BB21B07BEC100A0FD73 /* Word.m */; };
+		AFEED0DB1B23FDB70008F4DE /* Fail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0D71B23FDB70008F4DE /* Fail.mp3 */; };
+		AFEED0DD1B23FDB70008F4DE /* Finish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0D91B23FDB70008F4DE /* Finish.mp3 */; };
+		AFEED0DE1B23FDB70008F4DE /* Wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0DA1B23FDB70008F4DE /* Wrong.mp3 */; };
+		AFEED0E01B23FE390008F4DE /* Win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFEED0DF1B23FE390008F4DE /* Win.mp3 */; };
 		AFF15E101B1EFB2E002D0EC1 /* giraffe_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E0E1B1EFB2E002D0EC1 /* giraffe_happy.png */; };
 		AFF15E111B1EFB2E002D0EC1 /* giraffe_sad.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E0F1B1EFB2E002D0EC1 /* giraffe_sad.png */; };
 		AFF15E1C1B1F029E002D0EC1 /* AlertMascotDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFF15E1B1B1F029E002D0EC1 /* AlertMascotDisplayView.xib */; };
@@ -377,6 +381,10 @@
 		AFEE4BAF1B07BEAF00A0FD73 /* LSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSet.m; sourceTree = "<group>"; };
 		AFEE4BB11B07BEC100A0FD73 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		AFEE4BB21B07BEC100A0FD73 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		AFEED0D71B23FDB70008F4DE /* Fail.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Fail.mp3; path = Sounds/Fail.mp3; sourceTree = "<group>"; };
+		AFEED0D91B23FDB70008F4DE /* Finish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Finish.mp3; path = Sounds/Finish.mp3; sourceTree = "<group>"; };
+		AFEED0DA1B23FDB70008F4DE /* Wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Wrong.mp3; path = Sounds/Wrong.mp3; sourceTree = "<group>"; };
+		AFEED0DF1B23FE390008F4DE /* Win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Win.mp3; path = Sounds/Win.mp3; sourceTree = "<group>"; };
 		AFF15E0E1B1EFB2E002D0EC1 /* giraffe_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giraffe_happy.png; sourceTree = "<group>"; };
 		AFF15E0F1B1EFB2E002D0EC1 /* giraffe_sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giraffe_sad.png; sourceTree = "<group>"; };
 		AFF15E1B1B1F029E002D0EC1 /* AlertMascotDisplayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertMascotDisplayView.xib; sourceTree = "<group>"; };
@@ -443,6 +451,10 @@
 		AF7869AA1B10CBEB009BE37B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				AFEED0DF1B23FE390008F4DE /* Win.mp3 */,
+				AFEED0D71B23FDB70008F4DE /* Fail.mp3 */,
+				AFEED0D91B23FDB70008F4DE /* Finish.mp3 */,
+				AFEED0DA1B23FDB70008F4DE /* Wrong.mp3 */,
 				AF7869AB1B10CFCC009BE37B /* Correct.mp3 */,
 			);
 			name = Sounds;
@@ -983,6 +995,7 @@
 				AF2B6EFC1B1CC3C500079B4B /* SetIconView.xib in Resources */,
 				AFE7BEDE1B1DD79F0088B9DB /* laurelWreath.png in Resources */,
 				AFC27BDD1B0EEC5700225016 /* home.png in Resources */,
+				AFEED0E01B23FE390008F4DE /* Win.mp3 in Resources */,
 				AFC27BFB1B0EEC5700225016 /* truck.png in Resources */,
 				AFEDE7DA1B0DAD00007994CE /* VNF-Gotham-Rounded-Book.ttf in Resources */,
 				AFC27BDC1B0EEC5700225016 /* graph.png in Resources */,
@@ -1001,6 +1014,7 @@
 				AFC27BE01B0EEC5700225016 /* lifesaver.png in Resources */,
 				AFCFE5FE1B04E668006D9744 /* cross.png in Resources */,
 				AF0C13BB1B1E084E006D5AF9 /* PriceTag.png in Resources */,
+				AFEED0DD1B23FDB70008F4DE /* Finish.mp3 in Resources */,
 				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
 				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
 				AFE7BEEB1B1DD7BE0088B9DB /* banner_4.png in Resources */,
@@ -1028,10 +1042,12 @@
 				AFC27BCF1B0EEC5700225016 /* compass.png in Resources */,
 				AFF396D11B1CB9F6002675AB /* rankStar_3.png in Resources */,
 				AFC27BF81B0EEC5700225016 /* switch.png in Resources */,
+				AFEED0DB1B23FDB70008F4DE /* Fail.mp3 in Resources */,
 				AFC27BE11B0EEC5700225016 /* lock.png in Resources */,
 				AFE729801B0DEFEA005F0850 /* SideMenuCellView.xib in Resources */,
 				AF7869B81B10F71B009BE37B /* demo.png in Resources */,
 				AFC27BD91B0EEC5700225016 /* film.png in Resources */,
+				AFEED0DE1B23FDB70008F4DE /* Wrong.mp3 in Resources */,
 				AFC27BFA1B0EEC5700225016 /* ticket.png in Resources */,
 				AFC27BEB1B0EEC5700225016 /* phone.png in Resources */,
 				AFC27BF61B0EEC5700225016 /* speech.png in Resources */,

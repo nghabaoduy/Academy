@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LSet.h"
+#import "Package.h"
 @class SetDisplayer;
 
 @protocol SetDisplayerDelegate
@@ -20,6 +21,8 @@
 }
 @property (retain) id delegate;
 @property (strong, nonatomic) IBOutlet UIView *view;
+@property BOOL isFinalTest;
 - (void) setLSet:(LSet *) set;
 -(LSet *) getLSet;
+-(void) setFinalTest:(Package *) pack;
 @end

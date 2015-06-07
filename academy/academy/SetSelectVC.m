@@ -9,7 +9,8 @@
 #import "SetSelectVC.h"
 #import "SetDetailVC.h"
 #import "LSet.h"
-
+#import "WordTestVC.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface SetSelectVC ()
 
@@ -18,8 +19,12 @@
 @implementation SetSelectVC{
     NSMutableArray *setOrderArray;
     NSArray *tempArray;
-    LSet *clickedSet;
+    SetDisplayer *clickedSetDisplayer;
     BOOL isDisplayerClicked;
+    
+    int setLoadCount;
+    NSMutableArray * fullWordList;
+    
 }
 
 @synthesize curPack;
@@ -60,7 +65,7 @@
     if (!curPack) {
         return 0;
     }
-    return setOrderArray.count;
+    return setOrderArray.count+1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -68,6 +73,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //final row
+    if (indexPath.row == setOrderArray.count) {
+        SetRow1Displayer *cell = [tableView dequeueReusableCellWithIdentifier:@"setCell1Displayer" forIndexPath:indexPath];
+        cell.setDisplayer.delegate = self;
+        [cell.setDisplayer setFinalTest:curPack];
+        
+        return cell;
+    }
+    //other
     NSMutableArray * orderList = setOrderArray[indexPath.row];
     
     if (orderList.count == 1) {
@@ -97,10 +111,12 @@
 {
     if ([[segue identifier] isEqualToString:@"goSetDetail"])
     {
-         LSet *set = clickedSet;
-        SetDetailVC * destination = segue.destinationViewController;
-        [destination setTitle:set.name];
-        destination.curSet = set;
+        if (!clickedSetDisplayer.isFinalTest) {
+            LSet *set = [clickedSetDisplayer getLSet];
+            SetDetailVC * destination = segue.destinationViewController;
+            [destination setTitle:set.name];
+            destination.curSet = set;
+        }
     }
 }
 
@@ -113,51 +129,55 @@
 -(void)setDisplayerClicked:(SetDisplayer *)_setDisplayer
 {
     isDisplayerClicked = YES;
-    clickedSet = [_setDisplayer getLSet];
-    [self performSegueWithIdentifier:@"goSetDetail" sender:self];
+    clickedSetDisplayer = _setDisplayer;
+    
+    if (!_setDisplayer.isFinalTest) {
+        [self performSegueWithIdentifier:@"goSetDetail" sender:self];
+    }
+    else
+    {
+        [self retrieveAllSets];
+    }
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(void) retrieveAllSets
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    fullWordList = [NSMutableArray new];
+    setLoadCount = 0;
+    for (LSet *set in curPack.setList) {
+        if (set.wordList.count > 0) {
+            [self addWordListToFullWordList:set.wordList];
+        }
+        else
+        {
+            [set setDelegate:self];
+            [set findId:set.modelId];
+        }
+    }
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+#pragma mark - Model Delegate
+- (void)findIdSuccessful:(LSet *)model {
+    [self addWordListToFullWordList:model.wordList];
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+-(void) addWordListToFullWordList:(NSArray *) wordList
+{
+    if (wordList) {
+        [fullWordList addObjectsFromArray:wordList];
+    }
+    setLoadCount++;
+    if (setLoadCount >= curPack.setList.count) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        WordTestVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordTestView"];
+        view.curPack = curPack;
+        view.wordList = [fullWordList copy];
+        [self presentViewController:view animated:YES completion:nil];
+    }
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    [self addWordListToFullWordList:nil];
 }
-*/
+
 
 @end

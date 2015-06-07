@@ -15,8 +15,11 @@
     IBOutlet UIImageView *rankImg;
     IBOutlet UILabel *titleLb;
     LSet* curSet;
+    Package * curPack;
+    
 }
 @synthesize delegate;
+@synthesize isFinalTest;
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -42,6 +45,7 @@
 - (void) setLSet:(LSet *) set
 {
     curSet = set;
+    isFinalTest = NO;
     [titleLb setText:set.name];
     if ([set.grade intValue] == 0) {
         [rankImg setHidden:YES];
@@ -50,6 +54,20 @@
     {
         [rankImg setHidden:NO];
         [rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[set.grade intValue]]]];
+    }
+}
+-(void) setFinalTest:(Package *) pack
+{
+    curPack = pack;
+    isFinalTest = YES;
+    [titleLb setText:@"Tổng Kiểm Tra"];
+    if ([pack.grade intValue] == 0) {
+        [rankImg setHidden:YES];
+    }
+    else
+    {
+        [rankImg setHidden:NO];
+        [rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[pack.grade intValue]]]];
     }
 }
 -(LSet *) getLSet
