@@ -18,6 +18,11 @@
 - (void)userLogoutSuccessfull:(User *)user;
 - (void)userLogout:(User *)user WithError:(NSDictionary*)Error;
 
+- (void)userRegiserSuccessful:(User*)user;
+- (void)userRegiserFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber*)statusCode;
+
+
+
 - (void)userPurchasePackageSucessful:(User *)user;
 - (void)userPurchasePackageFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 - (void)userTryPackageSucessful:(User *)user;
@@ -42,4 +47,6 @@
 
 - (void)purchasePackage:(Package *)package;
 - (void)tryPackage:(Package *)package;
+
+- (void)registerUserWithParam:(NSDictionary*)dictionary;
 @end

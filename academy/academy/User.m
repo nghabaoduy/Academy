@@ -120,4 +120,23 @@ static User * _currentUser = nil;
     }];
 }
 
+- (void)registerUserWithParam:(NSDictionary *)dictionary {
+    
+    NSString *apiPath = @"api/register";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response %@", responseObject);
+        [self.authDelegate userRegiserSuccessful:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error %@", error.localizedDescription);
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        [self.authDelegate userRegiserFailed:self WithError:json StatusCode:@([operation.response statusCode])];
+    }];
+}
+
 @end

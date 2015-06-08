@@ -7,8 +7,9 @@
 //
 
 #import "RegisterVC.h"
+#import "User.h"
 
-@interface RegisterVC ()
+@interface RegisterVC () <AuthDelegate>
 
 @end
 
@@ -28,6 +29,19 @@
     emailTF.placeholder = @"Email: ";
     passwordTF.placeholder = @"Mật khẩu: ";
     rePasswordTF.placeholder = @"Xác nhận mật khẩu: ";
+    [self newUser];
+}
+
+- (void)newUser {
+    //example only checking Register APi Indropbox
+    User * newUser = [User new];
+    newUser.authDelegate = self;
+    [newUser registerUserWithParam:@{
+                                     @"username" : @"test@gmail.com",
+                                     @"password" : @"000000",
+                                     @"password_confirmation" : @"000000",
+                                     @"profile_name" : @"test user"
+                                     }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,4 +60,13 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+- (void)userRegiserFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode {
+    
+}
+
+- (void)userRegiserSuccessful:(User *)user {
+    NSLog(@"success");
+}
+
 @end
