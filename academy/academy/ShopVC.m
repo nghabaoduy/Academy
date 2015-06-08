@@ -100,7 +100,8 @@
     return cellInitHeight;
 }
 #pragma mark - Package
-- (void)getAllSucessfull:(NSMutableArray *)allList {
+
+- (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
     packageList = allList;
     [self.tableView reloadData];
 }

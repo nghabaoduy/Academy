@@ -49,7 +49,7 @@
             LSet * newSet = [[LSet alloc] initWithDict:setDict];
             [setList addObject:newSet];
         }
-        [self.delegate getAllSucessfull:setList];
+        [self.delegate getAllSucessfull:self List:setList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];

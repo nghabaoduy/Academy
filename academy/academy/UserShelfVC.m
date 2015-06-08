@@ -149,7 +149,7 @@
 }
 #pragma mark - Model Delegate
 
-- (void)getAllSucessfull:(NSMutableArray *)allList {
+- (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
     packageList = allList;
     [self reloadData];
 

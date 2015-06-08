@@ -41,7 +41,7 @@
             UserPackage * newUserPackage = [[UserPackage alloc] initWithDict:userPackageDict];
             [packageList addObject:newUserPackage];
         }
-        [self.delegate getAllSucessfull:packageList];
+        [self.delegate getAllSucessfull:self List:packageList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];

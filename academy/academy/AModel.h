@@ -14,7 +14,7 @@
 @protocol ModelDelegate <NSObject>
 
 @optional
-- (void)getAllSucessfull:(NSMutableArray *)allList;
+- (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList;
 - (void)findIdSuccessful:(AModel*)model;
 - (void)createModelSuccessful:(AModel *)model;
 - (void)updateModelSuccessful:(AModel *)model;

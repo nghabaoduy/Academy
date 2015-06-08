@@ -39,7 +39,7 @@
             SetScore* setScore = [[SetScore alloc] initWithDict:setScoreDict];
             [setScoreList addObject:setScore];
         }
-        [self.delegate getAllSucessfull:setScoreList];
+        [self.delegate getAllSucessfull:self List:setScoreList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
