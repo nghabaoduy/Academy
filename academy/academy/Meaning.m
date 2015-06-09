@@ -17,7 +17,21 @@
     _content = [self getStringFromDict:dict WithKey:@"content"];
     _wordId = [self getStringFromDict:dict WithKey:@"wordId"];
     _example = [self getStringFromDict:dict WithKey:@"example"];
-    self.wordSubDict = [self getDictFromString:[self getStringFromDict:dict WithKey:@"word_sub_dict"]];
+    _wordSubDictStr = [self getStringFromDict:dict WithKey:@"word_sub_dict"];
+    self.wordSubDict = [self getDictFromString:_wordSubDictStr];
+}
+-(NSDictionary *)getDictionaryFromObject
+{
+    return @{
+             @"id" : self.modelId ?: @"",
+             @"language" : _language ?: @"",
+             @"content" : _content?: @"",
+             @"wordId" : _wordId?: @"",
+             @"example" : _example?: @"",
+             @"word_sub_dict" : _wordSubDictStr?: @""
+             };
+    
+    
 }
 -(NSDictionary *) getDictFromString:(NSString *) dictStr
 {

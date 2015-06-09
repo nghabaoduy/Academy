@@ -25,4 +25,6 @@
 - (void) setLSet:(LSet *) set;
 -(LSet *) getLSet;
 -(void) setFinalTest:(Package *) pack;
+-(void) disableDisplayer;
+-(void) enableDisplayer;
 @end

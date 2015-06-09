@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) NSMutableArray * wordList;
 @property (nonatomic, retain) NSNumber * grade;
-@property (nonatomic, retain) SetScore *score;
+@property (nonatomic, retain) SetScore * score;
 @property (nonatomic, retain) NSString * imgURL;
+@property (nonatomic, retain) NSString * dummyImgName;
 @end

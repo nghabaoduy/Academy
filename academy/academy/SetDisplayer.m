@@ -16,6 +16,7 @@
     IBOutlet UILabel *titleLb;
     LSet* curSet;
     Package * curPack;
+    BOOL isEnabled;
     
 }
 @synthesize delegate;
@@ -51,7 +52,7 @@
     if (set.imgURL)
         [img setImageWithURL:[NSURL URLWithString:set.imgURL] placeholderImage:[UIImage imageNamed:@"sticker_egg.png"]];
     else
-        [img setImage:[UIImage imageNamed:@"sticker_egg.png"]];
+        [img setImage:[UIImage imageNamed:set.dummyImgName]];
     
     if ([set.grade intValue] == 0) {
         [rankImg setHidden:YES];
@@ -67,6 +68,7 @@
     curPack = pack;
     isFinalTest = YES;
     [titleLb setText:@"Tổng Kiểm Tra"];
+    [img setImage:[UIImage imageNamed:@"sticker_finaltest.png"]];
     if ([pack.grade intValue] == 0) {
         [rankImg setHidden:YES];
     }
@@ -81,7 +83,20 @@
     return curSet;
 }
 - (IBAction)touchInside:(id)sender {
-    [delegate setDisplayerClicked:self];
+    if (isEnabled) {
+        [delegate setDisplayerClicked:self];
+    }
+}
+
+-(void) disableDisplayer
+{
+    isEnabled = NO;
+    self.layer.opacity = 0.2;
+}
+-(void) enableDisplayer
+{
+    isEnabled = YES;
+    self.layer.opacity = 1;
 }
 
 @end

@@ -28,6 +28,8 @@
     IBOutlet UIButton *nextBtn;
     IBOutlet UIButton *knowBtn;
     IBOutlet UIButton *dunnoBtn;
+    
+    NSString *errorMessage;
 }
 
 @synthesize wordCard = _wordCard;
@@ -50,12 +52,12 @@
     _wordNoLb.text = @"";
     _setTitleLb.text = @"";
     
+    NSLog(@"curset.wordList = %@",[curSet getDictionaryFromObject]);
     
-    [self retrieveWords];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     knownWords = [NSMutableArray new];
     [self resetView];
+    [self retrieveWords];
 }
 
 -(void) resetView
@@ -102,7 +104,7 @@
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%lu",curWordNo+1,(unsigned long)wordList.count]];
     
     Word *word = wordList[curWordNo];
-    
+    NSLog(@"displayCurWord - %@",word);
     //Check Session
     if (isWordCheckSession) {
         [_wordCard displayCenterWord:word.name message:@"Bạn có biết từ này không?"];
@@ -321,7 +323,7 @@
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
+    NSLog(@"Model.wordList = %@",model.wordList);
     wordList = model.wordList;
     originalWordList = [wordList copy];
     [self displayCurWord];
@@ -333,7 +335,25 @@
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    
+    NSLog(@"ErrorMessage[%i] = %@",[statusCode intValue],error);
+    errorMessage = error;
+    [self performSelector:@selector(displayError) withObject:self afterDelay:0.5];
+}
+-(void) displayError
+{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             [self dismissViewControllerAnimated:YES completion:nil];
+                                                         }];
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+    
+    
 }
 
 @end

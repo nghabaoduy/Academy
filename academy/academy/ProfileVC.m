@@ -8,7 +8,8 @@
 
 #import "ProfileVC.h"
 #import "PNChart.h"
-
+#import "DataEngine.h"
+#import "User.h"
 @interface ProfileVC ()
 
 @end
@@ -21,10 +22,13 @@
     IBOutlet UIView *chartView;
     
     PNBarChart * barChart;
+    IBOutlet UIButton *changePassBtn;
+    User *curUser;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    curUser = [User currentUser];
     [self refreshView];
     [nameTF setFont:[UIFont fontWithName:@"GothamRounded-Bold" size:20]];
     
@@ -32,6 +36,10 @@
     CALayer *avatarLayer = avatar.layer;
     [avatarLayer setCornerRadius:50.0f];
     [avatarLayer setMasksToBounds:YES];
+    
+    if ([[DataEngine getInstance] loginType] != LoginNormal) {
+        [changePassBtn setEnabled:NO];
+    }
     
     //For BarC hart
     barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180.0)];
@@ -42,10 +50,12 @@
     [chartView setBackgroundColor:[UIColor clearColor]];
     
     [self performSelector:@selector(refreshChart) withObject:self afterDelay:1.0f];
+    
+    
 }
 -(void) refreshView
 {
-   
+    [nameTF setText:curUser.profileName];
     
     
 }

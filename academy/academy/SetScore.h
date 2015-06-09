@@ -10,6 +10,7 @@
 
 @interface SetScore : AModel
 
+@property (nonatomic, strong) NSString * user_id;
 @property (nonatomic, strong) NSString * set_id;
 @property (nonatomic, strong) NSNumber *score;
 

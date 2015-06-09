@@ -5,7 +5,9 @@
 //  Created by Brian on 5/20/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <GoogleOpenSource/GoogleOpenSource.h>
 
 #import "SideMenuVC.h"
 #import "LoginVC.h"
@@ -14,6 +16,7 @@
 #import "UserShelfVC.h"
 #import "ShopVC.h"
 #import "ProfileVC.h"
+#import "DataEngine.h"
 
 NSString * const MenuCellReuseIdentifier = @"menuCell";
 NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
@@ -139,14 +142,14 @@ static SideMenuVC * instance = nil;
     self.menuIconList = @[
                           @"book.png",
                           @"shop.png",
-                          @"wallet.png",
+                          //@"wallet.png",
                           @"user.png",
                           @"config.png"
                           ];
     self.menuTitleList = @[
                            @"Tủ Sách",
                            @"Thư Viện",
-                           @"Nạp Thẻ",
+                           //@"Nạp Thẻ",
                            @"Cá Nhân",
                            @"Điều Chỉnh",
                            @"Thoát"
@@ -163,9 +166,9 @@ static SideMenuVC * instance = nil;
             break;
         case 1:
             return ControllerShop;
-        case 3:
+        case 2:
             return ControllerProfile;
-        case 5:
+        case 4:
             return ControllerLogin;
         default:
             break;
@@ -253,8 +256,44 @@ static SideMenuVC * instance = nil;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MSPaneViewControllerType paneViewControllerType = [self paneViewControllerTypeForIndexPath:indexPath];
-    [self transitionToViewController:paneViewControllerType animated:YES];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([[DataEngine getInstance] isOffline]) {
+        if (paneViewControllerType == ControllerProfile || paneViewControllerType == ControllerShop) {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Bạn chỉ sử dụng được ứng dụng này khi kết nối với internet." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action) {
+                                                                 
+                                                             }];
+            [alertController addAction:dismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+            return;
+        }
+    }
+    
+    if (paneViewControllerType == ControllerLogin) {
+        //logout
+        [self logout];
+        [self transitionToViewController:paneViewControllerType animated:YES];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    else
+    {
+        [self transitionToViewController:paneViewControllerType animated:YES];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+//=== LOG OUT ===//
+-(void) logout
+{
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //facebook
+    if ([FBSDKAccessToken currentAccessToken]) {
+        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        [loginManager logOut];
+    }
+    //google plus
+    [[GPPSignIn sharedInstance] signOut];
 }
 
 @end

@@ -26,7 +26,24 @@
         [_meaningList addObject:newMeaning];
     }
 }
-
+-(NSDictionary *)getDictionaryFromObject
+{
+    return @{
+             @"id" : self.modelId ?: @"",
+             @"name" : name ?: @"",
+             @"phonentic" : phonentic?: @"",
+             @"word_type" : wordType?: @"",
+             @"meaning_list" : [self getMeaningList]
+             };
+}
+-(NSArray *) getMeaningList
+{
+    NSMutableArray *aArray = [NSMutableArray new];
+    for (Meaning * newMeaning in _meaningList) {
+        [aArray addObject:[newMeaning getDictionaryFromObject]];
+    }
+    return aArray;
+}
 -(NSString *) getMeaning: (NSString *) lang bExample:(BOOL) bExample
 {
     if (bExample) {
@@ -56,7 +73,7 @@
             return meaning.wordSubDict;
         }
     }
-    return @"";
+    return @{};
 }
 -(NSString *) getExample: (NSString *) lang
 {
@@ -70,5 +87,9 @@
 -(NSString *) getWordType
 {
     return self.wordType;
+}
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"[Word Class] %@",name];
 }
 @end

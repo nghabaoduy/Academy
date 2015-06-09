@@ -79,4 +79,56 @@
     return dict[key];
 }
 
+-(NSString *)getUserDefaultStoredKey
+{
+    return @"";
+}
+-(void) saveToNSUserDefaults
+{
+    if ([[DataEngine getInstance] isOffline]) {
+        return;
+    }
+    NSString *userDefaultStoredKey = [self getUserDefaultStoredKey];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray * storedArray = [defaults objectForKey:userDefaultStoredKey];
+    NSMutableArray * modifiedArray;
+    if (!storedArray) {
+        modifiedArray = [NSMutableArray new];
+    }
+    else
+    {
+        modifiedArray = [storedArray mutableCopy];
+    }
+    BOOL isStored = NO;
+    int index = 0;
+    for (NSDictionary * objDict in storedArray) {
+        if ([objDict[@"id"] isEqualToString:self.modelId]) {
+            isStored = YES;
+            index = [storedArray indexOfObject:objDict];
+        }
+    }
+    if (isStored) {
+        [modifiedArray removeObjectAtIndex:index];
+    }
+    [modifiedArray addObject:[self getDictionaryFromObject]];
+    
+    [defaults setObject:modifiedArray forKey:userDefaultStoredKey];
+    [defaults synchronize];
+}
+
+-(NSArray *) filterNSArrayWithFilter:(NSArray *) aArray Filter:(NSDictionary*) filter
+{
+    NSArray *resultArray = [aArray copy];
+    for (NSString *key in [filter allKeys]) {
+        resultArray = [self filterArrayByADictionary:resultArray andKey:[NSString stringWithFormat:@"%@ = '%@'",key,[filter valueForKey:key]]];
+    }
+    return resultArray;
+    
+}
+-(NSArray *)filterArrayByADictionary:(NSArray *)aArray andKey:(NSString *)aPredicte
+{
+    NSPredicate *filter = [NSPredicate predicateWithFormat:aPredicte];
+    return [aArray filteredArrayUsingPredicate:filter];
+}
+
 @end

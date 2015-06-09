@@ -13,6 +13,7 @@
 #import "SoundEngine.h"
 #import "AlertMascotView.h"
 #import "TestSettingView.h"
+#import "DataEngine.h"
 
 @interface WordTestVC () <ModelDelegate>
 
@@ -43,6 +44,8 @@
     
     BOOL isFinalTest;
     int finalTestTotalQuestion;
+    
+    NSString *errorMessage;
 }
 
 @synthesize cardMultipleChoice = _cardMultipleChoice;
@@ -73,8 +76,8 @@
     [self.setTitleLb setText:self.curSet.name];
     
     if (!wordList) {
-        [self retrieveWords];
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self retrieveWords];
     }
     else
     {
@@ -215,7 +218,8 @@
         grade = [NSNumber numberWithInt:0];
     }
     
-    if (!isFinalTest) {
+    if (!isFinalTest) if(curSet.grade < grade)
+    {
         curSet.grade = grade;
         SetScore * newsScore = [SetScore new];
         newsScore.delegate = self;
@@ -259,7 +263,15 @@
             TestRankAnimView *rankView = [[TestRankAnimView alloc] init];
             NSString *message = [NSString stringWithFormat:@"Chúc mừng, bạn đã hoàn thành bài kiểm tra với %lu/%i câu trả lời đúng.",(unsigned long)correctWordList.count, [testMaker getTestWordQuantity]];
             [rankView setMessage:message];
-            [rankView setLSet:curSet];
+            
+            if (isFinalTest) {
+                [rankView setPackage:curPack];
+            }
+            else
+            {
+                [rankView setLSet:curSet];
+            }
+            
             [alertView setContainerView:rankView];
              [[SoundEngine getInstance] playSound:@"Win.mp3"];
         }
@@ -383,6 +395,20 @@
 -(void)AlertTestModePickView:(AlertTestModePickView *)modePickView modePicked:(TestPickType)testPickType
 {
     curPickType = testPickType;
+    if ([[DataEngine getInstance] isOffline]) {
+        if (testPickType == TestPickTimer) {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Bạn không làm kiểm tra được khi không kết nối với internet." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action) {
+                                                                 
+                                                             }];
+            [alertController addAction:dismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+            return;
+        }
+    }
+    
     [modePickView.alertView close];
     switch (testPickType) {
         case TestPickNormal:
@@ -464,14 +490,30 @@
     curSet = model;
     
     wordList = model.wordList;
-    [self displayAlertTestPick];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self performSelector:@selector(displayAlertTestPick) withObject:self afterDelay:0.5];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"ErrorMessage[%i] = %@",[statusCode intValue],error);
+    errorMessage = error;
+    [self performSelector:@selector(displayError) withObject:self afterDelay:0.5];
 }
-
+-(void) displayError
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                     }];
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
 - (void)createModelSuccessful:(AModel *)model {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }

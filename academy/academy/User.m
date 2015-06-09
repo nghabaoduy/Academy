@@ -22,13 +22,21 @@ static User * _currentUser = nil;
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     userDict = dict;
     self.modelId = dict[@"id"];
-    _firstName = [self getStringFromDict:dict WithKey:@"first_name"];
-    _lastName = [self getStringFromDict:dict WithKey:@"last_name"];
     _email = [self getStringFromDict:dict WithKey:@"email"];
     _userName =[self getStringFromDict:dict WithKey:@"username"];
     _credit = [self getNumberFromDict:dict WithKey:@"credit"];
+    _profileName = [self getStringFromDict:dict WithKey:@"profile_name"];
 }
 
+-(NSDictionary *)getDictionaryFromObject
+{
+    return @{@"id" : self.modelId ?: @"",
+             @"email" : _email ?: @"",
+             @"username" : _userName ?: @"",
+             @"credit": _credit,
+             @"profile_name":_profileName
+             };
+}
 - (NSString *)auth {
     return userDict[@"auth"];
 }
@@ -49,10 +57,13 @@ static User * _currentUser = nil;
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
-    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
         _currentUser = self;
         [self setObjectWithDictionary:responseObject];
+        [self saveCurrentUserToNSUserDefaults];
         [self.authDelegate userLoginSuccessfull:self];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
         NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
@@ -137,6 +148,22 @@ static User * _currentUser = nil;
         
         [self.authDelegate userRegiserFailed:self WithError:json StatusCode:@([operation.response statusCode])];
     }];
+}
+
+-(void)saveCurrentUserToNSUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary * currentUserDict = [[User currentUser] getDictionaryFromObject];
+    [defaults setObject:currentUserDict forKey:@"currentUserDict"];
+    [defaults synchronize];
+}
++(void)loadCurrentUserToNSUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary * currentUserDict = [defaults objectForKey:@"currentUserDict"];
+    User *user = [[User new] initWithDict:currentUserDict];
+    _currentUser = user;
+    
 }
 
 @end

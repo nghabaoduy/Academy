@@ -7,7 +7,12 @@
 //
 #import <GooglePlus/GooglePlus.h>
 #import <UIKit/UIKit.h>
+#import "MyCustomTextfield.h"
 
 @interface LoginVC : UIViewController<GPPSignInDelegate, UITextFieldDelegate>
+@property (strong, nonatomic) IBOutlet MyCustomTextfield *textfUsername;
+@property (strong, nonatomic) IBOutlet MyCustomTextfield *textfPassword;
+
+-(void) loginWithEmailAndPassword:(NSString *) email Password:(NSString *) password;
 
 @end

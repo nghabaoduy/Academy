@@ -15,7 +15,7 @@
 @synthesize awsId, name, desc, category, price, wordsTotal, setList, imgURL;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
-    NSLog(@"Package dict = %@",dict);
+    //NSLog(@"Package dict = %@",dict);
     
     self.modelId = [self getStringFromDict:dict WithKey:@"id"];
     name = [self getStringFromDict:dict WithKey:@"name"];
@@ -23,7 +23,7 @@
     category = [self getStringFromDict:dict WithKey:@"category"];
     price = [self getStringFromDict:dict WithKey:@"price"];
     wordsTotal = [[self getStringFromDict:dict WithKey:@"no_of_words"] intValue];
-    imgURL = dict[@"asset"] ? dict[@"asset"][@"index"] : nil;
+    imgURL = dict[@"imgURL"] ?:(dict[@"asset"] ? dict[@"asset"][@"index"] : nil);
     
     setList = [NSMutableArray new];
     for (NSDictionary *setDict in [self getArrayFromDict:dict WithKey:@"sets"]) {
@@ -32,6 +32,26 @@
     }
 }
 
+- (NSDictionary *)getDictionaryFromObject {
+    return @{
+             @"id" : self.modelId ?: @"",
+             @"name" : name ?: @"",
+             @"description" : desc ?: @"",
+             @"category" : category ?: @"",
+             @"price" : price ?: @"",
+             @"no_of_words" : [NSNumber numberWithInt:wordsTotal] ?: @"",
+             @"imgURL" : imgURL ?: @"",
+             @"sets":[self getSetDictList]
+             };
+}
+-(NSArray *) getSetDictList
+{
+    NSMutableArray *aArray = [NSMutableArray new];
+    for (LSet * set in setList) {
+        [aArray addObject:[set getDictionaryFromObject]];
+    }
+    return aArray;
+}
 - (void)getAllWithFilter:(NSDictionary *)filterDictionary {
     NSString *apiPath = @"api/package";
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

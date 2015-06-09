@@ -51,6 +51,7 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor purpleColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
@@ -59,6 +60,7 @@
                   forControlEvents:UIControlEventValueChanged];
     
     [self.tableView addSubview:refeshControl];
+    
     [[DataEngine getInstance] setIsForceReload:YES];
     
 }
@@ -72,6 +74,7 @@
 
 -(void) retrievePackages
 {
+    NSLog(@"retrievePackages runs");
     [refeshControl beginRefreshing];
     UserPackage * userPackage = [UserPackage new];
     [userPackage setDelegate:self];
@@ -94,7 +97,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PackageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"packCell" forIndexPath:indexPath];
     
-    UserPackage * curUserPackage = [packageList objectAtIndex:indexPath.row];;
+    UserPackage * curUserPackage = [packageList objectAtIndex:indexPath.row];
     Package *pack = curUserPackage.package;
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];

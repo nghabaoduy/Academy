@@ -55,6 +55,9 @@
     if (indexPath.row == 0) {
         WordInfoVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordInfoView"];
         view.curSet = self.curSet;
+        if (self.curSet.wordList.count > 0) {
+            
+        }
         view.isWordCheckSession = NO;
         [self presentViewController:view animated:YES completion:nil];
     }

@@ -31,6 +31,7 @@
 
 @interface User : AModel
 @property (nonatomic, weak) id <AuthDelegate> authDelegate;
+@property (nonatomic, strong) NSString *profileName;
 @property (nonatomic, strong) NSString * firstName;
 @property (nonatomic, strong) NSString * lastName;
 @property (nonatomic, strong) NSString * userName;
@@ -43,10 +44,11 @@
 - (void)userLoginWith:(NSString *)userName Password:(NSString *)password;
 - (void)userLogout;
 
-+ (id)currentUser;
++ (User *)currentUser;
 
 - (void)purchasePackage:(Package *)package;
 - (void)tryPackage:(Package *)package;
 
 - (void)registerUserWithParam:(NSDictionary*)dictionary;
++(void)loadCurrentUserToNSUserDefaults;
 @end

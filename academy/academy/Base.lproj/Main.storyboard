@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xkv-Le-Wj5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xkv-Le-Wj5">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -304,13 +304,14 @@
                                         <exclude reference="v18-IG-HvO"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="147" y="510" width="107" height="35"/>
                                     <mask key="constraints">
                                         <include reference="v18-IG-HvO"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Lrp-i1-E4Z" kind="show" id="rhN-Cf-fKV"/>
+                                    <segue destination="Lrp-i1-E4Z" kind="show" identifier="goRegister" id="rhN-Cf-fKV"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xid-Bn-dMg">
@@ -439,8 +440,8 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="textfPassword" destination="FlU-Bp-q7b" id="4ae-Xr-tyX"/>
-                        <outlet property="textfUsername" destination="Rev-Dh-DLK" id="ruV-YY-LIK"/>
+                        <outlet property="textfPassword" destination="FlU-Bp-q7b" id="r8v-Kg-HqW"/>
+                        <outlet property="textfUsername" destination="Rev-Dh-DLK" id="Mif-pz-glv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -742,6 +743,9 @@
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" red="0.27450980390000002" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="25" y="28" width="59" height="29"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fq-uS-ZoL">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -750,6 +754,9 @@
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" red="0.27450980390000002" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="25" y="60" width="47" height="24"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kux-MG-jOd">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1526,12 +1533,18 @@
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="25" y="86" width="47" height="23"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-yM-uIV">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="25" y="55" width="59" height="28"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3N-fe-2o7">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1548,7 +1561,8 @@
                                         <exclude reference="VPL-Eh-BL5"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="325" y="42" width="65" height="14"/>
                                     <mask key="constraints">
                                         <include reference="VPL-Eh-BL5"/>
                                     </mask>
@@ -1945,7 +1959,8 @@
                                         <exclude reference="LIm-Oh-ns3"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="100" y="51" width="200" height="20"/>
                                     <mask key="constraints">
                                         <include reference="LIm-Oh-ns3"/>
                                     </mask>
@@ -3245,6 +3260,7 @@
                     </tableView>
                     <connections>
                         <outlet property="avatar" destination="CY2-3T-ZAM" id="fjH-Hl-vWg"/>
+                        <outlet property="changePassBtn" destination="nyF-dA-YTm" id="o8f-pv-bej"/>
                         <outlet property="chartView" destination="CTK-NR-v3i" id="5kp-Yi-M4d"/>
                         <outlet property="nameTF" destination="jPy-bC-F8p" id="TUz-As-iMN"/>
                     </connections>

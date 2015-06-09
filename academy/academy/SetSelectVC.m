@@ -11,7 +11,7 @@
 #import "LSet.h"
 #import "WordTestVC.h"
 #import <MBProgressHUD/MBProgressHUD.h>
-
+#import "User.h"
 
 @interface SetSelectVC ()
 
@@ -23,16 +23,18 @@
     SetDisplayer *clickedSetDisplayer;
     BOOL isDisplayerClicked;
     
+    int scoreLoadCount;
     int setLoadCount;
     NSMutableArray * fullWordList;
     
+    int curMaxUnlocked;
 }
 
 @synthesize curPack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    curMaxUnlocked = 0;
     
     self.tableView.allowsSelection = NO;
     setOrderArray = [NSMutableArray new];
@@ -46,10 +48,29 @@
         [orderList sortUsingComparator:^NSComparisonResult(LSet * set1, LSet * set2) {
             return (set1.orderNo%2)>(set2.orderNo%2);
         }];
+        [self loadSetScore];
     }
 }
+-(void)loadSetScore
+{
+    scoreLoadCount = 0;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    SetScore * newsScore = [SetScore new];
+    for (LSet *set in curPack.setList) {
+        newsScore.delegate = self;
+        newsScore.set_id = set.modelId;
+        [newsScore getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    for (LSet *set in curPack.setList) {
+        if (set.grade > 0) if(set.orderNo>=curMaxUnlocked){
+            curMaxUnlocked = set.orderNo+1;
+        }
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -80,16 +101,20 @@
         cell.setDisplayer.delegate = self;
         [cell.setDisplayer setFinalTest:curPack];
         
+        NSMutableArray * orderList = [setOrderArray lastObject];
+        LSet *set = [orderList lastObject];
+        set.orderNo < curMaxUnlocked? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
         return cell;
     }
     //other
     NSMutableArray * orderList = setOrderArray[indexPath.row];
-    
+    NSLog(@"curMaxUnlocked = %i",curMaxUnlocked);
     if (orderList.count == 1) {
         SetRow1Displayer *cell = [tableView dequeueReusableCellWithIdentifier:@"setCell1Displayer" forIndexPath:indexPath];
         cell.setDisplayer.delegate = self;
         LSet *set = orderList[0];
         [cell.setDisplayer setLSet:set];
+        set.orderNo <= curMaxUnlocked? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
         
         return cell;
     }
@@ -99,10 +124,12 @@
         cell.setDisplayer1.delegate = self;
         LSet *set = orderList[0];
         [cell.setDisplayer1 setLSet:set];
+        set.orderNo <= curMaxUnlocked? [cell.setDisplayer1 enableDisplayer]: [cell.setDisplayer1 disableDisplayer];
         
         cell.setDisplayer2.delegate = self;
         LSet *set2 = orderList[1];
         [cell.setDisplayer2 setLSet:set2];
+        set2.orderNo <= curMaxUnlocked? [cell.setDisplayer2 enableDisplayer]: [cell.setDisplayer2 disableDisplayer];
         
         return cell;
     }
@@ -177,8 +204,46 @@
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    [self addWordListToFullWordList:nil];
+    if ([model class] == [LSet class]) {
+        [self addWordListToFullWordList:nil];
+    }
+    else if([model class] == [SetScore class])
+    {
+        [self handleScoreList:nil];
+    }
+    
 }
 
+- (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
+    
+    [self handleScoreList:allList];
+    
+}
+-(void) handleScoreList:(NSMutableArray *)allList
+{
+    if(allList)if(allList.count > 0)
+    {
+        NSLog(@"Get score successfull = %@",allList);
+        [allList sortUsingComparator:^NSComparisonResult(SetScore * score1, SetScore * score2) {
+            return (score1.score)>(score2.score);
+        }];
+        SetScore *finalScore = [allList lastObject];
+        for (LSet *set in curPack.setList) {
+            if ([set.modelId isEqualToString:finalScore.set_id]) {
+                set.score = finalScore;
+                set.grade = finalScore.score;
+                if (set.grade > 0) if(set.orderNo>=curMaxUnlocked){
+                    curMaxUnlocked = set.orderNo+1;
+                }
+            }
+        }
+    }
+    
+    scoreLoadCount++;
+     if (scoreLoadCount >= curPack.setList.count) {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         [self.tableView reloadData];
+     }
+}
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AlertTestModePickView.h"
 #import <QuartzCore/QuartzCore.h>
+
 @implementation AlertTestModePickView
 {
     IBOutlet UILabel *testInfoLb;

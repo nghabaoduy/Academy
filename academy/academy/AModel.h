@@ -45,4 +45,8 @@
 - (NSNumber*)getNumberFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 - (NSDictionary*)getDictFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 
+-(NSArray *) filterNSArrayWithFilter:(NSArray *) aArray Filter:(NSDictionary*) filter;
+
+-(NSString*) getUserDefaultStoredKey;
+-(void) saveToNSUserDefaults;
 @end

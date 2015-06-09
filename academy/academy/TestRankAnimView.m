@@ -7,6 +7,7 @@
 //
 
 #import "TestRankAnimView.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation TestRankAnimView
 {
@@ -53,6 +54,11 @@
 -(void) setLSet:(LSet *) set
 {
     curSet = set;
+    if (set.imgURL)
+        [setIcon setImageWithURL:[NSURL URLWithString:set.imgURL] placeholderImage:[UIImage imageNamed:@"sticker_egg.png"]];
+    else
+        [setIcon setImage:[UIImage imageNamed:set.dummyImgName]];
+    
     [rankStar setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[set.grade intValue]]]];
     
     [self performScale:setIcon:0.5f:0.0f];
@@ -60,6 +66,18 @@
     [self performScale:ribbon:0.7f:0.0f];
     [self performScale:rankStar:0.8f:0.0f];
     
+}
+-(void) setPackage:(Package *) pack
+{
+
+    [setIcon setImage:[UIImage imageNamed:@"sticker_timer.png"]];
+    
+    [rankStar setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[pack.grade intValue]]]];
+    
+    [self performScale:setIcon:0.5f:0.0f];
+    [self performScale:wreath:0.6f:0.0f];
+    [self performScale:ribbon:0.7f:0.0f];
+    [self performScale:rankStar:0.8f:0.0f];
 }
 -(void) performScale:(UIView *) target :(CGFloat) duration :(CGFloat) delay
 {

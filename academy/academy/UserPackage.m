@@ -19,17 +19,30 @@
     if (_package_id) {
         _package = [[Package alloc] initWithDict:dict[@"package"]];
     }
-    
     _user_id = dict[@"user_id"] ?: nil;
+    
+    [self saveToNSUserDefaults];
+}
+-(NSString *)getUserDefaultStoredKey
+{
+    return @"storedUserPackages";
 }
 - (NSDictionary *)getDictionaryFromObject {
     return @{
+             @"id" : self.modelId ?: @"",
              @"package_id" : _package_id ?: @"",
-             @"user_id" : _user_id ?: @""
+             @"user_id" : _user_id ?: @"",
+             @"package": [_package getDictionaryFromObject]
              };
 }
 
 - (void)getAllWithFilter:(NSDictionary *)filterDictionary {
+    NSLog(@"getAllWithFilter %@",filterDictionary);
+    if ([[DataEngine getInstance] isOffline]) {
+        [self getAllWithFilterFromNSUserDefaults:filterDictionary];
+        return;
+    }
+    
     NSString *apiPath = @"api/userPackage";
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
@@ -41,6 +54,7 @@
             UserPackage * newUserPackage = [[UserPackage alloc] initWithDict:userPackageDict];
             [packageList addObject:newUserPackage];
         }
+        
         [self.delegate getAllSucessfull:self List:packageList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -52,5 +66,22 @@
     }];
 }
 
+- (void)getAllWithFilterFromNSUserDefaults:(NSDictionary *)filterDictionary {
+    NSString *userDefaultStoredKey = [self getUserDefaultStoredKey];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray * storedUserPackages = [defaults objectForKey:userDefaultStoredKey];
+    //NSLog(@"%@ = %@",self.userDefaultStoredKey, storedUserPackages);
+    NSArray *packages = [self filterNSArrayWithFilter:storedUserPackages Filter:filterDictionary];
+    NSMutableArray * packageList = [NSMutableArray new];
+    for (NSDictionary * userPackageDict in packages) {
+        UserPackage * newUserPackage = [[UserPackage alloc] initWithDict:userPackageDict];
+        [packageList addObject:newUserPackage];
+    }
+    
+    [self.delegate getAllSucessfull:self List:packageList];
+    
+    
+}
 
 @end

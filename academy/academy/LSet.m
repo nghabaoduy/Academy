@@ -22,7 +22,7 @@
     package_id = [self getStringFromDict:dict WithKey:@"package_id"];
     orderNo = [self getStringFromDict:dict WithKey:@"order_number"] ? [[self getStringFromDict:dict WithKey:@"order_number"] intValue]:-1;
     
-    imgURL = dict[@"asset"] ? dict[@"asset"][@"index"] : nil;
+    imgURL = dict[@"imgURL"] ?:(dict[@"asset"] ? dict[@"asset"][@"index"] : nil);
     wordList = [NSMutableArray new];
     
     NSArray * words = [self getArrayFromDict:dict WithKey:@"words"];
@@ -33,9 +33,38 @@
     }
     
     self.grade = 0;
+    self.dummyImgName = @"sticker_egg.png";
+    
+    if (words.count > 0) {
+        [self saveToNSUserDefaults];
+    }
+}
+-(NSString *)getUserDefaultStoredKey
+{
+    return @"storedLSetWithWords";
 }
 
+-(NSDictionary *)getDictionaryFromObject
+{
+    return @{
+             @"id" : self.modelId ?: @"",
+             @"name" : name ?: @"",
+             @"description" : desc ?: @"",
+             @"package_id": package_id?: @"",
+             @"order_number": [NSNumber numberWithInt:orderNo],
+             @"imgURL":imgURL?: @"",
+             @"words":[self getWordList]
+             };
 
+}
+-(NSArray *) getWordList
+{
+    NSMutableArray *aArray = [NSMutableArray new];
+    for (Word * newWord in wordList) {
+        [aArray addObject:[newWord getDictionaryFromObject]];
+    }
+    return aArray;
+}
 - (void)getAllWithFilter:(NSDictionary *)filterDictionary {
     NSString *apiPath = @"api/set";
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
@@ -61,6 +90,12 @@
 }
 
 - (void)findId:(NSString *)valId {
+    if ([[DataEngine getInstance] isOffline]) {
+        [self findIdInFromNSUserDefaults:valId];
+        return;
+    }
+    
+    
     NSString *apiPath = @"api/set";
     NSString *requestURL = [NSString stringWithFormat:@"%@%@/%@", [[DataEngine getInstance] requestURL], apiPath, valId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -76,6 +111,26 @@
         
         [self.delegate model:self ErrorMessage:json[@"message"] StatusCode:@([operation.response statusCode])];
     }];
+}
+
+-(void)findIdInFromNSUserDefaults:(NSString *)valId {
+    NSString *userDefaultStoredKey = [self getUserDefaultStoredKey];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray * storedData = [defaults objectForKey:userDefaultStoredKey];
+    //NSLog(@"%@ = %@",userDefaultStoredKey, storedData);
+    NSArray *aArray = [self filterNSArrayWithFilter:storedData Filter:@{@"id":valId}];
+    if (aArray.count > 0) {
+        [self setObjectWithDictionary:[aArray firstObject]];
+        [self.delegate findIdSuccessful:self];
+    }
+    else
+    {
+        NSString *errorMess = @"Không thể tải từ vựng về. Bạn cần tải về 1 lần trước khi có thể sự dụng trong chế độ Offline.";
+        [self.delegate model:self ErrorMessage:errorMess StatusCode:@0];
+
+    }
+
 }
 
 @end

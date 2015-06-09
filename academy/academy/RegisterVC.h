@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MyCustomTextfield.h"
+#import "LoginVC.h"
 
 @interface RegisterVC : UITableViewController <UITextFieldDelegate>
-
+@property (nonatomic, retain) LoginVC *loginView;
 
 @end

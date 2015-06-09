@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LSet.h"
+#import "Package.h"
 @interface TestRankAnimView : UIView
 @property (strong, nonatomic) IBOutlet UIView *view;
 -(void) setLSet:(LSet *) set;
+-(void) setPackage:(Package *) pack;
 -(void) setMessage:(NSString *) message;
 @end

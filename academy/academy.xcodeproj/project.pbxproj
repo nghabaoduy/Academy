@@ -170,6 +170,7 @@
 		AFF250521B23015000803482 /* PasswordChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF250511B23015000803482 /* PasswordChangeVC.m */; };
 		AFF250571B23382900803482 /* TestSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF250561B23382900803482 /* TestSettingView.m */; };
 		AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */; };
+		AFF2D7D41B26027500D53E56 /* sticker_finaltest.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF2D7D31B26027500D53E56 /* sticker_finaltest.png */; };
 		AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396C91B1CB9F6002675AB /* rankStar_1.png */; };
 		AFF396D01B1CB9F6002675AB /* rankStar_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396CA1B1CB9F6002675AB /* rankStar_2.png */; };
 		AFF396D11B1CB9F6002675AB /* rankStar_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF396CB1B1CB9F6002675AB /* rankStar_3.png */; };
@@ -402,6 +403,7 @@
 		AFF250551B23382900803482 /* TestSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSettingView.h; sourceTree = "<group>"; };
 		AFF250561B23382900803482 /* TestSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSettingView.m; sourceTree = "<group>"; };
 		AFF2A6681B0BED8700DBFC2A /* ViewBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ViewBG.jpg; path = Graphics/ViewBG.jpg; sourceTree = "<group>"; };
+		AFF2D7D31B26027500D53E56 /* sticker_finaltest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sticker_finaltest.png; path = Graphics/Stickers/sticker_finaltest.png; sourceTree = "<group>"; };
 		AFF396C91B1CB9F6002675AB /* rankStar_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_1.png; path = Graphics/Stickers/rankStar_1.png; sourceTree = "<group>"; };
 		AFF396CA1B1CB9F6002675AB /* rankStar_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_2.png; path = Graphics/Stickers/rankStar_2.png; sourceTree = "<group>"; };
 		AFF396CB1B1CB9F6002675AB /* rankStar_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rankStar_3.png; path = Graphics/Stickers/rankStar_3.png; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 		AFF396C81B1CB996002675AB /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
+				AFF2D7D31B26027500D53E56 /* sticker_finaltest.png */,
 				AFE7BEDA1B1DD79F0088B9DB /* laurelWreath.png */,
 				AFE7BEDB1B1DD79F0088B9DB /* rankRibbon.png */,
 				AFE7BEDC1B1DD79F0088B9DB /* sticker_pencil.png */,
@@ -773,6 +776,8 @@
 		C36AEB221B07109D00A40692 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C36DF4ED1B0853B300C225DA /* LoginVC.h */,
+				C36DF4EE1B0853B300C225DA /* LoginVC.m */,
 				AFE6DEE31B03C9E9003E30CA /* UserShelfVC.h */,
 				AFE6DEE41B03C9E9003E30CA /* UserShelfVC.m */,
 				AF0C13BC1B1E1329006D5AF9 /* ShopVC.h */,
@@ -781,8 +786,6 @@
 				AFE6DEEA1B03CEDC003E30CA /* SetSelectVC.m */,
 				AFE6DEEF1B03D7AC003E30CA /* SetDetailVC.h */,
 				AFE6DEF01B03D7AC003E30CA /* SetDetailVC.m */,
-				C36DF4ED1B0853B300C225DA /* LoginVC.h */,
-				C36DF4EE1B0853B300C225DA /* LoginVC.m */,
 				AFFB76B11B0A4D0B001489F1 /* PackageInfoVC.h */,
 				AFFB76B21B0A4D0B001489F1 /* PackageInfoVC.m */,
 				AF719E411B21F23700D52EA3 /* RegisterVC.h */,
@@ -1038,6 +1041,7 @@
 				AFC243081B1F85D100972BA4 /* GooglePlusLogo.png in Resources */,
 				AFD6363B1B038E1000ABDB3C /* Images.xcassets in Resources */,
 				AFC27BE61B0EEC5700225016 /* music.png in Resources */,
+				AFF2D7D41B26027500D53E56 /* sticker_finaltest.png in Resources */,
 				AF7869A41B10BDB9009BE37B /* MenuBtn.png in Resources */,
 				AFC27BE21B0EEC5700225016 /* love.png in Resources */,
 				AFC27BCC1B0EEC5700225016 /* clock.png in Resources */,
