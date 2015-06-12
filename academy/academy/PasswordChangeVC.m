@@ -8,8 +8,8 @@
 
 #import "PasswordChangeVC.h"
 #import "MyCustomTextfield.h"
-
-@interface PasswordChangeVC ()
+#import "User.h"
+@interface PasswordChangeVC ()<AuthDelegate>
 
 @end
 
@@ -30,12 +30,76 @@
 
 }
 - (IBAction)goChangePass:(id)sender {
+    if (![self validatePassword]) {
+        return;
+    }
+    User *curUser = [User currentUser];
+    curUser.authDelegate = self;
+    [curUser changePassword:curPassTF.text NewPass:passwordTF.text];
 }
 
+
+-(BOOL) validatePassword
+{
+    if (passwordTF.text.length < 6) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Mật khẩu không thể ít hơn 6 kí tự." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return NO;
+    }
+    if (![passwordTF.text isEqualToString:rePasswordTF.text]) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Xác nhận mật khẩu sai." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma AuthDelegate
+-(void)userChangePasswordSuccessful:(User *)user
+{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Thay đổi mật khẩu thành công." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                         [self.navigationController popViewControllerAnimated:YES];
+                                                     }];
+    
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+-(void)userChangePasswordFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode
+{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Thay đổi mật khẩu thất bại. Xin vui lòng kiểm tra và thử lại." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                     }];
+    
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+
 /*
 #pragma mark - Table view data source
 

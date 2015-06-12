@@ -49,6 +49,9 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)goRegister:(id)sender {
+    if (![self validateBlankTextfield:@[profileNameTF,emailTF]]) {
+        return;
+    }
     if (![self validatePassword]) {
         return;
     }
@@ -62,10 +65,20 @@
                                      @"profile_name" : profileNameTF.text
                                      }];
 }
+-(BOOL) validateBlankTextfield:(NSArray *) tfArray
+{
+    for (UITextField * tf in tfArray) {
+        if (tf.text.length == 0) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 -(BOOL) validatePassword
 {
     if (passwordTF.text.length < 6) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Error!!!" message:@"Mật mã không thể ít hơn 6 kí tự." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Mật khẩu không thể ít hơn 6 kí tự." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleCancel
@@ -77,7 +90,7 @@
         return NO;
     }
     if (![passwordTF.text isEqualToString:rePasswordTF.text]) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Error!!!" message:@"Xác nhận mật mã sai." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Xác nhận mật khẩu sai." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleCancel
@@ -102,6 +115,18 @@
 
 - (void)userRegiserFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSString *errorMessage = [statusCode intValue] == 200?@"Email này đã được đăng ký. Xin chọn email khác.":@"Đăng ký thất bại. Xin bạn thử lại";
+
+    
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                     }];
+    
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)userRegiserSuccessful:(User *)user {

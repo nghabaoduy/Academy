@@ -21,7 +21,11 @@
 - (void)userRegiserSuccessful:(User*)user;
 - (void)userRegiserFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber*)statusCode;
 
+- (void)userChangePasswordSuccessful:(User*)user;
+- (void)userChangePasswordFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber*)statusCode;
 
+- (void)userResetPasswordSuccessful:(User*)user;
+- (void)userResetPasswordFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber*)statusCode;
 
 - (void)userPurchasePackageSucessful:(User *)user;
 - (void)userPurchasePackageFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
@@ -45,10 +49,14 @@
 - (void)userLogout;
 
 + (User *)currentUser;
++ (void) loadCurrentUserToNSUserDefaults;
 
 - (void)purchasePackage:(Package *)package;
 - (void)tryPackage:(Package *)package;
 
 - (void)registerUserWithParam:(NSDictionary*)dictionary;
-+(void)loadCurrentUserToNSUserDefaults;
+
+- (void)changePassword:(NSString *)oldPass NewPass:(NSString *) newPass;
+
+- (void)resetPassword:(NSString *) username;
 @end

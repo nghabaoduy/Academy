@@ -138,8 +138,16 @@ static User * _currentUser = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
     [manager POST:requestURL parameters:dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response %@", responseObject);
-        [self.authDelegate userRegiserSuccessful:self];
+        NSDictionary* responseDict = responseObject;
+        NSLog(@"response[%li] %@", (long)[operation.response statusCode],responseObject);
+        if ([responseDict allKeys].count == 1) {
+            [self.authDelegate userRegiserFailed:self WithError:nil StatusCode:@([operation.response statusCode])];
+        }
+        else
+        {
+            [self.authDelegate userRegiserSuccessful:self];
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error %@", error.localizedDescription);
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
@@ -147,6 +155,53 @@ static User * _currentUser = nil;
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         [self.authDelegate userRegiserFailed:self WithError:json StatusCode:@([operation.response statusCode])];
+    }];
+}
+
+- (void)changePassword:(NSString *)oldPass NewPass:(NSString *) newPass {
+    NSDictionary * params = @{
+                              @"username" : self.userName,
+                              @"current_password" : oldPass,
+                              @"password" : newPass,
+                              @"password_confirmation" : newPass
+                              };
+
+    NSString *apiPath = @"api/changePassword";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response %@", responseObject);
+        [self.authDelegate userChangePasswordSuccessful:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error %@", error.localizedDescription);
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        [self.authDelegate userChangePasswordFailed:self WithError:json StatusCode:@([operation.response statusCode])];
+    }];
+}
+-(void) resetPassword:(NSString *)inputUsername
+{
+    NSDictionary * params = @{
+                              @"username" : inputUsername
+                              };
+    
+    NSString *apiPath = @"api/resetPassword";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response %@", responseObject);
+        [self.authDelegate userResetPasswordSuccessful:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error %@", error.localizedDescription);
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        [self.authDelegate userResetPasswordFailed:self WithError:json StatusCode:@([operation.response statusCode])];
     }];
 }
 
@@ -165,5 +220,6 @@ static User * _currentUser = nil;
     _currentUser = user;
     
 }
+
 
 @end

@@ -76,7 +76,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     
     NSString *saveUsername = [loginDict objectForKey:@"saveUsername"];
     NSString *savePassword = [loginDict objectForKey:@"savePassword"];
-    NSLog(@"username = %@ password = %@",saveUsername,savePassword);
+    NSLog(@"autoLogin username = %@ password = %@",saveUsername,savePassword);
     if (saveUsername.length > 0) {
         [self loginWithEmailAndPassword:saveUsername Password:savePassword];
     }
@@ -452,6 +452,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 }
 - (void)userRegiserFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self loginWithEmailAndPassword:registerDict[@"username"] Password:registerDict[@"password"]];
 }
 
 - (void)userRegiserSuccessful:(User *)user {

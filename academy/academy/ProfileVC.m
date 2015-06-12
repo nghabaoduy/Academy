@@ -10,7 +10,8 @@
 #import "PNChart.h"
 #import "DataEngine.h"
 #import "User.h"
-@interface ProfileVC ()
+#import "WordLearned.h"
+@interface ProfileVC ()<ModelDelegate>
 
 @end
 
@@ -24,6 +25,7 @@
     PNBarChart * barChart;
     IBOutlet UIButton *changePassBtn;
     User *curUser;
+    
 }
 
 - (void)viewDidLoad {
@@ -51,7 +53,15 @@
     
     [self performSelector:@selector(refreshChart) withObject:self afterDelay:1.0f];
     
+    [self getWordLearnedList];
     
+    
+}
+-(void) getWordLearnedList
+{
+    WordLearned *wordLearned = [WordLearned new];
+    wordLearned.delegate = self;
+    [wordLearned getAllWithFilter:@{@"user_id":curUser.modelId}];
 }
 -(void) refreshView
 {
@@ -96,8 +106,6 @@
                                                    otherButtonTitles:@"Chụp ngay", @"Lấy ảnh từ máy", nil];
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [popupQuery showInView:self.view];
-    
-    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -163,6 +171,16 @@
         [self presentViewController:imgPicker animated:YES completion:NULL];
     }
     
+}
+
+#pragma WordLearned
+-(void)getAllSucessfull:(AModel *)model List:(NSMutableArray *)allList
+{
+    NSLog(@"WordLearnedList = %@",allList);
+}
+-(void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode
+{
+    NSLog(@"ErrorMessage %i",[statusCode intValue]);
 }
 
 @end

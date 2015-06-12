@@ -6,9 +6,12 @@
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "PasswordResetVC.h"
 #import "MyCustomTextfield.h"
-@interface PasswordResetVC ()
+#import "User.h"
+
+@interface PasswordResetVC ()<AuthDelegate>
 
 @end
 
@@ -31,6 +34,13 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)resetEmail:(id)sender {
+    if (emailTF.text.length == 0) {
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    User *user = [User new];
+    user.authDelegate = self;
+    [user resetPassword:emailTF.text];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -45,14 +55,27 @@
 - (IBAction)touchUp:(id)sender {
     [emailTF resignFirstResponder];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma User Delegate
+-(void)userResetPasswordSuccessful:(User *)user
+{
+    NSLog(@"userResetPasswordSuccessful");
 }
-*/
+-(void)userResetPasswordFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSString *errorMessage = [statusCode intValue] == 404?@"Không tìm được email của bạn. Xin kiểm tra lại.":@"Có lỗi xãy ra. Xin bạn thử lại";
+    
+    
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                     }];
+    
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 @end

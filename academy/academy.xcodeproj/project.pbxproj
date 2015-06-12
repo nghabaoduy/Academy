@@ -11,6 +11,7 @@
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
+		AF0923691B2AF16B00C20540 /* WordLearned.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0923681B2AF16B00C20540 /* WordLearned.m */; };
 		AF0C13BB1B1E084E006D5AF9 /* PriceTag.png in Resources */ = {isa = PBXBuildFile; fileRef = AF0C13BA1B1E084E006D5AF9 /* PriceTag.png */; };
 		AF0C13BE1B1E1329006D5AF9 /* ShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0C13BD1B1E1329006D5AF9 /* ShopVC.m */; };
 		AF0ED9C21B142C5400340BA5 /* medium-green-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = AF0ED9C11B142C5400340BA5 /* medium-green-btn.png */; };
@@ -206,6 +207,8 @@
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
 		AF0241D31B0F18930019B3E2 /* WordDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDisplayView.h; sourceTree = "<group>"; };
 		AF0241D41B0F18930019B3E2 /* WordDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDisplayView.m; sourceTree = "<group>"; };
+		AF0923671B2AF16B00C20540 /* WordLearned.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordLearned.h; sourceTree = "<group>"; };
+		AF0923681B2AF16B00C20540 /* WordLearned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordLearned.m; sourceTree = "<group>"; };
 		AF0C13BA1B1E084E006D5AF9 /* PriceTag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PriceTag.png; path = Graphics/PriceTag.png; sourceTree = "<group>"; };
 		AF0C13BC1B1E1329006D5AF9 /* ShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopVC.h; sourceTree = "<group>"; };
 		AF0C13BD1B1E1329006D5AF9 /* ShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopVC.m; sourceTree = "<group>"; };
@@ -821,6 +824,8 @@
 				AFCB0D261B11E71000F5688F /* TestMaker.m */,
 				AFC243021B1F6B2500972BA4 /* SetScore.h */,
 				AFC243031B1F6B2500972BA4 /* SetScore.m */,
+				AF0923671B2AF16B00C20540 /* WordLearned.h */,
+				AF0923681B2AF16B00C20540 /* WordLearned.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1124,6 +1129,7 @@
 				AF3AC8801B1DE9AF00B23FCF /* TestRankAnimView.m in Sources */,
 				AF719E431B21F23700D52EA3 /* RegisterVC.m in Sources */,
 				AF0ED9C91B14C2D100340BA5 /* TestVC.m in Sources */,
+				AF0923691B2AF16B00C20540 /* WordLearned.m in Sources */,
 				AF719E461B22137F00D52EA3 /* PasswordResetVC.m in Sources */,
 				AFCB0D351B11F8F800F5688F /* CardTypeAnswerView.m in Sources */,
 				AFF250521B23015000803482 /* PasswordChangeVC.m in Sources */,
