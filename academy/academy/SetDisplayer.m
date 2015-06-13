@@ -68,15 +68,16 @@
     curPack = pack;
     isFinalTest = YES;
     [titleLb setText:@"Tổng Kiểm Tra"];
+    [rankImg setHidden:YES];
     [img setImage:[UIImage imageNamed:@"sticker_finaltest.png"]];
-    if ([pack.grade intValue] == 0) {
+    /*if ([pack.grade intValue] == 0) {
         [rankImg setHidden:YES];
     }
     else
     {
         [rankImg setHidden:NO];
         [rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[pack.grade intValue]]]];
-    }
+    }*/
 }
 -(LSet *) getLSet
 {

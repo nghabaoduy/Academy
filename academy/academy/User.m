@@ -26,6 +26,8 @@ static User * _currentUser = nil;
     _userName =[self getStringFromDict:dict WithKey:@"username"];
     _credit = [self getNumberFromDict:dict WithKey:@"credit"];
     _profileName = [self getStringFromDict:dict WithKey:@"profile_name"];
+    _facebookId = [self getStringFromDict:dict WithKey:@"facebook_id"];
+    _ggpId = [self getStringFromDict:dict WithKey:@"ggp_id"];
 }
 
 -(NSDictionary *)getDictionaryFromObject
@@ -34,7 +36,9 @@ static User * _currentUser = nil;
              @"email" : _email ?: @"",
              @"username" : _userName ?: @"",
              @"credit": _credit,
-             @"profile_name":_profileName
+             @"profile_name":_profileName?:@"",
+             @"facebook_id":_facebookId?:@"",
+             @"ggp_id":_ggpId?:@""
              };
 }
 - (NSString *)auth {
@@ -220,6 +224,35 @@ static User * _currentUser = nil;
     _currentUser = user;
     
 }
-
+-(void)changeProfileName:(NSString *) newProfileName
+{
+    if ([_profileName isEqualToString:newProfileName]) {
+        [self.authDelegate userChangeProfileNameSucessful:self];
+        return;
+    }
+    NSDictionary * params = @{
+                              @"username" : self.userName,
+                              @"profile_name":newProfileName
+                              };
+    
+    NSString *apiPath = @"api/changeProfileName";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response %@", responseObject);
+        [self setObjectWithDictionary:responseObject];
+        [self.authDelegate userChangeProfileNameSucessful:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error %@", error.localizedDescription);
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        [self.authDelegate userChangeProfileNameFailed:self WithError:json StatusCode:@([operation.response statusCode])];
+    }];
+    
+    
+}
 
 @end

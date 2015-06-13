@@ -12,6 +12,7 @@
 #import "Package.h"
 #import "PackageInfoVC.h"
 #import "UIImageView+AFNetworking.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface ShopVC () <ModelDelegate>
 
@@ -41,6 +42,7 @@
 }
 
 -(void) retrievePackages {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     //Init new package just to find (i cant do static one)
     Package * toRetrivePackages = [Package new];
     //Assign Deleteage
@@ -102,12 +104,13 @@
 #pragma mark - Package
 
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     packageList = allList;
     [self.tableView reloadData];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
-    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark - Navigation

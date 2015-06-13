@@ -55,7 +55,7 @@
         return @"";
         //return @"Empty";
     }
-    return dict[key];
+    return [NSString stringWithFormat:@"%@",dict[key]];
 }
 
 - (NSNumber *)getNumberFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
@@ -71,7 +71,12 @@
     }
     return dict[key];
 }
-
+- (NSDate *)getDateFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",[dict valueForKey:key]]];
+    return date;
+}
 - (NSDictionary *)getDictFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
     if ([dict[key] isEqual:[NSNull null]] || !dict[key]) {
         return @{};
@@ -102,7 +107,9 @@
     BOOL isStored = NO;
     int index = 0;
     for (NSDictionary * objDict in storedArray) {
-        if ([objDict[@"id"] isEqualToString:self.modelId]) {
+        NSString * loopId = [NSString stringWithFormat:@"%@",objDict[@"id"]];
+        if (loopId && self.modelId)
+        if ([loopId isEqualToString:self.modelId]) {
             isStored = YES;
             index = [storedArray indexOfObject:objDict];
         }

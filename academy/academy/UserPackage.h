@@ -8,11 +8,18 @@
 
 #import "AModel.h"
 #import "Package.h"
-
+@class UserPackage;
+@protocol UserPackageDelegate <NSObject>
+- (void)updateUserPackageScoreSuccessful:(UserPackage *) userPackage;
+- (void)updateUserPackageScoreWithError:(id)Error StatusCode:(NSNumber*)statusCode;
+@end
 @interface UserPackage : AModel
+@property (nonatomic, weak) id <UserPackageDelegate> userPackageDelegate;
 
 @property (nonatomic, strong) NSString * user_id;
 @property (nonatomic, strong) NSString * package_id;
 @property (nonatomic, strong) Package * package;
+@property (nonatomic, strong) NSNumber * score;
 
+-(void) updateScore:(NSNumber *) score;
 @end

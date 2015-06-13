@@ -43,6 +43,7 @@
 - (NSString*)getStringFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 - (NSArray*)getArrayFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 - (NSNumber*)getNumberFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
+- (NSDate *)getDateFromDict:(NSDictionary *)dict WithKey:(NSString *)key;
 - (NSDictionary*)getDictFromDict:(NSDictionary*)dict WithKey:(NSString*)key;
 
 -(NSArray *) filterNSArrayWithFilter:(NSArray *) aArray Filter:(NSDictionary*) filter;

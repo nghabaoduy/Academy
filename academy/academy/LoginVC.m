@@ -67,9 +67,10 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     BOOL isAutoLogin = [defaults boolForKey:@"isAutoLogin"];
     NSLog(@"isAutoLogin = %@",isAutoLogin?@"YES":@"NO");
     if (isAutoLogin) {
-        [self autoLogin];
+        [self performSelector:@selector(autoLogin) withObject:self afterDelay:0.5];
     }
 }
+
 -(void) autoLogin
 {
     NSDictionary *loginDict = [[DataEngine getInstance] loadLoginInfo];

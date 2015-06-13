@@ -15,7 +15,7 @@
 @synthesize name, desc, orderNo, wordList, package_id, imgURL;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
-    self.modelId = [dict valueForKey:@"id"];
+    self.modelId = [self getStringFromDict:dict WithKey:@"id"];
 
     name = [self getStringFromDict:dict WithKey:@"name"];
     desc = [self getStringFromDict:dict WithKey:@"description"];

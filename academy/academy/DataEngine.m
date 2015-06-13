@@ -44,6 +44,7 @@ static DataEngine * instance = nil;
     
 }
 - (NSString *)requestURL {
+    return @"http://192.168.1.2:8000/";
     return @"http://academy.openlabproduction.com/";
 }
 

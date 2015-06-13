@@ -229,7 +229,8 @@
         }];
         SetScore *finalScore = [allList lastObject];
         for (LSet *set in curPack.setList) {
-            if ([set.modelId isEqualToString:finalScore.set_id]) {
+            NSString *finalSetId = [NSString stringWithFormat:@"%@",finalScore.set_id];
+            if ([set.modelId isEqualToString:finalSetId]) {
                 set.score = finalScore;
                 set.grade = finalScore.score;
                 if (set.grade > 0) if(set.orderNo>=curMaxUnlocked){

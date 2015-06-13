@@ -5,13 +5,15 @@
 //  Created by Brian on 6/6/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #import "ProfileVC.h"
 #import "PNChart.h"
 #import "DataEngine.h"
 #import "User.h"
 #import "WordLearned.h"
-@interface ProfileVC ()<ModelDelegate>
+
+@interface ProfileVC ()<ModelDelegate, AuthDelegate>
 
 @end
 
@@ -21,16 +23,21 @@
     IBOutlet UITextField *nameTF;
     IBOutlet UIButton *avatar;
     IBOutlet UIView *chartView;
+    IBOutlet UILabel *totalWordLb;
+    IBOutlet UIActivityIndicatorView *wordLoadIndicator;
     
     PNBarChart * barChart;
     IBOutlet UIButton *changePassBtn;
     User *curUser;
     
+    NSArray *xLabels;
+    NSArray *yValues;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     curUser = [User currentUser];
+    curUser.authDelegate = self;
     [self refreshView];
     [nameTF setFont:[UIFont fontWithName:@"GothamRounded-Bold" size:20]];
     
@@ -59,6 +66,8 @@
 }
 -(void) getWordLearnedList
 {
+    wordLoadIndicator.hidden = NO;
+    NSLog(@"getWordLearnedList runs");
     WordLearned *wordLearned = [WordLearned new];
     wordLearned.delegate = self;
     [wordLearned getAllWithFilter:@{@"user_id":curUser.modelId}];
@@ -71,9 +80,9 @@
 }
 -(void) refreshChart
 {
-    [barChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
-    [barChart setYValues:@[@1,  @10, @2, @6, @3]];
-    [barChart setBarTopLabels:@[@1,  @10, @2, @6, @3]];
+    [barChart setXLabels:xLabels];
+    [barChart setYValues:yValues];
+    [barChart setBarTopLabels:yValues];
     [barChart strokeChart];
 }
 
@@ -83,6 +92,9 @@
 }
 - (IBAction)goChangeName:(UITextField *)sender {
     NSLog(@"Change name to: %@",sender.text);
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [curUser changeProfileName:sender.text];
+    
     [sender resignFirstResponder];
 }
 - (IBAction)changeAvatar:(id)sender {
@@ -176,11 +188,38 @@
 #pragma WordLearned
 -(void)getAllSucessfull:(AModel *)model List:(NSMutableArray *)allList
 {
+    wordLoadIndicator.hidden = YES;
     NSLog(@"WordLearnedList = %@",allList);
+    [totalWordLb setText:[NSString stringWithFormat:@"%i",allList.count]];
+    [self generateChartInfo:allList];
+    
 }
+
+-(void) generateChartInfo:(NSArray *)learnedList
+{
+    NSDictionary * chartData = [WordLearned convertLearnedArrayForChart:learnedList maxColumn:5];
+    xLabels = chartData[@"xLabels"];
+    yValues = chartData[@"yValues"];
+    [self refreshChart];
+}
+
 -(void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode
 {
-    NSLog(@"ErrorMessage %i",[statusCode intValue]);
+    wordLoadIndicator.hidden = YES;
+    NSLog(@"error Message[%i] = %@",statusCode.intValue,error);
+}
+#pragma AuthDelegate
+-(void)userChangeProfileNameSucessful:(User *)user
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"userChangeProfileNameSucessful - %@",user.profileName);
+    nameTF.text = user.profileName;
+}
+-(void)userChangeProfileNameFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"userChangeProfileNameFailed - %@",error);
+    nameTF.text = user.profileName;
 }
 
 @end

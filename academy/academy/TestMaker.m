@@ -49,7 +49,7 @@
 }
 -(int) getTestWordQuantity
 {
-    return wordList.count;
+    return MIN(_fullWordList.count, _testWordQuantity);
 }
 -(void) setAllowAnswerBack:(BOOL) allow
 {

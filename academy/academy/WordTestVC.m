@@ -14,8 +14,10 @@
 #import "AlertMascotView.h"
 #import "TestSettingView.h"
 #import "DataEngine.h"
-
-@interface WordTestVC () <ModelDelegate>
+#import "UserPackage.h"
+#import "User.h"
+#import "WordLearned.h"
+@interface WordTestVC () <ModelDelegate, UserPackageDelegate, WordLearnedDelegate>
 
 @end
 
@@ -83,7 +85,7 @@
     {
         if (curPack) {
             isFinalTest = YES;
-            finalTestTotalQuestion = 20;
+            finalTestTotalQuestion = 5;
         }
         [self performSelector:@selector(displayAlertTestPick) withObject:self afterDelay:0.5];
     }
@@ -203,6 +205,14 @@
     }
     
     [_cardTypeAnswer dismissKeyboard];
+    
+    //Upload Wordlearned
+    if (curPickType == TestPickTimer && correctWordList.count > 0) {
+        WordLearned * saveWordLearned = [WordLearned new];
+        saveWordLearned.wordLearnedDelegate = self;
+        [saveWordLearned addWordLearnedList:correctWordList UserId:[User currentUser].modelId];
+    }
+    
     //ranking
     NSNumber * grade;
     if (correctWordList.count >= [testMaker getTestWordQuantity]) {
@@ -226,6 +236,13 @@
         newsScore.score = curSet.grade;
         newsScore.set_id = curSet.modelId;
         [newsScore createModel];
+    }
+    if (isFinalTest && curPack) {
+        UserPackage *userPackage = [UserPackage new];
+        userPackage.userPackageDelegate = self;
+        userPackage.user_id = [User currentUser].modelId;
+        userPackage.package_id = curPack.modelId;
+        [userPackage updateScore:grade];
     }
     
     [self performSelector:@selector(displayFinishTestAlert) withObject:self afterDelay:0.5];
@@ -488,8 +505,8 @@
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
     curSet = model;
-    
     wordList = model.wordList;
+    
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self performSelector:@selector(displayAlertTestPick) withObject:self afterDelay:0.5];
 }
@@ -517,5 +534,23 @@
 - (void)createModelSuccessful:(AModel *)model {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+#pragma UserPackage Delegate
+- (void)updateUserPackageScoreSuccessful:(UserPackage *)userPackage
+{
+    NSLog(@"updateUserPackageScoreSuccessful %@",userPackage);
+}
+-(void)updateUserPackageScoreWithError:(id)Error StatusCode:(NSNumber *)statusCode
+{
+    NSLog(@"updateUserPackageScoreWithError[%i] = %@",[statusCode intValue],Error);
+}
 
+#pragma WordLearnedDelegate
+-(void)wordLearnedUploadSuccessful:(NSArray *)wordLearnedList
+{
+    NSLog(@"wordLearnedUploadSuccessful = %@",wordLearnedList);
+}
+-(void)wordLearnedUploadWithError:(id)Error StatusCode:(NSNumber *)statusCode
+{
+    NSLog(@"wordLearnedUploadWithError[%i] = %@",[statusCode intValue],Error);
+}
 @end

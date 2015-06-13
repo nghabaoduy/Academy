@@ -16,6 +16,7 @@
 #import "DataEngine.h"
 #import "MSDynamicsDrawerViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface UserShelfVC () <ModelDelegate>
 
@@ -75,6 +76,7 @@
 -(void) retrievePackages
 {
     NSLog(@"retrievePackages runs");
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [refeshControl beginRefreshing];
     UserPackage * userPackage = [UserPackage new];
     [userPackage setDelegate:self];
@@ -153,12 +155,14 @@
 #pragma mark - Model Delegate
 
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     packageList = allList;
     [self reloadData];
 
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"error %@", error);
     [self.refreshControl endRefreshing];
 

@@ -31,6 +31,9 @@
 - (void)userPurchasePackageFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 - (void)userTryPackageSucessful:(User *)user;
 - (void)userTryPackageFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
+
+- (void)userChangeProfileNameSucessful:(User*)user;
+- (void)userChangeProfileNameFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 @end
 
 @interface User : AModel
@@ -44,6 +47,8 @@
 @property (nonatomic, readonly) NSString * fullName;
 @property (nonatomic, readonly) NSString * auth;
 @property (nonatomic, strong) NSNumber * credit;
+@property (nonatomic, strong) NSString * facebookId;
+@property (nonatomic, strong) NSString * ggpId;
 
 - (void)userLoginWith:(NSString *)userName Password:(NSString *)password;
 - (void)userLogout;
@@ -59,4 +64,7 @@
 - (void)changePassword:(NSString *)oldPass NewPass:(NSString *) newPass;
 
 - (void)resetPassword:(NSString *) username;
+
+-(void)changeProfileName:(NSString *) newProfileName;
+
 @end
