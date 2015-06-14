@@ -322,7 +322,8 @@ static User * _currentUser = nil;
 {
     NSLog(@"uploadImageWithURL = %@",imgURL);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
- 
+    manager.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:@"application/json", @"text/html", nil];
+    
     NSDictionary * params = @{
                               @"username" : self.userName
                               };
