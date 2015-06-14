@@ -15,6 +15,7 @@
 @synthesize name, desc, orderNo, wordList, package_id, imgURL;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
+
     self.modelId = [self getStringFromDict:dict WithKey:@"id"];
 
     name = [self getStringFromDict:dict WithKey:@"name"];
@@ -23,6 +24,7 @@
     orderNo = [self getStringFromDict:dict WithKey:@"order_number"] ? [[self getStringFromDict:dict WithKey:@"order_number"] intValue]:-1;
     
     imgURL = dict[@"imgURL"] ?:(dict[@"asset"] ? dict[@"asset"][@"index"] : nil);
+
     wordList = [NSMutableArray new];
     
     NSArray * words = [self getArrayFromDict:dict WithKey:@"words"];
@@ -101,6 +103,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
     [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         [self setObjectWithDictionary:responseObject];
         [self.delegate findIdSuccessful:self];
         

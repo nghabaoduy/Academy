@@ -186,8 +186,8 @@
         [wlArrayList addObject:[NSMutableArray new]];
         [xLabels addObject:[WordLearned getStringFromDateWithoutYear:checkDate]];
     }
-    NSLog(@"xLabels = %@",xLabels);
-    NSLog(@"wlArrayList = %@",wlArrayList);
+    //NSLog(@"xLabels = %@",xLabels);
+    //NSLog(@"wlArrayList = %@",wlArrayList);
     
     NSMutableArray *wlCountArray = [NSMutableArray new];
     for (NSArray *wlArray in wlArrayList) {

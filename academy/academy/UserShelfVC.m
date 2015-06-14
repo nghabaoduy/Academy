@@ -63,7 +63,7 @@
     [self.tableView addSubview:refeshControl];
     
     [[DataEngine getInstance] setIsForceReload:YES];
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -76,10 +76,11 @@
 -(void) retrievePackages
 {
     NSLog(@"retrievePackages runs");
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [refeshControl beginRefreshing];
     UserPackage * userPackage = [UserPackage new];
     [userPackage setDelegate:self];
+    NSLog(@"curUser.id = %@",[[User currentUser] modelId]);
     [userPackage getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
 }
 
@@ -104,6 +105,12 @@
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
     [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
+    if ([curUserPackage.score intValue] > 0) {
+        [cell.rankImg setHidden:NO];
+        [cell.rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"packRankStar_%i.png",[curUserPackage.score intValue]]]];
+    }   else   {
+        [cell.rankImg setHidden:YES];
+    }
     
     if ([pack.price intValue] == 0) {
         [cell.priceLb setText:@"FREE"];

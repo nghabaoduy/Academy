@@ -67,12 +67,12 @@
     [self performScale:rankStar:0.8f:0.0f];
     
 }
--(void) setPackage:(Package *) pack
+-(void) setPackage:(Package *) pack grade:(int) grade
 {
 
     [setIcon setImage:[UIImage imageNamed:@"sticker_timer.png"]];
     
-    //[rankStar setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[pack.grade intValue]]]];
+    [rankStar setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",grade]]];
     
     [self performScale:setIcon:0.5f:0.0f];
     [self performScale:wreath:0.6f:0.0f];

@@ -57,7 +57,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     knownWords = [NSMutableArray new];
     [self resetView];
-    [self retrieveWords];
+    [self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
 }
 
 -(void) resetView
@@ -91,6 +91,7 @@
 }
 
 - (void)retrieveWords {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [curSet setDelegate:self];
     [curSet findId:curSet.modelId];
 }

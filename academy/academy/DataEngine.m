@@ -44,35 +44,25 @@ static DataEngine * instance = nil;
     
 }
 - (NSString *)requestURL {
-    return @"http://192.168.1.2:8000/";
+    return @"http://192.168.1.3:8000/";
     return @"http://academy.openlabproduction.com/";
 }
 
--(void) saveLoginInfo:(NSString*) username Password: (NSString*) password
+-(void) saveLoginInfo:(NSString*) username Password: (NSString*) password fbId:(NSString *)fbId ggpId:(NSString*)ggpId
 {
     if ([[DataEngine getInstance] isOffline]) {
         return;
     }
     NSLog(@"saveLoginInfo:%@ Password:%@",username,password);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:username forKey:@"saveUsername"];
-    [defaults setObject:password forKey:@"savePassword"];
-    [defaults setObject:@YES forKey:@"isAutoLogin"];
-    [defaults setObject:[NSNumber numberWithInteger:self.loginType] forKey:@"loginType"];
+    [defaults setValue:username forKey:@"saveUsername"];
+    [defaults setValue:password forKey:@"savePassword"];
+    [defaults setValue:fbId forKey:@"facebook_id"];
+    [defaults setValue:ggpId forKey:@"ggp_id"];
+    [defaults setValue:@YES forKey:@"isAutoLogin"];
+    [defaults setValue:[NSNumber numberWithInteger:self.loginType] forKey:@"loginType"];
     [defaults synchronize];
 }
--(NSDictionary*) loadLoginInfo
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *saveUsername = [defaults objectForKey:@"saveUsername"];
-    NSString *savePassword = [defaults objectForKey:@"savePassword"];
-    NSLog(@"loadLoginInfo:%@ Password:%@",saveUsername,savePassword);
-    NSMutableDictionary *loginDict = [[NSMutableDictionary alloc] init];
-    if (saveUsername && savePassword) {
-        [loginDict setObject:saveUsername forKey:@"saveUsername"];
-        [loginDict setObject:savePassword forKey:@"savePassword"];
-    }
-    return loginDict;
-}
+
 
 @end

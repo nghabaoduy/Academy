@@ -62,7 +62,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     signIn.scopes = @[ @"profile" ];            // "profile" scope
     signIn.delegate = self;
     //[signIn trySilentAuthentication];
-    
+    //[self clearSave];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isAutoLogin = [defaults boolForKey:@"isAutoLogin"];
     NSLog(@"isAutoLogin = %@",isAutoLogin?@"YES":@"NO");
@@ -71,16 +71,57 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     }
 }
 
+-(void) clearSave
+{
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //facebook
+    if ([FBSDKAccessToken currentAccessToken]) {
+        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        [loginManager logOut];
+    }
+    //google plus
+    [[GPPSignIn sharedInstance] signOut];
+}
+
 -(void) autoLogin
 {
-    NSDictionary *loginDict = [[DataEngine getInstance] loadLoginInfo];
-    
-    NSString *saveUsername = [loginDict objectForKey:@"saveUsername"];
-    NSString *savePassword = [loginDict objectForKey:@"savePassword"];
-    NSLog(@"autoLogin username = %@ password = %@",saveUsername,savePassword);
-    if (saveUsername.length > 0) {
-        [self loginWithEmailAndPassword:saveUsername Password:savePassword];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *saveUsername = [defaults valueForKey:@"saveUsername"];
+    NSString *savePassword = [defaults valueForKey:@"savePassword"];
+    NSString *fbId = [defaults valueForKey:@"facebook_id"];
+    NSString *ggpId = [defaults valueForKey:@"ggp_id"];
+    switch ([[DataEngine getInstance] loginType]) {
+        case LoginNormal:
+        {
+            NSLog(@"autoLogin username = %@ password = %@",saveUsername,savePassword);
+            if (saveUsername.length > 0) {
+                [textfUsername setText:saveUsername];
+                [textfPassword setText:savePassword];
+                [self loginWithEmailAndPassword:saveUsername Password:savePassword];
+            }
+        }
+            break;
+        case LoginFacebook:
+        {
+            NSLog(@"autoLogin username = %@ FBId = %@",saveUsername,fbId);
+            if (saveUsername.length > 0) {
+                [self loginWithEmailAndFBId:saveUsername fbId:fbId];
+            }
+        }
+            break;
+        case LoginGooglePlus:
+        {
+            NSLog(@"autoLogin username = %@ ggpId = %@",saveUsername,ggpId);
+            if (saveUsername.length > 0) {
+                [self loginWithEmailAndGGPId:saveUsername ggpId:ggpId];
+            }
+        }
+            break;
+        default:
+            break;
     }
+    
 }
 
 
@@ -137,10 +178,10 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
                  if (!error) {
                      NSLog(@"fetched user:%@", result);
                      NSString *email = result[@"email"];
-                     NSString *password = result[@"id"];
+                     
                      NSString *profileName =[result[@"first_name"] stringByAppendingFormat:@" %@",result[@"last_name"]];
                      [[DataEngine getInstance] setLoginType:LoginFacebook];
-                     [self registerNewUserWithEmail:email Password:password ProfileName:profileName];
+                     [self registerNewUserWithEmail:email ProfileName:profileName fbId:result[@"id"] ggpId:@""];
                  }
                  else
                  {
@@ -168,10 +209,10 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
                          if (!error) {
                              NSLog(@"fetched user:%@", result);
                              NSString *email = result[@"email"];
-                             NSString *password = result[@"id"];
+                             
                              NSString *profileName =[result[@"first_name"] stringByAppendingFormat:@" %@",result[@"last_name"]];
                              [[DataEngine getInstance] setLoginType:LoginFacebook];
-                             [self registerNewUserWithEmail:email Password:password ProfileName:profileName];
+                             [self registerNewUserWithEmail:email ProfileName:profileName fbId:result[@"id"] ggpId:@""];
                              
                          }
                          else
@@ -227,10 +268,10 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
                         NSLog(@"Gender=%@",person.gender);
                         
                         NSString *email = [GPPSignIn sharedInstance].authentication.userEmail;
-                        NSString *password = person.identifier;
+                        
                         NSString *profileName =[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName];
                         [[DataEngine getInstance] setLoginType:LoginGooglePlus];
-                        [self registerNewUserWithEmail:email Password:password ProfileName:profileName];
+                        [self registerNewUserWithEmail:email ProfileName:profileName fbId:@"" ggpId:person.identifier];
                     }
                 }];
     
@@ -282,10 +323,10 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
                         NSLog(@"User Name=%@",[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName]);
                         NSLog(@"Gender=%@",person.gender);
                         NSString *email = [GPPSignIn sharedInstance].authentication.userEmail;
-                        NSString *password = person.identifier;
+                        
                         NSString *profileName =[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName];
                         [[DataEngine getInstance] setLoginType:LoginGooglePlus];
-                        [self registerNewUserWithEmail:email Password:password ProfileName:profileName];
+                        [self registerNewUserWithEmail:email ProfileName:profileName fbId:@"" ggpId:person.identifier];
                         
                     }
                 }];
@@ -314,7 +355,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 - (IBAction)actionLogin:(id)sender {
     
     
-    if (![self validation]) {
+    if (![self validation:textfUsername.text pass:textfPassword.text]) {
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Email và mật khẩu không được để trống." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
@@ -331,20 +372,39 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
                      @"password" : textfPassword.text,
                      @"password_confirmation" : textfPassword.text
                      };
+    [[DataEngine getInstance] saveLoginInfo:textfUsername.text Password:textfPassword.text fbId:@"" ggpId:@""];
     [[DataEngine getInstance] setLoginType:LoginNormal];
     [self loginWithEmailAndPassword:textfUsername.text Password:textfPassword.text];
 }
 -(void) loginWithEmailAndPassword:(NSString *) email Password:(NSString *) password
 {
+    if(![self validation:email pass:password])
+        return;
     User * newUser = [User new];
     [newUser setAuthDelegate:self];
     [newUser userLoginWith:email Password:password];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
 }
+-(void) loginWithEmailAndFBId:(NSString *) email fbId:(NSString *) fbId
+{
+    User * newUser = [User new];
+    [newUser setAuthDelegate:self];
+    [newUser userLoginWith:email fbId:fbId];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+}
+-(void) loginWithEmailAndGGPId:(NSString *) email ggpId:(NSString *) ggpId
+{
+    User * newUser = [User new];
+    [newUser setAuthDelegate:self];
+    [newUser userLoginWith:email ggpId:ggpId];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+}
 
-- (BOOL)validation {
-    if ([textfUsername.text isEqualToString:@""] && [textfPassword.text isEqualToString:@""]) {
+- (BOOL)validation:(NSString*) username pass:(NSString *) pass{
+    if ([username isEqualToString:@""] || [pass isEqualToString:@""]) {
         return NO;
     }
     return YES;
@@ -363,18 +423,22 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     [self presentViewController:alertController animated:YES completion:nil];
 }
 //=== REGISTER ===//
--(void)registerNewUserWithEmail:(NSString *) email Password:(NSString*) password ProfileName:(NSString *) profileName
+-(void)registerNewUserWithEmail:(NSString *) email ProfileName:(NSString *) profileName fbId:(NSString *)fbId ggpId:(NSString *) ggpId
 {
-    NSLog(@"registerNewUserWithEmail called");
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     User * newUser = [User new];
+    NSString *pass = [User createRandomStringWithLength:8];
     newUser.authDelegate = self;
     registerDict = @{
                  @"username" : email,
-                 @"password" : password,
-                 @"password_confirmation" : password,
-                 @"profile_name" : profileName
+                 @"password" : pass,
+                 @"password_confirmation" : pass,
+                 @"profile_name" : profileName,
+                 @"facebook_id" : fbId,
+                 @"ggp_id":ggpId
                  };
+    NSLog(@"registerNewUserWithEmail called %@",registerDict);
     [newUser registerUserWithParam:registerDict];
 }
 
@@ -385,12 +449,10 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     
     switch (statusCode.intValue) {
         case 400:
-            //NSLog(@"error: %@", Error);
             errorMessage = Error;
             break;
         case 422:
             errorMessage = [NSString stringWithFormat:@"%@", statusCode];
-            //NSLog(@"error: %@", Error);
             break;
             
         default:
@@ -411,7 +473,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
             UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Thử lại"
                                                                style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction *action) {
-                                                                 // do destructive stuff here
+                                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                              }];
             [alertController addAction:dismiss];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -424,7 +486,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Thử lại"
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction *action) {
-                                                         // do destructive stuff here
+                                                         [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                      }];
     UIAlertAction * forgotPass = [UIAlertAction actionWithTitle:@"Quên mật khẩu"
                                                        style:UIAlertActionStyleDefault
@@ -442,10 +504,15 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isAutoLogin = [defaults boolForKey:@"isAutoLogin"];
     if (!isAutoLogin) {
-        [[DataEngine getInstance] saveLoginInfo:registerDict[@"username"] Password:registerDict[@"password"]];
+        [[DataEngine getInstance] saveLoginInfo:registerDict[@"username"] Password:registerDict[@"password"] fbId:registerDict[@"facebook_id"] ggpId:registerDict[@"ggp_id"]];
     }
+    
     [[DataEngine getInstance] setIsOffline:NO];
     [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
+    
+    
+    
+    
 }
 
 - (IBAction)viewTouchUp:(id)sender {
@@ -453,7 +520,15 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 }
 - (void)userRegiserFailed:(User *)user WithError:(id)Error StatusCode:(NSNumber *)statusCode {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self loginWithEmailAndPassword:registerDict[@"username"] Password:registerDict[@"password"]];
+    NSString *fbId = registerDict[@"facebook_id"];
+    NSString *ggpId = registerDict[@"ggp_id"];
+    if (fbId.length > 0) {
+        [self loginWithEmailAndFBId:registerDict[@"username"] fbId:fbId];
+    }
+    if (ggpId.length > 0) {
+        [self loginWithEmailAndGGPId:registerDict[@"username"] ggpId:ggpId];
+    }
+    
 }
 
 - (void)userRegiserSuccessful:(User *)user {
@@ -486,6 +561,5 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     [textField resignFirstResponder];
     return YES;
 }
-
 
 @end

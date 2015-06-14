@@ -75,11 +75,15 @@
     _cardTypeAnswer.view.bounds = _cardTypeAnswer.bounds;
     [_cardTypeAnswer clearDisplay];
 
-    [self.setTitleLb setText:self.curSet.name];
+    if (curSet) {
+        [self.setTitleLb setText:self.curSet.name];
+    } else {
+        [self.setTitleLb setText:@"Tổng Kiểm Tra"];
+    }
+    
     
     if (!wordList) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [self retrieveWords];
+        [self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
     }
     else
     {
@@ -196,6 +200,7 @@
     [self refreshCardHiddenState];
     [nextBtn setEnabled:YES];
 }
+int finalGrade;
 -(void) finishTest
 {
     isTestFinished = YES;
@@ -227,6 +232,7 @@
     {
         grade = [NSNumber numberWithInt:0];
     }
+    finalGrade = [grade intValue];
     
     if (!isFinalTest) if(curSet.grade < grade)
     {
@@ -246,10 +252,8 @@
     }
     
     [self performSelector:@selector(displayFinishTestAlert) withObject:self afterDelay:0.5];
-
-    
-    
 }
+
 -(void) displayFinishTestAlert
 {
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
@@ -265,7 +269,7 @@
     }
     else
     {
-        if ([curSet.grade intValue] == 0) {
+        if (finalGrade == 0) {
             
             AlertMascotView *cartoonView = [[AlertMascotView alloc] init];
             [cartoonView.messageLb setText:[NSString stringWithFormat:@"Tiếc quá, bạn chỉ trả lời đúng %lu/%i câu thôi, cố lên nhé.",(unsigned long)correctWordList.count, [testMaker getTestWordQuantity]]];
@@ -282,7 +286,7 @@
             [rankView setMessage:message];
             
             if (isFinalTest) {
-                [rankView setPackage:curPack];
+                [rankView setPackage:curPack grade:finalGrade];
             }
             else
             {
@@ -336,6 +340,7 @@
 }
 
 - (void)retrieveWords {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [curSet setDelegate:self];
     [curSet findId:curSet.modelId];
 }

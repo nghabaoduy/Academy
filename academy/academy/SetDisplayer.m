@@ -48,7 +48,7 @@
     curSet = set;
     isFinalTest = NO;
     [titleLb setText:set.name];
-    
+    //NSLog(@"set.imgURL = %@",set.imgURL);
     if (set.imgURL)
         [img setImageWithURL:[NSURL URLWithString:set.imgURL] placeholderImage:[UIImage imageNamed:@"sticker_egg.png"]];
     else

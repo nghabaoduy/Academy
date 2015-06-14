@@ -11,12 +11,9 @@
 @interface PackageCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *packageImg;
 @property (strong, nonatomic) IBOutlet UILabel *priceLb;
-@property (strong, nonatomic) IBOutlet UIImageView *packageInfoBG;
-@property (strong, nonatomic) IBOutlet UITextView *contentTV;
-@property (strong, nonatomic) IBOutlet UIButton *tryBtn;
-@property (strong, nonatomic) IBOutlet UIButton *buyBtn;
 @property (strong, nonatomic) IBOutlet UILabel *packTitle;
 @property (strong, nonatomic) IBOutlet UILabel *packSubTitle;
+@property (strong, nonatomic) IBOutlet UIImageView *rankImg;
 
 
 @end

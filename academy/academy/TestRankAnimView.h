@@ -12,6 +12,6 @@
 @interface TestRankAnimView : UIView
 @property (strong, nonatomic) IBOutlet UIView *view;
 -(void) setLSet:(LSet *) set;
--(void) setPackage:(Package *) pack;
+-(void) setPackage:(Package *) pack grade:(int) grade;
 -(void) setMessage:(NSString *) message;
 @end

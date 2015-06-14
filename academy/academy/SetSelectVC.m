@@ -48,19 +48,21 @@
         [orderList sortUsingComparator:^NSComparisonResult(LSet * set1, LSet * set2) {
             return (set1.orderNo%2)>(set2.orderNo%2);
         }];
-        [self loadSetScore];
     }
 }
 -(void)loadSetScore
 {
+    setLoadCount = 0;
     scoreLoadCount = 0;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    SetScore * newsScore = [SetScore new];
+    
     for (LSet *set in curPack.setList) {
+        SetScore * newsScore = [SetScore new];
         newsScore.delegate = self;
         newsScore.set_id = set.modelId;
         [newsScore getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
     }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -72,6 +74,7 @@
     }
     
     [self.tableView reloadData];
+    [self loadSetScore];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,7 +111,6 @@
     }
     //other
     NSMutableArray * orderList = setOrderArray[indexPath.row];
-    NSLog(@"curMaxUnlocked = %i",curMaxUnlocked);
     if (orderList.count == 1) {
         SetRow1Displayer *cell = [tableView dequeueReusableCellWithIdentifier:@"setCell1Displayer" forIndexPath:indexPath];
         cell.setDisplayer.delegate = self;
@@ -173,6 +175,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     fullWordList = [NSMutableArray new];
     setLoadCount = 0;
+    scoreLoadCount = 0;
     for (LSet *set in curPack.setList) {
         if (set.wordList.count > 0) {
             [self addWordListToFullWordList:set.wordList];
@@ -194,11 +197,13 @@
         [fullWordList addObjectsFromArray:wordList];
     }
     setLoadCount++;
+    NSLog(@"setLoadCount = %i",setLoadCount);
     if (setLoadCount >= curPack.setList.count) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"direct view");
         WordTestVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordTestView"];
         view.curPack = curPack;
         view.wordList = [fullWordList copy];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self presentViewController:view animated:YES completion:nil];
     }
 }
@@ -211,7 +216,6 @@
     {
         [self handleScoreList:nil];
     }
-    
 }
 
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
@@ -221,9 +225,9 @@
 }
 -(void) handleScoreList:(NSMutableArray *)allList
 {
+    NSLog(@"handleScoreList runs");
     if(allList)if(allList.count > 0)
     {
-        NSLog(@"Get score successfull = %@",allList);
         [allList sortUsingComparator:^NSComparisonResult(SetScore * score1, SetScore * score2) {
             return (score1.score)>(score2.score);
         }];
@@ -239,9 +243,10 @@
             }
         }
     }
-    
     scoreLoadCount++;
+    
      if (scoreLoadCount >= curPack.setList.count) {
+         NSLog(@"handleScoreList done");
          [MBProgressHUD hideHUDForView:self.view animated:YES];
          [self.tableView reloadData];
      }

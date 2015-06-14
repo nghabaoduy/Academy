@@ -34,6 +34,8 @@
 
 - (void)userChangeProfileNameSucessful:(User*)user;
 - (void)userChangeProfileNameFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
+
+
 @end
 
 @interface User : AModel
@@ -50,7 +52,11 @@
 @property (nonatomic, strong) NSString * facebookId;
 @property (nonatomic, strong) NSString * ggpId;
 
++(NSString *) createRandomStringWithLength:(int) length;
+
 - (void)userLoginWith:(NSString *)userName Password:(NSString *)password;
+- (void)userLoginWith:(NSString *)userName fbId:(NSString *)fbId;
+- (void)userLoginWith:(NSString *)userName ggpId:(NSString *)ggpId;
 - (void)userLogout;
 
 + (User *)currentUser;
@@ -66,5 +72,7 @@
 - (void)resetPassword:(NSString *) username;
 
 -(void)changeProfileName:(NSString *) newProfileName;
+
+-(void)uploadImageWithURL:(NSURL *) imgURL;
 
 @end

@@ -25,7 +25,6 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 @property (nonatomic, assign) BOOL isOffline;
 @property (nonatomic, assign) LoginType loginType;
 
--(void) saveLoginInfo:(NSString*) username Password: (NSString*) password;
--(NSDictionary*) loadLoginInfo;
+-(void) saveLoginInfo:(NSString*) username Password: (NSString*) password fbId:(NSString *)fbId ggpId:(NSString*)ggpId;
 
 @end

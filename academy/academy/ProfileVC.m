@@ -52,13 +52,9 @@
     
     //For BarC hart
     barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180.0)];
-    [barChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
-    [barChart setYValues:@[@1,  @10, @2, @6, @3]];
-    [barChart setBarTopLabels:@[@1,  @10, @2, @6, @3]];
     [chartView addSubview:barChart];
     [chartView setBackgroundColor:[UIColor clearColor]];
     
-    [self performSelector:@selector(refreshChart) withObject:self afterDelay:1.0f];
     
     [self getWordLearnedList];
     
@@ -67,7 +63,7 @@
 -(void) getWordLearnedList
 {
     wordLoadIndicator.hidden = NO;
-    NSLog(@"getWordLearnedList runs");
+    //NSLog(@"getWordLearnedList runs");
     WordLearned *wordLearned = [WordLearned new];
     wordLearned.delegate = self;
     [wordLearned getAllWithFilter:@{@"user_id":curUser.modelId}];
@@ -137,9 +133,27 @@
     [avatar setImage:chosenImage forState:UIControlStateNormal];
     //save image
 
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-}
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self uploadImage:chosenImage];
+    }];
+    
 
+}
+-(void) uploadImage:(UIImage *)img
+{
+    [curUser uploadImageWithURL:[self getImageFilePath:img:0]];
+}
+-(NSURL *) getImageFilePath :(UIImage*) image :(int)imageIndex
+{
+    NSError * error;
+    NSArray * directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:&error];
+    NSLog(@"directoryContents ====== %@",directoryContents);
+    
+    NSData *pngData = UIImageJPEGRepresentation(image, 0.05f);
+    NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"propImage%@-%i.jpg",@"profileImage",imageIndex]]; //Add the file name
+    [pngData writeToFile:filePath atomically:YES]; //Write the file
+    return [NSURL fileURLWithPath:filePath];
+}
 - (UIImage *)imageWithImage:(UIImage *)image minSide:(int)minLength {
     
     CGSize newSize;
@@ -159,6 +173,7 @@
     return newImage;
     
 }
+
 - (void) SelectImage
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -190,9 +205,10 @@
 {
     wordLoadIndicator.hidden = YES;
     NSLog(@"WordLearnedList = %@",allList);
-    [totalWordLb setText:[NSString stringWithFormat:@"%i",allList.count]];
-    [self generateChartInfo:allList];
-    
+    if (allList.count > 0) {
+        [totalWordLb setText:[NSString stringWithFormat:@"%i",allList.count]];
+        [self generateChartInfo:allList];
+    }
 }
 
 -(void) generateChartInfo:(NSArray *)learnedList

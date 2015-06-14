@@ -73,7 +73,7 @@
 }
 - (NSDate *)getDateFromDict:(NSDictionary *)dict WithKey:(NSString *)key {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *date = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",[dict valueForKey:key]]];
     return date;
 }

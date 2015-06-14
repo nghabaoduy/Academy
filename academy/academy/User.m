@@ -51,7 +51,7 @@ static User * _currentUser = nil;
 }
 
 - (void)userLoginWith:(NSString *)userName Password:(NSString *)password {
-    
+    NSLog(@"User Login With Username and Password");
     NSDictionary * params = @{
                               @"username" : userName,
                               @"password" : password
@@ -75,6 +75,58 @@ static User * _currentUser = nil;
         
         [self.authDelegate userLogin:self WithError:json[@"message"] StatusCode:@([operation.response statusCode])];
     }];
+}
+- (void)userLoginWith:(NSString *)userName fbId:(NSString *)fbId {
+    NSLog(@"User Login With Username and fbId");
+    NSDictionary * params = @{
+                              @"username" : userName,
+                              @"facebook_id" : fbId
+                              };
+    
+    NSString *apiPath = @"api/loginWithFBId";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         _currentUser = self;
+         [self setObjectWithDictionary:responseObject];
+         [self saveCurrentUserToNSUserDefaults];
+         [self.authDelegate userLoginSuccessfull:self];
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+         NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+         
+         [self.authDelegate userLogin:self WithError:json[@"message"] StatusCode:@([operation.response statusCode])];
+     }];
+}
+- (void)userLoginWith:(NSString *)userName ggpId:(NSString *)ggpId{
+    NSLog(@"User Login With Username and ggpId");
+    NSDictionary * params = @{
+                              @"username" : userName,
+                              @"ggp_id" : ggpId
+                              };
+    
+    NSString *apiPath = @"api/loginWithGGPId";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         _currentUser = self;
+         [self setObjectWithDictionary:responseObject];
+         [self saveCurrentUserToNSUserDefaults];
+         [self.authDelegate userLoginSuccessfull:self];
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+         NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+         
+         [self.authDelegate userLogin:self WithError:json[@"message"] StatusCode:@([operation.response statusCode])];
+     }];
 }
 
 - (void)userLogout {
@@ -136,7 +188,7 @@ static User * _currentUser = nil;
 }
 
 - (void)registerUserWithParam:(NSDictionary *)dictionary {
-    
+    NSLog(@"registerUserWithParam = %@",dictionary);
     NSString *apiPath = @"api/register";
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -254,5 +306,41 @@ static User * _currentUser = nil;
     
     
 }
++(NSString *) createRandomStringWithLength:(int) length
+{
+    NSString *chars = @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int charsLength = chars.length;
+    NSString * randomStr = @"";
+    for (int i = 0; i<length; i++) {
+        randomStr = [NSString stringWithFormat:@"%@%@",randomStr,[chars substringWithRange:NSMakeRange(arc4random_uniform(charsLength),1)]];
+    }
 
+    return randomStr;
+}
+
+-(void)uploadImageWithURL:(NSURL *)imgURL
+{
+    NSLog(@"uploadImageWithURL = %@",imgURL);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+ 
+    NSDictionary * params = @{
+                              @"username" : self.userName
+                              };
+
+    NSString *apiPath = @"api/uploadAvatar";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    
+    [manager POST:requestURL parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileURL:imgURL name:@"image" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"operation = %@",operation);
+        NSLog(@"#error: %@", error.localizedDescription);
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"uploadImageWithURLError[%i] = %@",[operation.response statusCode],json[@"message"]);
+    }];
+}
 @end
