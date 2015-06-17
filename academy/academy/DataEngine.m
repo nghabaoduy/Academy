@@ -44,7 +44,7 @@ static DataEngine * instance = nil;
     
 }
 - (NSString *)requestURL {
-    return @"http://192.168.1.3:8000/";
+    //return @"http://192.168.1.6:8000/";
     return @"http://academy.openlabproduction.com/";
 }
 
@@ -62,6 +62,11 @@ static DataEngine * instance = nil;
     [defaults setValue:@YES forKey:@"isAutoLogin"];
     [defaults setValue:[NSNumber numberWithInteger:self.loginType] forKey:@"loginType"];
     [defaults synchronize];
+}
+
+-(NSString *) getAppURL
+{
+    return @"https://itunes.apple.com/us/app/vnacademy/id1008312086?ls=1&mt=8";
 }
 
 

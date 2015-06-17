@@ -27,31 +27,31 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"CardTypeAnswer" owner:self options:nil];
-        self.bounds = self.view.bounds;
-        [self addSubview:self.view];
+        [self initCard];
     }
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
     return self;
 }
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"CardTypeAnswer" owner:self options:nil];
-        self.bounds = self.view.bounds;
-        [self addSubview:self.view];
+        [self initCard];
     }
+    
+    return self;
+}
+
+-(void) initCard
+{
+    [[NSBundle mainBundle] loadNibNamed:@"CardTypeAnswer" owner:self options:nil];
+    self.bounds = self.view.bounds;
+    [self addSubview:self.view];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
-    return self;
+    
 }
 
 -(void)displayQuestion:(NSString *) question
@@ -72,10 +72,12 @@
     [self clearDisplay];
     [speakerBtn setHidden:NO];
     speakerWord = word;
-    [[SoundEngine getInstance] readWord:word];
+    self.language = [self.delegate CardTypeAnswerViewGetLanguage];
+    [[SoundEngine getInstance] readWord:word language:self.language];
 }
 - (IBAction)speakerClicked:(id)sender {
-    [[SoundEngine getInstance] readWord:speakerWord];
+    self.language = [self.delegate CardTypeAnswerViewGetLanguage];
+    [[SoundEngine getInstance] readWord:speakerWord language:self.language];
 }
 - (IBAction)checkAnswer:(id)sender {
     [checkBtn setEnabled:NO];

@@ -7,6 +7,7 @@
 //
 
 #import "SoundEngine.h"
+#import "LanguageControl.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -46,13 +47,13 @@ static SoundEngine * instance = nil;
     audioPlayerObj = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     [audioPlayerObj play];
 }
-- (void) readWord:(NSString*)word
+- (void) readWord:(NSString*)word language:(NSString *) lang
 {
     if ([synthesizer isPaused]) {
         [synthesizer continueSpeaking];
     }else{
         [self stopSpeech];
-        [self speakText:word];
+        [self speakText:word language:lang];
     }
 }
 - (void)stopSpeech
@@ -65,12 +66,13 @@ static SoundEngine * instance = nil;
         [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
 }
-- (void)speakText:(NSString*)text{
+- (void)speakText:(NSString*)text language:(NSString *) lang{
     
     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
     utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
-    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-au"];
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[LanguageControl getInstance] getLanguageVoiceCodeByLang:lang]];
     
     [synthesizer speakUtterance:utterance];
 }
+
 @end

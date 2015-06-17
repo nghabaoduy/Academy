@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LanguageControl.h"
+
 @class CardInfoView;
 
 @protocol CardInfoViewDelegate
 -(void) cardIsTapped:(CardInfoView *) card;
-
+-(NSString *) CardInfoViewGetLanguage;
 @end
 
 @interface CardInfoView : UIView
@@ -23,9 +25,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneticLb;
 @property (strong, nonatomic) IBOutlet UILabel *wordTypeLb;
 @property (strong, nonatomic) IBOutlet UITextView *contentTV;
+@property (strong, nonatomic) IBOutlet UITextView *contentBelowTV;
 @property (strong, nonatomic) IBOutlet UILabel *messageLb;
 @property (strong, nonatomic) IBOutlet UILabel *centerWordLb;
 @property (strong, nonatomic) IBOutlet UIView *view;
+@property LanguageIndexType curLanguageType;
+@property int standardFontSize;
 
 
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent;

@@ -13,6 +13,7 @@
 #import "PackageInfoVC.h"
 #import "UIImageView+AFNetworking.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "ShelfHeader.h"
 
 @interface ShopVC () <ModelDelegate>
 
@@ -25,6 +26,9 @@
     NSIndexPath *curCellPath;
     int expansionHeight;
     int cellTopMargin;
+    
+    NSMutableArray * packageLangList;
+    NSMutableArray * languageList;
 }
 
 - (void)viewDidLoad {
@@ -50,23 +54,55 @@
     //Call the function
     [toRetrivePackages getAllWithFilter:nil];
 }
-
+-(void) organizePackageList
+{
+    packageLangList = [NSMutableArray new];
+    languageList = [NSMutableArray new];
+    
+    for (Package * package in packageList) {
+        BOOL isAvai = NO;
+        for(NSString * langStr in languageList) {
+            if ([package.language isEqualToString:langStr]) {
+                isAvai = YES;
+            }
+        }
+        if (!isAvai) {
+            [languageList addObject:package.language];
+        }
+    }
+    for (NSString *langStr in languageList) {
+        [packageLangList addObject:[NSMutableArray new]];
+    }
+    for (Package * package in packageList) {
+        for(int i = 0; i<languageList.count;i++) {
+            NSString * langStr = languageList[i];
+            if ([package.language isEqualToString:langStr]) {
+                NSMutableArray *langArr = packageLangList[i];
+                [langArr addObject:package];
+            }
+        }
+    }
+    [self.tableView reloadData];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return languageList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return packageList.count;
+    NSMutableArray *langArr = packageLangList[section];
+    return langArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PackageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"packCell" forIndexPath:indexPath];
-    Package *pack = [packageList objectAtIndex:indexPath.row];
+    
+    NSMutableArray *langArr = packageLangList[indexPath.section];
+    Package *pack = [langArr objectAtIndex:indexPath.row];
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
     [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
@@ -92,21 +128,32 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
-    
+    ShelfHeader *headerView = [[ShelfHeader alloc] init];
+    NSString * lang = [languageList objectAtIndex:section];
+    lang = [NSString stringWithFormat:@"%@%@",[[lang substringToIndex:1] uppercaseString], [lang substringFromIndex:1]];
+    headerView.titleLb.text = lang;
+    return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50.0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return cellInitHeight;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
 }
 #pragma mark - Package
 
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     packageList = allList;
-    [self.tableView reloadData];
+    [self organizePackageList];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {

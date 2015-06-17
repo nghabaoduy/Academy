@@ -13,5 +13,5 @@
 
 + (id)getInstance;
 - (void)playSound:(NSString*)fileNameWithExtension ;
-- (void) readWord:(NSString*)word;
+- (void) readWord:(NSString*)word language:(NSString *) lang;
 @end

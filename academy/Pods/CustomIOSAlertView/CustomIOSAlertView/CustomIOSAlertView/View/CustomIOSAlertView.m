@@ -198,9 +198,14 @@ CGFloat buttonSpacerHeight = 0;
 
     CGSize screenSize = [self countScreenSize];
     CGSize dialogSize = [self countDialogSize];
-
+    
+    CGFloat offset = 0;
+    if ([parentView class] == [UINavigationController class]) {
+        UINavigationController * navController = (UINavigationController *) parentView;
+        offset = navController.navigationController.navigationBar.frame.size.height;
+    }
     // For the black background
-    [self setFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
+    [self setFrame:CGRectMake(-offset, 0, screenSize.width, screenSize.height)];
 
     // This is the dialog's container; we attach the custom content and the buttons to this one
     UIView *dialogContainer = [[UIView alloc] initWithFrame:CGRectMake((screenSize.width - dialogSize.width) / 2, (screenSize.height - dialogSize.height) / 2, dialogSize.width, dialogSize.height)];

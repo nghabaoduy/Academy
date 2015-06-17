@@ -69,6 +69,13 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     if (isAutoLogin) {
         [self performSelector:@selector(autoLogin) withObject:self afterDelay:0.5];
     }
+    else
+    {
+        NSString *saveUsername = [[NSUserDefaults standardUserDefaults]valueForKey:@"saveUsername"];
+        if (![saveUsername isEqualToString:@""]) {
+            [textfUsername setText:saveUsername];
+        }
+    }
 }
 
 -(void) clearSave
@@ -508,11 +515,22 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     }
     
     [[DataEngine getInstance] setIsOffline:NO];
+    if ([[DataEngine getInstance] loginType] == LoginNormal) {
+        [user refreshUser];
+    }else{
+        [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
+    }
+    
+    
+    
+}
+
+- (void)refreshUserSucessful:(User *)user{
     [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
-    
-    
-    
-    
+}
+-(void)refreshUserFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode
+{
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
 }
 
 - (IBAction)viewTouchUp:(id)sender {

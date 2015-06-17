@@ -7,11 +7,11 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.openlabproduction.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>com.openlabproduction.vnacademy</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>vnAcademy</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -24,16 +24,16 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.openlabproduction.academy</string>
+			<string>com.openlabproduction.vnacademy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.openlabproduction.academy</string>
+				<string>com.openlabproduction.vnacademy</string>
 				<string>fb468528923297269</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1</string>
 	<key>FacebookAppID</key>
 	<string>468528923297269</string>
 	<key>FacebookDisplayName</key>

@@ -9,6 +9,7 @@
 #import "TestMaker.h"
 #import "CardMultipleChoiceView.h"
 #import "CardTypeAnswerView.h"
+#import "LanguageControl.h"
 
 @implementation TestMaker{
     
@@ -22,7 +23,7 @@
     
     NSMutableArray *answeredQuestion;
 }
-@synthesize delegate;
+@synthesize delegate, testLanguage;
 - (id)initWithWordList:(NSArray *) _wordList {
     self = [super init];
     if (self) {
@@ -95,14 +96,14 @@
     
     switch (curTestType) {
         case TestMultipleChoiceSameLanguage:
-            question  = [word getMeaning:@"English" bExample:NO];
+            question  = [word getMeaning:testLanguage bExample:NO];
             break;
         case TestMultipleChoiceUserLanguage:
             question  = [word getMeaning:@"Vietnamese" bExample:NO];
             break;
         case TestMultipleChoiceExampleBlank:
-            question = [word getExample:@"English"];
-            question = [question stringByReplacingOccurrencesOfString:word.name withString:@"__________"];
+            question = [word getExample:testLanguage];
+            question = [question stringByReplacingOccurrencesOfString:word.name withString:@"_______" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [question length])];
             break;
         default:
             break;
@@ -148,7 +149,7 @@
     
     switch (curTestType) {
         case TestWordFillingSameLanguage:
-            question  = [NSString stringWithFormat:@"(%@) %@",wordType,[word getMeaning:@"English" bExample:NO]];
+            question  = [NSString stringWithFormat:@"(%@) %@",wordType,[word getMeaning:testLanguage bExample:NO]];
             [card displayQuestion:question ];
             break;
         case TestWordFillingUserLanguage:
@@ -169,7 +170,7 @@
 {
     curWordNo = [self getNextQuestionIndex];
     NSLog(@"curWordNo = %i",curWordNo);
-    NSLog(@"userPickedTestType = %i",_userPickedTestType);
+    NSLog(@"userPickedTestType = %lu",(unsigned long)_userPickedTestType);
     if (_userPickedTestType != TestTypeCount) {
         return viewTypeList[_userPickedTestType];
     }
@@ -187,13 +188,19 @@
     if (testT == TestTypeCount) {
         return NO;
     }
+    //check by Language
+    if (![self checkLangCanPerformTextType:testT]) {
+        return NO;
+    }
+    
+    
     int minCharacters = 10;
     int minWordsInSentence = 6;
     Word *word = wordList[curWordNo];
     switch (testT) {
         case TestMultipleChoiceExampleBlank:
         {
-            NSString *example = [word getExample:@"English"];
+            NSString *example = [word getExample:testLanguage];
             if (example.length < minCharacters) {
                 return NO;
             }
@@ -207,6 +214,22 @@
             break;
     }
 
+    return YES;
+}
+-(BOOL) checkLangCanPerformTextType:(TestType) testT
+{
+    LanguageIndexType langIndexType = [[LanguageControl getInstance] getLanguageIndexTypeByLang:self.testLanguage];
+    if (langIndexType == LanguageIndexTypeCharacter) {
+        switch (testT) {
+            case TestWordFillingSameLanguage:
+            case TestWordFillingUserLanguage:
+            case TestWordFillingWordListen:
+                return NO;
+                break;
+            default:
+                break;
+        }
+    }
     return YES;
 }
 -(int) getNextQuestionIndex

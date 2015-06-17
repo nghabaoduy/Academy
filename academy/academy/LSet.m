@@ -12,7 +12,7 @@
 
 @implementation LSet
 
-@synthesize name, desc, orderNo, wordList, package_id, imgURL;
+@synthesize name, desc, orderNo, wordList, package_id, imgURL, language;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
 
@@ -22,8 +22,8 @@
     desc = [self getStringFromDict:dict WithKey:@"description"];
     package_id = [self getStringFromDict:dict WithKey:@"package_id"];
     orderNo = [self getStringFromDict:dict WithKey:@"order_number"] ? [[self getStringFromDict:dict WithKey:@"order_number"] intValue]:-1;
-    
-    imgURL = dict[@"imgURL"] ?:(dict[@"asset"] ? dict[@"asset"][@"index"] : nil);
+    language = [self getStringFromDict:dict WithKey:@"language"];
+    imgURL = dict[@"imgURL"] ?:(dict[@"asset"] != [NSNull null] ? dict[@"asset"][@"index"] : nil);
 
     wordList = [NSMutableArray new];
     
@@ -55,7 +55,8 @@
              @"package_id": package_id?: @"",
              @"order_number": [NSNumber numberWithInt:orderNo],
              @"imgURL":imgURL?: @"",
-             @"words":[self getWordList]
+             @"words":[self getWordList],
+             @"language":language?: @""
              };
 
 }

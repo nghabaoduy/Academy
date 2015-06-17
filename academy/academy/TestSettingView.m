@@ -14,12 +14,12 @@
 
 @implementation TestSettingView
 {
-
     IBOutlet MyCustomTextfield *totalWordTF;
     IBOutlet MyCustomTextfield *testTypeTF;
     UIPickerView *quantityPicker;
     UITextField * curTextField;
     TestType selectedTestType;
+    NSMutableArray * allowedTestTypeList;
 }
 
 - (void)viewDidLoad {
@@ -34,6 +34,13 @@
     
     totalWordTF.text = [NSString stringWithFormat:@"%i",_testMaker.testWordQuantity];
     testTypeTF.text = [TestMaker getTestTypeName:_testMaker.userPickedTestType];
+    
+    allowedTestTypeList = [NSMutableArray new];
+    for (int i = 0; i < TestTypeCount; i++) {
+        if ([_testMaker checkLangCanPerformTextType:i]) {
+            [allowedTestTypeList addObject:@(i)];
+        }
+    }
 }
 -(void) goBack
 {
@@ -85,8 +92,9 @@
                     testTypeTF.text = [TestMaker getTestTypeName:TestTypeCount];
                 }
                 else{
-                    selectedTestType = [quantityPicker selectedRowInComponent:0]-1;
-                    testTypeTF.text = [TestMaker getTestTypeName:[quantityPicker selectedRowInComponent:0]-1];
+                    NSNumber* testTypeByRow = [allowedTestTypeList objectAtIndex:[quantityPicker selectedRowInComponent:0]-1];
+                    selectedTestType = [testTypeByRow intValue];
+                    testTypeTF.text = [TestMaker getTestTypeName:selectedTestType];
                 }
                 
             }
@@ -125,7 +133,7 @@
         return _testMaker.fullWordList.count/5;
     }
     if (curTextField == testTypeTF) {
-        return TestTypeCount+1;
+        return allowedTestTypeList.count+1;
     }
     return 1;
 }
@@ -134,7 +142,7 @@
 {
     if (curTextField == totalWordTF) {
         if (row == _testMaker.fullWordList.count/5) {
-            return [NSString stringWithFormat:@"%i",_testMaker.fullWordList.count];
+            return [NSString stringWithFormat:@"%lu",(unsigned long)_testMaker.fullWordList.count];
         }
         return [NSString stringWithFormat:@"%i",((row+1) * 5)];
     }
@@ -142,7 +150,8 @@
         if (row == 0) {
             return [TestMaker getTestTypeName:TestTypeCount];
         }
-        return [TestMaker getTestTypeName:row-1];
+        NSNumber* testTypeByRow = [allowedTestTypeList objectAtIndex:row-1];
+        return [TestMaker getTestTypeName:[testTypeByRow intValue]];
     }
     return [NSString stringWithFormat:@"%i",row+1];
 }

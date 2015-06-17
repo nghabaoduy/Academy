@@ -14,6 +14,7 @@
 -(void) CardTypeAnswerView:(CardTypeAnswerView *) cardView checkAnswer:(NSString *) answer;
 -(void) CardTypeAnswerView:(CardTypeAnswerView *) cardView textfieldStartEditing:(UITextField *)textfield;
 -(void) CardTypeAnswerView:(CardTypeAnswerView *) cardView textfieldEndEditing:(UITextField *)textfield;
+-(NSString *) CardTypeAnswerViewGetLanguage;
 @end
 
 @interface CardTypeAnswerView : UIView <UITextFieldDelegate>
@@ -22,7 +23,7 @@
 }
 @property (retain) id delegate;
 @property (strong, nonatomic) IBOutlet UIView *view;
-
+@property (strong, nonatomic) NSString *language;
 -(void)displayQuestion:(NSString *) question;
 -(void)displayImgQuestion:(NSString *) imgLink;
 -(void) displayWordSpeaker:(NSString *) word;

@@ -20,6 +20,7 @@ static User * _currentUser = nil;
 }
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
+    NSLog(@"user dict = %@",dict);
     userDict = dict;
     self.modelId = dict[@"id"];
     _email = [self getStringFromDict:dict WithKey:@"email"];
@@ -28,6 +29,9 @@ static User * _currentUser = nil;
     _profileName = [self getStringFromDict:dict WithKey:@"profile_name"];
     _facebookId = [self getStringFromDict:dict WithKey:@"facebook_id"];
     _ggpId = [self getStringFromDict:dict WithKey:@"ggp_id"];
+    _avatarURL = dict[@"imgURL"] ?:(dict[@"asset"] != [NSNull null] ? dict[@"asset"][@"index"] : nil);
+    _role = [self getStringFromDict:dict WithKey:@"role"];
+    _ratingStatus = [self getStringFromDict:dict WithKey:@"rating_status"];//ENUM('notyet','rated','refuse')
 }
 
 -(NSDictionary *)getDictionaryFromObject
@@ -38,7 +42,9 @@ static User * _currentUser = nil;
              @"credit": _credit,
              @"profile_name":_profileName?:@"",
              @"facebook_id":_facebookId?:@"",
-             @"ggp_id":_ggpId?:@""
+             @"ggp_id":_ggpId?:@"",
+             @"role":_role?:@"",
+             @"rating_status":_ratingStatus
              };
 }
 - (NSString *)auth {
@@ -334,14 +340,48 @@ static User * _currentUser = nil;
     [manager POST:requestURL parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileURL:imgURL name:@"image" error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Success: %@", responseObject);
+        //NSLog(@"uploadImage Success: %@", responseObject);
+        [self setObjectWithDictionary:responseObject];
+        [self.authDelegate uploadAvatarSucessful:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"operation = %@",operation);
-        NSLog(@"#error: %@", error.localizedDescription);
+        //NSLog(@"operation = %@",operation);
+        //NSLog(@"#error: %@", error.localizedDescription);
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
         NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"uploadImageWithURLError[%i] = %@",[operation.response statusCode],json[@"message"]);
+        //NSLog(@"uploadImageWithURLError[%li] = %@",(long)[operation.response statusCode],json[@"message"]);
+        [self.authDelegate uploadAvatarFailed:self WithError:json StatusCode:@([operation.response statusCode])];
     }];
+}
+-(void) refreshUser
+{
+    NSDictionary * params = @{
+                              @"username" : self.userName
+                              };
+    
+    NSString *apiPath = @"api/getUser";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self setObjectWithDictionary:responseObject];
+        [self.authDelegate refreshUserSucessful:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.authDelegate refreshUserFailed:self WithError:[NSJSONSerialization JSONObjectWithData:[[[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil] StatusCode:@([operation.response statusCode])];
+    }];
+}
+
+-(BOOL) canViewThisPackage:(Package *) pack
+{
+    
+    NSLog(@"canDisplayByRole [userRole:%@][package %@ Role:%@]",self.role, pack.modelId, pack.roleCanView );
+    
+    if ([pack.roleCanView isEqualToString:@"user"] || [self.role isEqualToString:@"admin"]) {
+        return YES;
+    }
+    if ([pack.roleCanView isEqualToString:@"tester"] && [self.role isEqualToString:@"tester"]) {
+        return YES;
+    }
+    return NO;
 }
 @end

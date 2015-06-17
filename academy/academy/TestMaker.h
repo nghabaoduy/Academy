@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, TestType) {
 @property (nonatomic, retain) NSArray * fullWordList;
 @property int testWordQuantity;
 @property TestType userPickedTestType;
+@property NSString * testLanguage;
 
 + (NSString *) getTestTypeName:(TestType) testT;
 
@@ -49,4 +50,5 @@ typedef NS_ENUM(NSUInteger, TestType) {
 -(BOOL) isLastQuestion;
 -(int) getCurQuesNo;
 -(int) getTestWordQuantity;
+-(BOOL) checkLangCanPerformTextType:(TestType) testT;
 @end

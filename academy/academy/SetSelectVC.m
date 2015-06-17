@@ -34,8 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    curMaxUnlocked = 0;
     
+    curMaxUnlocked = 0;
     self.tableView.allowsSelection = NO;
     setOrderArray = [NSMutableArray new];
     for (LSet *set in curPack.setList) {
@@ -67,8 +67,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     for (LSet *set in curPack.setList) {
-        if (set.grade > 0) if(set.orderNo>=curMaxUnlocked){
+        
+        if ([set.grade intValue] > 0) if(set.orderNo>=curMaxUnlocked){
             curMaxUnlocked = set.orderNo+1;
         }
     }
@@ -132,7 +134,6 @@
         LSet *set2 = orderList[1];
         [cell.setDisplayer2 setLSet:set2];
         set2.orderNo <= curMaxUnlocked? [cell.setDisplayer2 enableDisplayer]: [cell.setDisplayer2 disableDisplayer];
-        
         return cell;
     }
     
@@ -225,7 +226,7 @@
 }
 -(void) handleScoreList:(NSMutableArray *)allList
 {
-    NSLog(@"handleScoreList runs");
+    //NSLog(@"handleScoreList runs");
     if(allList)if(allList.count > 0)
     {
         [allList sortUsingComparator:^NSComparisonResult(SetScore * score1, SetScore * score2) {
@@ -237,7 +238,7 @@
             if ([set.modelId isEqualToString:finalSetId]) {
                 set.score = finalScore;
                 set.grade = finalScore.score;
-                if (set.grade > 0) if(set.orderNo>=curMaxUnlocked){
+                if ([set.grade intValue] > 0) if(set.orderNo>=curMaxUnlocked){
                     curMaxUnlocked = set.orderNo+1;
                 }
             }

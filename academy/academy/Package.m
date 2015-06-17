@@ -8,11 +8,12 @@
 
 #import "Package.h"
 #import "LSet.h"
+#import "User.h"
 #import <AFNetworking/AFNetworking.h>
 
 @implementation Package
 
-@synthesize awsId, name, desc, category, price, wordsTotal, setList, imgURL;
+@synthesize awsId, name, desc, category, price, wordsTotal, setList, imgURL,language, roleCanView;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     //NSLog(@"Package dict = %@",dict);
@@ -23,13 +24,15 @@
     category = [self getStringFromDict:dict WithKey:@"category"];
     price = [self getStringFromDict:dict WithKey:@"price"];
     wordsTotal = [[self getStringFromDict:dict WithKey:@"no_of_words"] intValue];
-    imgURL = dict[@"imgURL"] ?:(dict[@"asset"] ? dict[@"asset"][@"index"] : nil);
-    
+    language = [self getStringFromDict:dict WithKey:@"language"];
+    imgURL = dict[@"imgURL"] ?:(dict[@"asset"] != [NSNull null] ? dict[@"asset"][@"index"] : nil);
+    roleCanView = [self getStringFromDict:dict WithKey:@"role_can_view"];
     setList = [NSMutableArray new];
     for (NSDictionary *setDict in [self getArrayFromDict:dict WithKey:@"sets"]) {
         LSet *set = [[LSet alloc] initWithDict:setDict];
         [setList addObject:set];
     }
+    
 }
 
 - (NSDictionary *)getDictionaryFromObject {
@@ -41,7 +44,9 @@
              @"price" : price ?: @"",
              @"no_of_words" : [NSNumber numberWithInt:wordsTotal] ?: @"",
              @"imgURL" : imgURL ?: @"",
-             @"sets":[self getSetDictList]
+             @"sets":[self getSetDictList],
+              @"role_can_view" : self.roleCanView ?: @"",
+              @"language" : self.language ?: @""
              };
 }
 -(NSArray *) getSetDictList
@@ -59,10 +64,15 @@
     [manager GET:requestURL parameters:filterDictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"here %@", responseObject);
         NSArray *packages = responseObject;
+        
+        User *curUser = [User currentUser];
         NSMutableArray * packageList = [NSMutableArray new];
         for (NSDictionary * packageDict in packages) {
             Package* pack = [[Package alloc] initWithDict:packageDict];
-            [packageList addObject:pack];
+            if ([curUser canViewThisPackage:pack]) {
+                [packageList addObject:pack];
+            }
+            
         }
         [self.delegate getAllSucessfull:self List:packageList];
         

@@ -9,6 +9,8 @@
 #import "RegisterVC.h"
 #import "User.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "CustomIOSAlertView.h"
+#import "TermNAgreementDisplayer.h"
 
 @interface RegisterVC () <AuthDelegate>
 
@@ -20,6 +22,8 @@
     IBOutlet MyCustomTextfield *emailTF;
     IBOutlet MyCustomTextfield *passwordTF;
     IBOutlet MyCustomTextfield *rePasswordTF;
+    
+    UITextField *curTF;
 }
 
 - (void)viewDidLoad {
@@ -48,13 +52,50 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)goRegister:(id)sender {
+- (IBAction)goRegister:(id)sender
+{
+    [curTF resignFirstResponder];
+    
     if (![self validateBlankTextfield:@[profileNameTF,emailTF]]) {
         return;
     }
     if (![self validatePassword]) {
         return;
     }
+    if (![self validateEmail]) {
+        return;
+    }
+    [self showTermAndAgreementAlert];
+    
+}
+//Terms and Agreement
+-(void) showTermAndAgreementAlert
+{
+    CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] initWithParentView:self.view];
+    
+    // Add some custom content to the alert view
+    TermNAgreementDisplayer *termView = [[TermNAgreementDisplayer alloc] init];
+    [alertView setContainerView:termView];
+    
+    [alertView setButtonTitles:[NSMutableArray arrayWithObjects:@"Từ Chối", @"Đồng Ý", nil]];
+    [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                [self startRegister];
+                ;
+            default:
+                break;
+        }
+        [alertView close];
+        
+    }];
+    [alertView setUseMotionEffects:true];
+    [alertView show];
+}
+-(void) startRegister
+{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     User * newUser = [User new];
     newUser.authDelegate = self;
@@ -102,6 +143,35 @@
         return NO;
     }
     return YES;
+}
+-(BOOL) validateEmail
+{
+    if (![self NSStringIsValidEmail:emailTF.text]) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Email không hợp lệ." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    curTF = textField;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {

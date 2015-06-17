@@ -35,7 +35,11 @@
 - (void)userChangeProfileNameSucessful:(User*)user;
 - (void)userChangeProfileNameFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 
+- (void)uploadAvatarSucessful:(User*)user;
+- (void)uploadAvatarFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 
+- (void)refreshUserSucessful:(User*)user;
+- (void)refreshUserFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 @end
 
 @interface User : AModel
@@ -51,6 +55,9 @@
 @property (nonatomic, strong) NSNumber * credit;
 @property (nonatomic, strong) NSString * facebookId;
 @property (nonatomic, strong) NSString * ggpId;
+@property (nonatomic, strong) NSString * avatarURL;
+@property (nonatomic, strong) NSString * role;
+@property (nonatomic, strong) NSString * ratingStatus;
 
 +(NSString *) createRandomStringWithLength:(int) length;
 
@@ -68,11 +75,12 @@
 - (void)registerUserWithParam:(NSDictionary*)dictionary;
 
 - (void)changePassword:(NSString *)oldPass NewPass:(NSString *) newPass;
-
 - (void)resetPassword:(NSString *) username;
 
 -(void)changeProfileName:(NSString *) newProfileName;
-
 -(void)uploadImageWithURL:(NSURL *) imgURL;
 
+-(void) refreshUser;
+
+-(BOOL) canViewThisPackage:(Package *) pack;
 @end

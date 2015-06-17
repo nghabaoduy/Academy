@@ -285,6 +285,11 @@ static SideMenuVC * instance = nil;
 //=== LOG OUT ===//
 -(void) logout
 {
+    NSString *saveUsername = @"";
+    if ([[DataEngine getInstance] loginType] == LoginNormal ) {
+        saveUsername = [[NSUserDefaults standardUserDefaults]valueForKey:@"saveUsername"];
+    }
+    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     //facebook
@@ -294,6 +299,10 @@ static SideMenuVC * instance = nil;
     }
     //google plus
     [[GPPSignIn sharedInstance] signOut];
+    
+    if (![saveUsername isEqualToString:@""]) {
+        [[NSUserDefaults standardUserDefaults] setValue:saveUsername forKey:@"saveUsername"];
+    }
 }
 
 @end

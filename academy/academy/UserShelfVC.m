@@ -14,9 +14,11 @@
 #import "UserPackage.h"
 #import "User.h"
 #import "DataEngine.h"
+#import "ShelfHeader.h"
 #import "MSDynamicsDrawerViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "SideMenuVC.h"
 
 @interface UserShelfVC () <ModelDelegate>
 
@@ -29,9 +31,9 @@
     NSIndexPath *curCellPath;
     int cellTopMargin;
     UIRefreshControl * refeshControl;
+    NSMutableArray * packageLangList;
+    NSMutableArray * languageList;
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,24 +85,84 @@
     NSLog(@"curUser.id = %@",[[User currentUser] modelId]);
     [userPackage getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
 }
-
+-(void) organizePackageList
+{
+    packageLangList = [NSMutableArray new];
+    languageList = [NSMutableArray new];
+    
+    for (UserPackage * uPackage in packageList) {
+        BOOL isAvai = NO;
+        for(NSString * langStr in languageList) {
+            if ([uPackage.package.language isEqualToString:langStr]) {
+                isAvai = YES;
+            }
+        }
+        if (!isAvai) {
+            [languageList addObject:uPackage.package.language];
+        }
+    }
+    for (NSString *langStr in languageList) {
+        [packageLangList addObject:[NSMutableArray new]];
+    }
+    for (UserPackage * uPackage in packageList) {
+        for(int i = 0; i<languageList.count;i++) {
+            NSString * langStr = languageList[i];
+            if ([uPackage.package.language isEqualToString:langStr]) {
+                NSMutableArray *langArr = packageLangList[i];
+                [langArr addObject:uPackage];
+            }
+        }
+    }
+    [self reloadData];
+    [self checkToBuyPack];
+    
+    
+}
+-(void) checkToBuyPack
+{
+    if (packageList.count == 0) {
+        if ([[DataEngine getInstance] isOffline]) {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Bạn hãy đăng nhập lại với kết nối Internet đễ có thể thử ngay bộ ngôn ngữ đầu tiên nhé!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action) {
+                                                             }];
+            [alertController addAction:dismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        else
+        {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Bạn chưa có bộ ngôn ngữ nào trong tử sách. Vào thư viên ngay!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action) {
+                                                                 [[SideMenuVC getInstance] transitionToViewController:ControllerShop animated:YES];
+                                                             }];
+            
+            [alertController addAction:dismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return languageList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return packageList.count;
+    NSMutableArray *langArr = packageLangList[section];
+    return langArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PackageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"packCell" forIndexPath:indexPath];
     
-    UserPackage * curUserPackage = [packageList objectAtIndex:indexPath.row];
+    NSMutableArray *langArr = packageLangList[indexPath.section];
+    UserPackage * curUserPackage = [langArr objectAtIndex:indexPath.row];
     Package *pack = curUserPackage.package;
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
@@ -131,15 +193,32 @@
     else
         [cell.packageImg setImage:[UIImage imageNamed:@"dummyBanner.png"]];
     
+    User *curUser = [User currentUser];
+    cell.packageImg.layer.opacity = [curUser canViewThisPackage:pack]?1:0.5f;
+    
     return cell;
 }
 
-
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    ShelfHeader *headerView = [[ShelfHeader alloc] init];
+    NSString * lang = [languageList objectAtIndex:section];
+    lang = [NSString stringWithFormat:@"%@%@",[[lang substringToIndex:1] uppercaseString], [lang substringFromIndex:1]];
+    headerView.titleLb.text = lang;
+    return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50.0;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return cellInitHeight;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
+}
 - (void)reloadData
 {
     // Reload table data
@@ -164,8 +243,7 @@
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     packageList = allList;
-    [self reloadData];
-
+    [self organizePackageList];
 }
 
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
@@ -188,16 +266,44 @@
 {
     if ([[segue identifier] isEqualToString:@"goSetList"])
     {
-        UserPackage * userPack = [packageList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        NSMutableArray *langArr = packageLangList[indexPath.section];
+        UserPackage * userPack = [langArr objectAtIndex:indexPath.row];
+        
         SetSelectVC * destination = segue.destinationViewController;
         [destination setTitle:userPack.package.name];
         destination.curPack = userPack.package;
     }
 }
 
+
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
+    if ([identifier isEqualToString:@"goSetList"])
+    {
+        User *curUser = [User currentUser];
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        NSMutableArray *langArr = packageLangList[indexPath.section];
+        UserPackage * userPack = [langArr objectAtIndex:indexPath.row];
+
+        if ([curUser canViewThisPackage:userPack.package]) {
+            return YES;
+        }
+        else
+        {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Gói ngôn ngữ này đang được cập nhập." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action) {
+                                                             }];
+            
+            [alertController addAction:dismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+            return NO;
+        }
+    }
     return YES;
 }
+
 
 @end

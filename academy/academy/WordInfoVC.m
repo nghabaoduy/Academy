@@ -54,7 +54,9 @@
     
     NSLog(@"curset.wordList = %@",[curSet getDictionaryFromObject]);
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.language = curSet.language;
+    
+    
     knownWords = [NSMutableArray new];
     [self resetView];
     [self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
@@ -113,11 +115,12 @@
     }
     
     if (isFront) {
-        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"English" bExample:YES] wordSubDict:[word getWordSubDict:@"English"]];
+        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:self.language bExample:YES] wordSubDict:[word getWordSubDict:self.language]];
     }
     else
     {
-        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES]];
+        [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES] wordSubDict:[word getWordSubDict:self.language]];
+        //[_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES]];
     }
     
     prevBtn.hidden = curWordNo == 0;
@@ -210,7 +213,7 @@
         [alertView close];
 
         Word *word = wordList[curWordNo];
-        [[SoundEngine getInstance] readWord:word.name];
+        [[SoundEngine getInstance] readWord:word.name language:self.language];
 
     }];
     [alertView setUseMotionEffects:true];
@@ -276,7 +279,7 @@
     [dunnoBtn setEnabled:YES];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
-        [[SoundEngine getInstance] readWord:word.name];
+        [[SoundEngine getInstance] readWord:word.name language:self.language];
 
         if (curWordNo>= wordList.count -1) {
             [nextBtn setBackgroundImage:[UIImage imageNamed:@"medium-green-btn"] forState:UIControlStateNormal];
@@ -310,9 +313,10 @@
     [dunnoBtn setEnabled:YES];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
-        [[SoundEngine getInstance] readWord:word.name];
+        [[SoundEngine getInstance] readWord:word.name language:self.language];
     }
 }
+#pragma mark - CardInfo delegate
 -(void) cardIsTapped:(CardInfoView *)card
 {
     if (!isWordCheckSession) {
@@ -320,6 +324,11 @@
         [self startFlip:_wordCard];
     }
 }
+- (NSString *)CardInfoViewGetLanguage
+{
+    return self.language;
+}
+
 
 #pragma mark - Model Delegate
 - (void)findIdSuccessful:(LSet *)model {
@@ -330,7 +339,7 @@
     [self displayCurWord];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
-        [[SoundEngine getInstance] readWord:word.name];
+        [[SoundEngine getInstance] readWord:word.name language:self.language];
     }
     
 }

@@ -26,5 +26,5 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 @property (nonatomic, assign) LoginType loginType;
 
 -(void) saveLoginInfo:(NSString*) username Password: (NSString*) password fbId:(NSString *)fbId ggpId:(NSString*)ggpId;
-
+-(NSString *) getAppURL;
 @end

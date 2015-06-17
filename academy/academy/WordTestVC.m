@@ -182,6 +182,12 @@
     hasAnswered = NO;
     if (!testMaker) {
         testMaker =[[TestMaker alloc] initWithWordList:wordList];
+        if (curSet) {
+            testMaker.testLanguage = curSet.language;
+        }
+        if (curPack) {
+            testMaker.testLanguage = curPack.language;
+        }
     }
     else{
         [testMaker resetTest];
@@ -234,21 +240,24 @@ int finalGrade;
     }
     finalGrade = [grade intValue];
     
-    if (!isFinalTest) if(curSet.grade < grade)
+    if (curPickType == TestPickTimer)
     {
-        curSet.grade = grade;
-        SetScore * newsScore = [SetScore new];
-        newsScore.delegate = self;
-        newsScore.score = curSet.grade;
-        newsScore.set_id = curSet.modelId;
-        [newsScore createModel];
-    }
-    if (isFinalTest && curPack) {
-        UserPackage *userPackage = [UserPackage new];
-        userPackage.userPackageDelegate = self;
-        userPackage.user_id = [User currentUser].modelId;
-        userPackage.package_id = curPack.modelId;
-        [userPackage updateScore:grade];
+        if (!isFinalTest) if(curSet.grade < grade)
+        {
+            curSet.grade = grade;
+            SetScore * newsScore = [SetScore new];
+            newsScore.delegate = self;
+            newsScore.score = curSet.grade;
+            newsScore.set_id = curSet.modelId;
+            [newsScore createModel];
+        }
+        if (isFinalTest && curPack) {
+            UserPackage *userPackage = [UserPackage new];
+            userPackage.userPackageDelegate = self;
+            userPackage.user_id = [User currentUser].modelId;
+            userPackage.package_id = curPack.modelId;
+            [userPackage updateScore:grade];
+        }
     }
     
     [self performSelector:@selector(displayFinishTestAlert) withObject:self afterDelay:0.5];
@@ -469,6 +478,16 @@ int finalGrade;
 {
     int tfBottomY = cardView.frame.origin.y + textfield.frame.origin.y + textfield.frame.size.height;
     [self animateTextField:tfBottomY up:NO];
+}
+-(NSString *)CardTypeAnswerViewGetLanguage
+{
+    if (curSet) {
+        return curSet.language;
+    }
+    if (curPack) {
+        return curPack.language;
+    }
+    return @"English";
 }
 - (void) animateTextField: (int)tfBottomY up: (BOOL) up
 {

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E33b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
+            <string>GothamRounded-Bold</string>
+        </mutableArray>
+        <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
+            <string>GothamRounded-Book</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermNAgreementDisplayer">
+            <connections>
+                <outlet property="termContentTV" destination="Mok-9Z-dxo" id="PaC-WB-J4H"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Gmt-7C-GFq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="355"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mok-9Z-dxo">
+                    <rect key="frame" x="8" y="47" width="274" height="300"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <mutableString key="text">I. ĐIỀU KHOẢN SỬ DỤNG
+1. Chấp nhận các điều khoản thỏa thuận
+Chào mừng các bạn đến với vnAcademy - Hệ thống học ngôn ngữ thông minh. Chúng tôi cung cấp dịch vụ (như được mô tả dưới đây) cho bạn, dựa trên các Điều khoản Sử dụng Dịch vụ sau đây, chúng tôi toàn quyền thay đổi nội dung các điều khoản theo quyết định của mình mà không cần báo trước. Khi sử dụng, có nghĩa rằng bạn đã chấp nhận và đồng ý tuân thủ theo thoả thuận.
+Tất cả các chỉ dẫn hoặc qui định theo từng trang riêng biệt cũng là những phần không thể tách rời với Điều khoản dịch vụ này.
+2. Mô tả dịch vụ
+Dịch vụ chúng tôi cung cấp cho bạn bao gồm, nhưng không giới hạn, những dịch vụ hiện có sau đây: vnAcademy cung cấp các bộ từ vựng tiếng Anh được thiết kế dựa trên qui trình và phương pháp học tiên tiến, giúp người học dễ dàng chinh phục mục tiêu ngôn ngữ của mình. vnAcademy cung cấp đa dạng các bộ từ vựng về các lĩnh vực khác nhau theo nhiều ngôn ngữ.
+3. Trách nhiệm của bạn trong việc đăng ký
+Khi xem xét việc bạn sử dụng Dịch vụ, bạn cam kết rằng mình có đủ tuổi luật định để xác lập một hợp đồng có tính ràng buộc và không phải là người bị hạn chế nhận các dịch vụ theo pháp luật hoặc bởi việc thực thi các phán quyết khác. Bạn cũng đồng ý rằng: (a) cung cấp các thông tin mới nhất, đầy đủ, trung thực và chính xác về bản thân bạn theo hướng dẫn trong mẫu đơn đăng ký sử dụng Dịch vụ và (b) duy trì và cập nhật kịp thời Dữ liệu đăng ký để bảo đảm rằng dữ liệu này là mới nhất, đầy đủ, trung thực và chính xác. Nếu bạn cung cấp bất kỳ thông tin nào không phải là thông tin mới nhất, không đầy đủ, không trung thực hoặc không chính xác, hoặc nếu vnAcademy có căn cứ hợp lý để nghi ngờ rằng thông tin đó không phải là thông tin mới nhất, không đầy đủ, không trung thực hoặc không chính xác, vnAcademy có quyền đình chỉ hoặc chấm dứt tài khoản của bạn và từ chối bất kỳ và toàn bộ việc sử dụng Dịch vụ (hoặc bất kỳ phần nào của Dịch vụ) tại thời điểm hiện tại hoặc sau này.
+vnAcademy quan tâm tới sự an toàn và sự riêng tư của tất cả những người sử dụng dịch vụ của mình, đặc biệt là trẻ em. Tuy nhiên, xin nhớ rằng Dịch vụ này được thiết kế để thu hút đông đảo người sử dụng. Vì vậy, nếu bạn là cha mẹ hoặc người giám hộ hợp pháp, bạn có trách nhiệm xác định xem bất kỳ các Dịch vụ và/hoặc Nội dung nào có thích hợp cho con của bạn hay không. Tương tự, nếu bạn là trẻ em, xin hãy hỏi ý kiến cha mẹ hoặc người giám hộ hợp pháp của bạn để xem liệu Dịch vụ và/hoặc Nội dung có phù hợp với bạn hay không.
+Mặc dù có quy định như đã nêu ở trên, chúng tôi có thể cho phép bạn sử dụng một số phần của Dịch vụ mà bạn không cần phải đăng ký sử dụng. Trong trường hợp đó, danh tính của bạn sẽ được dựa trên các phương tiện nhận dạng khác mà chúng tôi cho là thích hợp. Trong các trường hợp thích hợp, việc nhận dạng có thể được tiến hành dựa trên dữ liệu nhận dạng máy điện thoại di động hoặc việc đăng ký thuê bao sử dụng dịch vụ liên lạc của bạn do người điều hành mạng của bạn cung cấp. Bạn đồng ý rằng thông tin đó có thể được thu thập và tiết lộ cho chúng tôi và có thể được sử dụng theo qui định của bản Điều khoản dịch vụ này.
+4. Qui định về quyền riêng tư
+Dữ liệu đăng ký và một số thông tin khác về bạn phải tuân thủ theo đúng Quy định về sự riêng tư của chúng tôi. Quy định về quyền riêng tư được tham chiếu ở đây và là một phần của bản Điều khoản sử dụng này. Khi cung cấp Dữ liệu đăng ký và các thông tin khác về bản thân bạn cho chúng tôi, bạn đồng ý và xác nhận rằng chúng tôi có thể sử dụng hoặc tiết lộ thông tin đó cho các bên thứ ba, và bạn chấp thuận việc sử dụng hoặc tiết lộ đó. Hơn nữa, bạn đồng ý cung cấp cho chúng tôi Dữ liệu đăng ký của bạn và/hoặc việc sử dụng Dịch vụ, bạn đã yêu cầu nhận và đồng ý nhận các thông tin, tài liệu từ vnAcademy theo từng thời điểm.
+5. Tài khoản thành viên, mật khẩu và sự bảo mật
+Bạn sẽ nhận được một mật khẩu và tài khoản sau khi hoàn tất thủ tục đăng ký sử dụng Dịch vụ. Bạn có trách nhiệm giữ kín mật khẩu và tài khoản, và hoàn toàn chịu trách nhiệm đối với tất cả các hoạt động diễn ra thông qua việc sử dụng mật khẩu hoặc tài khoản của bạn. Bạn đồng ý (a) thông báo ngay cho vnAcademy về bất kỳ trường hợp nào sử dụng trái phép mật khẩu hoặc tài khoản của bạn hoặc bất kỳ trường hợp nào khác vi phạm sự bảo mật, và (b) bảo đảm rằng bạn luôn thoát khỏi tài khoản của mình sau mỗi lần sử dụng. vnAcademy không thể và sẽ không chịu trách nhiệm đối với bất kỳ tổn thất hoặc thiệt hại nào phát sinh do bạn không tuân thủ quy định tại mục này.
+6. Đóng góp cho vnAcademy
+Bằng việc gửi ý kiến, đề nghị, tài liệu, và/hoặc đề xuất ("Đóng góp") cho vnAcademy thông qua mọi hình thức, bạn xác nhận và đồng ý rằng:
+(a). Đóng góp của bạn không chứa thông tin bí mật hoặc độc quyền;
+(b). vnAcademy không có nghĩa vụ giữ bí mật, thể hiện hay ám chỉ, liên quan đến các Đóng góp;
+(c). vnAcademy có quyền sử dùng và công bố (hoặc chọn việc không sử dụng và công bố) các Đóng góp này vì bất cứ mục đích gì;
+(d). vnAcademy có thể có những cách thức tương tự với những Đóng góp để xem xét và phát triển;
+(e). Đóng góp của bạn tự động trở thành tài sản của vnAcademy không có bất cứ nghĩa vụ nào vnAcademy đối với bạn; và bạn không có quyền đối với bất cứ khoản bồi thường hoặc bồi hoàn nào từ vnAcademy trong bất kỳ trường hợp nào.
+7. Không bán lại Dịch vụ
+Bạn đồng ý không tái bản, bán, bán lại hoặc lợi dụng vì các mục đích thương mại, bất kỳ phần nào của Dịch vụ (bao gồm tài khoản vnAcademy của bạn), việc sử dụng Dịch vụ, hoặc truy cập vào Dịch vụ.
+8. Qui định về sự giới hạn
+Bạn xác nhận rằng vnAcademy có thể, tùy theo quyết định của mình, tạo ra các giới hạn chung liên quan tới việc sử dụng Dịch vụ, bao gồm nhưng không giới hạn đối với cách thức sử dụng Dịch vụ, dung lượng đĩa tối đa sẽ được vnAcademy thay mặt cho bạn phân bổ trên các máy chủ của chúng tôi, và số lần tối đa (khoảng thời gian tối đa) bạn có thể truy cập Dịch vụ trong một khoảng thời gian nhất định. Bạn đồng ý rằng vnAcademy không có trách nhiệm hoặc nghĩa vụ đối với việc xóa hoặc không lưu giữ bất kỳ thông điệp nào và các Nội dung khác được lưu giữ qua Dịch Vụ. Bạn xác nhận rằng vnAcademy giữ quyền xóa các tài khoản không sử dụng trong một khoảng thời gian dài. Thêm nữa, bạn xác nhận rằng vnAcademy giữ quyền sửa đổi các giới hạn chung này tại từng thời điểm tùy theo quyết định của vnAcademy, cho dù có hoặc không có thông báo, và bạn đồng ý rằng việc bạn tiếp tục sử dụng Dịch vụ sau khi có sự sửa đổi như vậy sẽ được coi là bạn chấp nhận và đồng ý tuân theo các giới hạn chung đã được sửa đổi đó.
+9.Sửa đổi đối với Dịch vụ
+vnAcademy giữ quyền, tại bất kỳ thời điểm nào và tại từng thời điểm, sửa đổi hoặc ngừng tạm thời hoặc vĩnh viễn, Dịch vụ (hoặc bất kỳ phần nào của Dịch vụ) cho dù có hoặc không có thông báo, vì bất kỳ lý do nào, cho dù áp dụng chung đối với tất cả mọi người hoặc chỉ giới hạn đối với bạn. Bạn đồng ý rằng vnAcademy không có nghĩa vụ dưới bất kỳ hình thức nào đối với bạn hoặc bất kỳ bên thứ ba nào về việc điều chỉnh, tạm ngừng hoặc ngừng cung cấp Dịch vụ.
+10. Chấm dứt
+Bạn đồng ý rằng vnAcademy có thể, tùy theo các trường hợp cụ thể và không cần thông báo trước chấm dứt ngay lập tức việc sử dụng tài khoản vnAcademy và truy cập vào Dịch vụ.
+Nguyên nhân của việc chấm dứt này bao gồm nhưng không giới hạn đối với:
+(a) hành vi vi phạm, xâm phạm hoặc các hành vi có mục đích xấu hoặc vi phạm Điều khoản dịch vụ hoặc các hướng dẫn hay thỏa thuận khác
+(b) những yêu cầu của việc thi hành pháp luật hoặc các cơ quan có thẩm quyền khác,
+(c) một yêu cầu của bạn (loại bỏ tài khoản được lập ban đầu)
+(d) xóa bỏ hoặc thay đổi nội dung nào đối với Dịch vụ (hoặc bất kỳ phần nào trong tài khoản đó)
+(e) các vấn đề kỹ thuật hoặc bảo mật đột xuất
+(f) không sử dụng trong thời gian dài
+(g) bạn thực hiện các hành vi lừa dối hoặc các hành vi bất hợp pháp, và/hoặc
+Việc chấm dứt sử dụng tài khoản vnAcademy của bạn bao gồm:
+(a) xóa bỏ việc truy cập vào tất cả các Nội dung trong phạm vi Dịch vụ
+(b) xóa bỏ mật khẩu và tất cả các thông tin, tập tin liên quan và các nội dung gắn kết hoặc nằm trong tài khoản của bạn (hoặc bất cứ phần nào của tải khoản), và
+(c) ngăn cản việc tiếp tục sử dụng Dịch vụ. Hơn nữa, bạn đồng ý rằng tất cả các chấm dứt được hình thành từ sự quyết định riêng của vnAcademy và rằng vnAcademy không có nghĩa vụ đối với bạn hoặc bất kỳ bên thứ ba nào về việc chấm dứt sử dụng tài khoản của bạn.
+11. Các trường hợp vi phạm
+Đề nghị thông báo mọi trường hợp vi phạm Dịch vụ cho Ban quản trị của chúng tôi tại địa chỉ: openlab.helpdesk@gmail.com
+II. CHÍNH SÁCH BẢO MẬT THÔNG TIN
+1. Mục đích và phạm vi thu thập
+Việc thu thập dữ liệu chủ yếu trên vnAcademy bao gồm: email, điện thoại, tên đăng nhập, mật khẩu đăng nhập, địa chỉ khách hàng (thành viên). Đây là các thông tin mà vnAcademy cần thành viên cung cấp bắt buộc khi đăng ký sử dụng dịch vụ và để vnAcademy liên hệ xác nhận khi khách hàng đăng ký sử dụng dịch vụ trên website nhằm đảm bảo quyền lợi cho cho người tiêu dùng. Các thành viên sẽ tự chịu trách nhiệm về bảo mật và lưu giữ mọi hoạt động sử dụng dịch vụ dưới tên đăng ký, mật khẩu và hộp thư điện tử của mình. Ngoài ra, thành viên có trách nhiệm thông báo kịp thời cho vnAcademy về những hành vi sử dụng trái phép, lạm dụng, vi phạm bảo mật, lưu giữ tên đăng ký và mật khẩu của bên thứ ba để có biện pháp giải quyết phù hợp.
+2. Phạm vị sử dụng thông tin
+vnAcademy sử dụng thông tin thành viên cung cấp để:
+- Cung cấp các dịch vụ đến Thành viên;
+- Gửi các thông báo về các hoạt động trao đổi thông tin giữa thành viên và vnAcademy;
+- Ngăn ngừa các hoạt động phá hủy tài khoản người dùng của thành viên hoặc các hoạt động giả mạo Thành viên;
+- Liên lạc và giải quyết với thành viên trong những trường hợp đặc biệt;
+- Không sử dụng thông tin cá nhân của thành viên ngoài mục đích xác nhận và liên hệ có liên quan đến giao dịch tại vnAcademy;
+- Trong trường hợp có yêu cầu của pháp luật: vnAcademy có trách nhiệm hợp tác cung cấp thông tin cá nhân thành viên khi có yêu cầu từ cơ quan tư pháp bao gồm: Viện kiểm sát, tòa án, cơ quan công an điều tra liên quan đến hành vi vi phạm pháp luật nào đó của khách hàng. Ngoài ra, không ai có quyền xâm phạm vào thông tin cá nhân của thành viên.
+3. Thời gian lưu trữ thông tin
+Dữ liệu cá nhân của Thành viên sẽ được lưu trữ cho đến khi có yêu cầu hủy bỏ hoặc tự thành viên đăng nhập và thực hiện hủy bỏ. Còn lại trong mọi trường hợp thông tin cá nhân thành viên sẽ được bảo mật trên máy chủ của vnAcademy.
+4. Phương tiện và công cụ để người dùng tiếp cận và chỉnh sửa dữ liệu cá nhân của mình.
+- Thành viên có quyền tự kiểm tra, cập nhật, điều chỉnh hoặc hủy bỏ thông tin cá nhân của mình bằng cách đăng nhập vào tài khoản và chỉnh sửa thông tin cá nhân hoặc yêu cầu vnAcademy thực hiện việc này.
+- Thành viên có quyền gửi khiếu nại về việc lộ thông tin các nhân cho bên thứ 3 đến Ban quản trị của vnAcademy. Khi tiếp nhận những phản hồi này, vnAcademy sẽ xác nhận lại thông tin, phải có trách nhiệm trả lời lý do và hướng dẫn thành viên khôi phục và bảo mật lại thông tin.
+Email: openlab.helpdesk@gmail.com
+5. Cam kết bảo mật thông tin cá nhân khách hàng
+- Thông tin cá nhân của thành viên trên vnAcademy được vnAcademy cam kết bảo mật tuyệt đối theo chính sách bảo vệ thông tin cá nhân của vnAcademy. Việc thu thập và sử dụng thông tin của mỗi thành viên chỉ được thực hiện khi có sự đồng ý của khách hàng đó trừ những trường hợp pháp luật có quy định khác.
+- Không sử dụng, không chuyển giao, cung cấp hay tiết lộ cho bên thứ 3 nào về thông tin cá nhân của thành viên khi không có sự cho phép đồng ý từ thành viên.
+- Trong trường hợp máy chủ lưu trữ thông tin bị hacker tấn công dẫn đến mất mát dữ liệu cá nhân thành viên, vnAcademy sẽ có trách nhiệm thông báo vụ việc cho cơ quan chức năng điều tra xử lý kịp thời và thông báo cho thành viên được biết.
+- Bảo mật tuyệt đối mọi thông tin giao dịch trực tuyến của Thành viên bao gồm thông tin hóa đơn kế toán chứng từ số hóa tại khu vực dữ liệu trung tâm an toàn cấp 1 của vnAcademy.
+- Ban quản lý vnAcademy yêu cầu các cá nhân khi đăng ký/mua hàng là thành viên, phải cung cấp đầy đủ thông tin cá nhân có liên quan như: Họ và tên, địa chỉ liên lạc, email, số chứng minh nhân dân, điện thoại, số tài khoản, số thẻ thanh toán …., và chịu trách nhiệm về tính pháp lý của những thông tin trên. Ban quản lý vnAcademy không chịu trách nhiệm cũng như không giải quyết mọi khiếu nại có liên quan đến quyền lợi của Thành viên đó nếu xét thấy tất cả thông tin cá nhân của thành viên đó cung cấp khi đăng ký ban đầu là không chính xác.
+
+</mutableString>
+                    <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐIỀU KHOẢN ĐĂNG KÝ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcM-K3-Lo0">
+                    <rect key="frame" x="8" y="18" width="274" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="31" id="E7s-wq-Dex"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="17"/>
+                    <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QcM-K3-Lo0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="138-ct-ixw"/>
+                <constraint firstItem="Mok-9Z-dxo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="47" id="4Jx-0w-zmS"/>
+                <constraint firstItem="QcM-K3-Lo0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="9yL-xA-gV5"/>
+                <constraint firstItem="QcM-K3-Lo0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cND-zj-Xb9"/>
+                <constraint firstAttribute="bottom" secondItem="Mok-9Z-dxo" secondAttribute="bottom" constant="8" id="fGj-s0-pJS"/>
+                <constraint firstAttribute="trailing" secondItem="Mok-9Z-dxo" secondAttribute="trailing" constant="8" id="nrT-le-aMZ"/>
+                <constraint firstItem="Mok-9Z-dxo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="qbw-2P-zNl"/>
+                <constraint firstAttribute="trailing" secondItem="QcM-K3-Lo0" secondAttribute="trailing" constant="8" id="wd5-5r-UnM"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="138-ct-ixw"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="284" y="210.5"/>
+        </view>
+        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="kcn-XI-e3W">
+            <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+            <textInputTraits key="textInputTraits"/>
+        </textField>
+    </objects>
+</document>

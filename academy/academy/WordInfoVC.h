@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet CardInfoView *wordCard;
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
 @property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
-
+@property (nonatomic, strong) NSString * language;
 @property BOOL isWordCheckSession;
 
 @end

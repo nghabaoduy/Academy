@@ -5,16 +5,18 @@
 //  Created by Brian on 5/18/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
-
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "PackageInfoVC.h"
 #import "User.h"
+#import "SideMenuVC.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface PackageInfoVC () <AuthDelegate>
 
 @end
 
 @implementation PackageInfoVC
-@synthesize curPack, topPriceLb, topSubTitleLb,topTitleLb,contentTv;
+@synthesize curPack, topPriceLb, topSubTitleLb,topTitleLb,contentTv, packageImg;
 @synthesize buyBtn,freeBtn,tryBtn;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,8 +25,20 @@
 -(void) displayInfo
 {
     [freeBtn setHidden:YES];
-    [topPriceLb setText:curPack.price];
+    if ([curPack.price intValue] == 0) {
+        [topPriceLb setText:@"FREE"];
+    }
+    else
+    {
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+        
+        NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[curPack.price integerValue]]];
+        formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+        [topPriceLb setText:[NSString stringWithFormat:@"%@ đ",formatted]];
+    }
     [topTitleLb setText:curPack.name];
+    [packageImg setImageWithURL:[NSURL URLWithString:curPack.imgURL] placeholderImage:[UIImage imageNamed:@"dummyBanner.png"]];
     [topSubTitleLb setText:[NSString stringWithFormat:@"%i Words",curPack.wordsTotal]];
     [contentTv setText:curPack.desc];
     
@@ -42,16 +56,19 @@
     [super didReceiveMemoryWarning];
 }
 - (IBAction)buy:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     User * user = [User currentUser];
     [user setAuthDelegate:self];
     [user purchasePackage: curPack];
 }
 - (IBAction)try:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     User * user = [User currentUser];
     [user setAuthDelegate:self];
     [user tryPackage: curPack];
 }
 - (IBAction)getFree:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     User * user = [User currentUser];
     [user setAuthDelegate:self];
     [user purchasePackage: curPack];
@@ -60,18 +77,24 @@
 
 #pragma mark - Auth delegate
 - (void)userPurchasePackageSucessful:(User *)user {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"purchase successful");
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:YES];
 }
 
 - (void)userPurchasePackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"purchase failed %@", error);
 }
 
 - (void)userTryPackageSucessful:(User *)user {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"try successful");
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:YES];
 }
 
 - (void)userTryPackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"try failed %@", error);
 }
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 #import <MBProgressHUD/MBProgressHUD.h>
-
+#import "UIImageView+AFNetworking.h"
 #import "ProfileVC.h"
 #import "PNChart.h"
 #import "DataEngine.h"
@@ -21,7 +21,9 @@
 {
     
     IBOutlet UITextField *nameTF;
-    IBOutlet UIButton *avatar;
+
+    IBOutlet UIButton *avatarBtn;
+    IBOutlet UIImageView *avatarImg;
     IBOutlet UIView *chartView;
     IBOutlet UILabel *totalWordLb;
     IBOutlet UIActivityIndicatorView *wordLoadIndicator;
@@ -40,9 +42,10 @@
     curUser.authDelegate = self;
     [self refreshView];
     [nameTF setFont:[UIFont fontWithName:@"GothamRounded-Bold" size:20]];
+    [avatarImg setImageWithURL:[NSURL URLWithString:curUser.avatarURL] placeholderImage:[UIImage imageNamed:@"giraffe_happy.png"]];
     
-    [avatar.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    CALayer *avatarLayer = avatar.layer;
+    [avatarImg setContentMode:UIViewContentModeScaleAspectFill];
+    CALayer *avatarLayer = avatarImg.layer;
     [avatarLayer setCornerRadius:50.0f];
     [avatarLayer setMasksToBounds:YES];
     
@@ -57,9 +60,8 @@
     
     
     [self getWordLearnedList];
-    
-    
 }
+
 -(void) getWordLearnedList
 {
     wordLoadIndicator.hidden = NO;
@@ -92,9 +94,6 @@
     [curUser changeProfileName:sender.text];
     
     [sender resignFirstResponder];
-}
-- (IBAction)changeAvatar:(id)sender {
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -130,7 +129,7 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     chosenImage = [self imageWithImage:chosenImage minSide:100];
-    [avatar setImage:chosenImage forState:UIControlStateNormal];
+    //[avatarImg setImage:chosenImage];
     //save image
 
     [picker dismissViewControllerAnimated:YES completion:^{
@@ -141,6 +140,7 @@
 }
 -(void) uploadImage:(UIImage *)img
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [curUser uploadImageWithURL:[self getImageFilePath:img:0]];
 }
 -(NSURL *) getImageFilePath :(UIImage*) image :(int)imageIndex
@@ -237,5 +237,15 @@
     NSLog(@"userChangeProfileNameFailed - %@",error);
     nameTF.text = user.profileName;
 }
-
+-(void)uploadAvatarSucessful:(User *)user
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"uploadAvatarSucessful - %@",user.avatarURL);
+    [avatarImg setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"giraffe_happy.png"]];
+}
+-(void)uploadAvatarFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"uploadAvatarFailed - %@",error);
+}
 @end
