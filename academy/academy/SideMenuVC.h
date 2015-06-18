@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, MSPaneViewControllerType) {
     ControllerUserShelf,
     ControllerShop,
     ControllerProfile,
+    ControllerSetting,
     ControllerTypeCount
 };
 

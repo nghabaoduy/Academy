@@ -176,7 +176,7 @@
     }
     
     int randType = curTestType;
-    while(randType == curTestType || ![self questionTypeIsValid:randType])
+    while(randType == curTestType || ![self questionTypeIsValid:randType] || ![self curWordIsValidForCurQuest:randType])
     {
         randType = arc4random_uniform(TestTypeCount);
     }
@@ -185,6 +185,7 @@
 }
 -(BOOL) questionTypeIsValid: (TestType) testT
 {
+    NSLog(@"check questionTypeIsValid: %@",[TestMaker getTestTypeName:testT]);
     if (testT == TestTypeCount) {
         return NO;
     }
@@ -192,8 +193,13 @@
     if (![self checkLangCanPerformTextType:testT]) {
         return NO;
     }
-    
-    
+    if ([[DataEngine getInstance] isSoundOff] && testT == TestWordFillingWordListen) {
+        return NO;
+    }
+    return YES;
+}
+-(BOOL) curWordIsValidForCurQuest: (TestType) testT
+{
     int minCharacters = 10;
     int minWordsInSentence = 6;
     Word *word = wordList[curWordNo];
@@ -208,13 +214,13 @@
                 return NO;
             }
         }
-        break;
+            break;
             
         default:
             break;
     }
-
     return YES;
+
 }
 -(BOOL) checkLangCanPerformTextType:(TestType) testT
 {

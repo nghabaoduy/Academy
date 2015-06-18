@@ -50,5 +50,5 @@ typedef NS_ENUM(NSUInteger, TestType) {
 -(BOOL) isLastQuestion;
 -(int) getCurQuesNo;
 -(int) getTestWordQuantity;
--(BOOL) checkLangCanPerformTextType:(TestType) testT;
+-(BOOL) questionTypeIsValid: (TestType) testT;
 @end

@@ -23,8 +23,11 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 
 @property (nonatomic, assign) BOOL isForceReload;
 @property (nonatomic, assign) BOOL isOffline;
+@property (nonatomic, assign) BOOL isSoundOff;
 @property (nonatomic, assign) LoginType loginType;
 
 -(void) saveLoginInfo:(NSString*) username Password: (NSString*) password fbId:(NSString *)fbId ggpId:(NSString*)ggpId;
 -(NSString *) getAppURL;
+-(NSString *) getFeedbackEmail;
+-(void) switchisSoundOff:(BOOL)isSoundOff;
 @end

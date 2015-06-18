@@ -37,7 +37,7 @@
     
     allowedTestTypeList = [NSMutableArray new];
     for (int i = 0; i < TestTypeCount; i++) {
-        if ([_testMaker checkLangCanPerformTextType:i]) {
+        if ([_testMaker questionTypeIsValid:i]) {
             [allowedTestTypeList addObject:@(i)];
         }
     }

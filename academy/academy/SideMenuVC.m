@@ -16,6 +16,7 @@
 #import "UserShelfVC.h"
 #import "ShopVC.h"
 #import "ProfileVC.h"
+#import "AppSettingVC.h"
 #import "DataEngine.h"
 
 NSString * const MenuCellReuseIdentifier = @"menuCell";
@@ -114,21 +115,24 @@ static SideMenuVC * instance = nil;
                                       @(ControllerLogin) : @"Đăng Nhập",
                                       @(ControllerUserShelf) : @"Tủ Sách",
                                       @(ControllerShop) : @"Thư Viện",
-                                      @(ControllerProfile) : @"Cá Nhân"
+                                      @(ControllerProfile) : @"Cá Nhân",
+                                      @(ControllerSetting) : @"Điều Chỉnh"
                                       };
 #if !defined(STORYBOARD)
     self.paneViewControllerClasses = @{
                                        @(ControllerLogin) : [LoginVC class],
                                        @(ControllerUserShelf) : [UserShelfVC class],
                                        @(ControllerShop) : [ShopVC Class],
-                                       @(ControllerProfile) : [ProfileVC Class]
+                                       @(ControllerProfile) : [ProfileVC Class],
+                                       @(ControllerSetting) : [AppSettingVC Class]
                                        };
 #else
     self.paneViewControllerIdentifiers = @{
                                            @(ControllerLogin) : @"loginView",
                                            @(ControllerUserShelf) : @"userShelfView",
                                            @(ControllerShop) : @"shopView",
-                                           @(ControllerProfile) : @"profileView"
+                                           @(ControllerProfile) : @"profileView",
+                                           @(ControllerSetting) : @"appSettingView"
                                            };
 #endif
     self.sectionTitles = @{
@@ -163,11 +167,12 @@ static SideMenuVC * instance = nil;
     switch (indexPath.row) {
         case 0:
             return ControllerUserShelf;
-            break;
         case 1:
             return ControllerShop;
         case 2:
             return ControllerProfile;
+        case 3:
+            return ControllerSetting;
         case 4:
             return ControllerLogin;
         default:

@@ -10,6 +10,7 @@
 #import "LanguageControl.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "DataEngine.h"
 
 @implementation SoundEngine
 {
@@ -37,6 +38,9 @@ static SoundEngine * instance = nil;
 
 - (void)playSound:(NSString*)fileNameWithExtension
 {
+    if ([[DataEngine getInstance] isSoundOff])
+        return;
+    
     if(!audioPlayerObj)
         audioPlayerObj = [AVAudioPlayer alloc];
     
@@ -49,6 +53,9 @@ static SoundEngine * instance = nil;
 }
 - (void) readWord:(NSString*)word language:(NSString *) lang
 {
+    if ([[DataEngine getInstance] isSoundOff])
+        return;
+    
     if ([synthesizer isPaused]) {
         [synthesizer continueSpeaking];
     }else{

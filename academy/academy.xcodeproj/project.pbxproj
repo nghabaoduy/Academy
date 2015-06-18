@@ -25,6 +25,7 @@
 		AF3AC8801B1DE9AF00B23FCF /* TestRankAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3AC87F1B1DE9AF00B23FCF /* TestRankAnimView.m */; };
 		AF3EA00C1B31E4030045D8D1 /* TermNAgreementView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3EA00B1B31E4030045D8D1 /* TermNAgreementView.xib */; };
 		AF3EA00F1B31E5380045D8D1 /* TermNAgreementDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3EA00E1B31E5380045D8D1 /* TermNAgreementDisplayer.m */; };
+		AF3EA0121B32C0DC0045D8D1 /* AppSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3EA0111B32C0DC0045D8D1 /* AppSettingVC.m */; };
 		AF53E5B81B301FC700B7CC53 /* LanguageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF53E5B71B301FC700B7CC53 /* LanguageControl.m */; };
 		AF5E99601B1ECCB4009342BA /* popupArrowUp in Resources */ = {isa = PBXBuildFile; fileRef = AF5E995F1B1ECCB4009342BA /* popupArrowUp */; };
 		AF605EF21B2EF1DB00134BEE /* App-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AF605EF11B2EF1DB00134BEE /* App-Logo.png */; };
@@ -240,6 +241,8 @@
 		AF3EA00B1B31E4030045D8D1 /* TermNAgreementView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermNAgreementView.xib; sourceTree = "<group>"; };
 		AF3EA00D1B31E5380045D8D1 /* TermNAgreementDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermNAgreementDisplayer.h; sourceTree = "<group>"; };
 		AF3EA00E1B31E5380045D8D1 /* TermNAgreementDisplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermNAgreementDisplayer.m; sourceTree = "<group>"; };
+		AF3EA0101B32C0DC0045D8D1 /* AppSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettingVC.h; sourceTree = "<group>"; };
+		AF3EA0111B32C0DC0045D8D1 /* AppSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettingVC.m; sourceTree = "<group>"; };
 		AF53E5B61B301FC700B7CC53 /* LanguageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageControl.h; sourceTree = "<group>"; };
 		AF53E5B71B301FC700B7CC53 /* LanguageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageControl.m; sourceTree = "<group>"; };
 		AF5E995F1B1ECCB4009342BA /* popupArrowUp */ = {isa = PBXFileReference; lastKnownFileType = file; name = popupArrowUp; path = Graphics/popupArrowUp; sourceTree = "<group>"; };
@@ -744,8 +747,6 @@
 				AF0241D11B0F16560019B3E2 /* WordTestVC.m */,
 				AF0241D31B0F18930019B3E2 /* WordDisplayView.h */,
 				AF0241D41B0F18930019B3E2 /* WordDisplayView.m */,
-				AFF250551B23382900803482 /* TestSettingView.h */,
-				AFF250561B23382900803482 /* TestSettingView.m */,
 			);
 			name = WordCardViewCollection;
 			sourceTree = "<group>";
@@ -834,6 +835,10 @@
 				AFF2504E1B22D10300803482 /* ProfileVC.m */,
 				AFF250501B23015000803482 /* PasswordChangeVC.h */,
 				AFF250511B23015000803482 /* PasswordChangeVC.m */,
+				AF3EA0101B32C0DC0045D8D1 /* AppSettingVC.h */,
+				AF3EA0111B32C0DC0045D8D1 /* AppSettingVC.m */,
+				AFF250551B23382900803482 /* TestSettingView.h */,
+				AFF250561B23382900803482 /* TestSettingView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1218,6 +1223,7 @@
 				AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */,
 				AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */,
 				AF3EA00F1B31E5380045D8D1 /* TermNAgreementDisplayer.m in Sources */,
+				AF3EA0121B32C0DC0045D8D1 /* AppSettingVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

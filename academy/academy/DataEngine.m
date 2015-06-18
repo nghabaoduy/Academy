@@ -41,6 +41,7 @@ static DataEngine * instance = nil;
             [self setLoginType:LoginNormal];
             break;
     }
+    [self setIsSoundOff:[[defaults valueForKey:@"isSoundOff"] boolValue]];
     
 }
 - (NSString *)requestURL {
@@ -68,6 +69,16 @@ static DataEngine * instance = nil;
 {
     return @"https://itunes.apple.com/us/app/vnacademy/id1008312086?ls=1&mt=8";
 }
-
+-(NSString *) getFeedbackEmail
+{
+    return @"openlab.helpdesk@gmail.com";
+}
+-(void) switchisSoundOff:(BOOL)isSoundOff
+{
+    [self setIsSoundOff:isSoundOff];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:@([self isSoundOff]) forKey:@"isSoundOff"];
+    [defaults synchronize];
+}
 
 @end
