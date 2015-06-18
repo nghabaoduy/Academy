@@ -89,7 +89,7 @@
     {
         if (curPack) {
             isFinalTest = YES;
-            finalTestTotalQuestion = 5;
+            finalTestTotalQuestion = 20;
         }
         [self performSelector:@selector(displayAlertTestPick) withObject:self afterDelay:0.5];
     }
@@ -114,7 +114,25 @@
         }
     }];
 }
-
+-(void) askForRateAndReview
+{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Bạn có muốn đánh giá và cho điểm để vnAcademy ngày một tốt hơn? ^^" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * goRateAndReview = [UIAlertAction actionWithTitle:@"Làm ngay"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction *action) {
+                                                                 NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                                                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                                 [self dismissSelf];
+                                                             }];
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Để lần sau"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                         [self dismissSelf];
+                                                     }];
+    [alertController addAction:goRateAndReview];
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 - (void) addTimer
 {
     if (_timerControl != nil) {
@@ -312,7 +330,15 @@ int finalGrade;
     [alertView setOnButtonTouchUpInside:^(CustomIOSAlertView *alertView, int buttonIndex) {
         switch (buttonIndex) {
             case 0:
-                [self dismissSelf];
+            {
+                int rand = arc4random_uniform(10);
+                if (rand < 4 && finalGrade >= 2) {
+                    [self askForRateAndReview];
+                } else {
+                    [self dismissSelf];
+                }
+            }
+                
                 break;
             case 1:
                 [self displayAlertTestPick];

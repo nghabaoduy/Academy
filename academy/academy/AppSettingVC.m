@@ -16,7 +16,7 @@
 @interface AppSettingVC () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
     IBOutlet UISwitch *soundSwitch;
-    
+    BOOL isReportError;
 }
 
 @end
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isReportError = NO;
     [soundSwitch setOn:![[DataEngine getInstance] isSoundOff] animated:NO];
 }
 - (IBAction)soundSwitchChangedValue:(id)sender {
@@ -45,7 +46,7 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
 }
 - (IBAction)goGiveFeedback:(id)sender {
-    
+    isReportError = NO;
     MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
     messageController.mailComposeDelegate = self;
     [messageController setToRecipients:@[[[DataEngine getInstance] getFeedbackEmail]]];
@@ -58,12 +59,29 @@
     
     
 }
+- (IBAction)goErrorReport:(id)sender {
+    isReportError = YES;
+    MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
+    messageController.mailComposeDelegate = self;
+    [messageController setToRecipients:@[[[DataEngine getInstance] getFeedbackEmail]]];
+    
+    User *curUser = [User currentUser];
+    [messageController setSubject:[NSString stringWithFormat:@"[vnAcademy] Báo Lỗi từ %@ [Id:%@]",[curUser profileName],[curUser modelId]]];
+    
+    
+    [self presentViewController:messageController animated:YES completion:nil];
+}
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     NSLog(@"mail sent");
     [self dismissViewControllerAnimated:YES completion:^{
         if (result == MFMailComposeResultSent) {
-            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thank You!" message:@"Cảm ơn bạn đã góp ý. vnAcademy sẽ cố gắng cho bạn quá trình học ngoại ngữ tốt và vui vẻ nhất!" preferredStyle:UIAlertControllerStyleAlert];
+            NSString * title = isReportError?@"Sorry!":@"Thank You!";
+            NSString * message = isReportError?
+            @"Xin Lỗi bạn, bọn mình sẽ xem xét và xử lý trong thời gian sớm nhất. Cảm ơn bạn đã góp ý. vnAcademy sẽ cố gắng cho bạn quá trình học ngoại ngữ tốt và vui vẻ nhất!":
+            @"Cảm ơn bạn đã góp ý. vnAcademy sẽ cố gắng cho bạn quá trình học ngoại ngữ tốt và vui vẻ nhất!";
+            
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
                                                                style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction *action) {

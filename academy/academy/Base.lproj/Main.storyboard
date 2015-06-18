@@ -70,6 +70,7 @@
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
             <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -4301,6 +4302,65 @@
                                                     <include reference="cDH-2s-f6s"/>
                                                     <include reference="rtk-ri-A2D"/>
                                                     <include reference="sTf-6t-maL"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Bv9-gr-zIJ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bv9-gr-zIJ" id="pSW-mj-sNO">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGD-p7-eOf">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="I9o-28-Few"/>
+                                                        <constraint firstAttribute="height" constant="43" id="UFd-Du-XIS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                                                    <state key="normal" title="Báo Lỗi">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="UFd-Du-XIS"/>
+                                                            <exclude reference="I9o-28-Few"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="UFd-Du-XIS"/>
+                                                            <exclude reference="I9o-28-Few"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="goErrorReport:" destination="LrX-1i-NUf" eventType="touchUpInside" id="BoE-zj-eX5"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="NGD-p7-eOf" secondAttribute="centerY" id="GbL-0G-ggv"/>
+                                                <constraint firstItem="NGD-p7-eOf" firstAttribute="leading" secondItem="pSW-mj-sNO" secondAttribute="leading" constant="8" id="Plv-6S-tde"/>
+                                                <constraint firstAttribute="trailing" secondItem="NGD-p7-eOf" secondAttribute="trailing" constant="8" id="UF3-lj-bqm"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="NGD-p7-eOf"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="Plv-6S-tde"/>
+                                                    <exclude reference="GbL-0G-ggv"/>
+                                                    <exclude reference="UF3-lj-bqm"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="NGD-p7-eOf"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="Plv-6S-tde"/>
+                                                    <include reference="GbL-0G-ggv"/>
+                                                    <include reference="UF3-lj-bqm"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
