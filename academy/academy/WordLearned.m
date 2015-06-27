@@ -148,36 +148,54 @@
     NSArray *sortedArray = [learnedArray sortedArrayUsingComparator:^NSComparisonResult(WordLearned* obj1, WordLearned* obj2) {
         return [obj1.created_at compare:obj2.created_at] == NSOrderedAscending;
     }];
+    NSLog(@"sortedArray = %@",sortedArray);
     NSMutableArray *xLabels = [NSMutableArray new];
     NSMutableArray *wlArrayList = [NSMutableArray new];
-    NSDate *checkDate;
+    
+    NSDate *checkDate = [NSDate date];
+    WordLearned *lastWl = [sortedArray firstObject];
+    NSDateComponents *checkDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:checkDate];
+    NSDateComponents *lastWlComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:lastWl.created_at];
+    while ([checkDateComponents year] >= [lastWlComponents year] && [checkDateComponents month] >= [lastWlComponents month] && [checkDateComponents day] > [lastWlComponents day]) {
+        NSLog(@"date = %i-%i-%i",[checkDateComponents year], [checkDateComponents month], [checkDateComponents day]);
+        
+        [xLabels addObject:[WordLearned getStringFromDateWithoutYear:checkDate]];
+        NSMutableArray *wlContainer = [NSMutableArray new];
+        [wlArrayList addObject:wlContainer];
+        
+        checkDate =[checkDate dateByAddingTimeInterval:60*60*24*-1];
+        checkDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:checkDate];
+    }
+    
     
     for (WordLearned *wl in sortedArray) {
-        if (xLabels.count == 0) {
-            [xLabels addObject:[wl getDateStringWithoutYear]];
-            NSMutableArray *wlContainer = [NSMutableArray new];
-            [wlArrayList addObject:wlContainer];
-            [wlContainer addObject:wl];
-            checkDate = wl.created_at;
-        }
-        else
-        {
-            NSMutableArray *lastContainer = [wlArrayList lastObject];
-            WordLearned *lastWl = [lastContainer lastObject];
-            checkDate = lastWl.created_at;
-            while (![[wl getDateString] isEqualToString:[WordLearned getStringFromDate:checkDate]] && xLabels.count < maxColumn) {
-                checkDate = [checkDate dateByAddingTimeInterval:60*60*24*-1];
-                [wlArrayList addObject:[NSMutableArray new]];
-                [xLabels addObject:[WordLearned getStringFromDateWithoutYear:checkDate]];
-            }
-
-            if ([[wl getDateString] isEqualToString:[lastWl getDateString]]) {
-                [lastContainer addObject:wl];
+        if (xLabels.count <= maxColumn) {
+            if ([sortedArray indexOfObject:wl] == 0) {
+                [xLabels addObject:[wl getDateStringWithoutYear]];
+                NSMutableArray *wlContainer = [NSMutableArray new];
+                [wlArrayList addObject:wlContainer];
+                [wlContainer addObject:wl];
+                checkDate = wl.created_at;
             }
             else
             {
-                NSMutableArray *wlContainer = [wlArrayList lastObject];
-                [wlContainer addObject:wl];
+                NSMutableArray *lastContainer = [wlArrayList lastObject];
+                WordLearned *lastWl = [lastContainer lastObject];
+                checkDate = lastWl.created_at;
+                while (![[wl getDateString] isEqualToString:[WordLearned getStringFromDate:checkDate]]) {
+                    checkDate = [checkDate dateByAddingTimeInterval:60*60*24*-1];
+                    [wlArrayList addObject:[NSMutableArray new]];
+                    [xLabels addObject:[WordLearned getStringFromDateWithoutYear:checkDate]];
+                }
+                
+                if ([[wl getDateString] isEqualToString:[lastWl getDateString]]) {
+                    [lastContainer addObject:wl];
+                }
+                else
+                {
+                    NSMutableArray *wlContainer = [wlArrayList lastObject];
+                    [wlContainer addObject:wl];
+                }
             }
         }
     }
@@ -193,7 +211,12 @@
     for (NSArray *wlArray in wlArrayList) {
         [wlCountArray addObject:[NSNumber numberWithInt:wlArray.count]];
     }
-    
+    if (xLabels.count > maxColumn) {
+        [xLabels removeObjectsInRange:NSMakeRange(maxColumn, xLabels.count - maxColumn)];
+    }
+    if (wlCountArray.count > maxColumn) {
+        [wlCountArray removeObjectsInRange:NSMakeRange(maxColumn, wlCountArray.count - maxColumn)];
+    }
     [xLabels reverse];
     [wlCountArray reverse];
     

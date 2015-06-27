@@ -13,6 +13,7 @@
 
 @protocol CardInfoViewDelegate
 -(void) cardIsTapped:(CardInfoView *) card;
+-(void) exampleSpeakerIsTapped:(CardInfoView *) card;
 -(NSString *) CardInfoViewGetLanguage;
 @end
 
@@ -29,6 +30,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *messageLb;
 @property (strong, nonatomic) IBOutlet UILabel *centerWordLb;
 @property (strong, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) IBOutlet UIButton *exampleSpeaker;
+
+
 @property LanguageIndexType curLanguageType;
 @property int standardFontSize;
 

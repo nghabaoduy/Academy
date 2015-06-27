@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSString * category;
+@property (nonatomic, retain) NSString * oldPrice;
 @property (nonatomic, retain) NSString * price;
 @property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSString * roleCanView;

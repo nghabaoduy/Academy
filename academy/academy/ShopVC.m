@@ -107,6 +107,23 @@
     [cell.packTitle setText:pack.name];
     [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
     
+    if ([pack.oldPrice intValue] == 0) {
+        [cell.oldPriceLb setText:@""];
+    }
+    else
+    {
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+        
+        NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[pack.oldPrice integerValue]]];
+        formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+        [cell.oldPriceLb setText:[NSString stringWithFormat:@"%@ đ",formatted]];
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithAttributedString:cell.oldPriceLb.attributedText];
+        [attributeString addAttribute:NSStrikethroughStyleAttributeName
+                                value:@1
+                                range:NSMakeRange(0, [attributeString length])];
+        [cell.oldPriceLb setAttributedText:attributeString];
+    }
     if ([pack.price intValue] == 0) {
         [cell.priceLb setText:@"FREE"];
     }

@@ -94,6 +94,7 @@
         [self performSelector:@selector(displayAlertTestPick) withObject:self afterDelay:0.5];
     }
     _wordNoLb.text = @"";
+    [[SoundEngine getInstance] readWord:@" " language:curPack?curPack.language:curSet.language];
 }
 
 - (IBAction)close:(id)sender {

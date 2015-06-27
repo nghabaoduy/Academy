@@ -62,7 +62,9 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 -(void)setupRefreshControl{
-    
+    if ([[DataEngine getInstance] isOffline]) {
+        return;
+    }
     self.sunnyRefreshControl = [YALSunnyRefreshControl attachToScrollView:self.tableView
                                                                    target:self
                                                             refreshAction:@selector(sunnyControlDidStartAnimation)];
@@ -176,7 +178,14 @@
     Package *pack = curUserPackage.package;
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
-    [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
+    if ([curUserPackage isExpired]) {
+        [cell.packSubTitle setText:[NSString stringWithFormat:@"Cần gia hạn"]];
+    }
+    else
+    {
+        [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
+    }
+    
     if ([curUserPackage.score intValue] > 0) {
         [cell.rankImg setHidden:NO];
         [cell.rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"packRankStar_%i.png",[curUserPackage.score intValue]]]];
@@ -205,6 +214,7 @@
     
     User *curUser = [User currentUser];
     cell.packageImg.layer.opacity = [curUser canViewThisPackage:pack]?1:0.5f;
+    
     
     return cell;
 }
@@ -297,14 +307,29 @@
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
         NSMutableArray *langArr = packageLangList[indexPath.section];
         UserPackage * userPack = [langArr objectAtIndex:indexPath.row];
-
-        if ([curUser canViewThisPackage:userPack.package]) {
-            return YES;
-        }
-        else
-        {
+  
+        if (![curUser canViewThisPackage:userPack.package]) {
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Gói ngôn ngữ này đang được cập nhập." preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action) {
+                                                             }];
+            
+            [alertController addAction:dismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+            return NO;
+        }
+        
+        if ([userPack isExpired]) {
+            NSNumberFormatter *formatter = [NSNumberFormatter new];
+            [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+            NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[userPack.package.price integerValue]]];
+            formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+            
+            NSString * price = [userPack.package.price intValue] == 0?@"miễn phí":[NSString stringWithFormat:@"với %@đ",formatted];
+            
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:[NSString stringWithFormat:@"Gói ngôn ngữ này đã hết hạn sữ dụng. Bạn có muốn gia hạn %@?",price] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Để Sau"
                                                                style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction *action) {
                                                              }];

@@ -16,6 +16,9 @@
     self.modelId = dict[@"id"];
 
     _package_id = dict[@"package_id"] ?:  nil;
+    _createdAt = [self getDateFromDict:dict WithKey:@"created_at"];
+    _exprireddAt = [self getDateFromDict:dict WithKey:@"expired_at"];
+    [self checkExpiration];
     
     if (_package_id) {
         _package = [[Package alloc] initWithDict:dict[@"package"]];
@@ -35,7 +38,9 @@
              @"package_id" : _package_id ?: @"",
              @"user_id" : _user_id ?: @"",
              @"package": [_package getDictionaryFromObject],
-             @"score":_score?:[NSNumber numberWithInt:0]
+             @"score":_score?:[NSNumber numberWithInt:0],
+             @"created_at":[NSString stringWithFormat:@"%@",_createdAt],
+             @"expired_at":[NSString stringWithFormat:@"%@",_exprireddAt]
              };
 }
 
@@ -112,5 +117,15 @@
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"[UserPackage Class] [user_id:%@][package_id:%@][score:%i]",_user_id,_package_id,[_score intValue]];
+}
+
+-(void) checkExpiration
+{
+    if ([_createdAt compare:_exprireddAt] == NSOrderedDescending) {
+        [self setIsExpired:NO];
+        return;
+    }
+    NSDate * curDate = [NSDate date];
+    [self setIsExpired:[curDate compare:_exprireddAt] == NSOrderedDescending];
 }
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E33b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -21,6 +21,7 @@
                 <outlet property="centerWordLb" destination="fxJ-NU-RAd" id="4aj-qM-m5F"/>
                 <outlet property="contentBelowTV" destination="fIe-cG-JKy" id="2rc-3A-qx5"/>
                 <outlet property="contentTV" destination="UE7-3w-IZu" id="Dv1-3Z-CUx"/>
+                <outlet property="exampleSpeaker" destination="lm8-wB-E7P" id="1T9-sn-ks3"/>
                 <outlet property="messageLb" destination="Xm6-DT-24r" id="oBo-uW-yGb"/>
                 <outlet property="phoneticLb" destination="Aaf-hn-8N7" id="rAF-np-5ZB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Gps-F4-S6y"/>
@@ -95,6 +96,15 @@
                         </mask>
                     </variation>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lm8-wB-E7P">
+                    <rect key="frame" x="121" y="337" width="25" height="25"/>
+                    <state key="normal" title="Button" image="speaker-btn">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="speakerIsTapped:" destination="-1" eventType="touchUpInside" id="dJP-3L-22d"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
@@ -113,5 +123,6 @@
     </objects>
     <resources>
         <image name="Card.png" width="620" height="764"/>
+        <image name="speaker-btn" width="260" height="94"/>
     </resources>
 </document>

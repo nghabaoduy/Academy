@@ -44,7 +44,7 @@
     curUser.authDelegate = self;
     [self refreshView];
     [nameTF setFont:[UIFont fontWithName:@"GothamRounded-Bold" size:20]];
-    [avatarImg setImageWithURL:[NSURL URLWithString:curUser.avatarURL] placeholderImage:[UIImage imageNamed:@"giraffe_happy.png"]];
+    [avatarImg setImageWithURL:[NSURL URLWithString:curUser.avatarURL] placeholderImage:[UIImage imageNamed:@"dummyAvatar.png"]];
     
     [avatarImg setContentMode:UIViewContentModeScaleAspectFill];
     CALayer *avatarLayer = avatarImg.layer;
@@ -248,7 +248,7 @@
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"uploadAvatarSucessful - %@",user.avatarURL);
-    [avatarImg setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"giraffe_happy.png"]];
+    [avatarImg setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"uploadingAvatar.png"]];
 }
 -(void)uploadAvatarFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode
 {

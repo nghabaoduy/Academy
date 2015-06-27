@@ -16,7 +16,7 @@
 @end
 
 @implementation PackageInfoVC
-@synthesize curPack, topPriceLb, topSubTitleLb,topTitleLb,contentTv, packageImg;
+@synthesize curPack, topPriceLb, oldPriceLb, topSubTitleLb,topTitleLb,contentTv, packageImg;
 @synthesize buyBtn,freeBtn,tryBtn;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +25,25 @@
 -(void) displayInfo
 {
     [freeBtn setHidden:YES];
+    
+    if ([curPack.oldPrice intValue] == 0) {
+        [oldPriceLb setText:@""];
+    }
+    else
+    {
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+        
+        NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[curPack.oldPrice integerValue]]];
+        formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+        [oldPriceLb setText:[NSString stringWithFormat:@"%@ đ",formatted]];
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithAttributedString:oldPriceLb.attributedText];
+        [attributeString addAttribute:NSStrikethroughStyleAttributeName
+                                value:@1
+                                range:NSMakeRange(0, [attributeString length])];
+        [oldPriceLb setAttributedText:attributeString];
+    }
+    
     if ([curPack.price intValue] == 0) {
         [topPriceLb setText:@"FREE"];
     }
@@ -84,6 +103,18 @@
 
 - (void)userPurchasePackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if ([[NSString stringWithFormat:@"%@",[error valueForKey:@"message"]] isEqualToString:@"Insufficient credit to purchase"]) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Số dư tài khoản không đủ mua bộ ngôn ngữ này. Cập nhập phiên bản mới nhất để mua bộ ngôn ngữ này." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
     NSLog(@"purchase failed %@", error);
 }
 

@@ -14,7 +14,7 @@
     NSDictionary * wordSubDict;
 }
 
-@synthesize delegate;
+@synthesize delegate, exampleSpeaker;
 
 -(id)initWithFrame:(CGRect)frame
 {
@@ -43,6 +43,7 @@
     [self.contentTV addGestureRecognizer:gestureRecognizer];
     
     mPopup = [[MeaningPopupDisplayer alloc] init];
+    exampleSpeaker.hidden = YES;
     [self addSubview:mPopup];
     
     
@@ -51,6 +52,10 @@
     //NSLog(@"touchUpInside");
     [delegate cardIsTapped:self];
 }
+- (IBAction)speakerIsTapped:(id)sender {
+    [delegate exampleSpeakerIsTapped:self];
+}
+
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent wordSubDict:(NSDictionary *) subDict
 {
     wordSubDict = subDict;
@@ -77,12 +82,16 @@
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent
 {
     [self clearDisplay];
+    // remove mute bracket
+    detailContent = [detailContent stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    detailContent = [detailContent stringByReplacingOccurrencesOfString:@"}" withString:@""];
+    
     [self.wordLb setText:word];
-    [self.wordTypeLb setText:[NSString stringWithFormat:@"(%@)",wordType]];
+    [self.wordTypeLb setText:wordType.length > 0?[NSString stringWithFormat:@"(%@)",wordType]:@""];
     if ([[self.delegate CardInfoViewGetLanguage] isEqualToString:@"English"]) {
-        [self.phoneticLb setText:[NSString stringWithFormat:@"/%@/",phonetic]];
+        [self.phoneticLb setText:phonetic.length > 0?[NSString stringWithFormat:@"/%@/",phonetic]:@""];
     }   else   {
-        [self.phoneticLb setText:[NSString stringWithFormat:@"%@",phonetic]];
+        [self.phoneticLb setText:phonetic.length > 0?[NSString stringWithFormat:@"[%@]",phonetic]:@""];
     }
     
     [self.contentTV setText:@""];
@@ -96,8 +105,23 @@
     
     [self resizeTextViewToFit:self.contentTV];
     [self resizeTextViewToFit:self.contentBelowTV];
+    [self positionExampleSpeaker:self.contentTV];
 }
 
+-(void) positionExampleSpeaker:(UITextView *) textView
+{
+    exampleSpeaker.hidden = YES;
+    NSRange textRange = [textView.text rangeOfString:@"Example:"];
+    
+    if (textRange.location != NSNotFound) {
+        CGRect result1 = [self frameOfTextRange:textRange inTextView:textView];
+        exampleSpeaker.hidden = NO;
+        exampleSpeaker.frame = CGRectMake(textView.frame.origin.x + result1.origin.x + 3 + result1.size.width,
+                                          textView.frame.origin.y + result1.origin.y - 4,
+                                          exampleSpeaker.frame.size.width,exampleSpeaker.frame.size.height);
+    }
+    
+}
 -(void) resizeTextViewToFit:(UITextView *) tv
 {
     CGFloat fixedWidth = tv.frame.size.width;
@@ -195,9 +219,20 @@
     UITextView *textView = (UITextView *)recognizer.view;
     //get location
     CGPoint location = [recognizer locationInView:textView];
+    BOOL didShowPopUp = [self didShowPopUpAtLocation:location inTextView:textView];
+    if (self.curLanguageType == LanguageIndexTypeCharacter && !didShowPopUp) {
+        int oneCharSize = 20;
+        location.x += oneCharSize;
+        [self didShowPopUpAtLocation:location inTextView:textView];
+    }
+    
+    
+}
+-(BOOL) didShowPopUpAtLocation:(CGPoint) location inTextView:(UITextView *)textView
+{
     UITextPosition *tapPosition = [textView closestPositionToPoint:location];
     UITextRange *textRange;
-
+    
     switch (self.curLanguageType) {
         case LanguageIndexTypeWord:
         {
@@ -212,7 +247,7 @@
         }
             break;
         case LanguageIndexTypeTypeCount:
-            return;
+            return NO;
     }
     
     UITextPosition* beginning = textView.beginningOfDocument;
@@ -221,47 +256,58 @@
     
     NSInteger rangeLocation = [textView offsetFromPosition:beginning toPosition:selectionStart];
     NSInteger rangeLength = [textView offsetFromPosition:selectionStart toPosition:selectionEnd];
-
+    
     
     //return string
     NSString * tappedWord = [textView textInRange:textRange];
     NSLog(@"word = %@",tappedWord);
     if ([tappedWord isEqualToString:@""]) {
         [delegate cardIsTapped:self];
-        return;
+        return NO;
     }
     for (NSString *key in [wordSubDict allKeys]) {
-        if ([self checkIfCharacters:tappedWord inString:textView.text atRange:NSMakeRange(rangeLocation, rangeLength) isInWord:key]) {
-            CGRect result1 = [textView firstRectForRange:textRange ];
+        NSRange finalTextRange = [self checkIfCharacters:tappedWord inString:textView.text atRange:NSMakeRange(rangeLocation, rangeLength) isInWord:key];
+        if (finalTextRange.length > 0) {
+            CGRect result1 = [self frameOfTextRange:finalTextRange inTextView:textView];//[textView firstRectForRange:textRange ];
             
             CGPoint newPos = CGPointMake(textView.frame.origin.x + result1.origin.x + result1.size.width/2,
                                          textView.frame.origin.y + result1.origin.y  + result1.size.height+2);
             [mPopup displayText:[wordSubDict valueForKey:key] atPos:newPos];
-            return;
+            return YES;
         }
     }
     [mPopup fadeOut];
+    return NO;
 }
--(BOOL) checkIfCharacters:(NSString*) chars inString:(NSString *)aString atRange:(NSRange) textRange isInWord:(NSString*) word
+-(NSRange) checkIfCharacters:(NSString*) chars inString:(NSString *)aString atRange:(NSRange) textRange isInWord:(NSString*) word
 {
-    //NSLog(@"checkIfCharacters[%@] inString[%@] atRange[%i,%i] isInWord[%@]",chars,aString,textRange.location,textRange.length,word);
     if ([chars isEqualToString:word])
-        return YES;
+        return textRange;
     
     NSRange range = [word rangeOfString:chars];
-   // NSLog(@"range = [%i,%i]",range.location,range.length);
     if (range.location == NSNotFound)
-        return NO;
+        return NSMakeRange(0, 0);
     
     NSUInteger charsInFront = range.location;
     NSUInteger charsInBack = word.length - range.location - chars.length;
-   // NSLog(@"charsInFront,charsInBack = [%i,%i]",charsInFront,charsInBack);
+
     if (textRange.location >= charsInFront && aString.length >= (textRange.location + textRange.length + charsInBack)) {
         NSString * extractedWord = [aString substringWithRange:NSMakeRange(textRange.location - charsInFront, word.length)];
-        //NSLog(@"extractedWord = %@",extractedWord);
-        return [[extractedWord lowercaseString] isEqualToString:[word lowercaseString]];
+        BOOL isAtRange = [[extractedWord lowercaseString] isEqualToString:[word lowercaseString]];
+        if (isAtRange) {
+            return NSMakeRange(textRange.location - charsInFront, word.length);
+        }
     }
-    return NO;
+    return NSMakeRange(0, 0);
+}
+- (CGRect)frameOfTextRange:(NSRange)range inTextView:(UITextView *)textView
+{
+    UITextPosition *beginning = textView.beginningOfDocument;
+    UITextPosition *start = [textView positionFromPosition:beginning offset:range.location];
+    UITextPosition *end = [textView positionFromPosition:start offset:range.length];
+    UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
+    CGRect rect = [textView firstRectForRange:textRange];
+    return [textView convertRect:rect fromView:textView.textInputView];
 }
 -(void) clearDisplay
 {

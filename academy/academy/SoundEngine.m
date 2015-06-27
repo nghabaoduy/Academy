@@ -53,6 +53,7 @@ static SoundEngine * instance = nil;
 }
 - (void) readWord:(NSString*)word language:(NSString *) lang
 {
+    NSLog(@"Read word: %@",word);
     if ([[DataEngine getInstance] isSoundOff])
         return;
     
@@ -74,7 +75,7 @@ static SoundEngine * instance = nil;
     }
 }
 - (void)speakText:(NSString*)text language:(NSString *) lang{
-    
+    NSLog(@"Read text: %@",text);
     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
     utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[LanguageControl getInstance] getLanguageVoiceCodeByLang:lang]];

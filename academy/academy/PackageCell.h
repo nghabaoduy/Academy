@@ -10,6 +10,7 @@
 
 @interface PackageCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *packageImg;
+@property (weak, nonatomic) IBOutlet UILabel *oldPriceLb;
 @property (strong, nonatomic) IBOutlet UILabel *priceLb;
 @property (strong, nonatomic) IBOutlet UILabel *packTitle;
 @property (strong, nonatomic) IBOutlet UILabel *packSubTitle;

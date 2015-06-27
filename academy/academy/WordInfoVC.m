@@ -60,6 +60,8 @@
     knownWords = [NSMutableArray new];
     [self resetView];
     [self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
+    
+    [[SoundEngine getInstance] readWord:@" " language:self.language];
 }
 
 -(void) resetView
@@ -122,7 +124,7 @@
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES] wordSubDict:[word getWordSubDict:self.language]];
         //[_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES]];
     }
-    
+
     prevBtn.hidden = curWordNo == 0;
     
     
@@ -323,6 +325,34 @@
         //NSLog(@"cardIsTapped");
         [self startFlip:_wordCard];
     }
+}
+-(void) exampleSpeakerIsTapped:(CardInfoView *)card
+{
+    Word *word = wordList[curWordNo];
+    NSString *exampleStr = [word getExample:self.language];
+    [[SoundEngine getInstance] readWord:[self removeMuteSubString:exampleStr] language:self.language];
+}
+- (NSString *)removeMuteSubString:(NSString *)yourString {
+    
+    NSScanner *theScanner;
+    NSString *text = nil;
+    
+    theScanner = [NSScanner scannerWithString:yourString];
+    
+    while ([theScanner isAtEnd] == NO) {
+        
+        [theScanner scanUpToString:@"{" intoString:NULL] ;
+        
+        [theScanner scanUpToString:@"}" intoString:&text] ;
+        
+        yourString = [yourString stringByReplacingOccurrencesOfString:
+                      [NSString stringWithFormat:@"%@}", text]
+                                                           withString:@""];
+        
+    }
+    
+    return yourString;
+    
 }
 - (NSString *)CardInfoViewGetLanguage
 {

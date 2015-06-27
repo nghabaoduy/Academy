@@ -10,6 +10,7 @@
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
 		9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */; };
 		9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */; };
+		9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
@@ -219,6 +220,7 @@
 		9A748F061B3DBD36000B74EC /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YALSunnyRefreshControl.h; path = YALSunnyRefreshControll/YALSunnyRefreshControl.h; sourceTree = "<group>"; };
 		9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YALSunnyRefreshControl.m; path = YALSunnyRefreshControll/YALSunnyRefreshControl.m; sourceTree = "<group>"; };
 		9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YALSunnyRefreshControl.xib; path = YALSunnyRefreshControll/YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
+		9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uploadingAvatar.png; path = Graphics/uploadingAvatar.png; sourceTree = "<group>"; };
 		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */,
 				AF605EFC1B2F55D100134BEE /* LaunchImageIcon.png */,
 				AF605EF31B2EF9BD00134BEE /* transparent.png */,
 				AF605EF11B2EF1DB00134BEE /* App-Logo.png */,
@@ -1103,6 +1106,7 @@
 				AFC27BEF1B0EEC5700225016 /* radio.png in Resources */,
 				AFC27BC91B0EEC5700225016 /* calendar.png in Resources */,
 				AFC27BE91B0EEC5700225016 /* officephone.png in Resources */,
+				9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */,
 				AFC27BD01B0EEC5700225016 /* config.png in Resources */,
 				AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */,
 				AFE7BEEA1B1DD7BE0088B9DB /* banner_3.png in Resources */,

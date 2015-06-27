@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *packageImg;
 @property (strong, nonatomic) IBOutlet UILabel *topPriceLb;
+@property (weak, nonatomic) IBOutlet UILabel *oldPriceLb;
 @property (strong, nonatomic) IBOutlet UILabel *topTitleLb;
 @property (strong, nonatomic) IBOutlet UILabel *topSubTitleLb;
 @property (strong, nonatomic) IBOutlet UITextView *contentTv;
