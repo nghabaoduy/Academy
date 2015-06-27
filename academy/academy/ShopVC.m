@@ -166,7 +166,8 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
      if ([[segue identifier] isEqualToString:@"goPackInfo"])
      {
-         Package * pack = [packageList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+         NSMutableArray *langArr = packageLangList[self.tableView.indexPathForSelectedRow.section];
+         Package *pack = [langArr objectAtIndex:self.tableView.indexPathForSelectedRow.row];
          PackageInfoVC * destination = segue.destinationViewController;
          [destination setTitle:pack.name];
          destination.curPack = pack;

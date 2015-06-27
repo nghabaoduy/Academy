@@ -20,6 +20,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "SideMenuVC.h"
 
+
 @interface UserShelfVC () <ModelDelegate>
 
 @end
@@ -33,6 +34,7 @@
     UIRefreshControl * refeshControl;
     NSMutableArray * packageLangList;
     NSMutableArray * languageList;
+    
 }
 
 - (void)viewDidLoad {
@@ -53,21 +55,29 @@
     cellInitHeight = screenWidth *3/10 +cellTopMargin;
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor purpleColor];
-    self.refreshControl.tintColor = [UIColor whiteColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(retrievePackages)
-                  forControlEvents:UIControlEventValueChanged];
-    
-    [self.tableView addSubview:refeshControl];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self setupRefreshControl];
     
     [[DataEngine getInstance] setIsForceReload:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
+-(void)setupRefreshControl{
+    
+    self.sunnyRefreshControl = [YALSunnyRefreshControl attachToScrollView:self.tableView
+                                                                   target:self
+                                                            refreshAction:@selector(sunnyControlDidStartAnimation)];
+    
+}
 
+-(void)sunnyControlDidStartAnimation{
+    
+    [self retrievePackages];
+}
+
+-(IBAction)endAnimationHandle{
+    
+    [self.sunnyRefreshControl endRefreshing];
+}
 - (void)viewDidAppear:(BOOL)animated {
     if ([[DataEngine getInstance] isForceReload]) {
         [self retrievePackages];
@@ -223,7 +233,8 @@
 {
     // Reload table data
     [self.tableView reloadData];
-    
+    [self.sunnyRefreshControl endRefreshing];
+    /*
     // End the refreshing
     if (self.refreshControl) {
         
@@ -236,7 +247,7 @@
         self.refreshControl.attributedTitle = attributedTitle;
         
         [self.refreshControl endRefreshing];
-    }
+    }*/
 }
 #pragma mark - Model Delegate
 
@@ -249,7 +260,8 @@
 - (void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"error %@", error);
-    [self.refreshControl endRefreshing];
+    //[self.refreshControl endRefreshing];
+    [self.sunnyRefreshControl endRefreshing];
 
 }
 

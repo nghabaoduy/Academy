@@ -34,6 +34,8 @@
     
     NSArray *xLabels;
     NSArray *yValues;
+    
+    BOOL wordListIsLoad;
 }
 
 - (void)viewDidLoad {
@@ -58,8 +60,13 @@
     [chartView addSubview:barChart];
     [chartView setBackgroundColor:[UIColor clearColor]];
     
-    
-    [self getWordLearnedList];
+}
+-(void) viewDidAppear:(BOOL)animated
+{
+    if (!wordListIsLoad) {
+        wordListIsLoad = YES;
+        [self getWordLearnedList];
+    }
 }
 
 -(void) getWordLearnedList

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
+		9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */; };
+		9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
@@ -214,6 +216,9 @@
 
 /* Begin PBXFileReference section */
 		19415BF26ACA690DC120472F /* libPods-academy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-academy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A748F061B3DBD36000B74EC /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YALSunnyRefreshControl.h; path = YALSunnyRefreshControll/YALSunnyRefreshControl.h; sourceTree = "<group>"; };
+		9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YALSunnyRefreshControl.m; path = YALSunnyRefreshControll/YALSunnyRefreshControl.m; sourceTree = "<group>"; };
+		9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YALSunnyRefreshControl.xib; path = YALSunnyRefreshControll/YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
 		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
@@ -482,6 +487,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A748F051B3DBD2C000B74EC /* YALSunnyRefreshControll */ = {
+			isa = PBXGroup;
+			children = (
+				9A748F061B3DBD36000B74EC /* YALSunnyRefreshControl.h */,
+				9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */,
+				9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */,
+			);
+			name = YALSunnyRefreshControll;
+			sourceTree = "<group>";
+		};
 		AF7869AA1B10CBEB009BE37B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +668,7 @@
 		AFE0107F1B05313C005B4B4D /* Misc Object */ = {
 			isa = PBXGroup;
 			children = (
+				9A748F051B3DBD2C000B74EC /* YALSunnyRefreshControll */,
 				AFE010801B053186005B4B4D /* PackageCell.h */,
 				AFE010811B053186005B4B4D /* PackageCell.m */,
 				AF243D301B183F0300FDF1D8 /* AlertTestModePickView.h */,
@@ -1046,6 +1062,7 @@
 				AFF15E111B1EFB2E002D0EC1 /* giraffe_sad.png in Resources */,
 				AFC27BE51B0EEC5700225016 /* monitor.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
+				9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */,
 				AFCB0D321B11F89A00F5688F /* CardTypeAnswer.xib in Resources */,
 				AFC27BF71B0EEC5700225016 /* statistic.png in Resources */,
 				AF2B6EFC1B1CC3C500079B4B /* SetIconView.xib in Resources */,
@@ -1175,6 +1192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */,
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */,
 				AF3AC8801B1DE9AF00B23FCF /* TestRankAnimView.m in Sources */,

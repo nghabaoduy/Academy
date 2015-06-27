@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YALSunnyRefreshControl.h"
 
 @interface UserShelfVC : UITableViewController
-
+@property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
 @end
