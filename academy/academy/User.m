@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+
 #import <AFNetworking/AFNetworking.h>
 
 @implementation User {
@@ -190,6 +191,29 @@ static User * _currentUser = nil;
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         [self.authDelegate userPurchasePackageFailed:self WithError:json StatusCode:@([operation.response statusCode])];
+    }];
+}
+
+- (void)renewPurchase:(UserPackage *)userPackage {
+    NSDictionary * params = @{
+                              @"user_package_id" : userPackage.modelId
+                              };
+    
+    NSString *apiPath = @"api/renewPurchase";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        _credit =@([_credit intValue] - [userPackage.package.price intValue]);
+        [self.authDelegate userRenewPurchaseSucessful:self];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        [self.authDelegate userRenewPurchaseFailed:self WithError:json StatusCode:@([operation.response statusCode])];
     }];
 }
 

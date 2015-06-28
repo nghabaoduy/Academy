@@ -259,7 +259,7 @@ int finalGrade;
     }
     finalGrade = [grade intValue];
     
-    if (curPickType == TestPickTimer)
+    if (curPickType == TestPickTimer && ![self.curUserPack.purchaseType isEqualToString:@"try"])
     {
         if (!isFinalTest) if(curSet.grade < grade)
         {
@@ -318,7 +318,7 @@ int finalGrade;
             }
             else
             {
-                [rankView setLSet:curSet];
+                [rankView setLSet:curSet grade:finalGrade];
             }
             
             [alertView setContainerView:rankView];
@@ -333,7 +333,7 @@ int finalGrade;
             case 0:
             {
                 int rand = arc4random_uniform(10);
-                if (rand < 4 && finalGrade >= 2) {
+                if (rand < 4 && finalGrade >= 2 && ![self.curUserPack.purchaseType isEqualToString:@"try"]) {
                     [self askForRateAndReview];
                 } else {
                     [self dismissSelf];

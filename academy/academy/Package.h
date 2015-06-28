@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * price;
 @property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSString * roleCanView;
+@property (nonatomic, retain) NSString * orderCode;
 @property int wordsTotal;
 
 @property (nonatomic, retain) NSMutableArray * setList;

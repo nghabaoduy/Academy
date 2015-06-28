@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserPackage.h"
 #import "LSet.h"
 @interface SetDetailVC : UITableViewController
 
+@property (nonatomic, retain) UserPackage* curUserPack;
 @property (nonatomic, retain) LSet* curSet;
 
 @end

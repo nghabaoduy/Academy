@@ -22,6 +22,7 @@
 @property (retain) id delegate;
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property BOOL isFinalTest;
+@property BOOL isEnabled;
 - (void) setLSet:(LSet *) set;
 -(LSet *) getLSet;
 -(void) setFinalTest:(Package *) pack;

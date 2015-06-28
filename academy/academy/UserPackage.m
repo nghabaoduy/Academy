@@ -16,8 +16,13 @@
     self.modelId = dict[@"id"];
 
     _package_id = dict[@"package_id"] ?:  nil;
+    
     _createdAt = [self getDateFromDict:dict WithKey:@"created_at"];
-    _exprireddAt = [self getDateFromDict:dict WithKey:@"expired_at"];
+    _expriredAt = [self getDateFromDict:dict WithKey:@"expired_at"];
+    
+    NSLog(@"_createdAt:%@ - _expriredAt:%@",_createdAt,_expriredAt);
+    
+    _purchaseType = [self getStringFromDict:dict WithKey:@"purchase_type"];
     [self checkExpiration];
     
     if (_package_id) {
@@ -33,14 +38,17 @@
     return @"storedUserPackages";
 }
 - (NSDictionary *)getDictionaryFromObject {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return @{
              @"id" : self.modelId ?: @"",
              @"package_id" : _package_id ?: @"",
              @"user_id" : _user_id ?: @"",
+             @"purchase_type":_purchaseType?:@"",
              @"package": [_package getDictionaryFromObject],
              @"score":_score?:[NSNumber numberWithInt:0],
-             @"created_at":[NSString stringWithFormat:@"%@",_createdAt],
-             @"expired_at":[NSString stringWithFormat:@"%@",_exprireddAt]
+             @"created_at":_createdAt?[dateFormat stringFromDate:_createdAt]:@"",
+             @"expired_at":_expriredAt?[dateFormat stringFromDate:_expriredAt]:@""
              };
 }
 
@@ -60,7 +68,7 @@
         NSMutableArray * packageList = [NSMutableArray new];
         for (NSDictionary * userPackageDict in packages) {
             UserPackage * newUserPackage = [[UserPackage alloc] initWithDict:userPackageDict];
-            NSLog(@"UserPackage = %@",newUserPackage);
+            //NSLog(@"UserPackage = %@",newUserPackage);
             [packageList addObject:newUserPackage];
         }
         
@@ -121,11 +129,11 @@
 
 -(void) checkExpiration
 {
-    if ([_createdAt compare:_exprireddAt] == NSOrderedDescending) {
+    if ([_createdAt compare:_expriredAt] == NSOrderedDescending) {
         [self setIsExpired:NO];
         return;
     }
     NSDate * curDate = [NSDate date];
-    [self setIsExpired:[curDate compare:_exprireddAt] == NSOrderedDescending];
+    [self setIsExpired:[curDate compare:_expriredAt] == NSOrderedDescending];
 }
 @end

@@ -51,7 +51,7 @@
 {
     [messageLb setText:message];
 }
--(void) setLSet:(LSet *) set
+-(void) setLSet:(LSet *) set grade:(int)grade
 {
     curSet = set;
     if (set.imgURL)
@@ -59,7 +59,7 @@
     else
         [setIcon setImage:[UIImage imageNamed:set.dummyImgName]];
     
-    [rankStar setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[set.grade intValue]]]];
+    [rankStar setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",grade]]];
     
     [self performScale:setIcon:0.5f:0.0f];
     [self performScale:wreath:0.6f:0.0f];

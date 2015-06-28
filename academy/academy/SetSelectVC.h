@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Package.h"
+#import "UserPackage.h"
 #import "SetRow1Displayer.h"
 #import "SetRow2Displayer.h"
 @interface SetSelectVC : UITableViewController <SetDisplayerDelegate, ModelDelegate>
 
-@property (nonatomic, retain) Package * curPack;
+@property (nonatomic, retain) UserPackage * curUserPack;
 
 @end

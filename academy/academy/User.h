@@ -7,7 +7,7 @@
 //
 
 #import "AModel.h"
-#import "Package.h"
+#import "UserPackage.h"
 
 @class User;
 @protocol AuthDelegate <NSObject>
@@ -29,6 +29,8 @@
 
 - (void)userPurchasePackageSucessful:(User *)user;
 - (void)userPurchasePackageFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
+- (void)userRenewPurchaseSucessful:(User *)user;
+- (void)userRenewPurchaseFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 - (void)userTryPackageSucessful:(User *)user;
 - (void)userTryPackageFailed:(User*)user WithError:(id)error StatusCode:(NSNumber*)statusCode;
 
@@ -71,6 +73,7 @@
 
 - (void)purchasePackage:(Package *)package;
 - (void)tryPackage:(Package *)package;
+- (void)renewPurchase:(UserPackage *)userPackage;
 
 - (void)registerUserWithParam:(NSDictionary*)dictionary;
 

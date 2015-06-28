@@ -70,6 +70,7 @@
     if (indexPath.row == 2) {
         WordTestVC * view = [self.storyboard instantiateViewControllerWithIdentifier:@"wordTestView"];
         view.curSet = self.curSet;
+        view.curUserPack = self.curUserPack;
         [self presentViewController:view animated:YES completion:nil];
     }
 }

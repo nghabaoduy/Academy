@@ -18,10 +18,11 @@
 
 @property (nonatomic, strong) NSString * user_id;
 @property (nonatomic, strong) NSString * package_id;
+@property (nonatomic, strong) NSString * purchaseType;
 @property (nonatomic, strong) Package * package;
 @property (nonatomic, strong) NSNumber * score;
 @property (nonatomic, strong) NSDate * createdAt;
-@property (nonatomic, strong) NSDate * exprireddAt;
+@property (nonatomic, strong) NSDate * expriredAt;
 @property (nonatomic, assign) BOOL isExpired;
 -(void) updateScore:(NSNumber *) score;
 @end

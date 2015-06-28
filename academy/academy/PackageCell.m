@@ -9,7 +9,7 @@
 #import "PackageCell.h"
 
 @implementation PackageCell
-
+@synthesize packageCellDelegate;
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -25,6 +25,7 @@
 }
 - (IBAction)buy:(id)sender {
     NSLog(@"buy package");
+    [packageCellDelegate packageCellPurchaseBtnClicked:self];
 }
 
 @end

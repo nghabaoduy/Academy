@@ -21,7 +21,7 @@
 #import "SideMenuVC.h"
 
 
-@interface UserShelfVC () <ModelDelegate>
+@interface UserShelfVC () <ModelDelegate, AuthDelegate, PackageCellDelegate>
 
 @end
 
@@ -99,6 +99,10 @@
 }
 -(void) organizePackageList
 {
+    [packageList sortUsingComparator:^NSComparisonResult(UserPackage * upack1, UserPackage * upack2) {
+        return [upack1.package.orderCode compare:upack2.package.orderCode];
+    }];
+    
     packageLangList = [NSMutableArray new];
     languageList = [NSMutableArray new];
     
@@ -178,14 +182,21 @@
     Package *pack = curUserPackage.package;
     [cell.textLabel setHidden:YES];
     [cell.packTitle setText:pack.name];
-    if ([curUserPackage isExpired]) {
-        [cell.packSubTitle setText:[NSString stringWithFormat:@"Cần gia hạn"]];
+    [cell.purchaseBtn setHidden:YES];
+    cell.packageCellDelegate = self;
+    [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
+    if([curUserPackage.purchaseType isEqualToString:@"try"])
+    {
+        [cell.purchaseBtn setHidden:NO];
+        [cell.purchaseBtn setTitle:@"Mua Ngay" forState:UIControlStateNormal];
     }
     else
     {
-        [cell.packSubTitle setText:[NSString stringWithFormat:@"%i Words",pack.wordsTotal]];
+        if ([curUserPackage isExpired]) {
+            [cell.purchaseBtn setHidden:NO];
+            [cell.purchaseBtn setTitle:@"Gia Hạn" forState:UIControlStateNormal];
+        }
     }
-    
     if ([curUserPackage.score intValue] > 0) {
         [cell.rankImg setHidden:NO];
         [cell.rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"packRankStar_%i.png",[curUserPackage.score intValue]]]];
@@ -244,20 +255,6 @@
     // Reload table data
     [self.tableView reloadData];
     [self.sunnyRefreshControl endRefreshing];
-    /*
-    // End the refreshing
-    if (self.refreshControl) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        
-        [self.refreshControl endRefreshing];
-    }*/
 }
 #pragma mark - Model Delegate
 
@@ -294,7 +291,7 @@
         
         SetSelectVC * destination = segue.destinationViewController;
         [destination setTitle:userPack.package.name];
-        destination.curPack = userPack.package;
+        destination.curUserPack = userPack;
     }
 }
 
@@ -321,26 +318,102 @@
         }
         
         if ([userPack isExpired]) {
-            NSNumberFormatter *formatter = [NSNumberFormatter new];
-            [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
-            NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[userPack.package.price integerValue]]];
-            formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
-            
-            NSString * price = [userPack.package.price intValue] == 0?@"miễn phí":[NSString stringWithFormat:@"với %@đ",formatted];
-            
-            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:[NSString stringWithFormat:@"Gói ngôn ngữ này đã hết hạn sữ dụng. Bạn có muốn gia hạn %@?",price] preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Để Sau"
-                                                               style:UIAlertActionStyleCancel
-                                                             handler:^(UIAlertAction *action) {
-                                                             }];
-            
-            [alertController addAction:dismiss];
-            [self presentViewController:alertController animated:YES completion:nil];
+            [self showRenewAlertForUserPackage:userPack];
             return NO;
         }
     }
     return YES;
 }
+-(void) showRenewAlertForUserPackage:(UserPackage *)userPack
+{
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+    NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[userPack.package.price integerValue]]];
+    formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+    
+    NSString * price = [userPack.package.price intValue] == 0?@"miễn phí":[NSString stringWithFormat:@"với %@đ",formatted];
+    
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:[NSString stringWithFormat:@"Gói ngôn ngữ này đã hết hạn sữ dụng. Bạn có muốn gia hạn %@?",price] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * buy = [UIAlertAction actionWithTitle:@"Gia Hạn"
+                                                   style:UIAlertActionStyleDefault
+                                                 handler:^(UIAlertAction *action) {
+                                                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                                     User * user = [User currentUser];
+                                                     [user setAuthDelegate:self];
+                                                     [user renewPurchase: userPack];
+                                                 }];
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Để Sau"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                     }];
+    
+    [alertController addAction:buy];
+    [alertController addAction:dismiss];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+#pragma mark - Auth delegate
+- (void)userRenewPurchaseSucessful:(User *)user {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"purchase successful");
+    [self retrievePackages];
+}
 
+- (void)userRenewPurchaseFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if ([[NSString stringWithFormat:@"%@",[error valueForKey:@"message"]] isEqualToString:@"Insufficient credit to purchase"]) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Số dư tài khoản không đủ mua bộ ngôn ngữ này. Cập nhập phiên bản mới nhất để mua bộ ngôn ngữ này." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    NSLog(@"purchase failed %@", error);
+}
+- (void)userPurchasePackageSucessful:(User *)user {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"purchase successful");
+    [self retrievePackages];
+}
+
+- (void)userPurchasePackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if ([[NSString stringWithFormat:@"%@",[error valueForKey:@"message"]] isEqualToString:@"Insufficient credit to purchase"]) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Số dư tài khoản không đủ mua bộ ngôn ngữ này. Cập nhập phiên bản mới nhất để mua bộ ngôn ngữ này." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    NSLog(@"purchase failed %@", error);
+}
+
+#pragma mark - PackageCellDelegate
+-(void)packageCellPurchaseBtnClicked:(PackageCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSMutableArray *langArr = packageLangList[indexPath.section];
+    UserPackage * userPack = [langArr objectAtIndex:indexPath.row];
+    
+    if ([cell.purchaseBtn.titleLabel.text isEqualToString:@"Mua Ngay"]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        User * user = [User currentUser];
+        [user setAuthDelegate:self];
+        [user purchasePackage: userPack.package];
+    }
+    if ([cell.purchaseBtn.titleLabel.text isEqualToString:@"Gia Hạn"]) {
+        [self showRenewAlertForUserPackage:userPack];
+    }
+    
+}
 
 @end

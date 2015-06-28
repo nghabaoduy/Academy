@@ -24,6 +24,7 @@
             <string>GothamRounded-Bold</string>
             <string>GothamRounded-Bold</string>
             <string>GothamRounded-Bold</string>
+            <string>GothamRounded-Bold</string>
         </mutableArray>
         <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
             <string>GothamRounded-Book</string>
@@ -574,6 +575,35 @@
                                                 <constraint firstAttribute="width" constant="80" id="wv9-Zh-b6y"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58a-z1-PdX">
+                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="jx7-tq-Pos"/>
+                                                <constraint firstAttribute="width" constant="87" id="mEd-xu-uJU"/>
+                                                <constraint firstAttribute="width" constant="96" id="zqm-al-lED"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="16"/>
+                                            <state key="normal" title="Mua Ngay" backgroundImage="medium-blue-btn.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="jx7-tq-Pos"/>
+                                                    <exclude reference="mEd-xu-uJU"/>
+                                                    <exclude reference="zqm-al-lED"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="jx7-tq-Pos"/>
+                                                    <exclude reference="mEd-xu-uJU"/>
+                                                    <include reference="zqm-al-lED"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <action selector="buy:" destination="IsN-Hw-Acp" eventType="touchUpInside" id="EHH-sL-zBt"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="bEZ-bI-axu" firstAttribute="top" secondItem="KDL-ZH-y8t" secondAttribute="bottom" constant="2" id="1Cp-Em-BvA">
@@ -586,12 +616,14 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="bEZ-bI-axu" secondAttribute="trailing" constant="15" id="Va1-eE-avE"/>
                                         <constraint firstItem="KDL-ZH-y8t" firstAttribute="top" secondItem="aWL-0E-bIf" secondAttribute="topMargin" constant="51" id="ZK4-iJ-ZEC"/>
                                         <constraint firstAttribute="bottom" secondItem="1uv-dU-1yh" secondAttribute="bottom" id="aaj-za-2hW"/>
+                                        <constraint firstItem="58a-z1-PdX" firstAttribute="bottom" secondItem="aWL-0E-bIf" secondAttribute="bottomMargin" id="fbq-fw-T8I"/>
                                         <constraint firstItem="Jzp-4T-cAs" firstAttribute="leading" secondItem="aWL-0E-bIf" secondAttribute="leadingMargin" constant="17" id="g7T-qk-LC1"/>
                                         <constraint firstItem="KDL-ZH-y8t" firstAttribute="top" secondItem="aWL-0E-bIf" secondAttribute="topMargin" constant="51" id="gqf-7v-Axj"/>
                                         <constraint firstItem="Jzp-4T-cAs" firstAttribute="top" secondItem="aWL-0E-bIf" secondAttribute="topMargin" constant="20" id="hVT-be-Kfw">
                                             <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                                         </constraint>
                                         <constraint firstItem="bEZ-bI-axu" firstAttribute="bottom" secondItem="aWL-0E-bIf" secondAttribute="bottomMargin" id="iCI-eZ-Jby"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="58a-z1-PdX" secondAttribute="trailing" constant="15" id="p0T-Wl-gS6"/>
                                         <constraint firstItem="bEZ-bI-axu" firstAttribute="leading" secondItem="aWL-0E-bIf" secondAttribute="leadingMargin" constant="10" id="r8Q-iB-EFg"/>
                                         <constraint firstItem="1uv-dU-1yh" firstAttribute="top" secondItem="aWL-0E-bIf" secondAttribute="top" constant="5" id="wBv-EB-qHf">
                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -603,6 +635,7 @@
                                             <exclude reference="Jzp-4T-cAs"/>
                                             <exclude reference="KDL-ZH-y8t"/>
                                             <exclude reference="bEZ-bI-axu"/>
+                                            <exclude reference="58a-z1-PdX"/>
                                         </mask>
                                         <mask key="constraints">
                                             <exclude reference="SkL-Yg-OkV"/>
@@ -615,6 +648,8 @@
                                             <exclude reference="OzQ-Xn-4Ch"/>
                                             <exclude reference="ZK4-iJ-ZEC"/>
                                             <exclude reference="gqf-7v-Axj"/>
+                                            <exclude reference="fbq-fw-T8I"/>
+                                            <exclude reference="p0T-Wl-gS6"/>
                                             <exclude reference="1Cp-Em-BvA"/>
                                             <exclude reference="Va1-eE-avE"/>
                                             <exclude reference="iCI-eZ-Jby"/>
@@ -627,6 +662,7 @@
                                             <include reference="Jzp-4T-cAs"/>
                                             <include reference="KDL-ZH-y8t"/>
                                             <include reference="bEZ-bI-axu"/>
+                                            <include reference="58a-z1-PdX"/>
                                         </mask>
                                         <mask key="constraints">
                                             <include reference="SkL-Yg-OkV"/>
@@ -639,6 +675,8 @@
                                             <include reference="OzQ-Xn-4Ch"/>
                                             <exclude reference="ZK4-iJ-ZEC"/>
                                             <include reference="gqf-7v-Axj"/>
+                                            <include reference="fbq-fw-T8I"/>
+                                            <include reference="p0T-Wl-gS6"/>
                                             <exclude reference="1Cp-Em-BvA"/>
                                             <include reference="Va1-eE-avE"/>
                                             <include reference="iCI-eZ-Jby"/>
@@ -651,6 +689,7 @@
                                     <outlet property="packSubTitle" destination="KDL-ZH-y8t" id="bBv-9g-eGX"/>
                                     <outlet property="packTitle" destination="Jzp-4T-cAs" id="xoF-ym-1M8"/>
                                     <outlet property="packageImg" destination="1uv-dU-1yh" id="Gnw-vk-c9K"/>
+                                    <outlet property="purchaseBtn" destination="58a-z1-PdX" id="1jx-Dc-Ixt"/>
                                     <outlet property="rankImg" destination="bEZ-bI-axu" id="YB9-iG-mgk"/>
                                     <segue destination="DRU-Ks-MQZ" kind="show" identifier="goSetList" id="FVg-40-eHw"/>
                                 </connections>

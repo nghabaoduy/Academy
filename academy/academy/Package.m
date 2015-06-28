@@ -13,7 +13,7 @@
 
 @implementation Package
 
-@synthesize awsId, name, desc, category, price, oldPrice, wordsTotal, setList, imgURL,language, roleCanView;
+@synthesize awsId, name, desc, category, price, oldPrice, wordsTotal, setList, imgURL,language, roleCanView, orderCode;
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     //NSLog(@"Package dict = %@",dict);
@@ -24,6 +24,7 @@
     category = [self getStringFromDict:dict WithKey:@"category"];
     oldPrice = [self getStringFromDict:dict WithKey:@"old_price"];
     price = [self getStringFromDict:dict WithKey:@"price"];
+    orderCode = [self getStringFromDict:dict WithKey:@"order_code"];
     wordsTotal = [[self getStringFromDict:dict WithKey:@"no_of_words"] intValue];
     language = [self getStringFromDict:dict WithKey:@"language"];
     imgURL = dict[@"imgURL"] ?:(dict[@"asset"] != [NSNull null] ? dict[@"asset"][@"index"] : nil);

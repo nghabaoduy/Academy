@@ -13,7 +13,7 @@
 #import "WordInfoVC.h"
 #import "Word.h"
 #import "LSet.h"
-#import "Package.h"
+#import "UserPackage.h"
 #import "TestMaker.h"
 #import "AlertTestModePickView.h"
 
@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic) Package *curPack;
 @property (strong, nonatomic) LSet *curSet;
-
+@property (strong, nonatomic) UserPackage * curUserPack;
 @property (strong, nonatomic) IBOutlet CardMultipleChoiceView *cardMultipleChoice;
 @property (strong, nonatomic) IBOutlet CardTypeAnswerView *cardTypeAnswer;
 @property (strong, nonatomic) IBOutlet UILabel *wordNoLb;

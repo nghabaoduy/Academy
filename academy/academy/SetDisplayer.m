@@ -16,11 +16,11 @@
     IBOutlet UILabel *titleLb;
     LSet* curSet;
     Package * curPack;
-    BOOL isEnabled;
+    
     
 }
 @synthesize delegate;
-@synthesize isFinalTest;
+@synthesize isFinalTest, isEnabled;
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -56,11 +56,13 @@
     
     if ([set.grade intValue] == 0) {
         [rankImg setHidden:YES];
+        [self disableDisplayer];
     }
     else
     {
         [rankImg setHidden:NO];
         [rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[set.grade intValue]]]];
+        [self enableDisplayer];
     }
 }
 -(void) setFinalTest:(Package *) pack
@@ -70,23 +72,15 @@
     [titleLb setText:@"Tổng Kiểm Tra"];
     [rankImg setHidden:YES];
     [img setImage:[UIImage imageNamed:@"sticker_finaltest.png"]];
-    /*if ([pack.grade intValue] == 0) {
-        [rankImg setHidden:YES];
-    }
-    else
-    {
-        [rankImg setHidden:NO];
-        [rankImg setImage:[UIImage imageNamed:[NSString stringWithFormat:@"rankStar_%i.png",[pack.grade intValue]]]];
-    }*/
 }
 -(LSet *) getLSet
 {
     return curSet;
 }
 - (IBAction)touchInside:(id)sender {
-    if (isEnabled) {
+    //if (isEnabled) {
         [delegate setDisplayerClicked:self];
-    }
+    //}
 }
 
 -(void) disableDisplayer

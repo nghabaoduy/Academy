@@ -59,6 +59,10 @@
     packageLangList = [NSMutableArray new];
     languageList = [NSMutableArray new];
     
+    [packageList sortUsingComparator:^NSComparisonResult(Package * pack1, Package * pack2) {
+        return [pack1.orderCode compare:pack2.orderCode];
+    }];
+    
     for (Package * package in packageList) {
         BOOL isAvai = NO;
         for(NSString * langStr in languageList) {
@@ -170,6 +174,7 @@
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     packageList = allList;
+    
     [self organizePackageList];
 }
 

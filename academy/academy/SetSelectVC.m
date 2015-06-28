@@ -27,17 +27,23 @@
     int setLoadCount;
     NSMutableArray * fullWordList;
     
-    int curMaxUnlocked;
+    int maxUnlock;
+    int curUnlock;
+    
+    Package * curPack;
 }
 
-@synthesize curPack;
+@synthesize curUserPack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    curMaxUnlocked = 0;
+    curPack = curUserPack.package;
+    
+    maxUnlock = 2;
     self.tableView.allowsSelection = NO;
     setOrderArray = [NSMutableArray new];
+    
     for (LSet *set in curPack.setList) {
         int row = set.orderNo/2;
         while (setOrderArray.count <= row) {
@@ -68,20 +74,22 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    for (LSet *set in curPack.setList) {
-        
-        if ([set.grade intValue] > 0) if(set.orderNo>=curMaxUnlocked){
-            curMaxUnlocked = set.orderNo+1;
-        }
+    [self refreshTable];
+    if ([curUserPack.purchaseType isEqualToString:@"buy"]) {
+        [self loadSetScore];
     }
     
-    [self.tableView reloadData];
-    [self loadSetScore];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
+}
+
+-(void) refreshTable
+{
+    curUnlock = 0;
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -106,9 +114,7 @@
         cell.setDisplayer.delegate = self;
         [cell.setDisplayer setFinalTest:curPack];
         
-        NSMutableArray * orderList = [setOrderArray lastObject];
-        LSet *set = [orderList lastObject];
-        set.orderNo < curMaxUnlocked? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
+        [self isAllSetIsRanked]? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
         return cell;
     }
     //other
@@ -118,8 +124,7 @@
         cell.setDisplayer.delegate = self;
         LSet *set = orderList[0];
         [cell.setDisplayer setLSet:set];
-        set.orderNo <= curMaxUnlocked? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
-        
+        [self checkUnlockSetDisplayer:cell.setDisplayer];
         return cell;
     }
     else
@@ -128,15 +133,30 @@
         cell.setDisplayer1.delegate = self;
         LSet *set = orderList[0];
         [cell.setDisplayer1 setLSet:set];
-        set.orderNo <= curMaxUnlocked? [cell.setDisplayer1 enableDisplayer]: [cell.setDisplayer1 disableDisplayer];
+        [self checkUnlockSetDisplayer:cell.setDisplayer1];
         
         cell.setDisplayer2.delegate = self;
         LSet *set2 = orderList[1];
         [cell.setDisplayer2 setLSet:set2];
-        set2.orderNo <= curMaxUnlocked? [cell.setDisplayer2 enableDisplayer]: [cell.setDisplayer2 disableDisplayer];
+        [self checkUnlockSetDisplayer:cell.setDisplayer2];
         return cell;
     }
-    
+}
+-(BOOL) isAllSetIsRanked
+{
+    for (LSet * set in curPack.setList) {
+        if (set.grade == 0) {
+            return NO;
+        }
+    }
+    return YES;
+}
+-(void) checkUnlockSetDisplayer:(SetDisplayer *) setDisplayer
+{
+    if (curUnlock < maxUnlock && !setDisplayer.isEnabled) {
+        [setDisplayer enableDisplayer];
+        curUnlock++;
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -147,6 +167,7 @@
             SetDetailVC * destination = segue.destinationViewController;
             [destination setTitle:set.name];
             destination.curSet = set;
+            destination.curUserPack = curUserPack;
         }
     }
 }
@@ -159,16 +180,21 @@
 #pragma mark - SetDisplayer
 -(void)setDisplayerClicked:(SetDisplayer *)_setDisplayer
 {
-    isDisplayerClicked = YES;
-    clickedSetDisplayer = _setDisplayer;
+    if (_setDisplayer.isEnabled) {
+        isDisplayerClicked = YES;
+        clickedSetDisplayer = _setDisplayer;
+        
+        if (!_setDisplayer.isFinalTest) {
+            [self performSegueWithIdentifier:@"goSetDetail" sender:self];
+        } else {
+            [self retrieveAllSets];
+        }
+    } else {
+        if ([curUserPack.purchaseType isEqualToString:@"try"]) {
+            
+        }
+    }
     
-    if (!_setDisplayer.isFinalTest) {
-        [self performSegueWithIdentifier:@"goSetDetail" sender:self];
-    }
-    else
-    {
-        [self retrieveAllSets];
-    }
 }
 
 -(void) retrieveAllSets
@@ -238,9 +264,6 @@
             if ([set.modelId isEqualToString:finalSetId]) {
                 set.score = finalScore;
                 set.grade = finalScore.score;
-                if ([set.grade intValue] > 0) if(set.orderNo>=curMaxUnlocked){
-                    curMaxUnlocked = set.orderNo+1;
-                }
             }
         }
     }
@@ -249,7 +272,7 @@
      if (scoreLoadCount >= curPack.setList.count) {
          NSLog(@"handleScoreList done");
          [MBProgressHUD hideHUDForView:self.view animated:YES];
-         [self.tableView reloadData];
+         [self refreshTable];
      }
 }
 
