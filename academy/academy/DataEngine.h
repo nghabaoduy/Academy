@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SharedData.h"
 typedef NS_ENUM(NSUInteger, LoginType) {
     LoginNormal = 0,
     LoginFacebook = 1,
@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 @property (nonatomic, assign) BOOL isOffline;
 @property (nonatomic, assign) BOOL isSoundOff;
 @property (nonatomic, assign) LoginType loginType;
+@property (nonatomic, retain) SharedData * sharedData;
 
 -(void) saveLoginInfo:(NSString*) username Password: (NSString*) password fbId:(NSString *)fbId ggpId:(NSString*)ggpId;
 -(NSString *) getAppURL;

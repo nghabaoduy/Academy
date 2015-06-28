@@ -69,6 +69,8 @@
     for (UIView * view in objectList) {
         view.hidden = NO;
     }
+    
+    
     [questionTV setText:message];
 }
 
@@ -78,11 +80,16 @@
                              choice3:(NSString *) choice3
                              choice4:(NSString *) choice4
 {
+    // remove mute bracket
+    question = [question stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    question = [question stringByReplacingOccurrencesOfString:@"}" withString:@""];
+    
     [self clearDisplay];
     NSArray *objectList = @[questionLb, questionTV, choice1Btn, choice2Btn, choice3Btn, choice4Btn];
     for (UIView * view in objectList) {
         view.hidden = NO;
     }
+    
     [questionTV setText:question];
     [choice1Btn setTitle:choice1 forState:UIControlStateNormal];
     [choice2Btn setTitle:choice2 forState:UIControlStateNormal];

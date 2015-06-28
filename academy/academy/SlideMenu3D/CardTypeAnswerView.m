@@ -56,7 +56,12 @@
 
 -(void)displayQuestion:(NSString *) question
 {
+    // remove mute bracket
+    question = [question stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    question = [question stringByReplacingOccurrencesOfString:@"}" withString:@""];
+    
     [self clearDisplay];
+        
     [questionTV setText:question];
     
 }

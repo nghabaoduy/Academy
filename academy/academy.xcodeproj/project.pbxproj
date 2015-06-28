@@ -11,6 +11,7 @@
 		9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */; };
 		9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */; };
 		9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */; };
+		9ADB5A081B3F231300AEB089 /* SharedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB5A071B3F231300AEB089 /* SharedData.m */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
@@ -221,6 +222,8 @@
 		9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YALSunnyRefreshControl.m; path = YALSunnyRefreshControll/YALSunnyRefreshControl.m; sourceTree = "<group>"; };
 		9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YALSunnyRefreshControl.xib; path = YALSunnyRefreshControll/YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
 		9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uploadingAvatar.png; path = Graphics/uploadingAvatar.png; sourceTree = "<group>"; };
+		9ADB5A061B3F231300AEB089 /* SharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedData.h; sourceTree = "<group>"; };
+		9ADB5A071B3F231300AEB089 /* SharedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedData.m; sourceTree = "<group>"; };
 		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
@@ -885,6 +888,8 @@
 				AFC243031B1F6B2500972BA4 /* SetScore.m */,
 				AF0923671B2AF16B00C20540 /* WordLearned.h */,
 				AF0923681B2AF16B00C20540 /* WordLearned.m */,
+				9ADB5A061B3F231300AEB089 /* SharedData.h */,
+				9ADB5A071B3F231300AEB089 /* SharedData.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1200,6 +1205,7 @@
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */,
 				AF3AC8801B1DE9AF00B23FCF /* TestRankAnimView.m in Sources */,
+				9ADB5A081B3F231300AEB089 /* SharedData.m in Sources */,
 				AF719E431B21F23700D52EA3 /* RegisterVC.m in Sources */,
 				AF0923691B2AF16B00C20540 /* WordLearned.m in Sources */,
 				AF719E461B22137F00D52EA3 /* PasswordResetVC.m in Sources */,

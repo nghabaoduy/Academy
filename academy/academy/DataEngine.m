@@ -20,9 +20,11 @@ static DataEngine * instance = nil;
     if (instance == nil) {
         instance = [DataEngine new];
         [instance loadSaveData];
+        instance.sharedData = [[SharedData alloc] init];
     }
     return instance;
 }
+
 -(void) loadSaveData
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -44,6 +46,9 @@ static DataEngine * instance = nil;
     [self setIsSoundOff:[[defaults valueForKey:@"isSoundOff"] boolValue]];
     
 }
+
+
+
 - (NSString *)requestURL {
     //return @"http://192.168.1.6:8000/";
     return @"http://academy.openlabproduction.com/";

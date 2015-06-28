@@ -18,10 +18,9 @@
 #import "SideMenuVC.h"
 #import "SoundEngine.h"
 #import "RegisterVC.h"
+#import "SharedData.h"
 
-
-
-@interface LoginVC ()<AuthDelegate> {
+@interface LoginVC ()<AuthDelegate, SharedDataDelegate> {
     
 }
 @end
@@ -61,21 +60,18 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     signIn.scopes = @[ kGTLAuthScopePlusLogin];  // "https://www.googleapis.com/auth/plus.login" scope
     signIn.scopes = @[ @"profile" ];            // "profile" scope
     signIn.delegate = self;
+    
     //[signIn trySilentAuthentication];
     //[self clearSave];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isAutoLogin = [defaults boolForKey:@"isAutoLogin"];
-    NSLog(@"isAutoLogin = %@",isAutoLogin?@"YES":@"NO");
-    if (isAutoLogin) {
-        [self performSelector:@selector(autoLogin) withObject:self afterDelay:0.5];
-    }
-    else
-    {
-        NSString *saveUsername = [[NSUserDefaults standardUserDefaults]valueForKey:@"saveUsername"];
-        if (![saveUsername isEqualToString:@""]) {
-            [textfUsername setText:saveUsername];
-        }
-    }
+    [self performSelector:@selector(getSharedData) withObject:self afterDelay:0.5];
+    
+    
+}
+-(void) getSharedData
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DataEngine getInstance] sharedData].sharedDataDelegate = self;
+    [[[DataEngine getInstance] sharedData] updateSharedData];
 }
 
 -(void) clearSave
@@ -91,6 +87,23 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     [[GPPSignIn sharedInstance] signOut];
 }
 
+-(void) checkAutoLogin
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isAutoLogin = [defaults boolForKey:@"isAutoLogin"];
+    NSLog(@"isAutoLogin = %@",isAutoLogin?@"YES":@"NO");
+    if (isAutoLogin) {
+        //[self performSelector:@selector(autoLogin) withObject:self afterDelay:0.5];
+        [self autoLogin];
+    }
+    else
+    {
+        NSString *saveUsername = [[NSUserDefaults standardUserDefaults]valueForKey:@"saveUsername"];
+        if (![saveUsername isEqualToString:@""]) {
+            [textfUsername setText:saveUsername];
+        }
+    }
+}
 -(void) autoLogin
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -578,6 +591,46 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+#pragma mark - SharedDataDelegate
+-(void)SharedDataGetSuccessful:(SharedData *)sharedData
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSString* curAppVersion = [NSString stringWithFormat:@"%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    NSString* latestAppVersion = [sharedData appVersion] ;
+    NSLog(@"Compared curVersion %@ to %@",curAppVersion,latestAppVersion);
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Cập nhật ngay phiên bản mới nhất để trải nghiệm vnAcademy một cách toàn diện nhất!" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Để Sau"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction *action) {
+                                                         [self checkAutoLogin];
+                                                         
+                                                     }];
+    UIAlertAction * forgotPass = [UIAlertAction actionWithTitle:@"Cập Nhập Ngay"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                        }];
+    [alertController addAction:dismiss];
+    [alertController addAction:forgotPass];
+    
+    if ([curAppVersion floatValue] < [latestAppVersion floatValue]) {
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else
+    {
+        [self checkAutoLogin];
+    }
+    
+    
+}
+-(void)SharedDataGetFailed:(id)Error StatusCode:(NSNumber *)statusCode
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self checkAutoLogin];
 }
 
 @end
