@@ -29,6 +29,7 @@
     
     int maxUnlock;
     int curUnlock;
+    NSMutableArray *curUnlockList;
     
     Package * curPack;
 }
@@ -89,6 +90,7 @@
 -(void) refreshTable
 {
     curUnlock = 0;
+    curUnlockList = [NSMutableArray new];
     [self.tableView reloadData];
 }
 
@@ -115,6 +117,10 @@
         [cell.setDisplayer setFinalTest:curPack];
         
         [self isAllSetIsRanked]? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
+        if([[[User currentUser] role] isEqualToString:@"admin"] || [[[User currentUser] role] isEqualToString:@"tester"])
+        {
+            [cell.setDisplayer enableDisplayer];
+        }
         return cell;
     }
     //other
@@ -153,9 +159,18 @@
 }
 -(void) checkUnlockSetDisplayer:(SetDisplayer *) setDisplayer
 {
-    if (curUnlock < maxUnlock && !setDisplayer.isEnabled) {
+    if([[[User currentUser] role] isEqualToString:@"admin"] || [[[User currentUser] role] isEqualToString:@"tester"])
+    {
+        [setDisplayer enableDisplayer];
+        return;
+    }
+    if ((curUnlock < maxUnlock && !setDisplayer.isEnabled) || (curUnlockList.count <=maxUnlock && [curUnlockList containsObject:setDisplayer])) {
         [setDisplayer enableDisplayer];
         curUnlock++;
+        if (![curUnlockList containsObject:setDisplayer]) {
+            [curUnlockList addObject:setDisplayer];
+        }
+        
     }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
