@@ -2,7 +2,7 @@
 platform :ios, '8.0'
 
 target 'academy' do
-pod "AFNetworking", "~> 2.0"
+pod 'AFNetworking', '~> 2.0'
 pod 'MSDynamicsDrawerViewController', '~> 1.5.1'
 pod 'CustomIOSAlertView', '~> 0.9.3'
 pod 'MBProgressHUD', '~> 0.5'
@@ -12,6 +12,8 @@ pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'google-plus-ios-sdk'
 pod 'PNChart', '~> 0.5'
+pod 'SIAlertView', '~> 1.3'
+pod 'AMSmoothAlert', '~> 1.0'
 end
 
 target 'academyTests' do

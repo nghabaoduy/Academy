@@ -20,6 +20,9 @@
 #import "RegisterVC.h"
 #import "SharedData.h"
 
+#import "SIAlertView.h"
+#import "AMSmoothAlertView.h"
+
 @interface LoginVC ()<AuthDelegate, SharedDataDelegate> {
     
 }
@@ -354,14 +357,14 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 }
 -(void) showPermissionError
 {
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Xác nhận thất bại." preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
-                                                       style:UIAlertActionStyleCancel
-                                                     handler:^(UIAlertAction *action) {
-                                                     }];
+    SIAlertView * siAlertView = [[SIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Xác nhận thất bại."];
+    [siAlertView addButtonWithTitle:@"OK"
+                               type:SIAlertViewButtonTypeDestructive
+                            handler:^(SIAlertView *alert) {
+                                
+                            }];
+    [siAlertView show];
     
-    [alertController addAction:dismiss];
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -376,15 +379,14 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     
     
     if (![self validation:textfUsername.text pass:textfPassword.text]) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Email và mật khẩu không được để trống." preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction *action) {
-                                                         }];
-        
-        [alertController addAction:dismiss];
-        [self presentViewController:alertController animated:YES completion:nil];
+        AMSmoothAlertView *alert = [[AMSmoothAlertView alloc] initDropAlertWithTitle:@"Thông Báo"
+                                                                             andText:@"Email và mật khẩu không được để trống."
+                                                                     andCancelButton:NO
+                                                                        forAlertType:AlertFailure withCompletionHandler:^(AMSmoothAlertView * alert, UIButton * button) {
+                                                                            //[alert dismissAlertView];
+        }];
+        [alert show];
         return;
     }
     registerDict = @{
@@ -432,15 +434,14 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
 - (void)loginOffline
 {
     [User loadCurrentUserToNSUserDefaults];
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Bạn đang đăng nhập Offline. Xin đăng nhập lại khi kết nối được Internet để sử dụng toàn bộ ứng dụng." preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
-                                                       style:UIAlertActionStyleCancel
-                                                     handler:^(UIAlertAction *action) {
-                                                         [[DataEngine getInstance] setIsOffline:YES];
-                                                         [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
-                                                     }];
-    [alertController addAction:dismiss];
-    [self presentViewController:alertController animated:YES completion:nil];
+    SIAlertView * siAlertView = [[SIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Bạn đang đăng nhập Offline. Xin đăng nhập lại khi kết nối được Internet để sử dụng toàn bộ ứng dụng."];
+    [siAlertView addButtonWithTitle:@"OK"
+                               type:SIAlertViewButtonTypeDestructive
+                            handler:^(SIAlertView *alert) {
+                                [[DataEngine getInstance] setIsOffline:YES];
+                                [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
+                            }];
+    [siAlertView show];
 }
 //=== REGISTER ===//
 -(void)registerNewUserWithEmail:(NSString *) email ProfileName:(NSString *) profileName fbId:(NSString *)fbId ggpId:(NSString *) ggpId
@@ -489,34 +490,35 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
         }
         else
         {
-            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Báo Lỗi" message:@"Kết nối Internet thất bại" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Thử lại"
-                                                               style:UIAlertActionStyleCancel
-                                                             handler:^(UIAlertAction *action) {
-                                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                             }];
-            [alertController addAction:dismiss];
-            [self presentViewController:alertController animated:YES completion:nil];
+            SIAlertView * siAlertView = [[SIAlertView alloc] initWithTitle:@"Báo Lỗi" message:@"Kết nối Internet thất bại"];
+
+            [siAlertView addButtonWithTitle:@"OK"
+                                       type:SIAlertViewButtonTypeDestructive
+                                    handler:^(SIAlertView *alert) {
+                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                    }];
+            [siAlertView show];
         }
         return;
     }
+
+    SIAlertView * siAlertView = [[SIAlertView alloc] initWithTitle:@"Báo Lỗi" message:@"Đăng nhập thất bại"];
     
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Báo Lỗi" message:@"Đăng nhập thất bại" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Thử lại"
-                                                       style:UIAlertActionStyleCancel
-                                                     handler:^(UIAlertAction *action) {
-                                                         [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                     }];
-    UIAlertAction * forgotPass = [UIAlertAction actionWithTitle:@"Quên mật khẩu"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction *action) {
-                                                         [self performSegueWithIdentifier:@"goForgotPassword" sender:self];
-                                                     }];
-    [alertController addAction:dismiss];
-    [alertController addAction:forgotPass];
+    [siAlertView addButtonWithTitle:@"Quên mật khẩu"
+                             type:SIAlertViewButtonTypeDefault
+                          handler:^(SIAlertView *alert) {
+                              [self performSegueWithIdentifier:@"goForgotPassword" sender:self];
+                          }];
+    [siAlertView addButtonWithTitle:@"Thử lại"
+                             type:SIAlertViewButtonTypeDestructive
+                          handler:^(SIAlertView *alert) {
+                              [MBProgressHUD hideHUDForView:self.view animated:YES];
+                          }];
     
-    [self presentViewController:alertController animated:YES completion:nil];
+    siAlertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    [siAlertView show];
 }
 
 - (void)userLoginSuccessfull:(User *)user {
@@ -600,25 +602,25 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     NSString* curAppVersion = [NSString stringWithFormat:@"%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     NSString* latestAppVersion = [sharedData appVersion] ;
     NSLog(@"Compared curVersion %@ to %@",curAppVersion,latestAppVersion);
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Cập nhật ngay phiên bản mới nhất để trải nghiệm vnAcademy một cách toàn diện nhất!" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"Để Sau"
-                                                       style:UIAlertActionStyleCancel
-                                                     handler:^(UIAlertAction *action) {
-                                                         [self checkAutoLogin];
-                                                         
-                                                     }];
-    UIAlertAction * forgotPass = [UIAlertAction actionWithTitle:@"Cập Nhập Ngay"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction *action) {
-                                                            NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
-                                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-                                                        }];
-    [alertController addAction:dismiss];
-    [alertController addAction:forgotPass];
+    
+    SIAlertView * siAlertView = [[SIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Cập nhật ngay phiên bản mới nhất để trải nghiệm vnAcademy một cách toàn diện nhất!"];
+    
+    [siAlertView addButtonWithTitle:@"Để Sau"
+                               type:SIAlertViewButtonTypeCancel
+                            handler:^(SIAlertView *alert) {
+                                [self checkAutoLogin];
+                                
+                            }];
+    [siAlertView addButtonWithTitle:@"Cập Nhập Ngay"
+                               type:SIAlertViewButtonTypeDefault
+                            handler:^(SIAlertView *alert) {
+                                NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                            }];
     
     if ([curAppVersion floatValue] < [latestAppVersion floatValue]) {
-        [self presentViewController:alertController animated:YES completion:nil];
+        [siAlertView show];
     }
     else
     {
