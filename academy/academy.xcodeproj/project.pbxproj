@@ -8,6 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19415BF26ACA690DC120472F /* libPods-academy.a */; };
+		9A1556541B42CB0600B996B9 /* UIViewController+YSLTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1556511B42CB0600B996B9 /* UIViewController+YSLTransition.m */; };
+		9A1556551B42CB0600B996B9 /* YSLTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1556531B42CB0600B996B9 /* YSLTransitionAnimator.m */; };
+		9A1556571B42CB1700B996B9 /* ysl_navi_back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556561B42CB1700B996B9 /* ysl_navi_back_btn@2x.png */; };
+		9A15565A1B42DA4C00B996B9 /* PackageStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556591B42DA4C00B996B9 /* PackageStoryboard.storyboard */; };
+		9A15565D1B42DB3600B996B9 /* ShelfCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A15565C1B42DB3600B996B9 /* ShelfCollectionVC.m */; };
+		9A1556601B42DC1500B996B9 /* ShelfCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A15565F1B42DC1500B996B9 /* ShelfCollectionCell.m */; };
+		9A1556701B42DDA900B996B9 /* image000.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556621B42DDA900B996B9 /* image000.jpg */; };
+		9A1556711B42DDA900B996B9 /* image001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556631B42DDA900B996B9 /* image001.jpg */; };
+		9A1556721B42DDA900B996B9 /* image002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556641B42DDA900B996B9 /* image002.jpg */; };
+		9A1556731B42DDA900B996B9 /* image003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556651B42DDA900B996B9 /* image003.jpg */; };
+		9A1556741B42DDA900B996B9 /* image004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556661B42DDA900B996B9 /* image004.jpg */; };
+		9A1556751B42DDA900B996B9 /* image005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556671B42DDA900B996B9 /* image005.jpg */; };
+		9A1556761B42DDA900B996B9 /* image006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556681B42DDA900B996B9 /* image006.jpg */; };
+		9A1556771B42DDA900B996B9 /* image007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A1556691B42DDA900B996B9 /* image007.jpg */; };
+		9A1556781B42DDA900B996B9 /* image008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A15566A1B42DDA900B996B9 /* image008.jpg */; };
+		9A1556791B42DDA900B996B9 /* image009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A15566B1B42DDA900B996B9 /* image009.jpg */; };
+		9A15567A1B42DDA900B996B9 /* image010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A15566C1B42DDA900B996B9 /* image010.jpg */; };
+		9A15567B1B42DDA900B996B9 /* image011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A15566D1B42DDA900B996B9 /* image011.jpg */; };
+		9A15567C1B42DDA900B996B9 /* image012.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A15566E1B42DDA900B996B9 /* image012.jpg */; };
+		9A15567D1B42DDA900B996B9 /* image013.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A15566F1B42DDA900B996B9 /* image013.jpg */; };
+		9A1556801B42E2D900B996B9 /* PackageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A15567F1B42E2D900B996B9 /* PackageDetailVC.m */; };
 		9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */; };
 		9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */; };
 		9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */; };
@@ -218,6 +239,32 @@
 
 /* Begin PBXFileReference section */
 		19415BF26ACA690DC120472F /* libPods-academy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-academy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A1556501B42CB0600B996B9 /* UIViewController+YSLTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+YSLTransition.h"; path = "YSLTransitionAnimator/UIViewController+YSLTransition.h"; sourceTree = "<group>"; };
+		9A1556511B42CB0600B996B9 /* UIViewController+YSLTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+YSLTransition.m"; path = "YSLTransitionAnimator/UIViewController+YSLTransition.m"; sourceTree = "<group>"; };
+		9A1556521B42CB0600B996B9 /* YSLTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSLTransitionAnimator.h; path = YSLTransitionAnimator/YSLTransitionAnimator.h; sourceTree = "<group>"; };
+		9A1556531B42CB0600B996B9 /* YSLTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSLTransitionAnimator.m; path = YSLTransitionAnimator/YSLTransitionAnimator.m; sourceTree = "<group>"; };
+		9A1556561B42CB1700B996B9 /* ysl_navi_back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ysl_navi_back_btn@2x.png"; path = "YSLTransitionAnimator/Resources/ysl_navi_back_btn@2x.png"; sourceTree = "<group>"; };
+		9A1556591B42DA4C00B996B9 /* PackageStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PackageStoryboard.storyboard; sourceTree = "<group>"; };
+		9A15565B1B42DB3600B996B9 /* ShelfCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfCollectionVC.h; sourceTree = "<group>"; };
+		9A15565C1B42DB3600B996B9 /* ShelfCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfCollectionVC.m; sourceTree = "<group>"; };
+		9A15565E1B42DC1500B996B9 /* ShelfCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfCollectionCell.h; sourceTree = "<group>"; };
+		9A15565F1B42DC1500B996B9 /* ShelfCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfCollectionCell.m; sourceTree = "<group>"; };
+		9A1556621B42DDA900B996B9 /* image000.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image000.jpg; path = "Parralax Sample Images/image000.jpg"; sourceTree = "<group>"; };
+		9A1556631B42DDA900B996B9 /* image001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image001.jpg; path = "Parralax Sample Images/image001.jpg"; sourceTree = "<group>"; };
+		9A1556641B42DDA900B996B9 /* image002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image002.jpg; path = "Parralax Sample Images/image002.jpg"; sourceTree = "<group>"; };
+		9A1556651B42DDA900B996B9 /* image003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image003.jpg; path = "Parralax Sample Images/image003.jpg"; sourceTree = "<group>"; };
+		9A1556661B42DDA900B996B9 /* image004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image004.jpg; path = "Parralax Sample Images/image004.jpg"; sourceTree = "<group>"; };
+		9A1556671B42DDA900B996B9 /* image005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image005.jpg; path = "Parralax Sample Images/image005.jpg"; sourceTree = "<group>"; };
+		9A1556681B42DDA900B996B9 /* image006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image006.jpg; path = "Parralax Sample Images/image006.jpg"; sourceTree = "<group>"; };
+		9A1556691B42DDA900B996B9 /* image007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image007.jpg; path = "Parralax Sample Images/image007.jpg"; sourceTree = "<group>"; };
+		9A15566A1B42DDA900B996B9 /* image008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image008.jpg; path = "Parralax Sample Images/image008.jpg"; sourceTree = "<group>"; };
+		9A15566B1B42DDA900B996B9 /* image009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image009.jpg; path = "Parralax Sample Images/image009.jpg"; sourceTree = "<group>"; };
+		9A15566C1B42DDA900B996B9 /* image010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image010.jpg; path = "Parralax Sample Images/image010.jpg"; sourceTree = "<group>"; };
+		9A15566D1B42DDA900B996B9 /* image011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image011.jpg; path = "Parralax Sample Images/image011.jpg"; sourceTree = "<group>"; };
+		9A15566E1B42DDA900B996B9 /* image012.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image012.jpg; path = "Parralax Sample Images/image012.jpg"; sourceTree = "<group>"; };
+		9A15566F1B42DDA900B996B9 /* image013.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image013.jpg; path = "Parralax Sample Images/image013.jpg"; sourceTree = "<group>"; };
+		9A15567E1B42E2D900B996B9 /* PackageDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageDetailVC.h; sourceTree = "<group>"; };
+		9A15567F1B42E2D900B996B9 /* PackageDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageDetailVC.m; sourceTree = "<group>"; };
 		9A748F061B3DBD36000B74EC /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YALSunnyRefreshControl.h; path = YALSunnyRefreshControll/YALSunnyRefreshControl.h; sourceTree = "<group>"; };
 		9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YALSunnyRefreshControl.m; path = YALSunnyRefreshControll/YALSunnyRefreshControl.m; sourceTree = "<group>"; };
 		9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YALSunnyRefreshControl.xib; path = YALSunnyRefreshControll/YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
@@ -492,6 +539,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A15564D1B42CA4F00B996B9 /* Other Libs */ = {
+			isa = PBXGroup;
+			children = (
+				9A15564E1B42CA7E00B996B9 /* YSLTransitionAnimator */,
+				9A748F051B3DBD2C000B74EC /* YALSunnyRefreshControll */,
+			);
+			name = "Other Libs";
+			sourceTree = "<group>";
+		};
+		9A15564E1B42CA7E00B996B9 /* YSLTransitionAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				9A1556501B42CB0600B996B9 /* UIViewController+YSLTransition.h */,
+				9A1556511B42CB0600B996B9 /* UIViewController+YSLTransition.m */,
+				9A1556521B42CB0600B996B9 /* YSLTransitionAnimator.h */,
+				9A1556531B42CB0600B996B9 /* YSLTransitionAnimator.m */,
+				9A15564F1B42CAFB00B996B9 /* Resources */,
+			);
+			name = YSLTransitionAnimator;
+			sourceTree = "<group>";
+		};
+		9A15564F1B42CAFB00B996B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9A1556561B42CB1700B996B9 /* ysl_navi_back_btn@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9A1556581B42CB4900B996B9 /* ShelfVC */ = {
+			isa = PBXGroup;
+			children = (
+				9A1556611B42DD6C00B996B9 /* Resources */,
+				9A15565B1B42DB3600B996B9 /* ShelfCollectionVC.h */,
+				9A15565C1B42DB3600B996B9 /* ShelfCollectionVC.m */,
+				9A15565E1B42DC1500B996B9 /* ShelfCollectionCell.h */,
+				9A15565F1B42DC1500B996B9 /* ShelfCollectionCell.m */,
+				9A15567E1B42E2D900B996B9 /* PackageDetailVC.h */,
+				9A15567F1B42E2D900B996B9 /* PackageDetailVC.m */,
+			);
+			name = ShelfVC;
+			sourceTree = "<group>";
+		};
+		9A1556611B42DD6C00B996B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9A1556621B42DDA900B996B9 /* image000.jpg */,
+				9A1556631B42DDA900B996B9 /* image001.jpg */,
+				9A1556641B42DDA900B996B9 /* image002.jpg */,
+				9A1556651B42DDA900B996B9 /* image003.jpg */,
+				9A1556661B42DDA900B996B9 /* image004.jpg */,
+				9A1556671B42DDA900B996B9 /* image005.jpg */,
+				9A1556681B42DDA900B996B9 /* image006.jpg */,
+				9A1556691B42DDA900B996B9 /* image007.jpg */,
+				9A15566A1B42DDA900B996B9 /* image008.jpg */,
+				9A15566B1B42DDA900B996B9 /* image009.jpg */,
+				9A15566C1B42DDA900B996B9 /* image010.jpg */,
+				9A15566D1B42DDA900B996B9 /* image011.jpg */,
+				9A15566E1B42DDA900B996B9 /* image012.jpg */,
+				9A15566F1B42DDA900B996B9 /* image013.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		9A748F051B3DBD2C000B74EC /* YALSunnyRefreshControll */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +732,8 @@
 		AFD636291B038E1000ABDB3C /* academy */ = {
 			isa = PBXGroup;
 			children = (
+				9A1556581B42CB4900B996B9 /* ShelfVC */,
+				9A15564D1B42CA4F00B996B9 /* Other Libs */,
 				AFF2A6671B0BC90400DBFC2A /* SideMenu */,
 				C36DF4EC1B084C4300C225DA /* Singleton */,
 				C36AEB231B0710AF00A40692 /* Models */,
@@ -634,6 +747,7 @@
 				AFD6362E1B038E1000ABDB3C /* AppDelegate.h */,
 				AFD6362F1B038E1000ABDB3C /* AppDelegate.m */,
 				AFD636371B038E1000ABDB3C /* Main.storyboard */,
+				9A1556591B42DA4C00B996B9 /* PackageStoryboard.storyboard */,
 				AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */,
 				AF605F001B2F5A6700134BEE /* Images.xcassets */,
 				AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */,
@@ -673,7 +787,6 @@
 		AFE0107F1B05313C005B4B4D /* Misc Object */ = {
 			isa = PBXGroup;
 			children = (
-				9A748F051B3DBD2C000B74EC /* YALSunnyRefreshControll */,
 				AFE010801B053186005B4B4D /* PackageCell.h */,
 				AFE010811B053186005B4B4D /* PackageCell.m */,
 				AF243D301B183F0300FDF1D8 /* AlertTestModePickView.h */,
@@ -1018,6 +1131,8 @@
 				AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */,
 				AFC27BE31B0EEC5700225016 /* mail.png in Resources */,
 				AFE729871B0E03E7005F0850 /* MenuHeaderBG.png in Resources */,
+				9A1556721B42DDA900B996B9 /* image002.jpg in Resources */,
+				9A1556741B42DDA900B996B9 /* image004.jpg in Resources */,
 				AF71F5191B2D674B00BCCB03 /* packRankStar_0.png in Resources */,
 				AFC27BD21B0EEC5700225016 /* count.png in Resources */,
 				AF0ED9C61B1473D300340BA5 /* speaker-btn in Resources */,
@@ -1027,6 +1142,8 @@
 				AFC27BCB1B0EEC5700225016 /* camera.png in Resources */,
 				AFEED0E21B24AD1C0008F4DE /* dummyBanner.png in Resources */,
 				AFE7BEEC1B1DD7BE0088B9DB /* banner_5.png in Resources */,
+				9A15565A1B42DA4C00B996B9 /* PackageStoryboard.storyboard in Resources */,
+				9A1556751B42DDA900B996B9 /* image005.jpg in Resources */,
 				AFE0107E1B051CE5005B4B4D /* PackageCellBG.png in Resources */,
 				AFF15E1C1B1F029E002D0EC1 /* AlertMascotDisplayView.xib in Resources */,
 				AFF15E211B1F096B002D0EC1 /* speechBubble.png in Resources */,
@@ -1034,6 +1151,7 @@
 				AFC27BF21B0EEC5700225016 /* safe.png in Resources */,
 				AFEDE7D91B0DAD00007994CE /* VNF-Gotham-Rounded-Bold.ttf in Resources */,
 				AFC27BDB1B0EEC5700225016 /* football.png in Resources */,
+				9A1556761B42DDA900B996B9 /* image006.jpg in Resources */,
 				AFC27BF41B0EEC5700225016 /* setting.png in Resources */,
 				AF5E99601B1ECCB4009342BA /* popupArrowUp in Resources */,
 				AFC243061B1F842F00972BA4 /* FacebookLogo.png in Resources */,
@@ -1041,6 +1159,7 @@
 				AFDFE68E1B183D810065CBE6 /* TestModePickView.xib in Resources */,
 				AFF396D01B1CB9F6002675AB /* rankStar_2.png in Resources */,
 				AFE6DEFA1B049D97003E30CA /* CardInfo.xib in Resources */,
+				9A15567A1B42DDA900B996B9 /* image010.jpg in Resources */,
 				AF605EF41B2EF9BD00134BEE /* transparent.png in Resources */,
 				AFC27C011B0EEC5700225016 /* voicemail.png in Resources */,
 				AFC27BD31B0EEC5700225016 /* creditcard.png in Resources */,
@@ -1062,12 +1181,15 @@
 				AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */,
 				AFC27BC31B0EEC5700225016 /* basket.png in Resources */,
 				AFC27BF01B0EEC5700225016 /* rain.png in Resources */,
+				9A15567C1B42DDA900B996B9 /* image012.jpg in Resources */,
 				AFC27BC81B0EEC5700225016 /* calculator.png in Resources */,
 				AFC27BE41B0EEC5700225016 /* money.png in Resources */,
 				AFF15E101B1EFB2E002D0EC1 /* giraffe_happy.png in Resources */,
 				AFC27BF51B0EEC5700225016 /* shop.png in Resources */,
+				9A1556571B42CB1700B996B9 /* ysl_navi_back_btn@2x.png in Resources */,
 				AFF396D41B1CB9F6002675AB /* sticker_star.png in Resources */,
 				AFF15E111B1EFB2E002D0EC1 /* giraffe_sad.png in Resources */,
+				9A1556791B42DDA900B996B9 /* image009.jpg in Resources */,
 				AFC27BE51B0EEC5700225016 /* monitor.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
 				9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */,
@@ -1101,6 +1223,7 @@
 				AFEED0DD1B23FDB70008F4DE /* Finish.mp3 in Resources */,
 				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
 				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
+				9A15567B1B42DDA900B996B9 /* image011.jpg in Resources */,
 				AFE7BEEB1B1DD7BE0088B9DB /* banner_4.png in Resources */,
 				AF66BF081B1EBCB500E89B23 /* MeaningPopup.xib in Resources */,
 				AFC27BFF1B0EEC5700225016 /* user2.png in Resources */,
@@ -1111,6 +1234,8 @@
 				AFC27BEF1B0EEC5700225016 /* radio.png in Resources */,
 				AFC27BC91B0EEC5700225016 /* calendar.png in Resources */,
 				AFC27BE91B0EEC5700225016 /* officephone.png in Resources */,
+				9A1556731B42DDA900B996B9 /* image003.jpg in Resources */,
+				9A1556771B42DDA900B996B9 /* image007.jpg in Resources */,
 				9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */,
 				AFC27BD01B0EEC5700225016 /* config.png in Resources */,
 				AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */,
@@ -1133,6 +1258,7 @@
 				AFE729801B0DEFEA005F0850 /* SideMenuCellView.xib in Resources */,
 				AF7869B81B10F71B009BE37B /* demo.png in Resources */,
 				AFC27BD91B0EEC5700225016 /* film.png in Resources */,
+				9A15567D1B42DDA900B996B9 /* image013.jpg in Resources */,
 				AFEED0DE1B23FDB70008F4DE /* Wrong.mp3 in Resources */,
 				AFC27BFA1B0EEC5700225016 /* ticket.png in Resources */,
 				AF71F51C1B2D674B00BCCB03 /* packRankStar_3.png in Resources */,
@@ -1143,6 +1269,8 @@
 				AF7869B01B10D48A009BE37B /* tick.png in Resources */,
 				AF605EF21B2EF1DB00134BEE /* App-Logo.png in Resources */,
 				AFFB76B71B0A5A47001489F1 /* long-blue-btn.png in Resources */,
+				9A1556781B42DDA900B996B9 /* image008.jpg in Resources */,
+				9A1556701B42DDA900B996B9 /* image000.jpg in Resources */,
 				AFCFE5FC1B04E315006D9744 /* medium-red-btn.png in Resources */,
 				AFC27BCD1B0EEC5700225016 /* cloudupload.png in Resources */,
 				AF7869AC1B10CFCC009BE37B /* Correct.mp3 in Resources */,
@@ -1151,6 +1279,7 @@
 				AFC27BC41B0EEC5700225016 /* book.png in Resources */,
 				AFC27BD41B0EEC5700225016 /* disk.png in Resources */,
 				AF71F51A1B2D674B00BCCB03 /* packRankStar_1.png in Resources */,
+				9A1556711B42DDA900B996B9 /* image001.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,6 +1333,8 @@
 				9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */,
 				AFE6DEF11B03D7AC003E30CA /* SetDetailVC.m in Sources */,
 				AFCB0D271B11E71000F5688F /* TestMaker.m in Sources */,
+				9A15565D1B42DB3600B996B9 /* ShelfCollectionVC.m in Sources */,
+				9A1556801B42E2D900B996B9 /* PackageDetailVC.m in Sources */,
 				AF3AC8801B1DE9AF00B23FCF /* TestRankAnimView.m in Sources */,
 				9ADB5A081B3F231300AEB089 /* SharedData.m in Sources */,
 				AF719E431B21F23700D52EA3 /* RegisterVC.m in Sources */,
@@ -1217,6 +1348,7 @@
 				AFEE4BB31B07BEC100A0FD73 /* Word.m in Sources */,
 				AF7869A71B10CB9B009BE37B /* SoundEngine.m in Sources */,
 				C36DF4EF1B0853B300C225DA /* LoginVC.m in Sources */,
+				9A1556551B42CB0600B996B9 /* YSLTransitionAnimator.m in Sources */,
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */,
 				AFD636301B038E1000ABDB3C /* AppDelegate.m in Sources */,
@@ -1233,12 +1365,14 @@
 				AF2B6EFF1B1CC43B00079B4B /* SetDisplayer.m in Sources */,
 				AFF250571B23382900803482 /* TestSettingView.m in Sources */,
 				AFF2504F1B22D10300803482 /* ProfileVC.m in Sources */,
+				9A1556541B42CB0600B996B9 /* UIViewController+YSLTransition.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
 				AF53E5B81B301FC700B7CC53 /* LanguageControl.m in Sources */,
 				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,
 				AF2B6F021B1CCC9200079B4B /* SetRow1Displayer.m in Sources */,
 				C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */,
 				AFE6DEE51B03C9E9003E30CA /* UserShelfVC.m in Sources */,
+				9A1556601B42DC1500B996B9 /* ShelfCollectionCell.m in Sources */,
 				AFED6ADD1B06756100B8AF10 /* SideMenuVC.m in Sources */,
 				C34203DA1B0A18650058FFE2 /* Meaning.m in Sources */,
 				AF719E3A1B21ED1700D52EA3 /* MyCustomTextfield.m in Sources */,

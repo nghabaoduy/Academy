@@ -342,7 +342,8 @@
                                         <exclude reference="v18-IG-HvO"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="147" y="530" width="107" height="35"/>
                                     <mask key="constraints">
                                         <include reference="v18-IG-HvO"/>
                                     </mask>
@@ -702,7 +703,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Qi-Dd-pY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="379.5"/>
+            <point key="canvasLocation" x="1807.5" y="377.25"/>
         </scene>
         <!--ShopVC-->
         <scene sceneID="gnn-P7-bIK">
@@ -782,7 +783,8 @@
                                                     <exclude reference="hAw-i2-bUu"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="25" y="23" width="59" height="40"/>
                                                 <mask key="constraints">
                                                     <exclude reference="e6O-8R-Ce1"/>
                                                     <include reference="hAw-i2-bUu"/>
@@ -796,6 +798,9 @@
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" red="0.27450980390000002" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="25" y="64" width="47" height="24"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kux-MG-jOd">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1707,7 +1712,8 @@
                                         <exclude reference="pSQ-oF-Zo4"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="25" y="86" width="47" height="23"/>
                                     <mask key="constraints">
                                         <include reference="pSQ-oF-Zo4"/>
                                     </mask>
@@ -1726,7 +1732,8 @@
                                         <exclude reference="mcX-3I-Hhu"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="25" y="50" width="59" height="40"/>
                                     <mask key="constraints">
                                         <include reference="mcX-3I-Hhu"/>
                                     </mask>
@@ -2195,7 +2202,8 @@
                                         <exclude reference="LIm-Oh-ns3"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="100" y="51" width="200" height="20"/>
                                     <mask key="constraints">
                                         <include reference="LIm-Oh-ns3"/>
                                     </mask>
@@ -2451,7 +2459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Riz-17-KJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124.5" y="-273"/>
+            <point key="canvasLocation" x="640.5" y="-275.25"/>
         </scene>
         <!--Side MenuVC-->
         <scene sceneID="YJr-Hl-hNR">
@@ -4194,7 +4202,8 @@
                                                             <exclude reference="s7H-jW-azT"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="9" width="83" height="31"/>
                                                         <mask key="constraints">
                                                             <include reference="s7H-jW-azT"/>
                                                         </mask>
