@@ -33,6 +33,12 @@
 		9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */; };
 		9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */; };
 		9ADB5A081B3F231300AEB089 /* SharedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB5A071B3F231300AEB089 /* SharedData.m */; };
+		9AEC2E181B4380E9005B8923 /* ShelfCellBG in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E171B4380E9005B8923 /* ShelfCellBG */; };
+		9AEC2E1A1B438585005B8923 /* ShelfCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E191B438585005B8923 /* ShelfCellView.xib */; };
+		9AEC2E1D1B43D9E3005B8923 /* tryCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E1B1B43D9E3005B8923 /* tryCircle.png */; };
+		9AEC2E1E1B43D9E3005B8923 /* buyCircle in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E1C1B43D9E3005B8923 /* buyCircle */; };
+		9AEC2E211B43E3A5005B8923 /* downloadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E1F1B43E3A5005B8923 /* downloadIcon.png */; };
+		9AEC2E221B43E3A5005B8923 /* viewIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E201B43E3A5005B8923 /* viewIcon.png */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
@@ -271,6 +277,12 @@
 		9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uploadingAvatar.png; path = Graphics/uploadingAvatar.png; sourceTree = "<group>"; };
 		9ADB5A061B3F231300AEB089 /* SharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedData.h; sourceTree = "<group>"; };
 		9ADB5A071B3F231300AEB089 /* SharedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedData.m; sourceTree = "<group>"; };
+		9AEC2E171B4380E9005B8923 /* ShelfCellBG */ = {isa = PBXFileReference; lastKnownFileType = file; name = ShelfCellBG; path = "Remake Graphics/ShelfCellBG"; sourceTree = "<group>"; };
+		9AEC2E191B438585005B8923 /* ShelfCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfCellView.xib; sourceTree = "<group>"; };
+		9AEC2E1B1B43D9E3005B8923 /* tryCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tryCircle.png; path = "Remake Graphics/tryCircle.png"; sourceTree = "<group>"; };
+		9AEC2E1C1B43D9E3005B8923 /* buyCircle */ = {isa = PBXFileReference; lastKnownFileType = file; name = buyCircle; path = "Remake Graphics/buyCircle"; sourceTree = "<group>"; };
+		9AEC2E1F1B43E3A5005B8923 /* downloadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = downloadIcon.png; path = "Remake Graphics/downloadIcon.png"; sourceTree = "<group>"; };
+		9AEC2E201B43E3A5005B8923 /* viewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = viewIcon.png; path = "Remake Graphics/viewIcon.png"; sourceTree = "<group>"; };
 		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
@@ -576,6 +588,7 @@
 				9A15565C1B42DB3600B996B9 /* ShelfCollectionVC.m */,
 				9A15565E1B42DC1500B996B9 /* ShelfCollectionCell.h */,
 				9A15565F1B42DC1500B996B9 /* ShelfCollectionCell.m */,
+				9AEC2E191B438585005B8923 /* ShelfCellView.xib */,
 				9A15567E1B42E2D900B996B9 /* PackageDetailVC.h */,
 				9A15567F1B42E2D900B996B9 /* PackageDetailVC.m */,
 			);
@@ -611,6 +624,18 @@
 				9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */,
 			);
 			name = YALSunnyRefreshControll;
+			sourceTree = "<group>";
+		};
+		9AEC2E161B438083005B8923 /* Remake Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				9AEC2E1F1B43E3A5005B8923 /* downloadIcon.png */,
+				9AEC2E201B43E3A5005B8923 /* viewIcon.png */,
+				9AEC2E1B1B43D9E3005B8923 /* tryCircle.png */,
+				9AEC2E1C1B43D9E3005B8923 /* buyCircle */,
+				9AEC2E171B4380E9005B8923 /* ShelfCellBG */,
+			);
+			name = "Remake Graphics";
 			sourceTree = "<group>";
 		};
 		AF7869AA1B10CBEB009BE37B /* Sounds */ = {
@@ -742,6 +767,7 @@
 				AFCFE5E61B04D754006D9744 /* Fonts */,
 				AFE6DF021B04B016003E30CA /* WordCardViewCollection */,
 				AFE6DEFF1B04A830003E30CA /* Graphics */,
+				9AEC2E161B438083005B8923 /* Remake Graphics */,
 				AF7869AA1B10CBEB009BE37B /* Sounds */,
 				AFE6DEF51B049D04003E30CA /* CardView */,
 				AFD6362E1B038E1000ABDB3C /* AppDelegate.h */,
@@ -1133,8 +1159,10 @@
 				AFE729871B0E03E7005F0850 /* MenuHeaderBG.png in Resources */,
 				9A1556721B42DDA900B996B9 /* image002.jpg in Resources */,
 				9A1556741B42DDA900B996B9 /* image004.jpg in Resources */,
+				9AEC2E221B43E3A5005B8923 /* viewIcon.png in Resources */,
 				AF71F5191B2D674B00BCCB03 /* packRankStar_0.png in Resources */,
 				AFC27BD21B0EEC5700225016 /* count.png in Resources */,
+				9AEC2E1E1B43D9E3005B8923 /* buyCircle in Resources */,
 				AF0ED9C61B1473D300340BA5 /* speaker-btn in Resources */,
 				AFC27BC51B0EEC5700225016 /* box.png in Resources */,
 				AFC27C021B0EEC5700225016 /* wallet.png in Resources */,
@@ -1189,6 +1217,8 @@
 				9A1556571B42CB1700B996B9 /* ysl_navi_back_btn@2x.png in Resources */,
 				AFF396D41B1CB9F6002675AB /* sticker_star.png in Resources */,
 				AFF15E111B1EFB2E002D0EC1 /* giraffe_sad.png in Resources */,
+				9AEC2E1A1B438585005B8923 /* ShelfCellView.xib in Resources */,
+				9AEC2E211B43E3A5005B8923 /* downloadIcon.png in Resources */,
 				9A1556791B42DDA900B996B9 /* image009.jpg in Resources */,
 				AFC27BE51B0EEC5700225016 /* monitor.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
@@ -1222,12 +1252,14 @@
 				AF0C13BB1B1E084E006D5AF9 /* PriceTag.png in Resources */,
 				AFEED0DD1B23FDB70008F4DE /* Finish.mp3 in Resources */,
 				AFE6DF011B04A83E003E30CA /* Card.png in Resources */,
+				9AEC2E1D1B43D9E3005B8923 /* tryCircle.png in Resources */,
 				AFCFE5FB1B04E315006D9744 /* medium-blue-btn.png in Resources */,
 				9A15567B1B42DDA900B996B9 /* image011.jpg in Resources */,
 				AFE7BEEB1B1DD7BE0088B9DB /* banner_4.png in Resources */,
 				AF66BF081B1EBCB500E89B23 /* MeaningPopup.xib in Resources */,
 				AFC27BFF1B0EEC5700225016 /* user2.png in Resources */,
 				AFC27BC61B0EEC5700225016 /* browser.png in Resources */,
+				9AEC2E181B4380E9005B8923 /* ShelfCellBG in Resources */,
 				AFC27BC21B0EEC5700225016 /* bag.png in Resources */,
 				AFC27BF31B0EEC5700225016 /* search.png in Resources */,
 				AFC27BE81B0EEC5700225016 /* notes.png in Resources */,

@@ -5,7 +5,7 @@
 //  Created by Brian on 5/13/15.
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
-
+#import <QuartzCore/QuartzCore.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <GooglePlus/GooglePlus.h>
 #import "AppDelegate.h"
@@ -27,6 +27,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     [[MyUIEngine sharedUIEngine] appDelegateUICustomzation];
+    [self.window.layer setCornerRadius:5.0];
+    [self.window.layer setMasksToBounds:YES];
+    self.window.layer.opaque = NO;
+    
+    
     /*
 #if !defined(STORYBOARD)
     self.dynamicsDrawerViewController = [MSDynamicsDrawerViewController new];

@@ -39,6 +39,7 @@
     UIImageView *fromTransitionImage = _isForward ? [fromViewController pushTransitionImageView] : [fromViewController popTransitionImageView];
     // UIView *imageSnapshot = [fromTransitionImage snapshotViewAfterScreenUpdates:NO];
     UIImageView *imageSnapshot = [[UIImageView alloc]initWithImage:fromTransitionImage.image];
+    [imageSnapshot setContentMode:UIViewContentModeScaleAspectFill];
     imageSnapshot.layer.cornerRadius = fromTransitionImage.layer.cornerRadius;
     
     imageSnapshot.frame = [containerView convertRect:fromTransitionImage.frame fromView:fromTransitionImage.superview];

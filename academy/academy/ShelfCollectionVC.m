@@ -22,9 +22,12 @@
 
 @implementation ShelfCollectionVC
 
+int defaultNavY;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    defaultNavY = self.navigationController.navigationBar.layer.position.y;
     // Do any additional setup after loading the view, typically from a nib.
     
     // Fill image array with images
@@ -39,6 +42,14 @@
     
     [self.parallaxCollectionView reloadData];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO];
+    CALayer *layer = self.navigationController.navigationBar.layer;
+    layer.position = CGPointMake(layer.position.x, -layer.frame.size.height);
+    [self animateNavigationBarUp:NO];
+    
+}
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self ysl_removeTransitionDelegate];
@@ -46,11 +57,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    float statusHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    float navigationHeight = self.navigationController.navigationBar.frame.size.height;
-    
+    [super viewWillAppear:animated];
     [self ysl_addTransitionDelegate:self];
-    [self ysl_pushTransitionAnimationWithToViewControllerImagePointY:statusHeight + navigationHeight
+    [self ysl_pushTransitionAnimationWithToViewControllerImagePointY:0
                                                    animationDuration:0.3];
 }
 - (void)didReceiveMemoryWarning
@@ -81,11 +90,28 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"collectionViewCell selected");
-    [self.navigationController setNavigationBarHidden:YES];
+    [self animateNavigationBarUp:YES];
     PackageDetailVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"packageDetailView"];
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)animateNavigationBarUp:(BOOL) hide
+{
+    CALayer *layer = self.navigationController.navigationBar.layer;
+    
+    // If the navigation bar is shown, hide it.
+    // Else, if the navigation bar is hidden, show it.
+    NSLog(@"Nav Position = %f,%f",layer.position.x,layer.position.y);
 
+    if(hide) {
+        [UIView animateWithDuration:0.25 animations:^{
+            layer.position = CGPointMake(layer.position.x, -layer.frame.size.height);
+        }];
+    } else {
+        [UIView animateWithDuration:0.25 animations:^{
+            layer.position = CGPointMake(layer.position.x,defaultNavY);
+        }];
+    }
+}
 #pragma mark - UIScrollViewdelegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     for(ShelfCollectionCell *view in self.parallaxCollectionView.visibleCells) {
@@ -96,7 +122,7 @@
 #pragma mark -- UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((self.view.frame.size.width / 2) - 9, (self.view.frame.size.width / 2) - 9);
+    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width * (630.0f/1242));
 }
 
 #pragma mark -- YSLTransitionAnimatorDataSource
