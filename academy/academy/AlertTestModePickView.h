@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, TestPickType) {
 -(void) AlertTestModePickView:(AlertTestModePickView*) modePickView modePicked:(TestPickType) testPickType;
 
 @end
-@interface AlertTestModePickView : UIWindow
+@interface AlertTestModePickView : UIView
 {
     id <TestPickDelegate> delegate;
 }

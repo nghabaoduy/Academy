@@ -138,4 +138,14 @@
     return [aArray filteredArrayUsingPredicate:filter];
 }
 
++(AModel *) getModelById:(NSString*) checkId from:(NSArray *) modelList
+{
+    for (AModel *model in modelList) {
+        if ([model.modelId isEqualToString:checkId]) {
+            return model;
+        }
+    }
+    return nil;
+}
+
 @end

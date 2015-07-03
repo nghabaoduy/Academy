@@ -49,7 +49,6 @@
     
 }
 - (IBAction)touchUpInside:(id)sender {
-    //NSLog(@"touchUpInside");
     [delegate cardIsTapped:self];
 }
 - (IBAction)speakerIsTapped:(id)sender {

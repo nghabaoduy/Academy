@@ -519,6 +519,9 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     siAlertView.transitionStyle = SIAlertViewTransitionStyleBounce;
     
     [siAlertView show];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:NO forKey:@"isAutoLogin"];
+    [defaults synchronize];
 }
 
 - (void)userLoginSuccessfull:(User *)user {
@@ -533,6 +536,7 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     if ([[DataEngine getInstance] loginType] == LoginNormal) {
         [user refreshUser];
     }else{
+        
         [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:NO];
     }
     

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "SharedData.h"
+#import "FMDatabase.h"
+
 typedef NS_ENUM(NSUInteger, LoginType) {
     LoginNormal = 0,
     LoginFacebook = 1,
@@ -17,7 +19,7 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 
 @interface DataEngine : NSObject
 
-+ (id)getInstance;
++ (DataEngine *)getInstance;
 
 - (NSString*)requestURL;
 
@@ -26,9 +28,22 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 @property (nonatomic, assign) BOOL isSoundOff;
 @property (nonatomic, assign) LoginType loginType;
 @property (nonatomic, retain) SharedData * sharedData;
+@property (nonatomic, retain) NSArray * packageList;
+@property (nonatomic, retain) NSArray * setList;
+@property (nonatomic, retain) NSArray * wordList;
+@property (nonatomic, retain) FMDatabase *database;
 
 -(void) saveLoginInfo:(NSString*) username Password: (NSString*) password fbId:(NSString *)fbId ggpId:(NSString*)ggpId;
 -(NSString *) getAppURL;
 -(NSString *) getFeedbackEmail;
 -(void) switchisSoundOff:(BOOL)isSoundOff;
+
+-(NSArray *) getWordsFromDB;
+-(NSArray *) getPackagesFromDB;
+-(NSArray *) getSetFromDB;
+
+- (void)addPackagesToDB:(NSArray *) packList;
+- (void) addWordsToDB:(NSArray *) wordList;
+- (void) addSetWordsToDB:(NSArray *) setwordList;
+- (void)addSetsToDB:(NSArray *) wordList;
 @end

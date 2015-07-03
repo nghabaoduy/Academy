@@ -25,14 +25,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
+    
+    
     [[MyUIEngine sharedUIEngine] appDelegateUICustomzation];
     [self.window.layer setCornerRadius:5.0];
     [self.window.layer setMasksToBounds:YES];
     self.window.layer.opaque = NO;
     
     
-    /*
+
+    
 #if !defined(STORYBOARD)
     self.dynamicsDrawerViewController = [MSDynamicsDrawerViewController new];
 #else
@@ -61,7 +63,7 @@
     [self.window makeKeyAndVisible];
     [self.window addSubview:self.windowBackground];
     [self.window sendSubviewToBack:self.windowBackground];
-     */
+     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

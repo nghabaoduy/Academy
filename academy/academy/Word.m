@@ -7,7 +7,8 @@
 //
 
 #import "Word.h"
-#import "Meaning.h"
+
+#import <AFNetworking/AFNetworking.h>
 
 @implementation Word
 
@@ -16,15 +17,15 @@
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     self.modelId = [dict valueForKey:@"id"];
     name = [self getStringFromDict:dict WithKey:@"name"];
-    phonentic = [self getStringFromDict:dict WithKey:@"phonentic"];
+    phonentic = [dict objectForKey:@"phonetic"]?:@"";
     wordType = [self getStringFromDict:dict WithKey:@"word_type"];
 
     _meaningList = [NSMutableArray new];
-    NSArray * meanings = [self getArrayFromDict:dict WithKey:@"meaning_list"];
+    /*NSArray * meanings = [self getArrayFromDict:dict WithKey:@"meaning_list"];
     for (NSDictionary * meaningDict in meanings) {
         Meaning * newMeaning = [[Meaning alloc] initWithDict:meaningDict];
         [_meaningList addObject:newMeaning];
-    }
+    }*/
 }
 -(NSDictionary *)getDictionaryFromObject
 {
@@ -36,6 +37,32 @@
              @"meaning_list" : [self getMeaningList]
              };
 }
+
+- (void)getAllWithFilter:(NSDictionary *)filterDictionary {
+    NSString *apiPath = @"api/word";
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    [manager GET:requestURL parameters:filterDictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"here %@", responseObject);
+        NSArray *words = responseObject;
+        NSMutableArray *wordList = [NSMutableArray new];
+        for (NSDictionary * wordDict in words) {
+            Word* word = [[Word alloc] initWithDict:wordDict];
+            [wordList addObject:word];
+        }
+        [self.delegate getAllSucessfull:self List:wordList];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        [self.delegate model:self ErrorMessage:json[@"message"] StatusCode:@([operation.response statusCode])];
+    }];
+}
+
+
 -(NSArray *) getMeaningList
 {
     NSMutableArray *aArray = [NSMutableArray new];
@@ -90,6 +117,6 @@
 }
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"[Word Class] %@",name];
+    return [NSString stringWithFormat:@"[Word Class] %@ meaningList[%i]",name, self.meaningList.count];
 }
 @end

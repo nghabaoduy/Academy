@@ -95,7 +95,7 @@
     UserPackage * userPackage = [UserPackage new];
     [userPackage setDelegate:self];
     NSLog(@"curUser.id = %@",[[User currentUser] modelId]);
-    [userPackage getAllWithFilter:@{@"user_id" : [[User currentUser] modelId]}];
+    [userPackage getAllWithFilter:@{@"user_id" : [[User currentUser] modelId], @"needLoadPackage":@"NO"}];
 }
 -(void) organizePackageList
 {

@@ -27,6 +27,9 @@ int defaultNavY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"Tủ Sách";
+    
     defaultNavY = self.navigationController.navigationBar.layer.position.y;
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -89,7 +92,6 @@ int defaultNavY;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"collectionViewCell selected");
     [self animateNavigationBarUp:YES];
     PackageDetailVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"packageDetailView"];
     [self.navigationController pushViewController:vc animated:YES];
@@ -97,10 +99,6 @@ int defaultNavY;
 - (void)animateNavigationBarUp:(BOOL) hide
 {
     CALayer *layer = self.navigationController.navigationBar.layer;
-    
-    // If the navigation bar is shown, hide it.
-    // Else, if the navigation bar is hidden, show it.
-    NSLog(@"Nav Position = %f,%f",layer.position.x,layer.position.y);
 
     if(hide) {
         [UIView animateWithDuration:0.25 animations:^{

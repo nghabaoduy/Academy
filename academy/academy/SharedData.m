@@ -24,6 +24,9 @@
             if ([dataDict[@"name"] isEqualToString:@"app_version"]) {
                 self.appVersion = dataDict[@"value"];
             }
+            if([dataDict[@"name"] isEqualToString:@"latest_data_update_date"]){
+                self.latestDataUpdateDate = dataDict[@"value"];
+            }
         }
         [sharedDataDelegate SharedDataGetSuccessful:self];
         

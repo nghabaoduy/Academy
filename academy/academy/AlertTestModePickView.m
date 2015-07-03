@@ -15,17 +15,12 @@
 
 }
 @synthesize delegate;
+
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"TestModePickView" owner:self options:nil];
-        
-        [self addSubview:self.view];
-        self.view.backgroundColor = [UIColor clearColor];
-        self.layer.anchorPoint = CGPointMake(0, 0);
-        self.layer.bounds = self.view.bounds;
-        
+        [self initView];
     }
     return self;
 }
@@ -33,15 +28,19 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"TestModePickView" owner:self options:nil];
-        [self addSubview:self.view];
-        self.view.backgroundColor = [UIColor clearColor];
-        self.layer.anchorPoint = CGPointMake(0, 0);
-       self.layer.bounds = self.view.bounds;
-
+        [self initView];
     }
     return self;
 }
+-(void) initView
+{
+    [[NSBundle mainBundle] loadNibNamed:@"TestModePickView" owner:self options:nil];
+    [self addSubview:self.view];
+    self.view.backgroundColor = [UIColor clearColor];
+    self.layer.anchorPoint = CGPointMake(0, 0);
+    self.layer.bounds = self.view.bounds;
+}
+
 - (IBAction)mode1Click:(id)sender {
     NSLog(@"mode1 clicked");
     [delegate AlertTestModePickView:self modePicked:TestPickNormal];

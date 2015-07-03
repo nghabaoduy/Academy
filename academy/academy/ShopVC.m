@@ -14,6 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "ShelfHeader.h"
+#import "User.h"
 
 @interface ShopVC () <ModelDelegate>
 
@@ -42,17 +43,21 @@
     expansionHeight = screenWidth *3/10 *160/200 + cellTopMargin;
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
     [self retrievePackages];
 }
 
 -(void) retrievePackages {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //Init new package just to find (i cant do static one)
-    Package * toRetrivePackages = [Package new];
-    //Assign Deleteage
-    toRetrivePackages.delegate = self;
-    //Call the function
-    [toRetrivePackages getAllWithFilter:nil];
+    packageList = [NSMutableArray new];
+    User *user = [User currentUser];
+    NSArray *allPacks = [DataEngine getInstance].packageList;
+    NSLog(@"allPacks = %@",allPacks);
+    for (Package * pack in allPacks) {
+        if ([user canViewThisPackage:pack]) {
+            [packageList addObject:pack];
+        }
+    }
+    [self organizePackageList];
 }
 -(void) organizePackageList
 {

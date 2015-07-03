@@ -30,6 +30,7 @@ PODS:
   - Bolts/Tasks (1.1.5)
   - CustomIOSAlertView (0.9.3)
   - DDHTimerControl (1.0.0)
+  - ECSlidingViewController (2.0.3)
   - FBSDKCoreKit (4.2.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.2.0)
@@ -43,6 +44,11 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.2.0):
     - FBSDKCoreKit
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
   - FRDLivelyButton (1.1.3)
   - google-plus-ios-sdk (1.7.1)
   - GPUImage (0.1.6)
@@ -59,9 +65,11 @@ DEPENDENCIES:
   - AMSmoothAlert (~> 1.0)
   - CustomIOSAlertView (~> 0.9.3)
   - DDHTimerControl
+  - ECSlidingViewController (~> 2.0.3)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - FMDB
   - FRDLivelyButton (~> 1.1.3)
   - google-plus-ios-sdk
   - MBProgressHUD (~> 0.5)
@@ -76,9 +84,11 @@ SPEC CHECKSUMS:
   Bolts: aac24961496d504aa56fc267cde95162a71bac39
   CustomIOSAlertView: 94d2401e34fcfb0ac0134679d6947f5e251b0446
   DDHTimerControl: 5dfe11a9d3cfe70ebe054437ad4ef7e89a99fe2a
+  ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FBSDKCoreKit: 84b3616a361801f190e43a9909caead7bb6087c7
   FBSDKLoginKit: 57e37106af12c9e264e473dcb75d7decdbb07fe4
   FBSDKShareKit: 931746fdf8fb95efd6e12310ec14b2b3295e2aec
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   FRDLivelyButton: d67f7ecb801ac84427fca1ea832a63e972b72478
   google-plus-ios-sdk: 47adbe03ea904bdb7aa1c0eca282a23c4686e1bc
   GPUImage: 4675ce4a5370ca92fcea8623b2a08b8f0c51b940

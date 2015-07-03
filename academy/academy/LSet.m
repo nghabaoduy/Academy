@@ -28,11 +28,8 @@
     wordList = [NSMutableArray new];
     
     NSArray * words = [self getArrayFromDict:dict WithKey:@"words"];
-    
-    for (NSDictionary * wordDict in words) {
-        Word * newWord = [[Word alloc] initWithDict:wordDict];
-        [wordList addObject:newWord];
-    }
+
+    [self getAllWordFromDB];
     
     self.grade = 0;
     self.dummyImgName = @"sticker_egg.png";
@@ -74,7 +71,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
     [manager GET:requestURL parameters:filterDictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"here %@", responseObject);
+        //NSLog(@"here %@", responseObject);
         NSArray *sets = responseObject;
         NSMutableArray * setList = [NSMutableArray new];
         for (NSDictionary * setDict in sets) {
@@ -135,6 +132,33 @@
 
     }
 
+}
+
+-(void) getAllWordFromDB
+{
+    FMDatabase * db = [[DataEngine getInstance] database];
+    [db open];
+    FMResultSet *results = [db executeQuery:[NSString stringWithFormat:@"select * from set_word where set_id=%@",self.modelId]];
+    NSMutableArray * wordIdList = [NSMutableArray new];
+    while([results next]) {
+       [wordIdList addObject:[results stringForColumn:@"word_id"]];
+    }
+    if (wordIdList.count > 0) {
+        wordList = [NSMutableArray new];
+        for (Word *word in [DataEngine getInstance].wordList) {
+            for (NSString *wordId in wordIdList) {
+                if ([wordId isEqualToString:word.modelId]) {
+                    [wordList addObject:word];
+                }
+                
+            }
+        }
+    }
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"[LSet Class] %@ wordList[%i]",name, self.wordList.count];
 }
 
 @end

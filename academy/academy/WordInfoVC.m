@@ -59,7 +59,7 @@
     
     knownWords = [NSMutableArray new];
     [self resetView];
-    [self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
+    //[self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
     
     [[SoundEngine getInstance] readWord:@" " language:self.language];
 }
@@ -87,11 +87,26 @@
     }
 }
 
+-(void) startDisplayCardInfo
+{
+    wordList = curSet.wordList;
+    NSLog(@"wordList = %@",wordList);
+    originalWordList = [wordList copy];
+    [self displayCurWord];
+    if (!isWordCheckSession) {
+        Word *word = wordList[curWordNo];
+        [[SoundEngine getInstance] readWord:word.name language:self.language];
+    }
+}
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self startDisplayCardInfo];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 - (void)retrieveWords {
@@ -122,7 +137,6 @@
     else
     {
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES] wordSubDict:[word getWordSubDict:self.language]];
-        //[_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES]];
     }
 
     prevBtn.hidden = curWordNo == 0;

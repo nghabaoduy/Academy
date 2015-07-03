@@ -33,7 +33,7 @@
     
     UIColor *barTintColor = UIColorFromRGB(0x0ea3f7);
     
-    [UIApplication sharedApplication].statusBarHidden = YES;
+    //[UIApplication sharedApplication].statusBarHidden = YES;
     
     [[UINavigationBar appearance] setBarTintColor:barTintColor];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -45,8 +45,8 @@
                                                             nil]];
     
 
-    //CGFloat verticalOffset = 4;
-    //[[UINavigationBar appearance] setTitleVerticalPositionAdjustment:verticalOffset forBarMetrics:UIBarMetricsDefault];
+    CGFloat verticalOffset = 4;
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:verticalOffset forBarMetrics:UIBarMetricsDefault];
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
 

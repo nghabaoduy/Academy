@@ -43,7 +43,7 @@
             [wordDict setObject:coms[1] forKey:coms[0]];
         }
     }
-    NSLog(@"getDictFromString [%@] = %@",dictStr,wordDict);
+    //NSLog(@"getDictFromString [%@] = %@",dictStr,wordDict);
     if ([wordDict allKeys].count== 0) {
         return nil;
     }

@@ -46,6 +46,7 @@
     setOrderArray = [NSMutableArray new];
     
     for (LSet *set in curPack.setList) {
+        NSLog(@"set = %@",set);
         int row = set.orderNo/2;
         while (setOrderArray.count <= row) {
             [setOrderArray addObject:[NSMutableArray new]];
@@ -77,7 +78,7 @@
     
     [self refreshTable];
     if ([curUserPack.purchaseType isEqualToString:@"buy"]) {
-        [self loadSetScore];
+        //[self loadSetScore];
     }
     
 }

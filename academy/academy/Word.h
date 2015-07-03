@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AModel.h"
-
+#import "Meaning.h"
 @interface Word : AModel
 
 @property (nonatomic, retain) NSString * name;

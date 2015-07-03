@@ -18,5 +18,6 @@
 
 @property (nonatomic, weak) id <SharedDataDelegate> sharedDataDelegate;
 @property (nonatomic, retain) NSString * appVersion;
+@property (nonatomic, retain) NSString * latestDataUpdateDate;
 - (void)updateSharedData;
 @end

@@ -77,10 +77,10 @@
 
     if (curSet) {
         [self.setTitleLb setText:self.curSet.name];
+        wordList = curSet.wordList;
     } else {
         [self.setTitleLb setText:@"Tổng Kiểm Tra"];
     }
-    
     
     if (!wordList) {
         [self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];

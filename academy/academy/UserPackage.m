@@ -26,12 +26,12 @@
     [self checkExpiration];
     
     if (_package_id) {
-        _package = [[Package alloc] initWithDict:dict[@"package"]];
+        _package = (Package*)[Package getModelById:_package_id from:[DataEngine getInstance].packageList];
     }
     _user_id = dict[@"user_id"] ?: nil;
     _score = [self getNumberFromDict:dict WithKey:@"score"];
     
-    [self saveToNSUserDefaults];
+    //[self saveToNSUserDefaults];
 }
 -(NSString *)getUserDefaultStoredKey
 {

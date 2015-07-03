@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSString * roleCanView;
 @property (nonatomic, retain) NSString * orderCode;
+@property (nonatomic, retain) NSString * expiryTime;
 @property int wordsTotal;
 
 @property (nonatomic, retain) NSMutableArray * setList;

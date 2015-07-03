@@ -50,4 +50,6 @@
 
 -(NSString*) getUserDefaultStoredKey;
 -(void) saveToNSUserDefaults;
+
++(AModel *) getModelById:(NSString*) checkId from:(NSArray *) modelList;
 @end
