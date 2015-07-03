@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
+            <string>GothamRounded-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShelfCollectionHeader">
+            <connections>
+                <outlet property="titleLb" destination="F1n-uU-PXS" id="zxv-wg-PRQ"/>
+                <outlet property="view" destination="ZYh-Xu-P8s" id="jWy-PZ-njC"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ZYh-Xu-P8s">
+            <rect key="frame" x="0.0" y="-1" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Học tiếng Anh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1n-uU-PXS">
+                    <rect key="frame" x="17" y="6" width="286" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="dQC-e6-NXj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="20"/>
+                    <color key="textColor" red="0.054901960780000002" green="0.63921568630000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="F1n-uU-PXS" secondAttribute="bottom" id="67K-5q-YSx"/>
+                <constraint firstAttribute="trailing" secondItem="F1n-uU-PXS" secondAttribute="trailing" constant="17" id="DsL-2i-dpv"/>
+                <constraint firstItem="F1n-uU-PXS" firstAttribute="leading" secondItem="ZYh-Xu-P8s" secondAttribute="leading" constant="17" id="Nfn-8V-yXV"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="42" y="74"/>
+        </view>
+    </objects>
+</document>

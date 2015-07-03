@@ -79,12 +79,13 @@
         <!--App InitVC-->
         <scene sceneID="UDe-ZI-dog">
             <objects>
-                <viewController id="UaZ-yX-3vi" customClass="AppInitVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="appInitView" id="UaZ-yX-3vi" customClass="AppInitVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ihc-nh-3at"/>
                         <viewControllerLayoutGuide type="bottom" id="dgK-YY-7qk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nPk-sx-qsx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App-Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="9BF-ho-rI0">
@@ -112,31 +113,58 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BOX-r0-sMm" customClass="ASProgressPopUpView">
+                                <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="oG6-by-Q2Y"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="oG6-by-Q2Y"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="oG6-by-Q2Y"/>
+                                    </mask>
+                                </variation>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="BOX-r0-sMm" firstAttribute="top" secondItem="9BF-ho-rI0" secondAttribute="bottom" constant="88" id="IXY-f2-a1Q"/>
                             <constraint firstAttribute="centerX" secondItem="9BF-ho-rI0" secondAttribute="centerX" id="PfY-b4-3X7"/>
+                            <constraint firstAttribute="centerX" secondItem="BOX-r0-sMm" secondAttribute="centerX" id="em7-aL-YXR"/>
                             <constraint firstAttribute="centerY" secondItem="9BF-ho-rI0" secondAttribute="centerY" id="fQM-yp-ExI"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="9BF-ho-rI0"/>
+                                <exclude reference="BOX-r0-sMm"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="PfY-b4-3X7"/>
                                 <exclude reference="fQM-yp-ExI"/>
+                                <exclude reference="IXY-f2-a1Q"/>
+                                <exclude reference="em7-aL-YXR"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="9BF-ho-rI0"/>
+                                <include reference="BOX-r0-sMm"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="PfY-b4-3X7"/>
                                 <include reference="fQM-yp-ExI"/>
+                                <include reference="IXY-f2-a1Q"/>
+                                <include reference="em7-aL-YXR"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="progressView" destination="BOX-r0-sMm" id="bP2-zQ-vxY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2J4-xa-WmH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

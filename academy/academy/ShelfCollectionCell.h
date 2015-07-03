@@ -23,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic, strong, readwrite) UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIView *imageContainerHolder;
+@property (weak, nonatomic) IBOutlet UILabel *titleLb;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLb;
 
 /*
  Image will always animate according to the imageOffset provided. Higher the value means higher offset for the image

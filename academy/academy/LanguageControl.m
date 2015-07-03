@@ -10,6 +10,7 @@
 
 @implementation LanguageControl{
     NSDictionary *languageVoiceCodeDict;
+    NSDictionary *languageTranslateDict;
     NSArray *languageCharacterIndexTypeList;
 }
 
@@ -32,6 +33,16 @@ static LanguageControl * instance = nil;
                                   @"Italian"    : @"it-IT",
                                   @"Japanese"   : @"ja-JP",
                                   @"Korean"     : @"ko-KR"
+                                  };
+        languageTranslateDict = @{
+                                  @"English"    : @"Tiếng Anh",
+                                  @"Chinese"    : @"Tiếng Trung",
+                                  @"French"     : @"Tiếng Pháp",
+                                  @"German"     : @"Tiếng Đức",
+                                  @"Hindi"      : @"Tiếng Ấn",
+                                  @"Italian"    : @"Tiếng Ý",
+                                  @"Japanese"   : @"Tiếng Nhật",
+                                  @"Korean"     : @"Tiếng Hàn"
                                   };
         languageCharacterIndexTypeList = @[
                                            @"Chinese",
@@ -67,5 +78,13 @@ static LanguageControl * instance = nil;
         }
     }
     return 14;
+}
+-(NSString *) getLanguageTranslateByLang:(NSString *) lang{
+    for (NSString * key in [languageTranslateDict allKeys]) {
+        if ([key isEqualToString:lang]) {
+            return languageTranslateDict[key];
+        }
+    }
+    return @"en-au";
 }
 @end

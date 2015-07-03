@@ -11,7 +11,8 @@
 #import "UIViewController+YSLTransition.h"
 #import "TOMSMorphingLabel.h"
 #import "CardInfoView.h"
-@interface PackageDetailVC () <YSLTransitionAnimatorDataSource>
+#import "Word.h"
+@interface PackageDetailVC () <YSLTransitionAnimatorDataSource, CardInfoViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
 
@@ -32,6 +33,7 @@
     __weak IBOutlet UITextView *descContentTV;
     __weak IBOutlet CardInfoView *cardInfo;
 }
+@synthesize curPack;
 
 - (void)didReceiveMemoryWarning
 {
@@ -104,12 +106,36 @@
     backBtn.transform = CGAffineTransformMakeTranslation(50, 0);
     descTitleLb.alpha = 0;
     descContentTV.alpha = 0;
+    [descContentTV setText:curPack.desc];
+    [self resizeTextViewToFit:descContentTV];
     
     descTitleLb.transform = CGAffineTransformMakeTranslation(0, -10);
     descContentTV.transform = CGAffineTransformMakeTranslation(0, 20);
     cardInfo.alpha = 0;
     cardInfo.transform = CGAffineTransformMakeTranslation(0, 50);
+    cardInfo.delegate = self;
+    [self displayCard];
 }
+
+-(void) displayCard
+{
+    NSArray *words = [curPack getWordsFromPackageWithQuantity:1];
+    if (words) {
+        Word *word = [words firstObject];
+        NSLog(@"word = %@",word);
+        [cardInfo displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:curPack.language bExample:YES] wordSubDict:[word getWordSubDict:curPack.language]];
+    }
+}
+
+-(void) resizeTextViewToFit:(UITextView *) tv
+{
+    CGFloat fixedWidth = tv.frame.size.width;
+    CGSize newSize = [tv sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = tv.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    tv.frame = newFrame;
+}
+
 -(void) clearAnimatedLabel:(TOMSMorphingLabel *) animatedLabel
 {
     [animatedLabel setMorphingEnabled:NO];
@@ -119,11 +145,24 @@
 }
 - (void) animateViewAppear
 {
-    [packageNameLb setText:@"IETLS TOEFL Basic" withCompletionBlock:^{
-        [subTitleLb setText:@"100 words" withCompletionBlock:^{
+    
+    
+    [packageNameLb setText:curPack.name withCompletionBlock:^{
+        [subTitleLb setText:[NSString stringWithFormat:@"%i Từ Vựng",curPack.wordsTotal] withCompletionBlock:^{
             [viewCountLb setText:@"520"];
             [downloadCountLb setText:@"158" withCompletionBlock:^{
-                [priceLb setText:@"FREE"];
+                if ([curPack.price intValue] == 0) {
+                    [priceLb setText:@"FREE"];
+                }
+                else
+                {
+                    NSNumberFormatter *formatter = [NSNumberFormatter new];
+                    [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+                    
+                    NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[curPack.price integerValue]]];
+                    formatted = [formatted stringByReplacingOccurrencesOfString:@"," withString:@"."];
+                    [priceLb setText:[NSString stringWithFormat:@"%@ đ",formatted]];
+                }
             }];
         }];
     }];
@@ -215,5 +254,9 @@
 {
     return nil;
 }
-
+#pragma mark -- CardInfoDelegate
+-(NSString *)CardInfoViewGetLanguage
+{
+    return curPack.language;
+}
 @end

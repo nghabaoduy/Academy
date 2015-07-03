@@ -12,6 +12,7 @@
 @class CardInfoView;
 
 @protocol CardInfoViewDelegate
+@optional
 -(void) cardIsTapped:(CardInfoView *) card;
 -(void) exampleSpeakerIsTapped:(CardInfoView *) card;
 -(NSString *) CardInfoViewGetLanguage;

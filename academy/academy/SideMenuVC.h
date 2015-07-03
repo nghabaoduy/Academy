@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "MSDynamicsDrawerViewController.h"
 typedef NS_ENUM(NSUInteger, MSPaneViewControllerType) {
+    ControllerAppInit,
     ControllerLogin,
     ControllerUserShelf,
     ControllerShop,

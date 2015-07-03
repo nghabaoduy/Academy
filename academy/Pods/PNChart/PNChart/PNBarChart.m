@@ -87,7 +87,7 @@
         _yLabels = [NSMutableArray new];
     }
     
-    if (NO) {//_showLabel
+    if (/* DISABLES CODE */ (NO)) {//_showLabel
         //Add y labels
         
         float yLabelSectionHeight = (self.frame.size.height - _chartMargin * 2 - kXLabelHeight) / _yLabelSum;

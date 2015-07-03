@@ -21,7 +21,7 @@ static User * _currentUser = nil;
 }
 
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
-    NSLog(@"user dict = %@",dict);
+    //NSLog(@"user dict = %@",dict);
     userDict = dict;
     self.modelId = dict[@"id"];
     _email = [self getStringFromDict:dict WithKey:@"email"];

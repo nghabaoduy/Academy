@@ -21,7 +21,7 @@ pod 'FMDB'
 # pod 'FMDB/standalone'   # FMDB with latest SQLite amalgamation source
 # pod 'FMDB/standalone/FTS'   # FMDB with latest SQLite amalgamation source and FTS
 # pod 'FMDB/SQLCipher'   # FMDB with SQLCipher
-pod 'ECSlidingViewController', '~> 2.0.3'
+pod 'ASProgressPopUpView', '~> 0.7.1'
 end
 
 target 'academyTests' do

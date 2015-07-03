@@ -66,15 +66,15 @@ static NSString * const kClientId = @"581227388428-rn5aloe857g2rjll30tm4qbmhr98o
     
     //[signIn trySilentAuthentication];
     //[self clearSave];
-    [self performSelector:@selector(getSharedData) withObject:self afterDelay:0.5];
+    [self performSelector:@selector(checkAutoLogin) withObject:self afterDelay:0.5];
     
     
 }
 -(void) getSharedData
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DataEngine getInstance] sharedData].sharedDataDelegate = self;
-    [[[DataEngine getInstance] sharedData] updateSharedData];
+    //[[DataEngine getInstance] sharedData].sharedDataDelegate = self;
+    //[[[DataEngine getInstance] sharedData] updateSharedData];
 }
 
 -(void) clearSave

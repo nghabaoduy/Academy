@@ -17,15 +17,15 @@
 - (void)setObjectWithDictionary:(NSDictionary *)dict {
     self.modelId = [dict valueForKey:@"id"];
     name = [self getStringFromDict:dict WithKey:@"name"];
-    phonentic = [dict objectForKey:@"phonetic"]?:@"";
+    phonentic = [dict objectForKey:@"phonentic"]?:@"";
     wordType = [self getStringFromDict:dict WithKey:@"word_type"];
 
     _meaningList = [NSMutableArray new];
-    /*NSArray * meanings = [self getArrayFromDict:dict WithKey:@"meaning_list"];
+    NSArray * meanings = [self getArrayFromDict:dict WithKey:@"meaning_list"];
     for (NSDictionary * meaningDict in meanings) {
         Meaning * newMeaning = [[Meaning alloc] initWithDict:meaningDict];
         [_meaningList addObject:newMeaning];
-    }*/
+    }
 }
 -(NSDictionary *)getDictionaryFromObject
 {
@@ -117,6 +117,6 @@
 }
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"[Word Class] %@ meaningList[%i]",name, self.meaningList.count];
+    return [NSString stringWithFormat:@"[Word Class] %@ - %@ -  meaningList[%i]",name,phonentic, self.meaningList.count];
 }
 @end

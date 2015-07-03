@@ -18,7 +18,7 @@
 }
 
 static DataEngine * instance = nil;
-
+@synthesize localDBDelegate;
 + (DataEngine *)getInstance {
     if (instance == nil) {
         instance = [DataEngine new];
@@ -49,7 +49,9 @@ static DataEngine * instance = nil;
             break;
     }
     [self setIsSoundOff:[[defaults valueForKey:@"isSoundOff"] boolValue]];
-    
+    self.localDBUpdateDate =[defaults valueForKey:@"localDBUpdateDate"];
+
+    NSLog(@"localDBUpdateDate = %@",self.localDBUpdateDate);
 }
 
 
@@ -91,7 +93,52 @@ static DataEngine * instance = nil;
     [defaults synchronize];
 }
 
-
+-(void) checkIfNeedUpdateData:(needUpdate) block
+{
+    self.sharedData = [SharedData new];
+    [self.sharedData updateSharedData:^(SharedData *returnSharedData) {
+        if (returnSharedData) {
+            
+            NSString* curAppVersion = [NSString stringWithFormat:@"%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+            NSString* latestAppVersion = [returnSharedData appVersion] ;
+            BOOL needDownloadNewVer = [curAppVersion floatValue] < [latestAppVersion floatValue];
+            
+            if(!self.localDBUpdateDate || [self.localDBUpdateDate isEqualToString:@""]) {
+                block(YES, needDownloadNewVer);
+            } else {
+                self.sharedData = returnSharedData;
+                
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDate * localUpdateDate = [dateFormat dateFromString:self.localDBUpdateDate];
+                
+                [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss +0000"];
+                NSDate *serverLatestUpdate = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",returnSharedData.latestDataUpdateDate]];
+                NSLog(@"localUpdateDate = %@ vs serverLatestUpdate = %@",localUpdateDate,serverLatestUpdate);
+                
+                block([localUpdateDate compare:serverLatestUpdate] == NSOrderedAscending, needDownloadNewVer);
+            }
+        }
+        else
+        {
+            block(NO, NO);
+        }
+    }];
+    
+}
+-(void) saveLocalDBUpdateDate
+{
+    NSDate * curDate = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.localDBUpdateDate = [dateFormat stringFromDate:curDate];
+   
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:self.localDBUpdateDate forKey:@"localDBUpdateDate"];
+    [defaults synchronize];
+     NSLog(@"saveLocalDBUpdateDate = %@",self.localDBUpdateDate);
+}
 //FMDB
 -(void) dbInit
 {
@@ -100,42 +147,39 @@ static DataEngine * instance = nil;
     NSString *path = [docsPath stringByAppendingPathComponent:@"database.sqlite"];
     
     self.database = [FMDatabase databaseWithPath:path];
+}
+
+-(void) clearAllLocalDB
+{
     [self.database open];
-    /*NSLog(@"Delete table package %@",[self.database executeUpdate:@"DROP TABLE package"]?@"successful":@"failed");
+    NSLog(@"Delete table package %@",[self.database executeUpdate:@"DROP TABLE package"]?@"successful":@"failed");
+    NSLog(@"Delete table word %@",[self.database executeUpdate:@"DROP TABLE word"]?@"successful":@"failed");
+    NSLog(@"Delete table meaning %@",[self.database executeUpdate:@"DROP TABLE meaning"]?@"successful":@"failed");
+    NSLog(@"Delete table set_word %@",[self.database executeUpdate:@"DROP TABLE set_word"]?@"successful":@"failed");
+    NSLog(@"Delete table lset %@",[self.database executeUpdate:@"DROP TABLE lset"]?@"successful":@"failed");
     
     [self.database executeUpdate:@"create table package(id text primary key, name text, description text, category text, old_price text, price text, no_of_words text, language text, expiry_time text, role_can_view text, imgURL text)"];
     [self.database executeUpdate:@"create table word(id text primary key, name text, phonetic text, word_type text)"];
     [self.database executeUpdate:@"create table meaning(id text primary key, word_id text, language text, content text, example text, word_sub_dict text)"];
-    [self.database executeUpdate:@"create table set_word(word_id text, set_id text)"];*/
+    [self.database executeUpdate:@"create table set_word(word_id text, set_id text)"];
     [self.database executeUpdate:@"create table lset(id text primary key, name text, description text, language text, package_id text, order_number text, imgURL text)"];
     [self.database close];
-    
+}
+-(void) setupDataFromLocalDB
+{
     self.wordList = [self getWordsFromDB];
     self.setList = [self getSetFromDB];
     self.packageList = [self getPackagesFromDB];
+    [localDBDelegate finishSetupDBSuccessful];
 }
-- (void)addPackagesToDB:(NSArray *) packList{
-    
-    [self.database open];
-    NSLog(@"Delete all from package %@",[self.database executeUpdate:@"DELETE FROM package"]?@"successful":@"failed");
-    for (Package * pack in packList) {
-        NSString *addPackQuery = @"insert into package (id, name, description, category, old_price, price, no_of_words, language, expiry_time, role_can_view, imgURL) values (? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
-        
-        [self.database executeUpdate:addPackQuery,pack.modelId,pack.name,pack.desc,pack.category,pack.oldPrice,pack.price,[NSString stringWithFormat:@"%i",pack.wordsTotal],pack.language,pack.expiryTime, pack.roleCanView, pack.imgURL?:@""];
-    }
-    [self.database close];
+
+-(void) finishRetrieveOnlineDB
+{
+    [[DataEngine getInstance] saveLocalDBUpdateDate];
+    [localDBDelegate finishSetupDBSuccessful];
 }
-- (void)addSetsToDB:(NSArray *) setList{
-    [self.database open];
-    NSLog(@"Delete all from lset %@",[self.database executeUpdate:@"DELETE FROM lset"]?@"successful":@"failed");
-    for (LSet * set in setList) {
-        NSString *addWordQuery = @"insert into lset(id, name, description, language, package_id, order_number, imgURL) values (?, ?, ?, ?, ?, ?, ?)";
-        
-        [self.database executeUpdate:addWordQuery,set.modelId, set.name, set.desc, set.language, set.package_id, [NSString stringWithFormat:@"%i",set.orderNo], set.imgURL];
-    }
-    
-    [self.database close];
-}
+
+//======= ADD DATA TO LOCAL DB ===========//
 - (void)addWordsToDB:(NSArray *) wordList{
 
     [self.database open];
@@ -151,26 +195,47 @@ static DataEngine * instance = nil;
     }
     
     [self.database close];
+    self.wordList = [self getWordsFromDB];
 }
 - (void)addSetWordsToDB:(NSArray *) setwordList{
     
     [self.database open];
-    //NSLog(@"Delete all from set_word %@",[self.database executeUpdate:@"DELETE FROM set_word"]?@"successful":@"failed");
     
     for (SetWord * setword in setwordList) {
         NSString *addSWordQuery = @"insert into set_word (word_id, set_id) values (?, ?)";
         
         [self.database executeUpdate:addSWordQuery,setword.wordId,setword.setId];
     }
-    FMResultSet *results = [self.database executeQuery:@"select * from set_word"];
-     
-     while([results next]) {
-         NSLog(@"setword[%@][%@]",[results stringForColumn:@"word_id"], [results stringForColumn:@"set_id"]);
-     }
-    
     [self.database close];
     
 }
+- (void)addSetsToDB:(NSArray *) setList{
+    [self.database open];
+    //NSLog(@"Delete all from lset %@",[self.database executeUpdate:@"DELETE FROM lset"]?@"successful":@"failed");
+    for (LSet * set in setList) {
+        NSString *addWordQuery = @"insert into lset(id, name, description, language, package_id, order_number, imgURL) values (?, ?, ?, ?, ?, ?, ?)";
+        
+        [self.database executeUpdate:addWordQuery,set.modelId, set.name, set.desc, set.language, set.package_id, [NSString stringWithFormat:@"%i",set.orderNo], set.imgURL];
+    }
+    
+    [self.database close];
+    self.setList = [self getSetFromDB];
+}
+- (void)addPackagesToDB:(NSArray *) packList{
+    
+    [self.database open];
+    
+    for (Package * pack in packList) {
+        NSString *addPackQuery = @"insert into package (id, name, description, category, old_price, price, no_of_words, language, expiry_time, role_can_view, imgURL) values (? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+        
+        [self.database executeUpdate:addPackQuery,pack.modelId,pack.name,pack.desc,pack.category,pack.oldPrice,pack.price,[NSString stringWithFormat:@"%i",pack.wordsTotal],pack.language,pack.expiryTime, pack.roleCanView, pack.imgURL?:@""];
+    }
+    [self.database close];
+    self.packageList = [self getPackagesFromDB];
+    [self finishRetrieveOnlineDB];
+}
+
+//======= GET DATA FROM LOCAL DB ===========//
 -(NSArray *) getWordsFromDB
 {
     NSMutableArray * wordList = [NSMutableArray new];
@@ -181,10 +246,11 @@ static DataEngine * instance = nil;
     while([results next]) {
         NSDictionary * wordDict = @{@"id":      [results stringForColumn:@"id"],
                                    @"name":     [results stringForColumn:@"name"],
-                                   @"phonetic": [results stringForColumn:@"phonetic"],
+                                   @"phonentic": [results stringForColumn:@"phonetic"],
                                    @"word_type":[results stringForColumn:@"word_type"]};
         Word *word = [[Word alloc] initWithDict:wordDict];
         [wordList addObject:word];
+        
     }
     
     FMResultSet *results2 = [self.database executeQuery:@"select * from meaning"];
@@ -202,6 +268,7 @@ static DataEngine * instance = nil;
             [word.meaningList addObject:meaning];
         }
     }
+    
     return wordList;
 }
 -(NSArray *) getPackagesFromDB
@@ -248,4 +315,5 @@ static DataEngine * instance = nil;
     }
     return setList;
 }
+
 @end

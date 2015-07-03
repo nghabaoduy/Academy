@@ -13,7 +13,7 @@
 
 @synthesize sharedDataDelegate;
 
-- (void)updateSharedData {
+-(void) updateSharedData:(returnSharedData) block{
     NSString *apiPath = @"api/sharedData";
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", [[DataEngine getInstance] requestURL], apiPath];    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
@@ -28,14 +28,15 @@
                 self.latestDataUpdateDate = dataDict[@"value"];
             }
         }
-        [sharedDataDelegate SharedDataGetSuccessful:self];
+        block(self);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-        NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        //NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        //NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
+        //id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
-        [sharedDataDelegate SharedDataGetFailed:json[@"message"] StatusCode:@([operation.response statusCode])];
+        block(nil);
+        //[sharedDataDelegate SharedDataGetFailed:json[@"message"] StatusCode:@([operation.response statusCode])];
     }];
 }
 @end

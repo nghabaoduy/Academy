@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Package.h"
 @interface PackageDetailVC : UIViewController
+
+@property (nonatomic, strong) Package *curPack;
 
 @end

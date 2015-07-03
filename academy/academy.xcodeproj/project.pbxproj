@@ -42,6 +42,8 @@
 		9AF369E61B44D5320094FAFD /* AppInitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF369E51B44D5320094FAFD /* AppInitVC.m */; };
 		9AF369EC1B4525940094FAFD /* SetWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF369EB1B4525940094FAFD /* SetWord.m */; };
 		9AF369F01B4557DC0094FAFD /* TestModePickView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF369EF1B4557DC0094FAFD /* TestModePickView.xib */; };
+		9AF6F6141B46E6CC004DD63F /* ShelfColHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */; };
+		9AF6F6171B46E717004DD63F /* ShelfCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
@@ -290,6 +292,9 @@
 		9AF369EA1B4525940094FAFD /* SetWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetWord.h; sourceTree = "<group>"; };
 		9AF369EB1B4525940094FAFD /* SetWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetWord.m; sourceTree = "<group>"; };
 		9AF369EF1B4557DC0094FAFD /* TestModePickView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestModePickView.xib; sourceTree = "<group>"; };
+		9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfColHeader.xib; sourceTree = "<group>"; };
+		9AF6F6151B46E717004DD63F /* ShelfCollectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfCollectionHeader.h; sourceTree = "<group>"; };
+		9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfCollectionHeader.m; sourceTree = "<group>"; };
 		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
@@ -595,6 +600,9 @@
 				9A15565E1B42DC1500B996B9 /* ShelfCollectionCell.h */,
 				9A15565F1B42DC1500B996B9 /* ShelfCollectionCell.m */,
 				9AEC2E191B438585005B8923 /* ShelfCellView.xib */,
+				9AF6F6151B46E717004DD63F /* ShelfCollectionHeader.h */,
+				9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */,
+				9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */,
 				9A15567E1B42E2D900B996B9 /* PackageDetailVC.h */,
 				9A15567F1B42E2D900B996B9 /* PackageDetailVC.m */,
 			);
@@ -1232,6 +1240,7 @@
 				AFC27BE51B0EEC5700225016 /* monitor.png in Resources */,
 				AFD6363E1B038E1000ABDB3C /* LaunchScreen.xib in Resources */,
 				9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */,
+				9AF6F6141B46E6CC004DD63F /* ShelfColHeader.xib in Resources */,
 				AFCB0D321B11F89A00F5688F /* CardTypeAnswer.xib in Resources */,
 				AFC27BF71B0EEC5700225016 /* statistic.png in Resources */,
 				AF2B6EFC1B1CC3C500079B4B /* SetIconView.xib in Resources */,
@@ -1427,6 +1436,7 @@
 				AFE6DEEB1B03CEDC003E30CA /* SetSelectVC.m in Sources */,
 				AF605EF71B2F25E300134BEE /* ShelfHeader.m in Sources */,
 				AFFB76B31B0A4D0B001489F1 /* PackageInfoVC.m in Sources */,
+				9AF6F6171B46E717004DD63F /* ShelfCollectionHeader.m in Sources */,
 				AFD636331B038E1000ABDB3C /* academy.xcdatamodeld in Sources */,
 				AF3EA00F1B31E5380045D8D1 /* TermNAgreementDisplayer.m in Sources */,
 				AF3EA0121B32C0DC0045D8D1 /* AppSettingVC.m in Sources */,
@@ -1499,8 +1509,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"STORYBOARD=1",
 					"COCOAPODS=1",
+					"STORYBOARD=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1539,8 +1549,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"STORYBOARD=1",
 					"COCOAPODS=1",
+					"STORYBOARD=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

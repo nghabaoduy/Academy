@@ -25,4 +25,6 @@
 
 @property (nonatomic, retain) NSMutableArray * setList;
 @property (nonatomic, retain) NSString * imgURL;
+
+-(NSArray *) getWordsFromPackageWithQuantity:(int) quan;
 @end

@@ -25,16 +25,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
-    [[MyUIEngine sharedUIEngine] appDelegateUICustomzation];
-    [self.window.layer setCornerRadius:5.0];
-    [self.window.layer setMasksToBounds:YES];
-    self.window.layer.opaque = NO;
-    
-    
-
-    
+ 
 #if !defined(STORYBOARD)
     self.dynamicsDrawerViewController = [MSDynamicsDrawerViewController new];
 #else
@@ -56,14 +47,20 @@
     
     // Transition to the first view controller
     
-    [menuViewController transitionToViewController:ControllerLogin animated:NO];
+    [menuViewController transitionToViewController:ControllerAppInit animated:NO];
      
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.dynamicsDrawerViewController;
     [self.window makeKeyAndVisible];
     [self.window addSubview:self.windowBackground];
     [self.window sendSubviewToBack:self.windowBackground];
-     
+    
+    [[MyUIEngine sharedUIEngine] appDelegateUICustomzation];
+    [self.window.layer setCornerRadius:5.0];
+    [self.window.layer setMasksToBounds:YES];
+    self.window.layer.opaque = NO;
+    
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

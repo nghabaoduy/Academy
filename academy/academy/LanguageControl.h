@@ -18,5 +18,6 @@ typedef NS_ENUM(NSUInteger, LanguageIndexType) {
 + (id)getInstance;
 -(NSString *) getLanguageVoiceCodeByLang:(NSString *) lang;
 -(LanguageIndexType) getLanguageIndexTypeByLang:(NSString *) lang;
+-(NSString *) getLanguageTranslateByLang:(NSString *) lang;
 -(int) getFontSizeByLang:(NSString *) lang;
 @end

@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_AMSmoothAlert 1
 #define COCOAPODS_VERSION_PATCH_AMSmoothAlert 0
 
+// ASProgressPopUpView
+#define COCOAPODS_POD_AVAILABLE_ASProgressPopUpView
+#define COCOAPODS_VERSION_MAJOR_ASProgressPopUpView 0
+#define COCOAPODS_VERSION_MINOR_ASProgressPopUpView 7
+#define COCOAPODS_VERSION_PATCH_ASProgressPopUpView 1
+
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1
@@ -83,12 +89,6 @@
 #define COCOAPODS_VERSION_MAJOR_DDHTimerControl 1
 #define COCOAPODS_VERSION_MINOR_DDHTimerControl 0
 #define COCOAPODS_VERSION_PATCH_DDHTimerControl 0
-
-// ECSlidingViewController
-#define COCOAPODS_POD_AVAILABLE_ECSlidingViewController
-#define COCOAPODS_VERSION_MAJOR_ECSlidingViewController 2
-#define COCOAPODS_VERSION_MINOR_ECSlidingViewController 0
-#define COCOAPODS_VERSION_PATCH_ECSlidingViewController 3
 
 // FBSDKCoreKit
 #define COCOAPODS_POD_AVAILABLE_FBSDKCoreKit

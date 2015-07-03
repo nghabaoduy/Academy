@@ -22,6 +22,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AMSmoothAlert (1.1):
     - GPUImage
+  - ASProgressPopUpView (0.7.1)
   - Bolts (1.1.5):
     - Bolts/AppLinks (= 1.1.5)
     - Bolts/Tasks (= 1.1.5)
@@ -30,7 +31,6 @@ PODS:
   - Bolts/Tasks (1.1.5)
   - CustomIOSAlertView (0.9.3)
   - DDHTimerControl (1.0.0)
-  - ECSlidingViewController (2.0.3)
   - FBSDKCoreKit (4.2.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.2.0)
@@ -63,9 +63,9 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - AMSmoothAlert (~> 1.0)
+  - ASProgressPopUpView (~> 0.7.1)
   - CustomIOSAlertView (~> 0.9.3)
   - DDHTimerControl
-  - ECSlidingViewController (~> 2.0.3)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -81,10 +81,10 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   AMSmoothAlert: 108cf0fc3eea9256ccfdcd9deaa283999ac1e47e
+  ASProgressPopUpView: 175e61016b575db7f6141bbc8599362d714ec328
   Bolts: aac24961496d504aa56fc267cde95162a71bac39
   CustomIOSAlertView: 94d2401e34fcfb0ac0134679d6947f5e251b0446
   DDHTimerControl: 5dfe11a9d3cfe70ebe054437ad4ef7e89a99fe2a
-  ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   FBSDKCoreKit: 84b3616a361801f190e43a9909caead7bb6087c7
   FBSDKLoginKit: 57e37106af12c9e264e473dcb75d7decdbb07fe4
   FBSDKShareKit: 931746fdf8fb95efd6e12310ec14b2b3295e2aec

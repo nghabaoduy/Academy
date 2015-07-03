@@ -18,6 +18,8 @@
 #import "ProfileVC.h"
 #import "AppSettingVC.h"
 #import "DataEngine.h"
+#import "AppInitVC.h"
+#import "ShelfCollectionVC.h"
 
 NSString * const MenuCellReuseIdentifier = @"menuCell";
 NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
@@ -33,6 +35,7 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 
 @property (nonatomic, strong) NSDictionary *paneViewControllerTitles;
 #if defined(STORYBOARD)
+@property (nonatomic, strong) NSDictionary *paneViewControllerStoryboards;
 @property (nonatomic, strong) NSDictionary *paneViewControllerIdentifiers;
 #else
 @property (nonatomic, strong) NSDictionary *paneViewControllerClasses;
@@ -112,6 +115,7 @@ static SideMenuVC * instance = nil;
 {
     self.paneViewControllerType = NSUIntegerMax;
     self.paneViewControllerTitles = @{
+                                      @(ControllerAppInit): @"",
                                       @(ControllerLogin) : @"Đăng Nhập",
                                       @(ControllerUserShelf) : @"Tủ Sách",
                                       @(ControllerShop) : @"Thư Viện",
@@ -120,16 +124,26 @@ static SideMenuVC * instance = nil;
                                       };
 #if !defined(STORYBOARD)
     self.paneViewControllerClasses = @{
+                                       @(ControllerAppInit) : [AppInitVC class],
                                        @(ControllerLogin) : [LoginVC class],
-                                       @(ControllerUserShelf) : [UserShelfVC class],
-                                       @(ControllerShop) : [ShopVC Class],
-                                       @(ControllerProfile) : [ProfileVC Class],
-                                       @(ControllerSetting) : [AppSettingVC Class]
+                                       @(ControllerUserShelf) : [ShelfCollectionVC class],
+                                       @(ControllerShop) : [ShopVC class],
+                                       @(ControllerProfile) : [ProfileVC class],
+                                       @(ControllerSetting) : [AppSettingVC class]
                                        };
 #else
+    self.paneViewControllerStoryboards = @{
+                                           @(ControllerAppInit) : @"Main",
+                                           @(ControllerLogin) : @"Main",
+                                           @(ControllerUserShelf) : @"PackageStoryboard",
+                                           @(ControllerShop) : @"Main",
+                                           @(ControllerProfile) : @"Main",
+                                           @(ControllerSetting) : @"Main"
+                                           };
     self.paneViewControllerIdentifiers = @{
+                                           @(ControllerAppInit) : @"appInitView",
                                            @(ControllerLogin) : @"loginView",
-                                           @(ControllerUserShelf) : @"userShelfView",
+                                           @(ControllerUserShelf) : @"shelfCollectionView",
                                            @(ControllerShop) : @"shopView",
                                            @(ControllerProfile) : @"profileView",
                                            @(ControllerSetting) : @"appSettingView"
@@ -192,7 +206,8 @@ static SideMenuVC * instance = nil;
     BOOL animateTransition = self.dynamicsDrawerViewController.paneViewController != nil && animated;
     
 #if defined(STORYBOARD)
-    UIViewController *paneViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.paneViewControllerIdentifiers[@(paneViewControllerType)]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:self.paneViewControllerStoryboards[@(paneViewControllerType)] bundle:nil];
+    UIViewController *paneViewController = [storyboard instantiateViewControllerWithIdentifier:self.paneViewControllerIdentifiers[@(paneViewControllerType)]];
 #else
     Class paneViewControllerClass = self.paneViewControllerClasses[@(paneViewControllerType)];
     UIViewController *paneViewController = (UIViewController *)[paneViewControllerClass new];

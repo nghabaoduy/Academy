@@ -9,6 +9,7 @@
 #import "Package.h"
 #import "LSet.h"
 #import "User.h"
+#import "Word.h"
 #import <AFNetworking/AFNetworking.h>
 
 @implementation Package
@@ -85,6 +86,26 @@
 
         [self.delegate model:self ErrorMessage:json[@"message"] StatusCode:@([operation.response statusCode])];
     }];
+}
+
+-(NSArray *) getWordsFromPackageWithQuantity:(int) quan
+{
+    NSMutableArray *wordList = [NSMutableArray new];
+    NSMutableArray *returnWordList = [NSMutableArray new];
+    for (LSet * set in setList) {
+        [wordList addObjectsFromArray:set.wordList];
+    }
+    if (quan > wordList.count) {
+        return nil;
+    }
+    for (int i=0; i<quan; i++) {
+        Word *word = [wordList objectAtIndex:arc4random_uniform(wordList.count)];
+        while ([returnWordList containsObject:word]) {
+            word = [wordList objectAtIndex:arc4random_uniform(wordList.count)];
+        }
+        [returnWordList addObject:word];
+    }
+    return returnWordList;
 }
 
 @end
