@@ -25,6 +25,7 @@
 #import "UIImageView+AFNetworking.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "SideMenuVC.h"
+#import "PackageTryBuyStatus.h"
 
 @interface ShelfCollectionVC () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, YSLTransitionAnimatorDataSource, ModelDelegate, AuthDelegate>
 
@@ -190,8 +191,7 @@ int defaultNavY;
     UserPackage * curUserPackage = [langArr objectAtIndex:indexPath.row];
     Package *pack = curUserPackage.package;
     
-    [cell.titleLb setText:pack.name];
-    [cell.subTitleLb setText:[NSString stringWithFormat:@"%i Từ Vựng",pack.wordsTotal]];
+    [cell setCellWithPackage:pack];
     //get image name and assign
     NSString* imageName = [self.images objectAtIndex:arc4random_uniform(self.images.count)];
     cell.image = [UIImage imageNamed:imageName];

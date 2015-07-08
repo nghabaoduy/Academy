@@ -20,6 +20,7 @@
 #import "DataEngine.h"
 #import "AppInitVC.h"
 #import "ShelfCollectionVC.h"
+#import "ShopCollectionVC.h"
 
 NSString * const MenuCellReuseIdentifier = @"menuCell";
 NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
@@ -127,7 +128,7 @@ static SideMenuVC * instance = nil;
                                        @(ControllerAppInit) : [AppInitVC class],
                                        @(ControllerLogin) : [LoginVC class],
                                        @(ControllerUserShelf) : [ShelfCollectionVC class],
-                                       @(ControllerShop) : [ShopVC class],
+                                       @(ControllerShop) : [ShopCollectionVC class],
                                        @(ControllerProfile) : [ProfileVC class],
                                        @(ControllerSetting) : [AppSettingVC class]
                                        };
@@ -136,7 +137,7 @@ static SideMenuVC * instance = nil;
                                            @(ControllerAppInit) : @"Main",
                                            @(ControllerLogin) : @"Main",
                                            @(ControllerUserShelf) : @"PackageStoryboard",
-                                           @(ControllerShop) : @"Main",
+                                           @(ControllerShop) : @"PackageStoryboard",
                                            @(ControllerProfile) : @"Main",
                                            @(ControllerSetting) : @"Main"
                                            };
@@ -144,7 +145,7 @@ static SideMenuVC * instance = nil;
                                            @(ControllerAppInit) : @"appInitView",
                                            @(ControllerLogin) : @"loginView",
                                            @(ControllerUserShelf) : @"shelfCollectionView",
-                                           @(ControllerShop) : @"shopView",
+                                           @(ControllerShop) : @"shopCollectionView",
                                            @(ControllerProfile) : @"profileView",
                                            @(ControllerSetting) : @"appSettingView"
                                            };

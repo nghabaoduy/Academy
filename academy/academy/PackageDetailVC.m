@@ -12,6 +12,9 @@
 #import "TOMSMorphingLabel.h"
 #import "CardInfoView.h"
 #import "Word.h"
+#import "PackageTryBuyStatus.h"
+#import "SoundEngine.h"
+#import <pop/POP.h>
 @interface PackageDetailVC () <YSLTransitionAnimatorDataSource, CardInfoViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
@@ -146,11 +149,11 @@
 - (void) animateViewAppear
 {
     
-    
+    PackageTryBuyStatus * status = (PackageTryBuyStatus*)[PackageTryBuyStatus getModelById:curPack.modelId from:[DataEngine getInstance].packStatusList];
     [packageNameLb setText:curPack.name withCompletionBlock:^{
         [subTitleLb setText:[NSString stringWithFormat:@"%i Từ Vựng",curPack.wordsTotal] withCompletionBlock:^{
-            [viewCountLb setText:@"520"];
-            [downloadCountLb setText:@"158" withCompletionBlock:^{
+            [viewCountLb setText:[NSString stringWithFormat:@"%i",status.tryCount]];
+            [downloadCountLb setText:[NSString stringWithFormat:@"%i",status.buyCount] withCompletionBlock:^{
                 if ([curPack.price intValue] == 0) {
                     [priceLb setText:@"FREE"];
                 }
@@ -258,5 +261,19 @@
 -(NSString *)CardInfoViewGetLanguage
 {
     return curPack.language;
+}
+-(void)cardIsTapped:(CardInfoView *)card
+{
+    POPSpringAnimation *anim;
+    if ((anim = [card.layer pop_animationForKey:@"cardShake"])) {
+        return;
+    }
+    [[SoundEngine getInstance] readWord:card.wordLb.text language:curPack.language];
+    POPSpringAnimation *shake = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    shake.springBounciness = 20;
+    shake.velocity = @(3000);
+    [card.layer pop_addAnimation:shake forKey:@"cardShake"];
+    
+    
 }
 @end

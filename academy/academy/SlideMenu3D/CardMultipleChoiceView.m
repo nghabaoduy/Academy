@@ -27,9 +27,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"CardTestMultipleChoice" owner:self options:nil];
-        self.bounds = self.view.bounds;
-        [self addSubview:self.view];
+        [self initView];
     }
     return self;
 }
@@ -37,12 +35,34 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"CardTestMultipleChoice" owner:self options:nil];
-        self.bounds = self.view.bounds;
-        [self addSubview:self.view];
+        [self initView];
     }
     return self;
 }
+
+-(void) initView
+{
+    [[NSBundle mainBundle] loadNibNamed:@"CardTestMultipleChoice" owner:self options:nil];
+    self.bounds = self.view.bounds;
+    [self addSubview:self.view];
+    
+    choice1Btn.titleLabel.numberOfLines = 2;
+    choice1Btn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    choice1Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    choice2Btn.titleLabel.numberOfLines = 2;
+    choice2Btn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    choice2Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    choice3Btn.titleLabel.numberOfLines = 2;
+    choice3Btn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    choice3Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    choice4Btn.titleLabel.numberOfLines = 2;
+    choice4Btn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    choice4Btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+}
+
 -(void)clearDisplay
 {
     [self hideAllComponent];

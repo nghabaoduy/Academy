@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserPackage.h"
 #define IMAGE_HEIGHT 200
 #define IMAGE_OFFSET_SPEED 25
 
@@ -25,11 +26,15 @@
 @property (weak, nonatomic) IBOutlet UIView *imageContainerHolder;
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *viewCountLb;
+@property (weak, nonatomic) IBOutlet UILabel *downloadCountLb;
+@property (weak, nonatomic) IBOutlet UILabel *priceLb;
 
 /*
  Image will always animate according to the imageOffset provided. Higher the value means higher offset for the image
  */
 @property (nonatomic, assign, readwrite) CGPoint imageOffset;
 
+-(void) setCellWithPackage:(Package *) pack;
 @end
 

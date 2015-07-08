@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
@@ -9,15 +10,21 @@
         </mutableArray>
         <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
             <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
+            <string>GothamRounded-Book</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShelfCollectionCell">
             <connections>
+                <outlet property="downloadCountLb" destination="tPh-eM-lAq" id="vlc-0L-ga8"/>
                 <outlet property="imageContainerHolder" destination="pGO-wS-pB0" id="RR4-ac-dZR"/>
+                <outlet property="priceLb" destination="gJz-69-mIl" id="LHu-Mc-aHl"/>
                 <outlet property="subTitleLb" destination="KSi-HE-ciR" id="SpV-O8-6hz"/>
                 <outlet property="titleLb" destination="z9k-UI-5fn" id="YK7-bE-mhG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="vPt-bX-tfC"/>
+                <outlet property="viewCountLb" destination="Q1s-8e-9Mf" id="2s2-EG-NqK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -32,6 +39,50 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
                     <color key="backgroundColor" red="0.27450980390000002" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="viewIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="RLe-1W-llD">
+                    <rect key="frame" x="15" y="165" width="22" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="Xh5-oD-zyr"/>
+                        <constraint firstAttribute="width" constant="22" id="b4e-Z3-J2S"/>
+                        <constraint firstAttribute="width" constant="22" id="fQg-4L-vqa"/>
+                        <constraint firstAttribute="height" constant="22" id="z8F-62-uR8"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Xh5-oD-zyr"/>
+                            <exclude reference="fQg-4L-vqa"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="21" y="6" width="22" height="22"/>
+                        <mask key="constraints">
+                            <include reference="Xh5-oD-zyr"/>
+                            <include reference="fQg-4L-vqa"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="downloadIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="84o-xv-Scb">
+                    <rect key="frame" x="93" y="165" width="22" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="oU5-gI-fMk"/>
+                        <constraint firstAttribute="width" constant="22" id="qjl-aQ-njo"/>
+                        <constraint firstAttribute="width" constant="22" id="tbm-ip-UB4"/>
+                        <constraint firstAttribute="height" constant="22" id="ttH-xb-X0o"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="oU5-gI-fMk"/>
+                            <exclude reference="tbm-ip-UB4"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="81" y="6" width="22" height="22"/>
+                        <mask key="constraints">
+                            <include reference="oU5-gI-fMk"/>
+                            <include reference="tbm-ip-UB4"/>
+                        </mask>
+                    </variation>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="IETLS &amp; TOEFL Basic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9k-UI-5fn">
                     <rect key="frame" x="20" y="23" width="296" height="34"/>
                     <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="21"/>
@@ -48,22 +99,104 @@
                     <color key="shadowColor" red="0.27450980390000002" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="1" height="1"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="152" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1s-8e-9Mf">
+                    <rect key="frame" x="41" y="166" width="51" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="37" id="d90-MW-uRS"/>
+                        <constraint firstAttribute="height" constant="21" id="rvm-XH-DH1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="28" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPh-eM-lAq">
+                    <rect key="frame" x="116" y="166" width="51" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="51" id="KUe-oX-jBR"/>
+                        <constraint firstAttribute="height" constant="21" id="d5x-Qb-8Zk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FREE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJz-69-mIl">
+                    <rect key="frame" x="182" y="166" width="222" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="ehV-Q3-YH1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vss-lw-HyH">
+                    <rect key="frame" x="0.0" y="190" width="414" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Vss-lw-HyH" secondAttribute="height" multiplier="18:1" id="3tS-k3-ax4"/>
+                        <constraint firstAttribute="width" secondItem="Vss-lw-HyH" secondAttribute="height" multiplier="138:7" id="Lg1-IZ-fZE"/>
+                        <constraint firstAttribute="width" secondItem="Vss-lw-HyH" secondAttribute="height" multiplier="414:19" id="dt9-5a-eW0"/>
+                        <constraint firstAttribute="width" secondItem="Vss-lw-HyH" secondAttribute="height" multiplier="207:10" id="ekM-3D-xm8"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="3tS-k3-ax4"/>
+                            <exclude reference="Lg1-IZ-fZE"/>
+                            <exclude reference="dt9-5a-eW0"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Q1s-8e-9Mf" firstAttribute="leading" secondItem="RLe-1W-llD" secondAttribute="trailing" constant="4" id="0gx-2c-Gev"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="top" secondItem="gJz-69-mIl" secondAttribute="bottom" id="5Iq-ER-9qi"/>
+                <constraint firstItem="RLe-1W-llD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7oL-sv-efz"/>
                 <constraint firstItem="bSP-i2-aAd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9iP-7e-WhC"/>
+                <constraint firstAttribute="trailing" secondItem="Vss-lw-HyH" secondAttribute="trailing" id="GoS-VP-lXl"/>
                 <constraint firstAttribute="trailing" secondItem="bSP-i2-aAd" secondAttribute="trailing" id="GtM-0y-hG1"/>
+                <constraint firstAttribute="bottom" secondItem="gJz-69-mIl" secondAttribute="bottom" constant="23" id="HNi-Wf-Yl3"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="top" secondItem="Q1s-8e-9Mf" secondAttribute="bottom" id="LEe-ry-Kld"/>
+                <constraint firstItem="Q1s-8e-9Mf" firstAttribute="leading" secondItem="RLe-1W-llD" secondAttribute="trailing" constant="4" id="MbU-nO-hYX"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="top" secondItem="tPh-eM-lAq" secondAttribute="bottom" id="MjI-bB-DgL"/>
+                <constraint firstAttribute="trailing" secondItem="gJz-69-mIl" secondAttribute="trailing" constant="10" id="NNG-fH-g98"/>
                 <constraint firstAttribute="bottom" secondItem="bSP-i2-aAd" secondAttribute="bottom" id="TG8-PZ-8EW"/>
                 <constraint firstItem="bSP-i2-aAd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Urk-k8-oEj"/>
+                <constraint firstAttribute="bottom" secondItem="Q1s-8e-9Mf" secondAttribute="bottom" constant="23" id="ZGk-Qw-ANG"/>
+                <constraint firstItem="gJz-69-mIl" firstAttribute="leading" secondItem="tPh-eM-lAq" secondAttribute="trailing" constant="15" id="a0X-8T-Hj3"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="top" secondItem="RLe-1W-llD" secondAttribute="bottom" constant="4" id="ahY-zZ-KNX"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="top" secondItem="84o-xv-Scb" secondAttribute="bottom" id="bUh-73-zzM"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="d7T-Lt-nNY"/>
+                <constraint firstAttribute="bottom" secondItem="tPh-eM-lAq" secondAttribute="bottom" constant="23" id="eNK-yv-Iif"/>
+                <constraint firstItem="Vss-lw-HyH" firstAttribute="top" secondItem="RLe-1W-llD" secondAttribute="bottom" id="hr5-LY-8Yr"/>
+                <constraint firstAttribute="bottom" secondItem="RLe-1W-llD" secondAttribute="bottom" constant="23" id="ieU-B6-zOs"/>
+                <constraint firstItem="84o-xv-Scb" firstAttribute="leading" secondItem="Q1s-8e-9Mf" secondAttribute="trailing" constant="1" id="jNx-77-ZwQ"/>
+                <constraint firstItem="tPh-eM-lAq" firstAttribute="leading" secondItem="84o-xv-Scb" secondAttribute="trailing" constant="1" id="oaq-Xb-BhL"/>
+                <constraint firstAttribute="bottom" secondItem="84o-xv-Scb" secondAttribute="bottom" constant="23" id="s5e-yS-UaE"/>
+                <constraint firstAttribute="bottom" secondItem="Vss-lw-HyH" secondAttribute="bottom" id="tlq-kJ-cW4"/>
+                <constraint firstItem="84o-xv-Scb" firstAttribute="leading" secondItem="RLe-1W-llD" secondAttribute="trailing" constant="38" id="yTB-B8-BJW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ieU-B6-zOs"/>
+                    <exclude reference="0gx-2c-Gev"/>
+                    <exclude reference="ZGk-Qw-ANG"/>
+                    <exclude reference="s5e-yS-UaE"/>
+                    <exclude reference="yTB-B8-BJW"/>
+                    <exclude reference="ahY-zZ-KNX"/>
+                    <exclude reference="eNK-yv-Iif"/>
+                    <exclude reference="HNi-Wf-Yl3"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="311" y="417"/>
         </view>
     </objects>
     <resources>
         <image name="ShelfCellBG" width="1242" height="631"/>
+        <image name="downloadIcon.png" width="128" height="128"/>
+        <image name="viewIcon.png" width="128" height="128"/>
     </resources>
 </document>

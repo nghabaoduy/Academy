@@ -7,6 +7,7 @@
 //
 
 #import "LanguageControl.h"
+#import <CoreFoundation/CoreFoundation.h>
 
 @implementation LanguageControl{
     NSDictionary *languageVoiceCodeDict;
@@ -27,7 +28,7 @@ static LanguageControl * instance = nil;
         languageVoiceCodeDict = @{
                                   @"English"    : @"en-au",
                                   @"Chinese"    : @"zh-TW",
-                                  @"French"     : @"fr-FR",
+                                  @"French"     : @"fr-CA",
                                   @"German"     : @"de-DE",
                                   @"Hindi"      : @"hi-IN",
                                   @"Italian"    : @"it-IT",
@@ -86,5 +87,13 @@ static LanguageControl * instance = nil;
         }
     }
     return @"en-au";
+}
+
+-(NSString *) getPinyinOfWord:(NSString *) chineseWord
+{
+    CFStringRef convertedString = (__bridge CFStringRef)chineseWord;
+    CFMutableStringRef string = CFStringCreateMutableCopy(NULL, 0, convertedString);
+    CFStringTransform(string, NULL, kCFStringTransformMandarinLatin, NO);
+    return [NSString stringWithFormat:@"%@",string];
 }
 @end

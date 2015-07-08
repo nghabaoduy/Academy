@@ -39,6 +39,7 @@ typedef void(^completion)(BOOL finished);
 @property (nonatomic, retain) NSArray * packageList;
 @property (nonatomic, retain) NSArray * setList;
 @property (nonatomic, retain) NSArray * wordList;
+@property (nonatomic, retain) NSArray * packStatusList;
 @property (nonatomic, retain) FMDatabase *database;
 @property (nonatomic, retain) NSString * localDBUpdateDate;
 
@@ -57,4 +58,6 @@ typedef void(^completion)(BOOL finished);
 
 -(void) checkIfNeedUpdateData:(needUpdate) block;
 -(void) saveLocalDBUpdateDate;
+
+- (void)refreshPackStatusInDB:(NSArray *) packStatusLis completion:(completion) block;
 @end

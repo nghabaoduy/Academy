@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YALSunnyRefreshControl.h"
 
 @interface ShelfCollectionVC : UIViewController
 @end

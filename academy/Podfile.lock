@@ -56,6 +56,7 @@ PODS:
   - MSDynamicsDrawerViewController (1.5.1)
   - PNChart (0.8.3):
     - UICountingLabel (~> 1.2.0)
+  - pop (1.0.7)
   - SIAlertView (1.3)
   - TOMSMorphingLabel (0.5.1)
   - UICountingLabel (1.2.0)
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.5)
   - MSDynamicsDrawerViewController (~> 1.5.1)
   - PNChart (~> 0.5)
+  - pop (~> 1.0)
   - SIAlertView (~> 1.3)
   - TOMSMorphingLabel (~> 0.5)
 
@@ -95,6 +97,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MSDynamicsDrawerViewController: 2874df90f5e9453dc7d4e32f8038b50615d4baa7
   PNChart: 8d81e061ec4845915184755d8da84f385ca1cb28
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   SIAlertView: 20c794b55eaf44d888773ea51647cf8907723919
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa

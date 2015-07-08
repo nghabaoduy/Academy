@@ -51,7 +51,8 @@
              @"imgURL" : imgURL ?: @"",
              @"sets":[self getSetDictList],
               @"role_can_view" : self.roleCanView ?: @"",
-              @"language" : self.language ?: @""
+              @"language" : self.language ?: @"",
+             @"orderCode":self.orderCode?:@""
              };
 }
 -(NSArray *) getSetDictList

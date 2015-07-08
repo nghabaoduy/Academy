@@ -236,13 +236,13 @@
         case LanguageIndexTypeWord:
         {
             textRange = [textView.tokenizer rangeEnclosingPosition:tapPosition withGranularity:UITextGranularityWord inDirection:UITextLayoutDirectionRight];
-            NSLog(@"wordRange = %@", textRange);
+            //NSLog(@"wordRange = %@", textRange);
         }
             break;
         case LanguageIndexTypeCharacter:
         {
             textRange = [textView characterRangeAtPoint:location];
-            NSLog(@"charRange = %@", textRange);
+            //NSLog(@"charRange = %@", textRange);
         }
             break;
         case LanguageIndexTypeTypeCount:
@@ -259,7 +259,7 @@
     
     //return string
     NSString * tappedWord = [textView textInRange:textRange];
-    NSLog(@"word = %@",tappedWord);
+    //NSLog(@"word = %@",tappedWord);
     if ([tappedWord isEqualToString:@""]) {
         [delegate cardIsTapped:self];
         return NO;
@@ -271,13 +271,17 @@
             
             CGPoint newPos = CGPointMake(textView.frame.origin.x + result1.origin.x + result1.size.width/2,
                                          textView.frame.origin.y + result1.origin.y  + result1.size.height+2);
-            [mPopup displayText:[wordSubDict valueForKey:key] atPos:newPos];
+            NSString * displayText =[[self.delegate CardInfoViewGetLanguage] isEqualToString:@"Chinese"]?
+            [NSString stringWithFormat:@"[%@] %@",[[LanguageControl getInstance] getPinyinOfWord:key],[wordSubDict valueForKey:key]]:
+            [wordSubDict valueForKey:key];
+            [mPopup displayText:displayText atPos:newPos];
             return YES;
         }
     }
     [mPopup fadeOut];
     return NO;
 }
+
 -(NSRange) checkIfCharacters:(NSString*) chars inString:(NSString *)aString atRange:(NSRange) textRange isInWord:(NSString*) word
 {
     if ([chars isEqualToString:word])

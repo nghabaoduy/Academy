@@ -143,10 +143,10 @@
                                 <exclude reference="BOX-r0-sMm"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="PfY-b4-3X7"/>
-                                <exclude reference="fQM-yp-ExI"/>
                                 <exclude reference="IXY-f2-a1Q"/>
                                 <exclude reference="em7-aL-YXR"/>
+                                <exclude reference="PfY-b4-3X7"/>
+                                <exclude reference="fQM-yp-ExI"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -155,10 +155,10 @@
                                 <include reference="BOX-r0-sMm"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="PfY-b4-3X7"/>
-                                <include reference="fQM-yp-ExI"/>
                                 <include reference="IXY-f2-a1Q"/>
                                 <include reference="em7-aL-YXR"/>
+                                <include reference="PfY-b4-3X7"/>
+                                <include reference="fQM-yp-ExI"/>
                             </mask>
                         </variation>
                     </view>

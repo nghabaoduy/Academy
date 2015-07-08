@@ -11,6 +11,7 @@
 #import "Word.h"
 #import "SetWord.h"
 #import "LSet.h"
+#import "PackageTryBuyStatus.h"
 
 @implementation DataEngine
 {
@@ -158,7 +159,7 @@ static DataEngine * instance = nil;
     NSLog(@"Delete table set_word %@",[self.database executeUpdate:@"DROP TABLE set_word"]?@"successful":@"failed");
     NSLog(@"Delete table lset %@",[self.database executeUpdate:@"DROP TABLE lset"]?@"successful":@"failed");
     
-    [self.database executeUpdate:@"create table package(id text primary key, name text, description text, category text, old_price text, price text, no_of_words text, language text, expiry_time text, role_can_view text, imgURL text)"];
+    [self.database executeUpdate:@"create table package(id text primary key,order_code text, name text, description text, category text, old_price text, price text, no_of_words text, language text, expiry_time text, role_can_view text, imgURL text)"];
     [self.database executeUpdate:@"create table word(id text primary key, name text, phonetic text, word_type text)"];
     [self.database executeUpdate:@"create table meaning(id text primary key, word_id text, language text, content text, example text, word_sub_dict text)"];
     [self.database executeUpdate:@"create table set_word(word_id text, set_id text)"];
@@ -226,15 +227,34 @@ static DataEngine * instance = nil;
     [self.database open];
     
     for (Package * pack in packList) {
-        NSString *addPackQuery = @"insert into package (id, name, description, category, old_price, price, no_of_words, language, expiry_time, role_can_view, imgURL) values (? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+        NSString *addPackQuery = @"insert into package (id, order_code, name, description, category, old_price, price, no_of_words, language, expiry_time, role_can_view, imgURL) values (? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
         
-        [self.database executeUpdate:addPackQuery,pack.modelId,pack.name,pack.desc,pack.category,pack.oldPrice,pack.price,[NSString stringWithFormat:@"%i",pack.wordsTotal],pack.language,pack.expiryTime, pack.roleCanView, pack.imgURL?:@""];
+        [self.database executeUpdate:addPackQuery,pack.modelId,pack.orderCode,pack.name,pack.desc,pack.category,pack.oldPrice,pack.price,[NSString stringWithFormat:@"%i",pack.wordsTotal],pack.language,pack.expiryTime, pack.roleCanView, pack.imgURL?:@""];
     }
     [self.database close];
     self.packageList = [self getPackagesFromDB];
     [self finishRetrieveOnlineDB];
 }
 
+- (void)refreshPackStatusInDB:(NSArray *) packStatusList completion:(completion) block{
+    
+    [self.database open];
+    NSLog(@"Delete table packStatus %@",[self.database executeUpdate:@"DROP TABLE packStatus"]?@"successful":@"failed");
+    
+    [self.database executeUpdate:@"create table packStatus(id text primary key, try text, buy text)"];
+    
+    BOOL sucessful;
+    sucessful = YES;
+    for(PackageTryBuyStatus * status in packStatusList) {
+        NSString *addPackStatusQuery = @"insert into packStatus (id, try, buy) values (? ,? ,?)";
+        sucessful = sucessful && [self.database executeUpdate:addPackStatusQuery,status.modelId,[NSString stringWithFormat:@"%i",[status tryCount]],[NSString stringWithFormat:@"%i",[status buyCount]]];
+    }
+    [self.database close];
+    self.packStatusList = [self getPackageStatusFromDB];
+    //NSLog(@"packStatusList = %@",self.packStatusList);
+    block(sucessful);
+    
+}
 //======= GET DATA FROM LOCAL DB ===========//
 -(NSArray *) getWordsFromDB
 {
@@ -280,6 +300,7 @@ static DataEngine * instance = nil;
 
     while([results next]) {
         NSDictionary * packDict = @{@"id":            [results stringForColumn:@"id"],
+                                    @"order_code":    [results stringForColumn:@"order_code"],
                                     @"name":          [results stringForColumn:@"name"],
                                     @"description":   [results stringForColumn:@"description"],
                                     @"category":      [results stringForColumn:@"category"],
@@ -304,16 +325,31 @@ static DataEngine * instance = nil;
     
     while([results next]) {
         NSDictionary * setDict = @{@"id":            [results stringForColumn:@"id"],
-                                    @"name":          [results stringForColumn:@"name"],
-                                    @"description":   [results stringForColumn:@"description"],
-                                    @"language":      [results stringForColumn:@"language"],
+                                    @"name":         [results stringForColumn:@"name"],
+                                    @"description":  [results stringForColumn:@"description"],
+                                    @"language":     [results stringForColumn:@"language"],
                                     @"package_id":   [results stringForColumn:@"package_id"],
                                     @"order_number": [results stringForColumn:@"order_number"],
-                                    @"imgURL":        [results stringForColumn:@"imgURL"]?:@""};
+                                    @"imgURL":       [results stringForColumn:@"imgURL"]?:@""};
         LSet *set = [[LSet alloc] initWithDict:setDict];
         [setList addObject:set];
     }
     return setList;
 }
-
+-(NSArray *) getPackageStatusFromDB
+{
+    NSMutableArray * packStatusList = [NSMutableArray new];
+    
+    [self.database open];
+    FMResultSet *results = [self.database executeQuery:@"select * from packStatus"];
+    
+    while([results next]) {
+        NSDictionary * statusDict = @{@"package_id":[results stringForColumn:@"id"],
+                                      @"try":       [results stringForColumn:@"try"],
+                                      @"buy":       [results stringForColumn:@"buy"]};
+        PackageTryBuyStatus *status = [[PackageTryBuyStatus alloc] initWithDict:statusDict];
+        [packStatusList addObject:status];
+    }
+    return packStatusList;
+}
 @end

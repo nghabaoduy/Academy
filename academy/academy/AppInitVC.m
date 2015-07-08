@@ -12,10 +12,12 @@
 #import "Package.h"
 #import "SetWord.h"
 #import "LSet.h"
+#import "PackageTryBuyStatus.h"
 
 #import "SideMenuVC.h"
 #import "SIAlertView.h"
 #import "ASProgressPopUpView.h"
+
 @interface AppInitVC () <ModelDelegate, LocalDBSetupDelegate, ASProgressPopUpViewDataSource>
 
 @end
@@ -28,6 +30,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //disable sideMenu Drag
+    MSDynamicsDrawerViewController *dynamicsDrawerViewController = (MSDynamicsDrawerViewController *)self.navigationController.parentViewController;
+    
+    MSDynamicsDrawerDirectionActionForMaskedValues(dynamicsDrawerViewController.possibleDrawerDirection, ^(MSDynamicsDrawerDirection drawerDirection) {
+        [dynamicsDrawerViewController setPaneDragRevealEnabled:NO forDirection:drawerDirection];
+    });
     
     [self.navigationController setNavigationBarHidden:YES];
     [DataEngine getInstance].localDBDelegate = self;
@@ -131,7 +140,7 @@
 
 - (void)getAllSucessfull:(AModel*)model List:(NSMutableArray *)allList {
     if ([model class] == [Package class]) {
-        [progressView setProgress:1 animated:YES];
+        [progressView setProgress:0.8 animated:YES];
         [DataEngine getInstance].packageList = allList;
         NSLog(@"getAllSucessfull package List = [%i]",allList.count);
         [[DataEngine getInstance] addPackagesToDB:allList];
@@ -148,13 +157,13 @@
         NSLog(@"getAllSucessfull SetWord List = [%i]",allList.count);
         [[DataEngine getInstance] addSetWordsToDB:allList];
         [self intSetDB];
-        [progressView setProgress:0.7 animated:YES];
+        [progressView setProgress:0.6 animated:YES];
     }
     if ([model class] == [LSet class]) {
         NSLog(@"getAllSucessfull LSet List = [%i]",allList.count);
         [[DataEngine getInstance] addSetsToDB:allList];
         [self intPackageDB];
-        [progressView setProgress:0.85 animated:YES];
+        [progressView setProgress:0.7 animated:YES];
     }
     
 }
@@ -168,8 +177,15 @@
 -(void)finishSetupDBSuccessful
 {
     NSLog(@"finishSetupDBSuccessful");
-    [progressView setProgress:1.0 animated:YES];
-    [self performSelector:@selector(goToLoginView) withObject:self afterDelay:1];
+    [progressView setProgress:0.9 animated:YES];
+    //load package status
+    PackageTryBuyStatus *toRetriveStatus = [[PackageTryBuyStatus alloc] init];
+    [toRetriveStatus refreshPackStatuswithCompletion:^(BOOL finished) {
+        [progressView setProgress:1.0 animated:YES];
+        [self performSelector:@selector(goToLoginView) withObject:self afterDelay:1];
+    }];
+    
+    
 }
 -(void)finishSetupDBWithErrorMessage:(NSString *)error
 {

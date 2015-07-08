@@ -31,8 +31,12 @@
 		9A1556801B42E2D900B996B9 /* PackageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A15567F1B42E2D900B996B9 /* PackageDetailVC.m */; };
 		9A748F091B3DBD36000B74EC /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */; };
 		9A748F0A1B3DBD36000B74EC /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */; };
+		9ABE3CDC1B491BAA00924BFD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABE3CDB1B491BAA00924BFD /* CoreFoundation.framework */; };
+		9ABE3CDF1B49B3EA00924BFD /* PackageTryBuyStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE3CDE1B49B3EA00924BFD /* PackageTryBuyStatus.m */; };
 		9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */; };
 		9ADB5A081B3F231300AEB089 /* SharedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB5A071B3F231300AEB089 /* SharedData.m */; };
+		9AE757711B4A92C300F18D02 /* ShopCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE757701B4A92C300F18D02 /* ShopCollectionVC.m */; };
+		9AE757731B4AA97900F18D02 /* SetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AE757721B4AA97900F18D02 /* SetStoryboard.storyboard */; };
 		9AEC2E181B4380E9005B8923 /* ShelfCellBG in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E171B4380E9005B8923 /* ShelfCellBG */; };
 		9AEC2E1A1B438585005B8923 /* ShelfCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E191B438585005B8923 /* ShelfCellView.xib */; };
 		9AEC2E1D1B43D9E3005B8923 /* tryCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC2E1B1B43D9E3005B8923 /* tryCircle.png */; };
@@ -278,9 +282,15 @@
 		9A748F061B3DBD36000B74EC /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YALSunnyRefreshControl.h; path = YALSunnyRefreshControll/YALSunnyRefreshControl.h; sourceTree = "<group>"; };
 		9A748F071B3DBD36000B74EC /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YALSunnyRefreshControl.m; path = YALSunnyRefreshControll/YALSunnyRefreshControl.m; sourceTree = "<group>"; };
 		9A748F081B3DBD36000B74EC /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YALSunnyRefreshControl.xib; path = YALSunnyRefreshControll/YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
+		9ABE3CDB1B491BAA00924BFD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		9ABE3CDD1B49B3EA00924BFD /* PackageTryBuyStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageTryBuyStatus.h; sourceTree = "<group>"; };
+		9ABE3CDE1B49B3EA00924BFD /* PackageTryBuyStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageTryBuyStatus.m; sourceTree = "<group>"; };
 		9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uploadingAvatar.png; path = Graphics/uploadingAvatar.png; sourceTree = "<group>"; };
 		9ADB5A061B3F231300AEB089 /* SharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedData.h; sourceTree = "<group>"; };
 		9ADB5A071B3F231300AEB089 /* SharedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedData.m; sourceTree = "<group>"; };
+		9AE7576F1B4A92C300F18D02 /* ShopCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCollectionVC.h; sourceTree = "<group>"; };
+		9AE757701B4A92C300F18D02 /* ShopCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCollectionVC.m; sourceTree = "<group>"; };
+		9AE757721B4AA97900F18D02 /* SetStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SetStoryboard.storyboard; sourceTree = "<group>"; };
 		9AEC2E171B4380E9005B8923 /* ShelfCellBG */ = {isa = PBXFileReference; lastKnownFileType = file; name = ShelfCellBG; path = "Remake Graphics/ShelfCellBG"; sourceTree = "<group>"; };
 		9AEC2E191B438585005B8923 /* ShelfCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfCellView.xib; sourceTree = "<group>"; };
 		9AEC2E1B1B43D9E3005B8923 /* tryCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tryCircle.png; path = "Remake Graphics/tryCircle.png"; sourceTree = "<group>"; };
@@ -546,6 +556,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ABE3CDC1B491BAA00924BFD /* CoreFoundation.framework in Frameworks */,
 				AF7869AE1B10D0C1009BE37B /* AudioToolbox.framework in Frameworks */,
 				AF7869A91B10CBD3009BE37B /* AVFoundation.framework in Frameworks */,
 				558C8FE8CCAE9770C97B0B23 /* libPods-academy.a in Frameworks */,
@@ -597,6 +608,8 @@
 				9A1556611B42DD6C00B996B9 /* Resources */,
 				9A15565B1B42DB3600B996B9 /* ShelfCollectionVC.h */,
 				9A15565C1B42DB3600B996B9 /* ShelfCollectionVC.m */,
+				9AE7576F1B4A92C300F18D02 /* ShopCollectionVC.h */,
+				9AE757701B4A92C300F18D02 /* ShopCollectionVC.m */,
 				9A15565E1B42DC1500B996B9 /* ShelfCollectionCell.h */,
 				9A15565F1B42DC1500B996B9 /* ShelfCollectionCell.m */,
 				9AEC2E191B438585005B8923 /* ShelfCellView.xib */,
@@ -790,6 +803,7 @@
 				9AF369E51B44D5320094FAFD /* AppInitVC.m */,
 				AFD636371B038E1000ABDB3C /* Main.storyboard */,
 				9A1556591B42DA4C00B996B9 /* PackageStoryboard.storyboard */,
+				9AE757721B4AA97900F18D02 /* SetStoryboard.storyboard */,
 				AFD6363C1B038E1000ABDB3C /* LaunchScreen.xib */,
 				AF605F001B2F5A6700134BEE /* Images.xcassets */,
 				AFD636311B038E1000ABDB3C /* academy.xcdatamodeld */,
@@ -1047,6 +1061,8 @@
 				AF0923681B2AF16B00C20540 /* WordLearned.m */,
 				9ADB5A061B3F231300AEB089 /* SharedData.h */,
 				9ADB5A071B3F231300AEB089 /* SharedData.m */,
+				9ABE3CDD1B49B3EA00924BFD /* PackageTryBuyStatus.h */,
+				9ABE3CDE1B49B3EA00924BFD /* PackageTryBuyStatus.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1069,6 +1085,7 @@
 		D1F161B5ED3662F51D828E49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9ABE3CDB1B491BAA00924BFD /* CoreFoundation.framework */,
 				AF7869AD1B10D0C1009BE37B /* AudioToolbox.framework */,
 				AF7869A81B10CBD3009BE37B /* AVFoundation.framework */,
 				19415BF26ACA690DC120472F /* libPods-academy.a */,
@@ -1200,6 +1217,7 @@
 				9A1556761B42DDA900B996B9 /* image006.jpg in Resources */,
 				AFC27BF41B0EEC5700225016 /* setting.png in Resources */,
 				AF5E99601B1ECCB4009342BA /* popupArrowUp in Resources */,
+				9AE757731B4AA97900F18D02 /* SetStoryboard.storyboard in Resources */,
 				AFC243061B1F842F00972BA4 /* FacebookLogo.png in Resources */,
 				AFF2A6691B0BED8700DBFC2A /* ViewBG.jpg in Resources */,
 				AFF396D01B1CB9F6002675AB /* rankStar_2.png in Resources */,
@@ -1400,6 +1418,7 @@
 				AF7869A71B10CB9B009BE37B /* SoundEngine.m in Sources */,
 				C36DF4EF1B0853B300C225DA /* LoginVC.m in Sources */,
 				9A1556551B42CB0600B996B9 /* YSLTransitionAnimator.m in Sources */,
+				9ABE3CDF1B49B3EA00924BFD /* PackageTryBuyStatus.m in Sources */,
 				9AF369E61B44D5320094FAFD /* AppInitVC.m in Sources */,
 				C36AEB261B0711A800A40692 /* AModel.m in Sources */,
 				AFE729851B0DFFBA005F0850 /* SideMenuHeader.m in Sources */,
@@ -1420,6 +1439,7 @@
 				9A1556541B42CB0600B996B9 /* UIViewController+YSLTransition.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
 				AF53E5B81B301FC700B7CC53 /* LanguageControl.m in Sources */,
+				9AE757711B4A92C300F18D02 /* ShopCollectionVC.m in Sources */,
 				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,
 				AF2B6F021B1CCC9200079B4B /* SetRow1Displayer.m in Sources */,
 				C36DF4EB1B084C3900C225DA /* DataEngine.m in Sources */,

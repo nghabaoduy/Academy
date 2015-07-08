@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 typedef NS_ENUM(NSUInteger, LanguageIndexType) {
     LanguageIndexTypeWord,
     LanguageIndexTypeCharacter,
@@ -20,4 +21,6 @@ typedef NS_ENUM(NSUInteger, LanguageIndexType) {
 -(LanguageIndexType) getLanguageIndexTypeByLang:(NSString *) lang;
 -(NSString *) getLanguageTranslateByLang:(NSString *) lang;
 -(int) getFontSizeByLang:(NSString *) lang;
+
+-(NSString *) getPinyinOfWord:(NSString *) chineseWord;
 @end
