@@ -83,6 +83,8 @@
     [self.imageContainer addSubview:self.MJImageView];
     self.MJImageView.userInteractionEnabled = NO;
     
+    self.clipsToBounds = NO;
+    
 }
 
 # pragma mark - Setters
@@ -154,4 +156,21 @@
     
 }
 
+-(void) setAppearAfterDelay:(CGFloat) time
+{
+    self.view.layer.opacity = 0;
+    self.view.transform = CGAffineTransformMakeTranslation(0, 60);
+    [self performSelector:@selector(appearAnimate) withObject:self afterDelay:time];
+}
+-(void) appearAnimate{
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                        self.view.layer.opacity = 1;
+                        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+                     }
+                     completion:^(BOOL b) {
+                         if (b) {
+
+                         }}];
+}
 @end

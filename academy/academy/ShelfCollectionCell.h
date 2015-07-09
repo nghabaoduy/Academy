@@ -36,5 +36,6 @@
 @property (nonatomic, assign, readwrite) CGPoint imageOffset;
 
 -(void) setCellWithPackage:(Package *) pack;
+-(void) setAppearAfterDelay:(CGFloat) time;
 @end
 

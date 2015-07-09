@@ -8,10 +8,7 @@
 
 #import "ShelfCollectionVC.h"
 #import "ShelfCollectionCell.h"
-#import "PackageDetailVC.h"
-
-#import "YSLTransitionAnimator.h"
-#import "UIViewController+YSLTransition.h"
+#import "SetCollectionVC.h"
 
 #import "SetSelectVC.h"
 #import "AFNetworking.h"
@@ -20,14 +17,15 @@
 #import "User.h"
 #import "DataEngine.h"
 #import "LanguageControl.h"
-#import "ShelfCollectionVC.h"
-#import "MSDynamicsDrawerViewController.h"
-#import "UIImageView+AFNetworking.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "SideMenuVC.h"
 #import "PackageTryBuyStatus.h"
 
-@interface ShelfCollectionVC () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, YSLTransitionAnimatorDataSource, ModelDelegate, AuthDelegate>
+#import "MSDynamicsDrawerViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+
+
+@interface ShelfCollectionVC () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, ModelDelegate, AuthDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *parallaxCollectionView;
 @property (nonatomic, strong) NSMutableArray* images;
@@ -42,6 +40,8 @@
     int cellTopMargin;
     NSMutableArray * packageLangList;
     NSMutableArray * languageList;
+    BOOL isNavBarNormal;
+    BOOL isFirstLoad;
 }
 
 int defaultNavY;
@@ -49,6 +49,9 @@ int defaultNavY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    isNavBarNormal = NO;
     
     //enable sideMenu Drag
     MSDynamicsDrawerViewController *dynamicsDrawerViewController = (MSDynamicsDrawerViewController *)self.navigationController.parentViewController;
@@ -72,6 +75,7 @@ int defaultNavY;
     
     [[DataEngine getInstance] setIsForceReload:YES];
      [self retrievePackages];
+    
     
 }
 
@@ -117,6 +121,7 @@ int defaultNavY;
             }
         }
     }
+    isFirstLoad = YES;
     [self.parallaxCollectionView reloadData];
     [self checkToBuyPack];
 }
@@ -149,23 +154,18 @@ int defaultNavY;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:NO];
-    CALayer *layer = self.navigationController.navigationBar.layer;
-    layer.position = CGPointMake(layer.position.x, -layer.frame.size.height);
+    
     [self animateNavigationBarUp:NO];
     
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self ysl_removeTransitionDelegate];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self ysl_addTransitionDelegate:self];
-    [self ysl_pushTransitionAnimationWithToViewControllerImagePointY:0
-                                                   animationDuration:0.3];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -200,6 +200,9 @@ int defaultNavY;
     CGFloat yOffset = ((self.parallaxCollectionView.contentOffset.y - cell.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
     cell.imageOffset = CGPointMake(0.0f, yOffset);
     
+    if (isFirstLoad) {
+        [cell setAppearAfterDelay:indexPath.row * 0.5];
+    }
     return cell;
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -223,23 +226,32 @@ int defaultNavY;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self animateNavigationBarUp:YES];
-    PackageDetailVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"packageDetailView"];
+    //[self animateNavigationBarUp:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SetStoryboard" bundle:nil];
+    SetCollectionVC *vc = [storyboard instantiateViewControllerWithIdentifier:@"setCollectionView"];
     NSMutableArray *langArr = packageLangList[indexPath.section];
     UserPackage * curUserPackage = [langArr objectAtIndex:indexPath.row];
-    Package *pack = curUserPackage.package;
-    vc.curPack = pack;
+    vc.curUserPack = curUserPackage;
+    
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 - (void)animateNavigationBarUp:(BOOL) hide
 {
-    CALayer *layer = self.navigationController.navigationBar.layer;
+    if (hide == NO && isNavBarNormal) {
+        return;
+    }
+    isNavBarNormal = !hide;
 
     if(hide) {
+        CALayer *layer = self.navigationController.navigationBar.layer;
+        layer.position = CGPointMake(layer.position.x, defaultNavY);
         [UIView animateWithDuration:0.25 animations:^{
             layer.position = CGPointMake(layer.position.x, -layer.frame.size.height);
         }];
     } else {
+        CALayer *layer = self.navigationController.navigationBar.layer;
+        layer.position = CGPointMake(layer.position.x, -layer.frame.size.height);
         [UIView animateWithDuration:0.25 animations:^{
             layer.position = CGPointMake(layer.position.x,defaultNavY);
         }];
@@ -247,6 +259,10 @@ int defaultNavY;
 }
 #pragma mark - UIScrollViewdelegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (isFirstLoad) {
+        isFirstLoad = NO;
+    }
+    
     for(ShelfCollectionCell *view in self.parallaxCollectionView.visibleCells) {
         CGFloat yOffset = ((self.parallaxCollectionView.contentOffset.y - view.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
         view.imageOffset = CGPointMake(0.0f, yOffset);
@@ -256,18 +272,6 @@ int defaultNavY;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width * (630.0f/1242));
-}
-
-#pragma mark -- YSLTransitionAnimatorDataSource
-- (UIImageView *)pushTransitionImageView
-{
-    ShelfCollectionCell *cell = (ShelfCollectionCell *)[self.parallaxCollectionView cellForItemAtIndexPath:[[self.parallaxCollectionView indexPathsForSelectedItems] firstObject]];
-    return cell.MJImageView;
-}
-
-- (UIImageView *)popTransitionImageView
-{
-    return nil;
 }
 #pragma mark - Model Delegate
 

@@ -180,6 +180,12 @@
 #define COCOAPODS_VERSION_MINOR_TOMSMorphingLabel 5
 #define COCOAPODS_VERSION_PATCH_TOMSMorphingLabel 1
 
+// UIColor+FlatColors
+#define COCOAPODS_POD_AVAILABLE_UIColor_FlatColors
+#define COCOAPODS_VERSION_MAJOR_UIColor_FlatColors 0
+#define COCOAPODS_VERSION_MINOR_UIColor_FlatColors 0
+#define COCOAPODS_VERSION_PATCH_UIColor_FlatColors 2
+
 // UICountingLabel
 #define COCOAPODS_POD_AVAILABLE_UICountingLabel
 #define COCOAPODS_VERSION_MAJOR_UICountingLabel 1

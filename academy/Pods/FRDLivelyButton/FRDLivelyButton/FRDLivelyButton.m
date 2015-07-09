@@ -136,7 +136,7 @@ NSString *const kFRDLivelyButtonStyleChangeAnimationDuration = @"kFRDLivelyButto
              kFRDLivelyButtonColor: [UIColor blackColor],
              kFRDLivelyButtonHighlightedColor: [UIColor lightGrayColor],
              kFRDLivelyButtonHighlightAnimationDuration: @(0.1),
-             kFRDLivelyButtonHighlightScale: @(0.9),
+             kFRDLivelyButtonHighlightScale: @(1.0),
              kFRDLivelyButtonLineWidth: @(1.0),
              kFRDLivelyButtonUnHighlightAnimationDuration: @(0.15),
              kFRDLivelyButtonStyleChangeAnimationDuration: @(0.3)

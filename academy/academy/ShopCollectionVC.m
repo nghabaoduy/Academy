@@ -42,6 +42,8 @@
     int cellTopMargin;
     NSMutableArray * packageLangList;
     NSMutableArray * languageList;
+    
+    BOOL isFirstLoad;
 }
 
 int defaultNavY;
@@ -70,9 +72,11 @@ int defaultNavY;
         [self.images addObject:name];
     }
     
-    [self organizePackageList];
+    [self performSelector:@selector( organizePackageList) withObject:self afterDelay:0.7];
     
 }
+
+
 
 -(void) organizePackageList
 {
@@ -112,6 +116,7 @@ int defaultNavY;
             }
         }
     }
+    isFirstLoad = YES;
     [self.parallaxCollectionView reloadData];
 }
 -(void) checkToBuyPack
@@ -194,6 +199,10 @@ int defaultNavY;
     CGFloat yOffset = ((self.parallaxCollectionView.contentOffset.y - cell.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
     cell.imageOffset = CGPointMake(0.0f, yOffset);
     
+    if (isFirstLoad) {
+        [cell setAppearAfterDelay:indexPath.row * 0.5];
+    }
+    
     return cell;
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -241,6 +250,9 @@ int defaultNavY;
 }
 #pragma mark - UIScrollViewdelegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (isFirstLoad) {
+        isFirstLoad = NO;
+    }
     for(ShelfCollectionCell *view in self.parallaxCollectionView.visibleCells) {
         CGFloat yOffset = ((self.parallaxCollectionView.contentOffset.y - view.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
         view.imageOffset = CGPointMake(0.0f, yOffset);

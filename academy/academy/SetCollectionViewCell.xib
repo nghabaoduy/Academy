@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="VNF-Gotham-Rounded-Bold.ttf">
+            <string>GothamRounded-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetCollectionCell">
+            <connections>
+                <outlet property="itemImage" destination="bjj-ea-U9b" id="5tw-bj-OXA"/>
+                <outlet property="itemLabel" destination="8wc-BE-byz" id="nka-hm-CGf"/>
+                <outlet property="solidBG" destination="0U6-ey-Wud" id="8p5-tD-Pyf"/>
+                <outlet property="solidBGAnimation" destination="Bpk-hL-ovc" id="5G4-dP-QnZ"/>
+                <outlet property="view" destination="sqi-pS-0tL" id="bkn-Gv-z7B"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="sqi-pS-0tL">
+            <rect key="frame" x="0.0" y="0.0" width="329" height="142"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0U6-ey-Wud">
+                    <rect key="frame" x="7" y="7" width="317" height="130"/>
+                    <color key="backgroundColor" red="1" green="0.54171711280000001" blue="0.34756475529999997" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpk-hL-ovc">
+                    <rect key="frame" x="114" y="21" width="100" height="100"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="6ri-RA-uLb"/>
+                        <constraint firstAttribute="height" constant="100" id="gSH-g8-Enh"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bjj-ea-U9b">
+                    <rect key="frame" x="114" y="1" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="NFA-2h-UB2"/>
+                        <constraint firstAttribute="width" constant="100" id="QWX-OV-iaU"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Set Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8wc-BE-byz">
+                    <rect key="frame" x="98" y="93" width="136" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="532-UA-0Qi"/>
+                        <constraint firstAttribute="width" constant="136" id="Lue-CJ-Yuo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="bjj-ea-U9b" secondAttribute="centerY" constant="20" id="56B-Sq-HK8"/>
+                <constraint firstAttribute="centerX" secondItem="bjj-ea-U9b" secondAttribute="centerX" id="8s2-WY-hTb"/>
+                <constraint firstAttribute="centerX" secondItem="Bpk-hL-ovc" secondAttribute="centerX" id="Db7-5z-YQf"/>
+                <constraint firstItem="0U6-ey-Wud" firstAttribute="top" secondItem="sqi-pS-0tL" secondAttribute="top" constant="7" id="HPY-nj-4Sa"/>
+                <constraint firstAttribute="centerX" secondItem="8wc-BE-byz" secondAttribute="centerX" id="Mx5-hm-ITQ"/>
+                <constraint firstAttribute="bottom" secondItem="0U6-ey-Wud" secondAttribute="bottom" constant="5" id="YKH-gt-VcL"/>
+                <constraint firstAttribute="bottom" secondItem="8wc-BE-byz" secondAttribute="bottom" constant="16" id="dGz-HC-h9g"/>
+                <constraint firstItem="0U6-ey-Wud" firstAttribute="leading" secondItem="sqi-pS-0tL" secondAttribute="leading" constant="7" id="hOA-fr-9j7"/>
+                <constraint firstAttribute="trailing" secondItem="0U6-ey-Wud" secondAttribute="trailing" constant="5" id="pdv-nw-e4T"/>
+                <constraint firstAttribute="centerY" secondItem="Bpk-hL-ovc" secondAttribute="centerY" id="y0y-hn-YFD"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="477.5" y="389"/>
+        </view>
+    </objects>
+</document>

@@ -12,10 +12,13 @@
 #import "TOMSMorphingLabel.h"
 #import "CardInfoView.h"
 #import "Word.h"
+#import "User.h"
 #import "PackageTryBuyStatus.h"
 #import "SoundEngine.h"
+#import "SideMenuVC.h"
 #import <pop/POP.h>
-@interface PackageDetailVC () <YSLTransitionAnimatorDataSource, CardInfoViewDelegate>
+#import "UIButton+Extensions.h"
+@interface PackageDetailVC () <YSLTransitionAnimatorDataSource, CardInfoViewDelegate, AuthDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
 
@@ -35,6 +38,8 @@
     __weak IBOutlet UILabel *descTitleLb;
     __weak IBOutlet UITextView *descContentTV;
     __weak IBOutlet CardInfoView *cardInfo;
+    
+    BOOL isBack;
 }
 @synthesize curPack;
 
@@ -45,9 +50,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    if (isBack) {
+        [self.navigationController setNavigationBarHidden:NO];
+        [self ysl_removeTransitionDelegate];
+    }
     
-    [self.navigationController setNavigationBarHidden:NO];
-    [self ysl_removeTransitionDelegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -62,6 +69,7 @@
     [self animateViewAppear];
 }
 - (IBAction)backClicked:(id)sender {
+    isBack = YES;
     [UIView animateWithDuration:0.17 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         backBtn.transform = CGAffineTransformMakeTranslation(-30, 0);
     } completion:^(BOOL finished){
@@ -107,6 +115,7 @@
     infoSection.layer.shadowRadius = 5.0;
     
     backBtn.transform = CGAffineTransformMakeTranslation(50, 0);
+    [backBtn setHitTestEdgeInsets:UIEdgeInsetsMake(-10, -10, -10, -10)];
     descTitleLb.alpha = 0;
     descContentTV.alpha = 0;
     [descContentTV setText:curPack.desc];
@@ -276,4 +285,61 @@
     
     
 }
+- (IBAction)buy:(id)sender {
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    User * user = [User currentUser];
+    [user setAuthDelegate:self];
+    [user purchasePackage: curPack];
+}
+- (IBAction)try:(id)sender {
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    User * user = [User currentUser];
+    [user setAuthDelegate:self];
+    [user tryPackage: curPack];
+}
+- (IBAction)getFree:(id)sender {
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    User * user = [User currentUser];
+    [user setAuthDelegate:self];
+    [user purchasePackage: curPack];
+    
+}
+
+#pragma mark - Auth delegate
+- (void)userPurchasePackageSucessful:(User *)user {
+    //[MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"purchase successful");
+    isBack  = NO;
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:YES];
+}
+
+- (void)userPurchasePackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    //[MBProgressHUD hideHUDForView:self.view animated:YES];
+    if ([[NSString stringWithFormat:@"%@",[error valueForKey:@"message"]] isEqualToString:@"Insufficient credit to purchase"]) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Thông Báo" message:@"Số dư tài khoản không đủ mua bộ ngôn ngữ này. Cập nhập phiên bản mới nhất để mua bộ ngôn ngữ này." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * dismiss = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             NSString *iTunesLink = [[DataEngine getInstance] getAppURL];
+                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                                                         }];
+        
+        [alertController addAction:dismiss];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    NSLog(@"purchase failed %@", error);
+}
+
+- (void)userTryPackageSucessful:(User *)user {
+    //[MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"try successful");
+    isBack  = NO;
+    [[SideMenuVC getInstance] transitionToViewController:ControllerUserShelf animated:YES];
+}
+
+- (void)userTryPackageFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode {
+    //[MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"try failed %@", error);
+}
+
 @end

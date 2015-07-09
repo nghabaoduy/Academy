@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Openlabproduction. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "AModel.h"
 #import "SetScore.h"
+
+
 @interface LSet : AModel
 
 @property (nonatomic, retain) NSString * name;
@@ -22,4 +24,6 @@
 @property (nonatomic, retain) NSString * imgURL;
 @property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSString * dummyImgName;
+
+@property (nonatomic, retain) UIColor * solidColor;
 @end

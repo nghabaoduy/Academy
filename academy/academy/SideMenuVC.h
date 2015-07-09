@@ -9,6 +9,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MSDynamicsDrawerViewController.h"
+#import "FRDLivelyButton.h"
+
 typedef NS_ENUM(NSUInteger, MSPaneViewControllerType) {
     ControllerAppInit,
     ControllerLogin,
@@ -26,6 +28,9 @@ typedef NS_ENUM(NSUInteger, MSPaneViewControllerType) {
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) MSPaneViewControllerType paneViewControllerType;
 @property (nonatomic, weak) MSDynamicsDrawerViewController *dynamicsDrawerViewController;
+
+@property (nonatomic, strong) FRDLivelyButton *paneRevealLeftBarButtonItem;
+@property (nonatomic, strong) FRDLivelyButton *paneRevealRightBarButtonItem;
 
 - (void)transitionToViewController:(MSPaneViewControllerType)paneViewControllerType animated:(BOOL) animated;
 - (void)dynamicsDrawerRevealLeftBarButtonItemTapped:(id)sender;

@@ -413,6 +413,9 @@
                                         <include reference="fJS-Mf-UN4"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="buy:" destination="Gdd-4j-uuv" eventType="touchUpInside" id="ObA-hV-H1k"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9m-JF-Coz">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -435,6 +438,9 @@
                                         <include reference="gc6-8B-xUl"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="try:" destination="Gdd-4j-uuv" eventType="touchUpInside" id="Law-ek-y6J"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOb-As-QdO">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -665,7 +671,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pG9-Te-BVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1932" y="247.5"/>
+            <point key="canvasLocation" x="1921.5" y="713.25"/>
         </scene>
         <!--Shop CollectionVC-->
         <scene sceneID="lhk-q4-Pjc">
@@ -759,6 +765,7 @@
                         <viewControllerLayoutGuide type="bottom" id="WRx-ns-uyD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="o5O-r0-Qc6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

@@ -23,6 +23,7 @@ pod 'FMDB'
 # pod 'FMDB/SQLCipher'   # FMDB with SQLCipher
 pod 'ASProgressPopUpView', '~> 0.7.1'
 pod 'pop', '~> 1.0'
+pod 'UIColor+FlatColors'
 end
 
 target 'academyTests' do

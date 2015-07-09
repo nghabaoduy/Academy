@@ -34,6 +34,11 @@
     UIColor *barTintColor = UIColorFromRGB(0x0ea3f7);
     
     [UIApplication sharedApplication].statusBarHidden = YES;
+    /*
+    if ([UINavigationBar instancesRespondToSelector:@selector(setBackIndicatorImage:)]) {
+        [[UINavigationBar appearance] setBackIndicatorImage:[[UIImage alloc] init]];
+        [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[[UIImage alloc] init]];
+    }*/
     
     [[UINavigationBar appearance] setBarTintColor:barTintColor];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -43,7 +48,6 @@
                                                            [UIColor whiteColor], NSForegroundColorAttributeName,
                                                            [UIFont fontWithName:@"GothamRounded-Bold" size:20.0], NSFontAttributeName,
                                                             nil]];
-    
 
     CGFloat verticalOffset = 4;
     [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:verticalOffset forBarMetrics:UIBarMetricsDefault];

@@ -22,6 +22,9 @@
 #import "ShelfCollectionVC.h"
 #import "ShopCollectionVC.h"
 
+
+#import "LTCustomNavigationBar.h"
+
 NSString * const MenuCellReuseIdentifier = @"menuCell";
 NSString * const MenuHeaderReuseIdentifier = @"menuHeader";
 
@@ -45,8 +48,7 @@ typedef NS_ENUM(NSUInteger, MSMenuViewControllerTableViewSectionType) {
 @property (nonatomic, strong) NSArray *tableViewSectionBreaks;
 
 @property (nonatomic, strong) UIBarButtonItem *paneStateBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *paneRevealLeftBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *paneRevealRightBarButtonItem;
+
 
 @property (nonatomic, strong) NSArray *menuIconList;
 @property (nonatomic, strong) NSArray *menuTitleList;
@@ -216,12 +218,24 @@ static SideMenuVC * instance = nil;
     paneViewController.navigationItem.title = self.paneViewControllerTitles[@(paneViewControllerType)];
     
     if (paneViewControllerType != ControllerLogin) {
-        self.paneRevealLeftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MenuBtn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:)];
-        paneViewController.navigationItem.leftBarButtonItem = self.paneRevealLeftBarButtonItem;
+        
+        self.paneRevealLeftBarButtonItem = [[FRDLivelyButton alloc] initWithFrame:CGRectMake(0,0,30,22)];
+        [self.paneRevealLeftBarButtonItem setStyle:kFRDLivelyButtonStyleHamburger animated:NO];
+        [self.paneRevealLeftBarButtonItem addTarget:self action:@selector(dynamicsDrawerRevealLeftBarButtonItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:self.paneRevealLeftBarButtonItem];
+        self.navigationItem.rightBarButtonItem = buttonItem;
+        
+        [self.paneRevealLeftBarButtonItem setOptions:@{ kFRDLivelyButtonLineWidth: @(2.0f),
+                              kFRDLivelyButtonHighlightedColor: [UIColor colorWithRed:0.5 green:0.8 blue:1.0 alpha:1.0],
+                              kFRDLivelyButtonColor: [UIColor whiteColor]
+                              }];
+        
+        paneViewController.navigationItem.leftBarButtonItem = buttonItem;
     }
     
     
     UINavigationController *paneNavigationViewController = [[UINavigationController alloc] initWithRootViewController:paneViewController];
+    [paneNavigationViewController setValue:[[LTCustomNavigationBar alloc]init] forKeyPath:@"navigationBar"];
     [self.dynamicsDrawerViewController setPaneViewController:paneNavigationViewController animated:animateTransition completion:nil];
     
     self.paneViewControllerType = paneViewControllerType;
