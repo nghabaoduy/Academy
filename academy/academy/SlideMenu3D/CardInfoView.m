@@ -7,6 +7,7 @@
 //
 
 #import "CardInfoView.h"
+
 #import "MeaningPopupDisplayer.h"
 @implementation CardInfoView
 {
@@ -14,7 +15,7 @@
     NSDictionary * wordSubDict;
 }
 
-@synthesize delegate, exampleSpeaker,setSubTitle,setTitle,packImgView,cardView,cardViewForShadow;
+@synthesize delegate, exampleSpeaker,setSubTitle,setTitle,packImgView,cardView,cardViewForShadow, setImageView;
 
 -(id)initWithFrame:(CGRect)frame
 {
@@ -55,20 +56,21 @@
     cardViewForShadow.layer.shadowRadius = 6;
     cardViewForShadow.layer.shadowOpacity = 0.4;
     
-    packImgView.hidden = YES;
-    setTitle.hidden = YES;
-    setSubTitle.hidden = YES;
+    [self clearDisplay];
 }
 
--(void) displaySetInfoWithTitle:(NSString *) title subTitle:(NSString *) subTitle image:(NSString *) imageName
+-(void) displaySetInfoWithSet:(LSet*)set withPackageImage:(NSString *) imageName
 {
     packImgView.hidden = NO;
     setTitle.hidden = NO;
     setSubTitle.hidden = NO;
+    setImageView.hidden = NO;
     
-    [setTitle setText:title];
-    [setSubTitle setText:subTitle];
+    [setTitle setText:set.name];
+    [setSubTitle setText:[NSString stringWithFormat:@"%lu Từ",(unsigned long)set.wordList.count]];
     [packImgView setImage:[UIImage imageNamed:imageName]];
+    [setImageView setImage:[UIImage imageNamed:set.imgURL]];
+    
 }
 
 - (IBAction)touchUpInside:(id)sender {
@@ -348,6 +350,7 @@
     packImgView.hidden = YES;
     setTitle.hidden = YES;
     setSubTitle.hidden = YES;
+    setImageView.hidden = YES;
     
 }
 @end

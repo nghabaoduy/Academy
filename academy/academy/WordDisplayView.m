@@ -55,24 +55,31 @@
 }
 -(void) performMove
 {
-    int startX = curCard.frame.origin.x;
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    curCard.transform = CGAffineTransformMakeTranslation(0, 0);
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
                      animations:^(void) {
-                         curCard.frame = CGRectMake(self.view.frame.size.width* (direction?-1:1), curCard.frame.origin.y, curCard.frame.size.width, curCard.frame.size.height);
+                         //curCard.frame = CGRectMake(self.view.frame.size.width* (direction?-1:1), curCard.frame.origin.y, curCard.frame.size.width, curCard.frame.size.height);
+                         curCard.transform = CGAffineTransformMakeTranslation(screenSize.width* (direction?-1:1), 0);
                      }
                      completion:^(BOOL b) {
                          if (b) {
-                             [self startEndMove:curCard:direction:startX];
+                             [self startEndMove:curCard:direction];
                          }
                      }];
    
 }
--(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
+-(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft
 {
-    wordCard.frame = CGRectMake(self.view.frame.size.width* (moveLeft?1:-1), wordCard.frame.origin.y, wordCard.frame.size.width, wordCard.frame.size.height);
-    [UIView animateWithDuration:0.2 delay:0.0 options:    UIViewAnimationOptionCurveEaseOut
-                     animations:^(void) {
-                         wordCard.frame = CGRectMake(startX, wordCard.frame.origin.y, wordCard.frame.size.width, wordCard.frame.size.height);
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    wordCard.transform = CGAffineTransformMakeTranslation(screenSize.width* (moveLeft?1:-1), 0);
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:0.65
+          initialSpringVelocity:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                          wordCard.transform = CGAffineTransformMakeTranslation(0, 0);
                      }
                      completion:^(BOOL b) {
                          if (b) {
@@ -104,8 +111,12 @@
 }
 -(void) startEndFlip:(UIView *)wordCard
 {
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
-                     animations:^(void) {
+    [UIView animateWithDuration:0.6
+                          delay:0
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
                          wordCard.transform = CGAffineTransformMakeScale(1, 1);
                      }
                      completion:^(BOOL b) {
@@ -119,5 +130,45 @@
 {
     
 }
-
+-(void) popButton:(UIButton *) button
+{
+    button.transform = CGAffineTransformMakeScale(1, 1);
+    [UIView animateWithDuration:0.1 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3
+                              delay:0
+             usingSpringWithDamping:0.45
+              initialSpringVelocity:0.0
+                            options:UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{
+                             button.transform = CGAffineTransformMakeScale(1, 1);
+                         }completion:nil];
+    }];
+}
+-(void) popAppearButton:(UIButton *) button
+{
+    [self popAppearButton:button withDelay:0];
+}
+-(void) popAppearButton:(UIButton *) button withDelay:(CGFloat) delay
+{
+    button.transform = CGAffineTransformMakeScale(0, 0);
+    [UIView animateWithDuration:0.7
+                          delay:delay
+         usingSpringWithDamping:0.45
+          initialSpringVelocity:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         button.transform = CGAffineTransformMakeScale(1, 1);
+                     }completion:nil];
+}
+-(void) popDisappearButton:(UIButton *) button
+{
+    button.transform = CGAffineTransformMakeScale(1, 1);
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        button.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    } completion:^(BOOL finished) {
+        button.transform = CGAffineTransformMakeScale(0., 0.);
+    }];
+}
 @end

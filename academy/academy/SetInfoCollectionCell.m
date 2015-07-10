@@ -66,9 +66,9 @@
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     CGPoint oriPos = self.view.layer.position;
     self.view.layer.position = CGPointMake(self.view.layer.position.x + screenSize.width, self.view.layer.position.y);
-    [UIView animateWithDuration:2.0
+    [UIView animateWithDuration:1.6
                           delay:0.0
-         usingSpringWithDamping:0.6
+         usingSpringWithDamping:0.55
           initialSpringVelocity:0.0
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{

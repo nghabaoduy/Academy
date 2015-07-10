@@ -29,6 +29,7 @@
                 <outlet property="messageLb" destination="Xm6-DT-24r" id="oBo-uW-yGb"/>
                 <outlet property="packImgView" destination="Nj4-o4-jyO" id="MtC-6r-Kqw"/>
                 <outlet property="phoneticLb" destination="Aaf-hn-8N7" id="rAF-np-5ZB"/>
+                <outlet property="setImageView" destination="oaS-dL-4HK" id="wpY-eV-F0H"/>
                 <outlet property="setSubTitle" destination="VRU-i7-HfZ" id="1th-mc-gE1"/>
                 <outlet property="setTitle" destination="Vx0-8f-dON" id="Esn-KV-3hy"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Gps-F4-S6y"/>
@@ -94,16 +95,25 @@
                                 </mask>
                             </variation>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oaS-dL-4HK">
+                            <rect key="frame" x="72" y="15" width="128" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="128" id="BtR-rw-tMs"/>
+                                <constraint firstAttribute="width" constant="128" id="Ey7-aS-Fto"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Vx0-8f-dON" firstAttribute="leading" secondItem="2rc-0w-86g" secondAttribute="leading" constant="20" id="167-vl-P2D"/>
+                        <constraint firstItem="oaS-dL-4HK" firstAttribute="top" secondItem="2rc-0w-86g" secondAttribute="top" constant="15" id="ICG-A0-pWq"/>
                         <constraint firstAttribute="bottom" secondItem="Nj4-o4-jyO" secondAttribute="bottom" id="XV8-qG-EsG"/>
                         <constraint firstItem="Nj4-o4-jyO" firstAttribute="top" secondItem="VRU-i7-HfZ" secondAttribute="bottom" constant="8" id="ZwF-dh-3gQ"/>
                         <constraint firstItem="Nj4-o4-jyO" firstAttribute="top" secondItem="Vx0-8f-dON" secondAttribute="bottom" constant="35" id="cz1-aK-n1f"/>
                         <constraint firstAttribute="trailing" secondItem="Nj4-o4-jyO" secondAttribute="trailing" id="iXT-fO-pQN"/>
                         <constraint firstItem="Nj4-o4-jyO" firstAttribute="leading" secondItem="2rc-0w-86g" secondAttribute="leading" id="vaK-Qb-4P0"/>
                         <constraint firstItem="VRU-i7-HfZ" firstAttribute="leading" secondItem="2rc-0w-86g" secondAttribute="leading" constant="20" id="xMI-U3-NVG"/>
+                        <constraint firstAttribute="centerX" secondItem="oaS-dL-4HK" secondAttribute="centerX" id="zpo-1w-skg"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Addition" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1r-Bz-KpO">

@@ -16,11 +16,16 @@
 
 -(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft;
 -(BOOL) startMove:(UIView *)wordCard :(BOOL) moveLeft delay:(CGFloat) delayInSecond;
--(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX;
+-(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft;
 -(void) endMove;
 -(BOOL) startFlip:(UIView *)wordCard;
 -(void) startEndFlip:(UIView *)wordCard;
 -(void) endFlip;
+
+-(void) popButton:(UIButton *) button;
+-(void) popAppearButton:(UIButton *) button;
+-(void) popAppearButton:(UIButton *) button withDelay:(CGFloat) delay;
+-(void) popDisappearButton:(UIButton *) button;
 @end
 /*
   basic function

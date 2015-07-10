@@ -400,11 +400,11 @@ int finalGrade;
     [testMaker displayNextQuestion];
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",[testMaker getCurQuesNo]+1,[testMaker getTestWordQuantity]]];
     if (nextCard != curCard) {
-        [super startEndMove:nextCard :moveLeft :startX];
+        [super startEndMove:nextCard :moveLeft];
     }
     else
     {
-        [super startEndMove:curCard :moveLeft :startX];
+        [super startEndMove:curCard :moveLeft];
     }
     
     

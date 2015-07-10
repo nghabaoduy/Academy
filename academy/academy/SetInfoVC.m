@@ -206,7 +206,7 @@ static NSString * const reuseIdentifier = @"CollectionCell";
             [otherCell animateViewDisappearLeft];
         }
     }
-    [self performSelector:@selector(navigateViewDidSelectItem) withObject:self afterDelay:1.0];
+    [self performSelector:@selector(navigateViewDidSelectItem) withObject:self afterDelay:1.5];
     [self disappearAnimation];
     [self performSelector:@selector(resetView) withObject:self afterDelay:3];
 

@@ -72,11 +72,11 @@
 #pragma mark -- Appear Animation
 - (void) setupInitView
 {
-    /*[prevBtn setHidden:YES];
-    [nextBtn setHidden:YES];
-    [knowBtn setHidden:YES];
-    [dunnoBtn setHidden:YES];
-    */
+    prevBtn.transform = CGAffineTransformMakeScale(0, 0);
+    nextBtn.transform = CGAffineTransformMakeScale(0, 0);
+    knowBtn.transform = CGAffineTransformMakeScale(0, 0);
+    dunnoBtn.transform = CGAffineTransformMakeScale(0, 0);
+    
     [_wordNoLb setTextWithoutMorphing:@""];
     [_setTitleLb setTextWithoutMorphing:@""];
     
@@ -85,7 +85,7 @@
     [backBtn setHitTestEdgeInsets:UIEdgeInsetsMake(-10, -10, -10, -10)];
     
     imageURL = [NSString stringWithFormat:@"image%03ld.jpg", (unsigned long)(arc4random_uniform(13)+1)];
-    [_wordCard displaySetInfoWithTitle:curSet.name subTitle:[NSString stringWithFormat:@"%lu Từ",(unsigned long)curSet.wordList.count] image:imageURL];
+    [_wordCard displaySetInfoWithSet:curSet withPackageImage:imageURL];
     //[self.wordCard setHidden:YES];
     
 }
@@ -139,6 +139,15 @@
     
     // execute the first block in the queue
     getNextAnimation()(YES);
+    
+    UIButton * appearBtn1 = isWordCheckSession?knowBtn:nextBtn;
+    UIButton * appearBtn2 = isWordCheckSession?dunnoBtn:nil;
+    
+    [self popAppearButton:appearBtn1 withDelay:1.5];
+    if (appearBtn2) {
+        [self popAppearButton:appearBtn2 withDelay:1.65];
+    }
+   
 }
 
 -(void) animateFirstCard
@@ -237,16 +246,17 @@
         [_wordCard displayWord:word.name wordType:word.wordType phonetic:word.phonentic detailContent:[word getMeaning:@"Vietnamese" bExample:YES] wordSubDict:[word getWordSubDict:self.language]];
     }
 
-    prevBtn.hidden = curWordNo == 0;
-    
-    
 }
 // PREV - NEXT
 - (IBAction)next:(id)sender {
+    [self popButton:nextBtn];
     isFront = YES;
     if (curWordNo< wordList.count -1) {
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
+            if (curWordNo == 1) {
+                [self popAppearButton:prevBtn];
+            }
         }
     }
     else
@@ -261,6 +271,14 @@
         if ([self startMove:_wordCard:NO])
         {
             curWordNo--;
+            if(curWordNo == 0)
+            {
+                [self popDisappearButton:prevBtn];
+            }
+            else
+            {
+                [self popButton:prevBtn];
+            }
         }
     }
 }
@@ -268,6 +286,7 @@
 
 // KNOW - DUNNO
 - (IBAction)know:(id)sender {
+    [self popButton:knowBtn];
     if (![knownWords containsObject:wordList[curWordNo]]) {
         [knownWords addObject:wordList[curWordNo]];
     }
@@ -282,6 +301,7 @@
 }
 - (IBAction)dunno:(id)sender
 {
+    [self popButton:dunnoBtn];
     if (curWordNo< wordList.count -1) {
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
@@ -328,6 +348,7 @@
 
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name language:self.language];
+        [self popAppearButton:nextBtn];
 
     }];
     [alertView setUseMotionEffects:true];
@@ -374,23 +395,23 @@
 
 -(BOOL) startMove:(CardInfoView *)wordCard :(BOOL) moveLeft
 {
-    [nextBtn setEnabled:NO];
-    [prevBtn setEnabled:NO];
-    [knowBtn setEnabled:NO];
-    [dunnoBtn setEnabled:NO];
+    [nextBtn setUserInteractionEnabled:NO];
+    [prevBtn setUserInteractionEnabled:NO];
+    [knowBtn setUserInteractionEnabled:NO];
+    [dunnoBtn setUserInteractionEnabled:NO];
     return [super startMove:wordCard :moveLeft];
 }
--(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft :(int)startX
+-(void) startEndMove:(CardInfoView *)wordCard :(BOOL) moveLeft
 {
     [self displayCurWord];
-    [super startEndMove:wordCard :moveLeft :startX];
+    [super startEndMove:wordCard :moveLeft];
 }
 -(void) endMove
 {
-    [nextBtn setEnabled:YES];
-    [prevBtn setEnabled:YES];
-    [knowBtn setEnabled:YES];
-    [dunnoBtn setEnabled:YES];
+    [nextBtn setUserInteractionEnabled:YES];
+    [prevBtn setUserInteractionEnabled:YES];
+    [knowBtn setUserInteractionEnabled:YES];
+    [dunnoBtn setUserInteractionEnabled:YES];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name language:self.language];
@@ -407,10 +428,10 @@
 }
 -(BOOL) startFlip:(CardInfoView *)wordCard
 {
-    [nextBtn setEnabled:NO];
-    [prevBtn setEnabled:NO];
-    [knowBtn setEnabled:NO];
-    [dunnoBtn setEnabled:NO];
+    [nextBtn setUserInteractionEnabled:NO];
+    [prevBtn setUserInteractionEnabled:NO];
+    [knowBtn setUserInteractionEnabled:NO];
+    [dunnoBtn setUserInteractionEnabled:NO];
     return [super startFlip:wordCard];
 }
 -(void) startEndFlip:(CardInfoView *)wordCard
@@ -421,10 +442,10 @@
 }
 -(void) endFlip
 {
-    [nextBtn setEnabled:YES];
-    [prevBtn setEnabled:YES];
-    [knowBtn setEnabled:YES];
-    [dunnoBtn setEnabled:YES];
+    [nextBtn setUserInteractionEnabled:YES];
+    [prevBtn setUserInteractionEnabled:YES];
+    [knowBtn setUserInteractionEnabled:YES];
+    [dunnoBtn setUserInteractionEnabled:YES];
     if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name language:self.language];

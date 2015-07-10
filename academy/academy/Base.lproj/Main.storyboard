@@ -2330,6 +2330,7 @@
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="LIm-Oh-ns3"/>
+                                    <constraint firstAttribute="height" constant="20" id="X3k-Qu-MFQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2337,12 +2338,14 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="LIm-Oh-ns3"/>
+                                        <exclude reference="X3k-Qu-MFQ"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="60" y="48" width="200" height="20"/>
                                     <mask key="constraints">
                                         <include reference="LIm-Oh-ns3"/>
+                                        <include reference="X3k-Qu-MFQ"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -2463,7 +2466,9 @@
                             <constraint firstItem="2Ee-CV-OzM" firstAttribute="top" secondItem="0Tu-UB-Gbk" secondAttribute="bottom" constant="8" id="Rvc-dd-L0O">
                                 <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                             </constraint>
-                            <constraint firstItem="sYX-u7-L6v" firstAttribute="top" secondItem="TGP-lS-h8h" secondAttribute="bottom" constant="1" id="S79-Gq-Fp4"/>
+                            <constraint firstItem="sYX-u7-L6v" firstAttribute="top" secondItem="TGP-lS-h8h" secondAttribute="bottom" constant="1" id="S79-Gq-Fp4">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstItem="TGP-lS-h8h" firstAttribute="top" secondItem="NHO-wQ-8PF" secondAttribute="bottom" constant="10" id="S7O-a2-f9D">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
