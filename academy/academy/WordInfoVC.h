@@ -11,13 +11,14 @@
 #import "CardInfoView.h"
 #import "Word.h"
 #import "LSet.h"
+#import "TOMSMorphingLabel.h"
 @interface WordInfoVC : WordDisplayView <CardInfoViewDelegate>
 
 @property (strong, nonatomic) LSet *curSet;
 
 @property (strong, nonatomic) IBOutlet CardInfoView *wordCard;
-@property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
-@property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
+@property (strong, nonatomic) IBOutlet TOMSMorphingLabel *wordNoLb;
+@property (strong, nonatomic) IBOutlet TOMSMorphingLabel *setTitleLb;
 @property (nonatomic, strong) NSString * language;
 @property BOOL isWordCheckSession;
 

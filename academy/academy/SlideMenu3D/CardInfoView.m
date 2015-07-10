@@ -14,7 +14,7 @@
     NSDictionary * wordSubDict;
 }
 
-@synthesize delegate, exampleSpeaker;
+@synthesize delegate, exampleSpeaker,setSubTitle,setTitle,packImgView,cardView,cardViewForShadow;
 
 -(id)initWithFrame:(CGRect)frame
 {
@@ -46,8 +46,31 @@
     exampleSpeaker.hidden = YES;
     [self addSubview:mPopup];
     
+    cardView.clipsToBounds = YES;
+    cardView.layer.cornerRadius = 8;
     
+    cardViewForShadow.layer.masksToBounds = NO;
+    cardViewForShadow.layer.cornerRadius = 8;
+    cardViewForShadow.layer.shadowOffset = CGSizeMake(0, 0);
+    cardViewForShadow.layer.shadowRadius = 6;
+    cardViewForShadow.layer.shadowOpacity = 0.4;
+    
+    packImgView.hidden = YES;
+    setTitle.hidden = YES;
+    setSubTitle.hidden = YES;
 }
+
+-(void) displaySetInfoWithTitle:(NSString *) title subTitle:(NSString *) subTitle image:(NSString *) imageName
+{
+    packImgView.hidden = NO;
+    setTitle.hidden = NO;
+    setSubTitle.hidden = NO;
+    
+    [setTitle setText:title];
+    [setSubTitle setText:subTitle];
+    [packImgView setImage:[UIImage imageNamed:imageName]];
+}
+
 - (IBAction)touchUpInside:(id)sender {
     [delegate cardIsTapped:self];
 }
@@ -322,6 +345,9 @@
     [self.centerWordLb setText:@""];
     [self.messageLb setText:@""];
     mPopup.hidden = YES;
+    packImgView.hidden = YES;
+    setTitle.hidden = YES;
+    setSubTitle.hidden = YES;
     
 }
 @end

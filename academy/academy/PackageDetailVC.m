@@ -17,7 +17,6 @@
 #import "SoundEngine.h"
 #import "SideMenuVC.h"
 #import <pop/POP.h>
-#import "UIButton+Extensions.h"
 @interface PackageDetailVC () <YSLTransitionAnimatorDataSource, CardInfoViewDelegate, AuthDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;

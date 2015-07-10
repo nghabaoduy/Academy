@@ -162,6 +162,12 @@
 #define COCOAPODS_VERSION_MINOR_MSDynamicsDrawerViewController 5
 #define COCOAPODS_VERSION_PATCH_MSDynamicsDrawerViewController 1
 
+// MotionBlur
+#define COCOAPODS_POD_AVAILABLE_MotionBlur
+#define COCOAPODS_VERSION_MAJOR_MotionBlur 0
+#define COCOAPODS_VERSION_MINOR_MotionBlur 2
+#define COCOAPODS_VERSION_PATCH_MotionBlur 0
+
 // PNChart
 #define COCOAPODS_POD_AVAILABLE_PNChart
 #define COCOAPODS_VERSION_MAJOR_PNChart 0

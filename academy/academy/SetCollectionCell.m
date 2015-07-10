@@ -15,6 +15,8 @@
     CGFloat _progressLength;
     CGFloat _diameter;
     CGRect _solidFrame;
+    
+    BOOL isFirstLoad;
 }
 
 @end
@@ -211,5 +213,10 @@
     getNextAnimation()(YES);
 }
 
-
+#pragma mark - UIScrollViewdelegate methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (isFirstLoad) {
+        isFirstLoad = NO;
+    }
+}
 @end

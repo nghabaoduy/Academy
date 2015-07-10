@@ -1,0 +1,16 @@
+//
+//  Academy-Prefix.pch
+//  academy
+//
+//  Created by Mac Mini on 7/10/15.
+//  Copyright (c) 2015 Openlabproduction. All rights reserved.
+//
+
+#ifndef academy_Academy_Prefix_pch
+#define academy_Academy_Prefix_pch
+
+#import "UIButton+Extensions.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

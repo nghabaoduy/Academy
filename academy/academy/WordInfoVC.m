@@ -11,6 +11,7 @@
 #import "CustomIOSAlertView.h"
 #import "AlertMascotView.h"
 #import "SoundEngine.h"
+#import <GPUImage/GPUImage.h>
 
 @interface WordInfoVC () <ModelDelegate>
 
@@ -28,8 +29,14 @@
     IBOutlet UIButton *nextBtn;
     IBOutlet UIButton *knowBtn;
     IBOutlet UIButton *dunnoBtn;
+    NSString * imageURL;
+    __weak IBOutlet UIImageView *imageBG;
+    __weak IBOutlet UIView *imageBGContainer;
     
     NSString *errorMessage;
+    
+    __weak IBOutlet UIButton *backBtn;
+    
 }
 
 @synthesize wordCard = _wordCard;
@@ -49,19 +56,107 @@
     
     _wordCard.delegate = self;
     _wordCard.view.bounds = _wordCard.bounds;
-    _wordNoLb.text = @"";
-    _setTitleLb.text = @"";
     
-    NSLog(@"curset.wordList = %@",[curSet getDictionaryFromObject]);
     
     self.language = curSet.language;
     
     
     knownWords = [NSMutableArray new];
     [self resetView];
-    //[self performSelector:@selector(retrieveWords) withObject:self afterDelay:0.5];
-    
+
+    [self setupInitView];
     [[SoundEngine getInstance] readWord:@" " language:self.language];
+    
+    
+}
+#pragma mark -- Appear Animation
+- (void) setupInitView
+{
+    /*[prevBtn setHidden:YES];
+    [nextBtn setHidden:YES];
+    [knowBtn setHidden:YES];
+    [dunnoBtn setHidden:YES];
+    */
+    [_wordNoLb setTextWithoutMorphing:@""];
+    [_setTitleLb setTextWithoutMorphing:@""];
+    
+    backBtn.transform = CGAffineTransformMakeTranslation(50, 0);
+    backBtn.layer.opacity = 0;
+    [backBtn setHitTestEdgeInsets:UIEdgeInsetsMake(-10, -10, -10, -10)];
+    
+    imageURL = [NSString stringWithFormat:@"image%03ld.jpg", (unsigned long)(arc4random_uniform(13)+1)];
+    [_wordCard displaySetInfoWithTitle:curSet.name subTitle:[NSString stringWithFormat:@"%lu Từ",(unsigned long)curSet.wordList.count] image:imageURL];
+    //[self.wordCard setHidden:YES];
+    
+}
+- (void) animateViewAppear
+{
+    [imageBGContainer.layer setOpacity:0];
+    
+    [imageBG setImage:[self getBlurImgBGFromImage:imageURL]];
+    
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        [imageBGContainer.layer setOpacity:1];
+    }completion:^(BOOL finished) {
+        [self.setTitleLb setText:self.curSet.name];
+    }];
+    
+    NSMutableArray* animationBlocks = [NSMutableArray new];
+    
+    typedef void(^animationBlock)(BOOL);
+    
+    // getNextAnimation
+    // removes the first block in the queue and returns it
+    animationBlock (^getNextAnimation)() = ^{
+        animationBlock block = animationBlocks.count ? (animationBlock)[animationBlocks objectAtIndex:0] : nil;
+        if (block){
+            [animationBlocks removeObjectAtIndex:0];
+            return block;
+        }else{
+            return ^(BOOL finished){};
+        }
+    };
+    
+    //block 1
+    [animationBlocks addObject:^(BOOL finished){;
+        [UIView animateWithDuration:0.25 delay:0.55 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            backBtn.transform = CGAffineTransformMakeTranslation(0, 0);
+            backBtn.layer.opacity = 1.0f;
+        } completion: getNextAnimation()];
+    }];
+    //block 2
+    [animationBlocks addObject:^(BOOL finished){
+        [UIView animateWithDuration:0.4f delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            
+
+        } completion: getNextAnimation()];
+    }];
+    //add a block to our queue
+    [animationBlocks addObject:^(BOOL finished){
+        [self animateFirstCard];
+    }];
+    
+    // execute the first block in the queue
+    getNextAnimation()(YES);
+}
+
+-(void) animateFirstCard
+{
+    isFront = NO;
+    [self startDisplayCardInfo];
+    [self startFlip:_wordCard];
+
+}
+
+-(UIImage *) getBlurImgBGFromImage:(NSString *) imageName
+{
+    GPUImageiOSBlurFilter *blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+    blurFilter.blurRadiusInPixels = 2.0;
+    UIImage * image = [UIImage imageNamed:imageName];
+    UIImage *blurredSnapshotImage = [blurFilter imageByFilteringImage:image];
+    
+    return blurredSnapshotImage;
 }
 
 -(void) resetView
@@ -70,7 +165,7 @@
     
     curWordNo = 0;
     isFront = YES;
-    [self.setTitleLb setText:self.curSet.name];
+    
     
     [prevBtn setHidden:YES];
     [nextBtn setHidden:YES];
@@ -85,6 +180,8 @@
         [knowBtn setHidden:NO];
         [dunnoBtn setHidden:NO];
     }
+    
+    backBtn.transform = CGAffineTransformMakeTranslation(0, 0);
 }
 
 -(void) startDisplayCardInfo
@@ -92,17 +189,18 @@
     wordList = curSet.wordList;
     NSLog(@"wordList = %@",wordList);
     originalWordList = [wordList copy];
-    [self displayCurWord];
-    if (!isWordCheckSession) {
+    //[self displayCurWord];
+    /*if (!isWordCheckSession) {
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name language:self.language];
-    }
+    }*/
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self startDisplayCardInfo];
+    [self animateViewAppear];
+    
 }
 
 - (void)didReceiveMemoryWarning {

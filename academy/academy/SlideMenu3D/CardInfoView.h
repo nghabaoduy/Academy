@@ -31,7 +31,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *messageLb;
 @property (strong, nonatomic) IBOutlet UILabel *centerWordLb;
 @property (strong, nonatomic) IBOutlet UIView *view;
-@property (weak, nonatomic) IBOutlet UIButton *exampleSpeaker;
+@property (strong, nonatomic) IBOutlet UIButton *exampleSpeaker;
+@property (strong, nonatomic) IBOutlet UIView *cardView;
+@property (weak, nonatomic) IBOutlet UIView *cardViewForShadow;
+@property (strong, nonatomic) IBOutlet UIImageView *packImgView;
+@property (strong, nonatomic) IBOutlet UILabel *setTitle;
+@property (strong, nonatomic) IBOutlet UILabel *setSubTitle;
 
 
 @property LanguageIndexType curLanguageType;
@@ -42,5 +47,6 @@
 -(void) displayWord:(NSString *) word wordType: (NSString*) wordType phonetic: (NSString*) phonetic detailContent:(NSString*) detailContent wordSubDict:(NSDictionary *) subDict;
 -(void) displayCenterWord:(NSString *)word message:(NSString *) message;
 -(void) clearDisplay;
+-(void) displaySetInfoWithTitle:(NSString *) title subTitle:(NSString *) subTitle image:(NSString *) imageName;
 
 @end

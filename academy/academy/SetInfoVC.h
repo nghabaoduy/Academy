@@ -16,5 +16,5 @@
 @property (nonatomic, retain) UserPackage *curUserPack;
 @property (nonatomic, retain) LSet * curSet;
 
-
+-(void) resetView;
 @end

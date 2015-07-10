@@ -52,6 +52,10 @@
 		9AF369E61B44D5320094FAFD /* AppInitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF369E51B44D5320094FAFD /* AppInitVC.m */; };
 		9AF369EC1B4525940094FAFD /* SetWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF369EB1B4525940094FAFD /* SetWord.m */; };
 		9AF369F01B4557DC0094FAFD /* TestModePickView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF369EF1B4557DC0094FAFD /* TestModePickView.xib */; };
+		9AF5AD821B4F6C2100A3D541 /* SetInfoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5AD811B4F6C2100A3D541 /* SetInfoCollectionCell.m */; };
+		9AF5AD841B4F729A00A3D541 /* SetInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5AD831B4F729A00A3D541 /* SetInfoCollectionViewCell.xib */; };
+		9AF5AD861B4F7F5500A3D541 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5AD851B4F7F5500A3D541 /* star.png */; };
+		9AF5AD901B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5AD8F1B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png */; };
 		9AF6F6141B46E6CC004DD63F /* ShelfColHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */; };
 		9AF6F6171B46E717004DD63F /* ShelfCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
@@ -319,6 +323,12 @@
 		9AF369EA1B4525940094FAFD /* SetWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetWord.h; sourceTree = "<group>"; };
 		9AF369EB1B4525940094FAFD /* SetWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetWord.m; sourceTree = "<group>"; };
 		9AF369EF1B4557DC0094FAFD /* TestModePickView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestModePickView.xib; sourceTree = "<group>"; };
+		9AF5AD801B4F6C2100A3D541 /* SetInfoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetInfoCollectionCell.h; sourceTree = "<group>"; };
+		9AF5AD811B4F6C2100A3D541 /* SetInfoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetInfoCollectionCell.m; sourceTree = "<group>"; };
+		9AF5AD831B4F729A00A3D541 /* SetInfoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		9AF5AD851B4F7F5500A3D541 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = Graphics/Icons/star.png; sourceTree = "<group>"; };
+		9AF5AD8F1B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ysl_navi_back_btn_dark@2x.png"; path = "YSLTransitionAnimator/Resources/ysl_navi_back_btn_dark@2x.png"; sourceTree = "<group>"; };
+		9AF5AD911B4FD08400A3D541 /* Academy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Academy-Prefix.pch"; sourceTree = "<group>"; };
 		9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfColHeader.xib; sourceTree = "<group>"; };
 		9AF6F6151B46E717004DD63F /* ShelfCollectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfCollectionHeader.h; sourceTree = "<group>"; };
 		9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfCollectionHeader.m; sourceTree = "<group>"; };
@@ -601,6 +611,9 @@
 				9AB712DA1B4D763300AD1C96 /* SetCollectionCell.h */,
 				9AB712DB1B4D763300AD1C96 /* SetCollectionCell.m */,
 				9AB712DD1B4D8B2C00AD1C96 /* SetCollectionViewCell.xib */,
+				9AF5AD801B4F6C2100A3D541 /* SetInfoCollectionCell.h */,
+				9AF5AD811B4F6C2100A3D541 /* SetInfoCollectionCell.m */,
+				9AF5AD831B4F729A00A3D541 /* SetInfoCollectionViewCell.xib */,
 			);
 			name = SetVC;
 			sourceTree = "<group>";
@@ -637,6 +650,7 @@
 		9A15564F1B42CAFB00B996B9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9AF5AD8F1B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png */,
 				9A1556561B42CB1700B996B9 /* ysl_navi_back_btn@2x.png */,
 			);
 			name = Resources;
@@ -729,6 +743,7 @@
 		AFC27B7C1B0EEC4A00225016 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9AF5AD851B4F7F5500A3D541 /* star.png */,
 				AFC27B7D1B0EEC5700225016 /* arrows.png */,
 				AFC27B7E1B0EEC5700225016 /* bag.png */,
 				AFC27B7F1B0EEC5700225016 /* basket.png */,
@@ -867,6 +882,7 @@
 			children = (
 				AFD6362B1B038E1000ABDB3C /* Info.plist */,
 				AFD6362C1B038E1000ABDB3C /* main.m */,
+				9AF5AD911B4FD08400A3D541 /* Academy-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1244,6 +1260,7 @@
 				AFD636391B038E1000ABDB3C /* Main.storyboard in Resources */,
 				AFC27BE31B0EEC5700225016 /* mail.png in Resources */,
 				AFE729871B0E03E7005F0850 /* MenuHeaderBG.png in Resources */,
+				9AF5AD841B4F729A00A3D541 /* SetInfoCollectionViewCell.xib in Resources */,
 				9A1556721B42DDA900B996B9 /* image002.jpg in Resources */,
 				9A1556741B42DDA900B996B9 /* image004.jpg in Resources */,
 				9AEC2E221B43E3A5005B8923 /* viewIcon.png in Resources */,
@@ -1351,6 +1368,7 @@
 				AFC27BC61B0EEC5700225016 /* browser.png in Resources */,
 				9AEC2E181B4380E9005B8923 /* ShelfCellBG in Resources */,
 				AFC27BC21B0EEC5700225016 /* bag.png in Resources */,
+				9AF5AD861B4F7F5500A3D541 /* star.png in Resources */,
 				AFC27BF31B0EEC5700225016 /* search.png in Resources */,
 				AFC27BE81B0EEC5700225016 /* notes.png in Resources */,
 				AFC27BEF1B0EEC5700225016 /* radio.png in Resources */,
@@ -1358,6 +1376,7 @@
 				AFC27BE91B0EEC5700225016 /* officephone.png in Resources */,
 				9A1556731B42DDA900B996B9 /* image003.jpg in Resources */,
 				9A1556771B42DDA900B996B9 /* image007.jpg in Resources */,
+				9AF5AD901B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png in Resources */,
 				9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */,
 				AFC27BD01B0EEC5700225016 /* config.png in Resources */,
 				AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */,
@@ -1495,6 +1514,7 @@
 				9A1058AC1B4D14AB000AF57E /* LTCustomNavigationBar.m in Sources */,
 				9A1556541B42CB0600B996B9 /* UIViewController+YSLTransition.m in Sources */,
 				AFEE4BAD1B07BE7C00A0FD73 /* Package.m in Sources */,
+				9AF5AD821B4F6C2100A3D541 /* SetInfoCollectionCell.m in Sources */,
 				AF53E5B81B301FC700B7CC53 /* LanguageControl.m in Sources */,
 				9AE757711B4A92C300F18D02 /* ShopCollectionVC.m in Sources */,
 				AFE7297E1B0DEAB7005F0850 /* SideMenuCell.m in Sources */,
@@ -1651,6 +1671,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/academy/Academy-Prefix.pch";
 				INFOPLIST_FILE = academy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1668,6 +1690,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/academy/Academy-Prefix.pch";
 				INFOPLIST_FILE = academy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

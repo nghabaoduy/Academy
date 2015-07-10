@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="VNF-Gotham-Rounded-Book.ttf">
@@ -16,29 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="LaunchImageIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z0H-ZC-9kW">
-                    <rect key="frame" x="27" y="105" width="409" height="279"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="Z0H-ZC-9kW" secondAttribute="height" multiplier="514:403" id="iiV-Lw-B1v"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="iiV-Lw-B1v"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="iiV-Lw-B1v"/>
-                        </mask>
-                    </variation>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="  Copyright (c) 2015 Openlabproduction. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="281" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="4tK-y5-YV4"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.37859064660000002" green="0.59803738240000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -52,18 +35,43 @@
                         </mask>
                     </variation>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App-Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="FnO-0f-uoF">
+                    <rect key="frame" x="95" y="233" width="130" height="102"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="102" id="DU3-ec-L8A"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="130" id="UnB-qB-gol"/>
+                        <constraint firstAttribute="width" constant="130" id="X8w-NE-11x"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="102" id="ZcE-AW-Hbt"/>
+                        <constraint firstAttribute="height" constant="102" id="je8-T1-MDI"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="s49-oS-647"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="DU3-ec-L8A"/>
+                            <exclude reference="X8w-NE-11x"/>
+                            <exclude reference="je8-T1-MDI"/>
+                            <exclude reference="s49-oS-647"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="DU3-ec-L8A"/>
+                            <include reference="X8w-NE-11x"/>
+                            <include reference="je8-T1-MDI"/>
+                            <include reference="s49-oS-647"/>
+                        </mask>
+                    </variation>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.137037037" green="0.72222222219999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="Z0H-ZC-9kW" secondAttribute="centerX" id="4nl-pe-WzU"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="8" id="7Ji-eW-D2x"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="9dK-mI-EEL"/>
-                <constraint firstItem="Z0H-ZC-9kW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-50" id="HmO-ko-htF"/>
+                <constraint firstAttribute="centerX" secondItem="FnO-0f-uoF" secondAttribute="centerX" id="FaT-eZ-043"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerY" secondItem="Z0H-ZC-9kW" secondAttribute="centerY" id="QL0-HQ-Pk5"/>
-                <constraint firstAttribute="trailing" secondItem="Z0H-ZC-9kW" secondAttribute="trailing" constant="-50" id="Vai-nZ-gwZ"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="centerY" secondItem="FnO-0f-uoF" secondAttribute="centerY" id="ga9-xx-dGM"/>
                 <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="20" id="hPp-o6-2yT"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -72,10 +80,6 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="4nl-pe-WzU"/>
-                    <exclude reference="HmO-ko-htF"/>
-                    <exclude reference="QL0-HQ-Pk5"/>
-                    <exclude reference="Vai-nZ-gwZ"/>
                     <exclude reference="7Ji-eW-D2x"/>
                     <exclude reference="9dK-mI-EEL"/>
                     <exclude reference="hPp-o6-2yT"/>
@@ -83,10 +87,6 @@
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
-                    <include reference="4nl-pe-WzU"/>
-                    <include reference="HmO-ko-htF"/>
-                    <include reference="QL0-HQ-Pk5"/>
-                    <include reference="Vai-nZ-gwZ"/>
                     <include reference="7Ji-eW-D2x"/>
                     <include reference="9dK-mI-EEL"/>
                     <exclude reference="Kzo-t9-V3l"/>
@@ -98,6 +98,6 @@
         </view>
     </objects>
     <resources>
-        <image name="LaunchImageIcon.png" width="1328" height="1178"/>
+        <image name="App-Logo.png" width="512" height="512"/>
     </resources>
 </document>
