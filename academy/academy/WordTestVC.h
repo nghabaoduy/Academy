@@ -24,8 +24,8 @@
 @property (strong, nonatomic) UserPackage * curUserPack;
 @property (strong, nonatomic) IBOutlet CardMultipleChoiceView *cardMultipleChoice;
 @property (strong, nonatomic) IBOutlet CardTypeAnswerView *cardTypeAnswer;
-@property (strong, nonatomic) IBOutlet UILabel *wordNoLb;
-@property (strong, nonatomic) IBOutlet UILabel *setTitleLb;
+@property (strong, nonatomic) IBOutlet TOMSMorphingLabel *wordNoLb;
+@property (strong, nonatomic) IBOutlet TOMSMorphingLabel *setTitleLb;
 
 @property (strong, nonatomic) NSArray *wordList;
 @property (strong, nonatomic) WordInfoVC *wordInfoView;

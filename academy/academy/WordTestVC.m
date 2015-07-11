@@ -67,6 +67,9 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     }
     
+    [self.setTitleLb setTextWithoutMorphing:@""];
+    [self.wordNoLb setTextWithoutMorphing:@""];
+    
     _cardMultipleChoice.delegate = self;
     _cardMultipleChoice.view.bounds = _cardMultipleChoice.bounds;
     [_cardMultipleChoice clearDisplay];
@@ -384,6 +387,7 @@ int finalGrade;
 
 
 - (IBAction)next:(id)sender {
+    [MyUIEngine popButton:nextBtn];
     if (![testMaker isLastQuestion]) {
         NSLog(@"curcard = %@",curCard);
         if ([self startMove:curCard:YES]) {
@@ -395,7 +399,7 @@ int finalGrade;
         [self finishTest];
     }
 }
--(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft :(int)startX
+-(void) startEndMove:(UIView *)wordCard :(BOOL) moveLeft
 {
     [testMaker displayNextQuestion];
     [_wordNoLb setText:[NSString stringWithFormat:@"%i/%i",[testMaker getCurQuesNo]+1,[testMaker getTestWordQuantity]]];

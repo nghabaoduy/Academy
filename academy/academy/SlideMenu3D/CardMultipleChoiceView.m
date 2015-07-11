@@ -116,6 +116,11 @@
     [choice3Btn setTitle:choice3 forState:UIControlStateNormal];
     [choice4Btn setTitle:choice4 forState:UIControlStateNormal];
     
+    [MyUIEngine popAppearButton:choice1Btn withDelay:0.5];
+    [MyUIEngine popAppearButton:choice2Btn withDelay:0.6];
+    [MyUIEngine popAppearButton:choice3Btn withDelay:0.7];
+    [MyUIEngine popAppearButton:choice4Btn withDelay:0.8];
+    
     btnList = @[choice1Btn,choice2Btn,choice3Btn,choice4Btn];
     for (UIButton * choice in btnList) {
         [choice setBackgroundImage:[UIImage imageNamed:@"medium-blue-btn.png"] forState:UIControlStateNormal];
@@ -139,12 +144,18 @@
     [choice3Btn setTitle:choice3 forState:UIControlStateNormal];
     [choice4Btn setTitle:choice4 forState:UIControlStateNormal];
     
+    [MyUIEngine popAppearButton:choice1Btn withDelay:0];
+    [MyUIEngine popAppearButton:choice2Btn withDelay:0.1];
+    [MyUIEngine popAppearButton:choice3Btn withDelay:0.2];
+    [MyUIEngine popAppearButton:choice4Btn withDelay:0.3];
+    
     btnList = @[choice1Btn,choice2Btn,choice3Btn,choice4Btn];
     for (UIButton * choice in btnList) {
         [choice setBackgroundImage:[UIImage imageNamed:@"medium-blue-btn.png"] forState:UIControlStateNormal];
     }
 }
 - (IBAction)choiceClicked:(UIButton *)choiceBtn {
+    [MyUIEngine popButton:choiceBtn];
     [delegate CardMultipleChoiceView:self choiceSelect:choiceBtn.titleLabel.text];
 }
 
@@ -154,8 +165,13 @@
         if ([choice.titleLabel.text isEqual:correctAnswer]) {
             [choice setBackgroundImage:[UIImage imageNamed:@"medium-green-btn.png"] forState:UIControlStateNormal];
         }
-        if ([choice.titleLabel.text isEqual:wrongAnswer]) {
-            [choice setBackgroundImage:[UIImage imageNamed:@"medium-red-btn.png"] forState:UIControlStateNormal];
+
+            if ([choice.titleLabel.text isEqual:wrongAnswer]) {
+                [choice setBackgroundImage:[UIImage imageNamed:@"medium-red-btn.png"] forState:UIControlStateNormal];
+            }
+
+        if (!([choice.titleLabel.text isEqual:correctAnswer] || [choice.titleLabel.text isEqual:wrongAnswer])) {
+            [MyUIEngine popDisappearButton:choice];
         }
     }
 }

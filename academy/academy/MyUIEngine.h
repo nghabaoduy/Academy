@@ -13,4 +13,8 @@
 + (id)sharedUIEngine;
 
 -(void)appDelegateUICustomzation;
++(void) popButton:(UIView *) button;
++(void) popAppearButton:(UIView *) button;
++(void) popAppearButton:(UIView *) button withDelay:(CGFloat) delay;
++(void) popDisappearButton:(UIView *) button;
 @end

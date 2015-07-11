@@ -63,6 +63,7 @@
     [self clearDisplay];
         
     [questionTV setText:question];
+    [MyUIEngine popAppearButton:checkBtn withDelay:0.2];
     
 }
 -(void)displayImgQuestion:(NSString *) imgLink
@@ -70,6 +71,7 @@
     [self clearDisplay];
     [questionImg setHidden:NO];
     [questionImg setImage:[UIImage imageNamed:imgLink]];
+    [MyUIEngine popAppearButton:checkBtn withDelay:0.2];
     
 }
 -(void) displayWordSpeaker:(NSString *) word
@@ -79,12 +81,15 @@
     speakerWord = word;
     self.language = [self.delegate CardTypeAnswerViewGetLanguage];
     [[SoundEngine getInstance] readWord:word language:self.language];
+    [MyUIEngine popAppearButton:checkBtn withDelay:0.2];
 }
 - (IBAction)speakerClicked:(id)sender {
+    [MyUIEngine popButton:(UIButton *)sender];
     self.language = [self.delegate CardTypeAnswerViewGetLanguage];
     [[SoundEngine getInstance] readWord:speakerWord language:self.language];
 }
 - (IBAction)checkAnswer:(id)sender {
+    [MyUIEngine popButton:checkBtn];
     [checkBtn setEnabled:NO];
     [delegate CardTypeAnswerView:self checkAnswer:answerTF.text];
 }
@@ -125,6 +130,7 @@
         [correctAnswerLb setText:correctAnswer];
         [checkCrossHolder setImage:[UIImage imageNamed:@"cross.png"]];
     }
+    [MyUIEngine popAppearButton:checkCrossHolder];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

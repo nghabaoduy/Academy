@@ -64,4 +64,47 @@
     
 }
 
++(void) popButton:(UIView *) button
+{
+    button.transform = CGAffineTransformMakeScale(1, 1);
+    [UIView animateWithDuration:0.1 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3
+                              delay:0
+             usingSpringWithDamping:0.45
+              initialSpringVelocity:0.0
+                            options:UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{
+                             button.transform = CGAffineTransformMakeScale(1, 1);
+                         }completion:nil];
+    }];
+}
++(void) popAppearButton:(UIView *) button
+{
+    button.transform = CGAffineTransformMakeScale(0, 0);
+    [MyUIEngine popAppearButton:button withDelay:0];
+}
++(void) popAppearButton:(UIView *) button withDelay:(CGFloat) delay
+{
+    button.transform = CGAffineTransformMakeScale(0, 0);
+    [UIView animateWithDuration:0.5
+                          delay:delay
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         button.transform = CGAffineTransformMakeScale(1, 1);
+                     }completion:nil];
+}
++(void) popDisappearButton:(UIView *) button
+{
+    //button.transform = CGAffineTransformMakeScale(1, 1);
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        button.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    } completion:^(BOOL finished) {
+        //button.transform = CGAffineTransformMakeScale(0, 0.);
+    }];
+}
+
 @end

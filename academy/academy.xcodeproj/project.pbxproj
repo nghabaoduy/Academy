@@ -58,6 +58,8 @@
 		9AF5AD901B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5AD8F1B4FC07600A3D541 /* ysl_navi_back_btn_dark@2x.png */; };
 		9AF6F6141B46E6CC004DD63F /* ShelfColHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */; };
 		9AF6F6171B46E717004DD63F /* ShelfCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */; };
+		9AF7BE051B50D5770004C821 /* crossBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7BE031B50D5770004C821 /* crossBtn.png */; };
+		9AF7BE061B50D5770004C821 /* tickBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7BE041B50D5770004C821 /* tickBtn.png */; };
 		AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */; };
 		AF0241D21B0F16560019B3E2 /* WordTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D11B0F16560019B3E2 /* WordTestVC.m */; };
 		AF0241D51B0F18930019B3E2 /* WordDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0241D41B0F18930019B3E2 /* WordDisplayView.m */; };
@@ -332,6 +334,8 @@
 		9AF6F6131B46E6CC004DD63F /* ShelfColHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfColHeader.xib; sourceTree = "<group>"; };
 		9AF6F6151B46E717004DD63F /* ShelfCollectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfCollectionHeader.h; sourceTree = "<group>"; };
 		9AF6F6161B46E717004DD63F /* ShelfCollectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfCollectionHeader.m; sourceTree = "<group>"; };
+		9AF7BE031B50D5770004C821 /* crossBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crossBtn.png; path = Graphics/crossBtn.png; sourceTree = "<group>"; };
+		9AF7BE041B50D5770004C821 /* tickBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tickBtn.png; path = Graphics/tickBtn.png; sourceTree = "<group>"; };
 		AF0241CE1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTestMultipleChoice.xib; path = academy/CardView/CardTestMultipleChoice.xib; sourceTree = SOURCE_ROOT; };
 		AF0241D01B0F16560019B3E2 /* WordTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTestVC.h; sourceTree = "<group>"; };
 		AF0241D11B0F16560019B3E2 /* WordTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTestVC.m; sourceTree = "<group>"; };
@@ -964,6 +968,8 @@
 		AFE6DEFF1B04A830003E30CA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				9AF7BE031B50D5770004C821 /* crossBtn.png */,
+				9AF7BE041B50D5770004C821 /* tickBtn.png */,
 				9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */,
 				AF605EFC1B2F55D100134BEE /* LaunchImageIcon.png */,
 				AF605EF31B2EF9BD00134BEE /* transparent.png */,
@@ -1313,6 +1319,7 @@
 				AFE010841B053547005B4B4D /* PackCellInfoBG.png in Resources */,
 				AFC27BC31B0EEC5700225016 /* basket.png in Resources */,
 				AFC27BF01B0EEC5700225016 /* rain.png in Resources */,
+				9AF7BE051B50D5770004C821 /* crossBtn.png in Resources */,
 				9A15567C1B42DDA900B996B9 /* image012.jpg in Resources */,
 				AFC27BC81B0EEC5700225016 /* calculator.png in Resources */,
 				AFC27BE41B0EEC5700225016 /* money.png in Resources */,
@@ -1347,6 +1354,7 @@
 				AF71F51B1B2D674B00BCCB03 /* packRankStar_2.png in Resources */,
 				AF0241CF1B0F0BA00019B3E2 /* CardTestMultipleChoice.xib in Resources */,
 				AFC27BC71B0EEC5700225016 /* building.png in Resources */,
+				9AF7BE061B50D5770004C821 /* tickBtn.png in Resources */,
 				AFE7BEE91B1DD7BE0088B9DB /* banner_2.png in Resources */,
 				AFE7BEE11B1DD79F0088B9DB /* sticker_timer.png in Resources */,
 				AFC27C001B0EEC5700225016 /* view.png in Resources */,

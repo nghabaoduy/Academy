@@ -175,9 +175,7 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"getrow runs");
-    
+{    
     SetInfoCollectionCell *cell = (SetInfoCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSArray *rowData = [rowDataSource objectAtIndex:indexPath.row];
     [cell.itemImage setImage:[UIImage imageNamed:rowData[0]]];

@@ -74,7 +74,7 @@
     CGAffineTransform transformScale = CGAffineTransformMakeScale(0,0);
     self.itemImage.transform = transformScale;
     
-    [self.itemLabel setText:self.curSet.name];
+    [self.itemLabel setText:self.curSet?self.curSet.name:@"Tổng Kết"];
     self.itemLabel.transform = CGAffineTransformMakeScale(0,0);
     
     [self performSelector:@selector(animateViewAppear) withObject:self afterDelay:time];

@@ -11,7 +11,7 @@
 #import "LSet.h"
 #import "User.h"
 #import "SetCollectionCell.h"
-
+#import "WordTestVC.h"
 #import "FRDLivelyButton.h"
 #import "YSLTransitionAnimator.h"
 #import "UIViewController+YSLTransition.h"
@@ -159,36 +159,39 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     if (!curPack) {
         return 0;
     }
-    return curPack.setList.count;
+    if (curPack.setList.count == 0) {
+        return 0;
+    }
+    return curPack.setList.count+1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"getrow runs");
+    SetCollectionCell *cell = (SetCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     //final row
-    /*if (indexPath.row == setOrderArray.count) {
-        SetCollectionCell *cell = (SetCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-        cell.setDisplayer.delegate = self;
-        [cell.setDisplayer setFinalTest:curPack];
+    if (indexPath.row == curPack.setList.count) {
         
-        [self isAllSetIsRanked]? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
+        cell.solidColor = [UIColor flatSunFlowerColor];
+        UIImage *img = [UIImage imageNamed:@"sticker_finaltest.png"];
+        [cell.itemImage setImage:img];
+        //[cell setFinalTest:curPack];
+        
+        /*[self isAllSetIsRanked]? [cell.setDisplayer enableDisplayer]: [cell.setDisplayer disableDisplayer];
         if([[[User currentUser] role] isEqualToString:@"admin"] || [[[User currentUser] role] isEqualToString:@"tester"])
         {
             [cell.setDisplayer enableDisplayer];
-        }
-        return cell;
-    }*/
-
-
-    SetCollectionCell *cell = (SetCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.setDisplayer.delegate = self;
-    LSet *set = curPack.setList[indexPath.row];
-    cell.curSet = set;
-    [self checkUnlockSetDisplayer:cell.setDisplayer];
-    
-    UIImage *img = [UIImage imageNamed:set.imgURL];
-    [cell.itemImage setImage:img];
-    cell.solidColor = set.solidColor;
+        }*/
+    }else{
+        //cell.setDisplayer.delegate = self;
+        LSet *set = curPack.setList[indexPath.row];
+        cell.curSet = set;
+        //[self checkUnlockSetDisplayer:cell.setDisplayer];
+        
+        UIImage *img = [UIImage imageNamed:set.imgURL];
+        [cell.itemImage setImage:img];
+        cell.solidColor = set.solidColor;
+    }
     if (isFirstLoad) {
         [cell setAppearAfterDelay:indexPath.row * 0.3];
     }
@@ -328,20 +331,42 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"didSelectItemAtIndexPath");
+    if (indexPath.row == curPack.setList.count) {
+        [self addWordListToFullWordList];
+        return;
+    }
     isFirstLoad = NO;
     [self animateNavigationBarUp:YES];
     SetCollectionCell *cell = (SetCollectionCell *)[self.collectionView cellForItemAtIndexPath:[[self.collectionView indexPathsForSelectedItems] firstObject]];
-    
     SetInfoVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"setInfoView"];
     vc.curSet = cell.curSet;
     vc.curUserPack = self.curUserPack;
     [self.navigationController pushViewController:vc animated:YES];
 }
+-(void) addWordListToFullWordList
+{
+    fullWordList = [NSMutableArray new];
+    for (LSet * set in curPack.setList) {
+        [fullWordList addObjectsFromArray:set.wordList];
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WordTestVC * view = [storyboard instantiateViewControllerWithIdentifier:@"wordTestView"];
+    view.curPack = curPack;
+    view.wordList = [fullWordList copy];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self presentViewController:view animated:YES completion:nil];
+}
+
 
 #pragma mark -- UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"isInDoubleRowAtIndexPath:%i = %@",indexPath.row, [self isInDoubleRowAtIndexPath:indexPath]?@"YES":@"NO");
+    NSLog(@"isInDoubleRowAtIndexPath:%li = %@",(long)indexPath.row, [self isInDoubleRowAtIndexPath:indexPath]?@"YES":@"NO");
+    if (indexPath.row == curPack.setList.count) {
+        return CGSizeMake(collectionView.frame.size.width, 142);
+    }
+    
     if ([self isInDoubleRowAtIndexPath:indexPath]) {
         return CGSizeMake(collectionView.frame.size.width/2, 142);
     }
@@ -352,6 +377,10 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 }
 -(BOOL) isInDoubleRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"is In Double Row At IndexPath");
+    if (indexPath.row == curPack.setList.count) {
+        return NO;
+    }
     LSet *curSet = curPack.setList[indexPath.row];
     for(NSMutableArray * orderList in setOrderArray)
     {

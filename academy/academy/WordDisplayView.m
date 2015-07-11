@@ -130,45 +130,4 @@
 {
     
 }
--(void) popButton:(UIButton *) button
-{
-    button.transform = CGAffineTransformMakeScale(1, 1);
-    [UIView animateWithDuration:0.1 animations:^{
-        button.transform = CGAffineTransformMakeScale(1.3, 1.3);
-    }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.3
-                              delay:0
-             usingSpringWithDamping:0.45
-              initialSpringVelocity:0.0
-                            options:UIViewAnimationOptionBeginFromCurrentState
-                         animations:^{
-                             button.transform = CGAffineTransformMakeScale(1, 1);
-                         }completion:nil];
-    }];
-}
--(void) popAppearButton:(UIButton *) button
-{
-    [self popAppearButton:button withDelay:0];
-}
--(void) popAppearButton:(UIButton *) button withDelay:(CGFloat) delay
-{
-    button.transform = CGAffineTransformMakeScale(0, 0);
-    [UIView animateWithDuration:0.7
-                          delay:delay
-         usingSpringWithDamping:0.45
-          initialSpringVelocity:0.0
-                        options:UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         button.transform = CGAffineTransformMakeScale(1, 1);
-                     }completion:nil];
-}
--(void) popDisappearButton:(UIButton *) button
-{
-    button.transform = CGAffineTransformMakeScale(1, 1);
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        button.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    } completion:^(BOOL finished) {
-        button.transform = CGAffineTransformMakeScale(0., 0.);
-    }];
-}
 @end

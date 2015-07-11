@@ -72,6 +72,11 @@
 #pragma mark -- Appear Animation
 - (void) setupInitView
 {
+    knowBtn.clipsToBounds = YES;
+    dunnoBtn.clipsToBounds = YES;
+    [knowBtn.layer setCornerRadius:5];
+    [dunnoBtn.layer setCornerRadius:5];
+    
     prevBtn.transform = CGAffineTransformMakeScale(0, 0);
     nextBtn.transform = CGAffineTransformMakeScale(0, 0);
     knowBtn.transform = CGAffineTransformMakeScale(0, 0);
@@ -143,9 +148,9 @@
     UIButton * appearBtn1 = isWordCheckSession?knowBtn:nextBtn;
     UIButton * appearBtn2 = isWordCheckSession?dunnoBtn:nil;
     
-    [self popAppearButton:appearBtn1 withDelay:1.5];
+    [MyUIEngine popAppearButton:appearBtn1 withDelay:1.5];
     if (appearBtn2) {
-        [self popAppearButton:appearBtn2 withDelay:1.65];
+        [MyUIEngine popAppearButton:appearBtn2 withDelay:1.65];
     }
    
 }
@@ -249,13 +254,13 @@
 }
 // PREV - NEXT
 - (IBAction)next:(id)sender {
-    [self popButton:nextBtn];
+    [MyUIEngine popButton:nextBtn];
     isFront = YES;
     if (curWordNo< wordList.count -1) {
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
             if (curWordNo == 1) {
-                [self popAppearButton:prevBtn];
+                [MyUIEngine popAppearButton:prevBtn];
             }
         }
     }
@@ -273,11 +278,11 @@
             curWordNo--;
             if(curWordNo == 0)
             {
-                [self popDisappearButton:prevBtn];
+                [MyUIEngine popDisappearButton:prevBtn];
             }
             else
             {
-                [self popButton:prevBtn];
+                [MyUIEngine popButton:prevBtn];
             }
         }
     }
@@ -286,7 +291,7 @@
 
 // KNOW - DUNNO
 - (IBAction)know:(id)sender {
-    [self popButton:knowBtn];
+    [MyUIEngine popButton:knowBtn];
     if (![knownWords containsObject:wordList[curWordNo]]) {
         [knownWords addObject:wordList[curWordNo]];
     }
@@ -301,7 +306,7 @@
 }
 - (IBAction)dunno:(id)sender
 {
-    [self popButton:dunnoBtn];
+    [MyUIEngine popButton:dunnoBtn];
     if (curWordNo< wordList.count -1) {
         if ([self startMove:_wordCard:YES]) {
             curWordNo++;
@@ -348,7 +353,7 @@
 
         Word *word = wordList[curWordNo];
         [[SoundEngine getInstance] readWord:word.name language:self.language];
-        [self popAppearButton:nextBtn];
+        [MyUIEngine popAppearButton:nextBtn];
 
     }];
     [alertView setUseMotionEffects:true];

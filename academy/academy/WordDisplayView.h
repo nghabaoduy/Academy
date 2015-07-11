@@ -23,9 +23,6 @@
 -(void) endFlip;
 
 -(void) popButton:(UIButton *) button;
--(void) popAppearButton:(UIButton *) button;
--(void) popAppearButton:(UIButton *) button withDelay:(CGFloat) delay;
--(void) popDisappearButton:(UIButton *) button;
 @end
 /*
   basic function
