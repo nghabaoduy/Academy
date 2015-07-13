@@ -148,7 +148,7 @@
     NSArray *sortedArray = [learnedArray sortedArrayUsingComparator:^NSComparisonResult(WordLearned* obj1, WordLearned* obj2) {
         return [obj1.created_at compare:obj2.created_at] == NSOrderedAscending;
     }];
-    NSLog(@"sortedArray = %@",sortedArray);
+    //NSLog(@"sortedArray = %@",sortedArray);
     NSMutableArray *xLabels = [NSMutableArray new];
     NSMutableArray *wlArrayList = [NSMutableArray new];
     

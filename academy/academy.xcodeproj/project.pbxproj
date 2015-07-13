@@ -38,6 +38,7 @@
 		9AB712DE1B4D8B2C00AD1C96 /* SetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AB712DD1B4D8B2C00AD1C96 /* SetCollectionViewCell.xib */; };
 		9ABE3CDC1B491BAA00924BFD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABE3CDB1B491BAA00924BFD /* CoreFoundation.framework */; };
 		9ABE3CDF1B49B3EA00924BFD /* PackageTryBuyStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABE3CDE1B49B3EA00924BFD /* PackageTryBuyStatus.m */; };
+		9AC3F29D1B526C7F006FAC74 /* camera2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC3F29C1B526C7F006FAC74 /* camera2.png */; };
 		9ADB5A051B3EB2E400AEB089 /* uploadingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */; };
 		9ADB5A081B3F231300AEB089 /* SharedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB5A071B3F231300AEB089 /* SharedData.m */; };
 		9AE757711B4A92C300F18D02 /* ShopCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE757701B4A92C300F18D02 /* ShopCollectionVC.m */; };
@@ -306,6 +307,7 @@
 		9ABE3CDB1B491BAA00924BFD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		9ABE3CDD1B49B3EA00924BFD /* PackageTryBuyStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageTryBuyStatus.h; sourceTree = "<group>"; };
 		9ABE3CDE1B49B3EA00924BFD /* PackageTryBuyStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageTryBuyStatus.m; sourceTree = "<group>"; };
+		9AC3F29C1B526C7F006FAC74 /* camera2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera2.png; path = Graphics/Icons/camera2.png; sourceTree = "<group>"; };
 		9ADB5A041B3EB2E400AEB089 /* uploadingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uploadingAvatar.png; path = Graphics/uploadingAvatar.png; sourceTree = "<group>"; };
 		9ADB5A061B3F231300AEB089 /* SharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedData.h; sourceTree = "<group>"; };
 		9ADB5A071B3F231300AEB089 /* SharedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedData.m; sourceTree = "<group>"; };
@@ -747,6 +749,7 @@
 		AFC27B7C1B0EEC4A00225016 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9AC3F29C1B526C7F006FAC74 /* camera2.png */,
 				9AF5AD851B4F7F5500A3D541 /* star.png */,
 				AFC27B7D1B0EEC5700225016 /* arrows.png */,
 				AFC27B7E1B0EEC5700225016 /* bag.png */,
@@ -1389,6 +1392,7 @@
 				AFC27BD01B0EEC5700225016 /* config.png in Resources */,
 				AFF396CF1B1CB9F6002675AB /* rankStar_1.png in Resources */,
 				AFE7BEEA1B1DD7BE0088B9DB /* banner_3.png in Resources */,
+				9AC3F29D1B526C7F006FAC74 /* camera2.png in Resources */,
 				AFC27BD81B0EEC5700225016 /* easel.png in Resources */,
 				AFC243081B1F85D100972BA4 /* GooglePlusLogo.png in Resources */,
 				AFC27BE61B0EEC5700225016 /* music.png in Resources */,

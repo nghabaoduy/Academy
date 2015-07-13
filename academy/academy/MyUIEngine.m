@@ -103,8 +103,30 @@
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         button.transform = CGAffineTransformMakeScale(0.01, 0.01);
     } completion:^(BOOL finished) {
-        //button.transform = CGAffineTransformMakeScale(0, 0.);
     }];
 }
-
++(void) fadeOutButton:(UIView *) button
+{
+    [MyUIEngine fadeOutButton:button withDelay:0];
+}
++(void) fadeOutButton:(UIView *) button withDelay:(CGFloat) delay
+{
+    
+    [UIView animateWithDuration:0.3 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        button.layer.opacity = 0;
+    } completion:^(BOOL finished) {
+    }];
+}
++(void) fadeInButton:(UIView *) button
+{
+    [MyUIEngine fadeInButton:button withDelay:0];
+}
++(void) fadeInButton:(UIView *) button withDelay:(CGFloat) delay
+{
+    button.layer.opacity = 0;
+    [UIView animateWithDuration:0.3 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        button.layer.opacity = 1;
+    } completion:^(BOOL finished) {
+    }];
+}
 @end

@@ -364,16 +364,14 @@ static User * _currentUser = nil;
     [manager POST:requestURL parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileURL:imgURL name:@"image" error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"uploadImage Success: %@", responseObject);
+
         [self setObjectWithDictionary:responseObject];
         [self.authDelegate uploadAvatarSucessful:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //NSLog(@"operation = %@",operation);
-        //NSLog(@"#error: %@", error.localizedDescription);
+
         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
         NSData *data = [ErrorResponse dataUsingEncoding:NSUTF8StringEncoding];
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        //NSLog(@"uploadImageWithURLError[%li] = %@",(long)[operation.response statusCode],json[@"message"]);
         [self.authDelegate uploadAvatarFailed:self WithError:json StatusCode:@([operation.response statusCode])];
     }];
 }

@@ -7,12 +7,16 @@
 //
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "UIImageView+AFNetworking.h"
+#import "AFNetworking.h"
 #import "ProfileVC.h"
 #import "PNChart.h"
 #import "DataEngine.h"
 #import "User.h"
 #import "WordLearned.h"
-
+#import "FRDLivelyButton.h"
+#import "SideMenuVC.h"
+#import "TOMSMorphingLabel.h"
+#import "AMSmoothAlertView.h"
 @interface ProfileVC ()<ModelDelegate, AuthDelegate>
 
 @end
@@ -20,11 +24,18 @@
 @implementation ProfileVC
 {
     
+    __weak IBOutlet TOMSMorphingLabel *titleLb;
     IBOutlet UITextField *nameTF;
 
     IBOutlet UIButton *avatarBtn;
+    __weak IBOutlet UIView *imgBGShade;
+    __weak IBOutlet UIView *takeImageSolid;
     IBOutlet UIImageView *avatarImg;
+    __weak IBOutlet UIImageView *avatarBG;
     IBOutlet UIView *chartView;
+    
+    
+    __weak IBOutlet UILabel *totalWordTitleLb;
     IBOutlet UILabel *totalWordLb;
     IBOutlet UIActivityIndicatorView *wordLoadIndicator;
     
@@ -36,6 +47,9 @@
     NSArray *yValues;
     
     BOOL wordListIsLoad;
+    
+    FRDLivelyButton *paneRevealLeftButton;
+    __weak IBOutlet UIProgressView *imgProgressBar;
 }
 
 - (void)viewDidLoad {
@@ -44,11 +58,14 @@
     curUser.authDelegate = self;
     [self refreshView];
     [nameTF setFont:[UIFont fontWithName:@"GothamRounded-Bold" size:20]];
-    [avatarImg setImageWithURL:[NSURL URLWithString:curUser.avatarURL] placeholderImage:[UIImage imageNamed:@"dummyAvatar.png"]];
+    takeImageSolid.layer.cornerRadius = 20;
+    [self setupInitView];
+    [self loadAvartar];
+    
     
     [avatarImg setContentMode:UIViewContentModeScaleAspectFill];
     CALayer *avatarLayer = avatarImg.layer;
-    [avatarLayer setCornerRadius:50.0f];
+    [avatarLayer setCornerRadius:75.0f];
     [avatarLayer setMasksToBounds:YES];
     
     if ([[DataEngine getInstance] loginType] != LoginNormal) {
@@ -60,6 +77,83 @@
     [chartView addSubview:barChart];
     [chartView setBackgroundColor:[UIColor clearColor]];
     
+    self.tableView.separatorColor = [UIColor clearColor];
+    [self.navigationController setNavigationBarHidden:YES];
+    
+}
+
+-(void) loadAvartar
+{
+    if (curUser.avatarURL == nil) {
+        [self displayDummyAvatar];
+        return;
+    }
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:curUser.avatarURL]];
+    AFURLConnectionOperation *operation =   [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"userAvatar.jpg"];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
+    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+        imgProgressBar.progress = (float)totalBytesRead / totalBytesExpectedToRead;
+    }];
+    [operation setCompletionBlock:^{
+        NSLog(@"downloadComplete!");
+        UIImage *storedavatarImg = [UIImage imageWithContentsOfFile:filePath];
+        [avatarImg setImage:storedavatarImg];
+        [avatarBG setImage:storedavatarImg];
+        [MyUIEngine fadeOutButton:imgProgressBar withDelay:0.5];
+        [self animateViewAppear];
+    }];
+    [operation start];
+}
+-(void) displayDummyAvatar
+{
+    NSLog(@"displayDummyAvatar runs");
+    [MyUIEngine fadeOutButton:imgProgressBar withDelay:0.5];
+    [avatarImg setImage:[UIImage imageNamed:@"dummyAvatar.png"]];
+    NSString* imageURL = [NSString stringWithFormat:@"image%03ld.jpg", (unsigned long)(arc4random_uniform(13)+1)];
+     [avatarBG setImage:[UIImage imageNamed:imageURL]];
+     [self animateViewAppear];
+}
+
+
+#pragma mark -- Appear Animation
+- (void) setupInitView
+{
+    self.tableView.bounces = NO;
+    self.tableView.alwaysBounceVertical = NO;
+    
+    avatarImg.layer.opacity = 0;
+    avatarBG.layer.opacity = 0;
+    takeImageSolid.transform = CGAffineTransformMakeScale(0, 0);
+    avatarBtn.transform = CGAffineTransformMakeScale(0, 0);
+    nameTF.transform = CGAffineTransformMakeScale(0, 0);
+    
+    [titleLb setTextWithoutMorphing:@""];
+    [self addMenuBtn];
+    paneRevealLeftButton.transform = CGAffineTransformMakeScale(0, 0);
+    
+    totalWordTitleLb.transform = CGAffineTransformMakeScale(0, 0);
+    totalWordLb.transform = CGAffineTransformMakeScale(0, 0);
+    wordLoadIndicator.transform = CGAffineTransformMakeScale(0, 0);
+}
+- (void) animateViewAppear
+{
+    [titleLb setText:@"Cá Nhân"];
+    [MyUIEngine popAppearButton:paneRevealLeftButton withDelay:0.1];
+    
+    [MyUIEngine fadeInButton:avatarBG];
+    [MyUIEngine fadeInButton:avatarImg withDelay:0.3];
+    [MyUIEngine popAppearButton:avatarImg withDelay:0.3];
+    [MyUIEngine popAppearButton:takeImageSolid withDelay:0.4];
+    [MyUIEngine popAppearButton:avatarBtn withDelay:0.5];
+    [MyUIEngine popAppearButton:nameTF withDelay:0.6];
+    
+    [MyUIEngine popAppearButton:totalWordTitleLb withDelay:0.8];
+    [MyUIEngine popAppearButton:totalWordLb withDelay:0.9];
+    
 }
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -67,11 +161,33 @@
         wordListIsLoad = YES;
         [self getWordLearnedList];
     }
+    
+}
+
+-(void) addMenuBtn
+{
+    if (!paneRevealLeftButton) {
+        paneRevealLeftButton = [[FRDLivelyButton alloc] initWithFrame:CGRectMake(15,12,30,22)];
+        [paneRevealLeftButton setStyle:kFRDLivelyButtonStyleHamburger animated:NO];
+        [paneRevealLeftButton addTarget:self action:@selector(leftBarButtonItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [paneRevealLeftButton setOptions:@{ kFRDLivelyButtonLineWidth: @(2.0f),
+                                                        kFRDLivelyButtonHighlightedColor: [UIColor colorWithRed:0.5 green:0.8 blue:1.0 alpha:1.0],
+                                                        kFRDLivelyButtonColor: [UIColor whiteColor]
+                                                        }];
+        [self.view addSubview:paneRevealLeftButton];
+    }
+    
+}
+
+-(void) leftBarButtonItemTapped:(id)sender
+{
+    [[SideMenuVC getInstance] dynamicsDrawerRevealLeftBarButtonItemTapped:sender];
 }
 
 -(void) getWordLearnedList
 {
-    wordLoadIndicator.hidden = NO;
+    [MyUIEngine popAppearButton:wordLoadIndicator];
     //NSLog(@"getWordLearnedList runs");
     WordLearned *wordLearned = [WordLearned new];
     wordLearned.delegate = self;
@@ -147,6 +263,14 @@
 }
 -(void) uploadImage:(UIImage *)img
 {
+    [avatarImg setImage:img];
+    [avatarBG setImage:img];
+    
+    avatarImg.layer.opacity = 0;
+    avatarBG.layer.opacity = 0;
+    [MyUIEngine fadeInButton:avatarBG];
+    [MyUIEngine fadeInButton:avatarImg withDelay:0.3];
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [curUser uploadImageWithURL:[self getImageFilePath:img:0]];
 }
@@ -156,7 +280,7 @@
     NSArray * directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:&error];
     NSLog(@"directoryContents ====== %@",directoryContents);
     
-    NSData *pngData = UIImageJPEGRepresentation(image, 0.05f);
+    NSData *pngData = UIImageJPEGRepresentation(image, 1.0f);
     NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"propImage%@-%i.jpg",@"profileImage",imageIndex]]; //Add the file name
     [pngData writeToFile:filePath atomically:YES]; //Write the file
     return [NSURL fileURLWithPath:filePath];
@@ -207,11 +331,35 @@
     
 }
 
+#pragma Tableview
+- (CGFloat)tableView:(UITableView*)tableView
+heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0.01;
+    }
+    
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView*)tableView
+heightForFooterInSection:(NSInteger)section {
+    return 0.01;
+}
+
+- (UIView*)tableView:(UITableView*)tableView
+viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (UIView*)tableView:(UITableView*)tableView
+viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
 #pragma WordLearned
 -(void)getAllSucessfull:(AModel *)model List:(NSMutableArray *)allList
 {
-    wordLoadIndicator.hidden = YES;
-    NSLog(@"WordLearnedList = %@",allList);
+    [MyUIEngine popDisappearButton:wordLoadIndicator];
+    //NSLog(@"WordLearnedList = %@",allList);
     if (allList.count > 0) {
         [totalWordLb setText:[NSString stringWithFormat:@"%i",allList.count]];
         [self generateChartInfo:allList];
@@ -228,7 +376,7 @@
 
 -(void)model:(AModel *)model ErrorMessage:(id)error StatusCode:(NSNumber *)statusCode
 {
-    wordLoadIndicator.hidden = YES;
+    [MyUIEngine popDisappearButton:wordLoadIndicator];
     NSLog(@"error Message[%i] = %@",statusCode.intValue,error);
 }
 #pragma AuthDelegate
@@ -248,11 +396,20 @@
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"uploadAvatarSucessful - %@",user.avatarURL);
-    [avatarImg setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"uploadingAvatar.png"]];
 }
 -(void)uploadAvatarFailed:(User *)user WithError:(id)error StatusCode:(NSNumber *)statusCode
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"uploadAvatarFailed - %@",error);
+    [avatarImg setImage:[UIImage imageNamed:@"dummyAvatar.png"]];
+    NSString* imageURL = [NSString stringWithFormat:@"image%03ld.jpg", (unsigned long)(arc4random_uniform(13)+1)];
+    [avatarBG setImage:[UIImage imageNamed:imageURL]];
+    AMSmoothAlertView *alert = [[AMSmoothAlertView alloc] initDropAlertWithTitle:@"Thông Báo"
+                                                                         andText:@"Thay ảnh đại diện thất bại. Bạn thử lại nhé!"
+                                                                 andCancelButton:NO
+                                                                    forAlertType:AlertFailure withCompletionHandler:^(AMSmoothAlertView * alert, UIButton * button) {
+                                                                        //[alert dismissAlertView];
+                                                                    }];
+    [alert show];
 }
 @end
