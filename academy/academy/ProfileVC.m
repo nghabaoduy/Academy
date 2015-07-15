@@ -17,6 +17,7 @@
 #import "SideMenuVC.h"
 #import "TOMSMorphingLabel.h"
 #import "AMSmoothAlertView.h"
+
 @interface ProfileVC ()<ModelDelegate, AuthDelegate>
 
 @end
@@ -88,25 +89,19 @@
         [self displayDummyAvatar];
         return;
     }
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:curUser.avatarURL]];
-    AFURLConnectionOperation *operation =   [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"userAvatar.jpg"];
-    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
-    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        imgProgressBar.progress = (float)totalBytesRead / totalBytesExpectedToRead;
-    }];
-    [operation setCompletionBlock:^{
-        NSLog(@"downloadComplete!");
-        UIImage *storedavatarImg = [UIImage imageWithContentsOfFile:filePath];
+    AFURLConnectionOperation * operation = [[DataEngine getInstance] getCacheImageOperation: curUser.avatarURL setCompletionBlock:^(NSString *localURL) {
+        UIImage *storedavatarImg = [UIImage imageWithContentsOfFile:localURL];
         [avatarImg setImage:storedavatarImg];
         [avatarBG setImage:storedavatarImg];
         [MyUIEngine fadeOutButton:imgProgressBar withDelay:0.5];
         [self animateViewAppear];
     }];
-    [operation start];
+    if (operation) {
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+            imgProgressBar.progress = (float)totalBytesRead / totalBytesExpectedToRead;
+        }];
+        [operation start];
+    }
 }
 -(void) displayDummyAvatar
 {

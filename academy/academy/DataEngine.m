@@ -12,6 +12,7 @@
 #import "SetWord.h"
 #import "LSet.h"
 #import "PackageTryBuyStatus.h"
+#import "AFNetworking.h"
 
 @implementation DataEngine
 {
@@ -158,6 +159,7 @@ static DataEngine * instance = nil;
     NSLog(@"Delete table meaning %@",[self.database executeUpdate:@"DROP TABLE meaning"]?@"successful":@"failed");
     NSLog(@"Delete table set_word %@",[self.database executeUpdate:@"DROP TABLE set_word"]?@"successful":@"failed");
     NSLog(@"Delete table lset %@",[self.database executeUpdate:@"DROP TABLE lset"]?@"successful":@"failed");
+    NSLog(@"Delete table image_cache %@",[self.database executeUpdate:@"DROP TABLE image_cache"]?@"successful":@"failed");
     
     [self.database executeUpdate:@"create table package(id text primary key,order_code text, name text, description text, category text, old_price text, price text, no_of_words text, language text, expiry_time text, role_can_view text, imgURL text)"];
     [self.database executeUpdate:@"create table word(id text primary key, name text, phonetic text, word_type text)"];
@@ -351,5 +353,80 @@ static DataEngine * instance = nil;
         [packStatusList addObject:status];
     }
     return packStatusList;
+}
+
+// imageCacheing
+- (AFURLConnectionOperation *) getCacheImageOperation:(NSString*) imageURL setCompletionBlock:(getLocalURL) block
+{
+    /*[self.database open];
+    
+    FMResultSet *results = [self.database executeQuery:@"select * from image_cache"];
+    while([results next]) {
+        if ([[results stringForColumn:@"server_url"] isEqualToString:imageURL]) {
+            NSLog(@"found image cache at path %@",[results stringForColumn:@"local_url"]);
+            block([results stringForColumn:@"local_url"]);
+            [self.database close];
+            return;
+        }
+    }*/
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageURL]];
+    AFURLConnectionOperation *operation =   [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *imgExt = [NSString stringWithFormat:@"%@",[[imageURL componentsSeparatedByString:@"."] lastObject]];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@",[User createRandomStringWithLength:8],imgExt]];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
+
+    [operation setCompletionBlock:^{
+        NSLog(@"download Image Complete!");
+        
+        [self.database open];
+        [self.database executeUpdate:@"create table image_cache(id integer primary key autoincrement, server_url text, local_url text)"];
+        NSString *addImgQuery = @"insert into image_cache (server_url, local_url) values (? ,?)";
+        [self.database executeUpdate:addImgQuery, imageURL, filePath];
+        [self.database close];
+        NSLog(@"saved image cache at path %@", filePath);
+        block(filePath);
+        
+    }];
+    return operation;
+}
+
+-(void) getCacheImage:(NSString*) imageURL setCompletionBlock:(getLocalURL) block
+{
+    /*[self.database open];
+     
+     FMResultSet *results = [self.database executeQuery:@"select * from image_cache"];
+     while([results next]) {
+     if ([[results stringForColumn:@"server_url"] isEqualToString:imageURL]) {
+     NSLog(@"found image cache at path %@",[results stringForColumn:@"local_url"]);
+     block([results stringForColumn:@"local_url"]);
+     [self.database close];
+     return;
+     }
+     }*/
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageURL]];
+    AFURLConnectionOperation *operation =   [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *imgExt = [NSString stringWithFormat:@"%@",[[imageURL componentsSeparatedByString:@"."] lastObject]];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@",[User createRandomStringWithLength:8],imgExt]];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
+    
+    [operation setCompletionBlock:^{
+        NSLog(@"download Image Complete!");
+        
+        [self.database open];
+        [self.database executeUpdate:@"create table image_cache(id integer primary key autoincrement, server_url text, local_url text)"];
+        NSString *addImgQuery = @"insert into image_cache (server_url, local_url) values (? ,?)";
+        [self.database executeUpdate:addImgQuery, imageURL, filePath];
+        [self.database close];
+        NSLog(@"saved image cache at path %@", filePath);
+        block(filePath);
+        
+    }];
+    [operation start];
 }
 @end

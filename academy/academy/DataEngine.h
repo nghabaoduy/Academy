@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SharedData.h"
 #import "FMDatabase.h"
+#import "AFNetworking.h"
 
 typedef NS_ENUM(NSUInteger, LoginType) {
     LoginNormal = 0,
@@ -24,6 +25,8 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 
 typedef void(^needUpdate)(BOOL doesNeedUpdate, BOOL downloadNewVer);
 typedef void(^completion)(BOOL finished);
+typedef void(^getLocalURL)(NSString *localURL);
+typedef void(^getProgress)(CGFloat percentage);
 
 @interface DataEngine : NSObject
 
@@ -60,4 +63,6 @@ typedef void(^completion)(BOOL finished);
 -(void) saveLocalDBUpdateDate;
 
 - (void)refreshPackStatusInDB:(NSArray *) packStatusLis completion:(completion) block;
+- (AFURLConnectionOperation *) getCacheImageOperation:(NSString*) imageURL setCompletionBlock:(getLocalURL) block;
+- (void) getCacheImage:(NSString*) imageURL setCompletionBlock:(getLocalURL) block;
 @end
